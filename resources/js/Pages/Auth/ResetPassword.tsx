@@ -12,17 +12,17 @@ const TITLE = 'Create New Password';
 const SUBTITLE = 'Your new password must be different from the previous password';
 
 export default () => {
-    const { username, token } = usePage().props
-    const { data, setData, errors, processing } = useForm({
-        username: username,
+    const { email, token } = usePage().props
+    const { data, setData, errors, post, processing } = useForm({
         token: token,
+        email: email,
         password: '',
         password_confirmation: ''
     })
-
+console.log(email, token)
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        Inertia.post(route('password.reset'));
+        post(route('password.update', token as string));
     }
 
 

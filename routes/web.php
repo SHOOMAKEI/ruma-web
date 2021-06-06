@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return inertia('Auth/Login');
 });
+
+Route::get('/home', function() {
+    return inertia('Dashboard');
+})->name('home');

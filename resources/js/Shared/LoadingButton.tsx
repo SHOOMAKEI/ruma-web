@@ -16,7 +16,9 @@ export default ({ loading, className, type, color='primary', children, ...props 
       {...props}
       data-kt-indicator={loading ? 'on': 'off'}
     >
-      {loading && <span className="spinner-border spinner-border-sm mr-2 mb-0" role="status" aria-hidden="true"></span>}
+      {loading && <span className="indicator-progress h4 mb-0">
+                Please wait... <span className="spinner-border spinner-border-sm align-middle ms-2"/>
+            </span>}
         <span className="indicator-label h4">{children}</span>
 
     </button>

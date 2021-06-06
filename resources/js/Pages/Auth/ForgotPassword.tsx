@@ -5,37 +5,40 @@ import route from "ziggy-js";
 import AuthFramework from "./AuthFramework";
 import TextInput from "../../Shared/TextInput";
 import LoadingButton from "../../Shared/LoadingButton";
+import ResponseAlert from "../../Shared/ResponseAlert";
 
 
 const ILLUSTRATION_URL = '/assets/images/illustrations/forgot-password.svg';
 const TITLE = 'Forgotten Password?';
-const SUBTITLE = 'Enter your username to reset your password';
+const SUBTITLE = 'Enter your email to reset your password';
 
 
 export default () => {
     const { status } = usePage().props
     const { data, setData, errors, post, processing } = useForm({
-        username: '',
+        email: '',
     });
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        Inertia.post(route('password.email'));
+        post(route('password.email'));
     }
     return (
         <AuthFramework illustrationUrl={ILLUSTRATION_URL} title={TITLE} subtitle={SUBTITLE}>
-
+            {
+                status && <ResponseAlert type="success"  message={status as string} />
+            }
             <form onSubmit={handleSubmit} className="form w-100">
 
                 <div className="fv-row mb-5">
                     <TextInput
                         className="mt-10"
-                        label="Your Username"
-                        name="username"
+                        label="Your Email"
+                        name="email"
                         type="text"
-                        errors={errors.username}
-                        value={data.username}
-                        onChange={(e: { target: { value: string; }; }) => setData('username', e.target.value)}
+                        errors={errors.email}
+                        value={data.email}
+                        onChange={(e: { target: { value: string; }; }) => setData('email', e.target.value)}
                     />
                 </div>
                 <div className="fv-row ">

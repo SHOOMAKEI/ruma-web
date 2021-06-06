@@ -22,7 +22,7 @@ export default () => {
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        Inertia.post(route('login'));
+        post(route('login'));
     }
 
     return (

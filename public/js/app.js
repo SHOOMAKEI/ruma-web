@@ -36603,13 +36603,13 @@ var map = {
 		"./resources/js/Pages/Auth/AuthFramework.tsx",
 		"resources_js_Pages_Auth_AuthFramework_tsx"
 	],
-	"./Auth/FogortPassword": [
-		"./resources/js/Pages/Auth/FogortPassword.tsx",
-		"resources_js_Pages_Auth_FogortPassword_tsx"
+	"./Auth/ForgotPassword": [
+		"./resources/js/Pages/Auth/ForgotPassword.tsx",
+		"resources_js_Pages_Auth_ForgotPassword_tsx"
 	],
-	"./Auth/FogortPassword.tsx": [
-		"./resources/js/Pages/Auth/FogortPassword.tsx",
-		"resources_js_Pages_Auth_FogortPassword_tsx"
+	"./Auth/ForgotPassword.tsx": [
+		"./resources/js/Pages/Auth/ForgotPassword.tsx",
+		"resources_js_Pages_Auth_ForgotPassword_tsx"
 	],
 	"./Auth/Login": [
 		"./resources/js/Pages/Auth/Login.tsx",
@@ -36634,6 +36634,14 @@ var map = {
 	"./Auth/TwoFactorAuth.tsx": [
 		"./resources/js/Pages/Auth/TwoFactorAuth.tsx",
 		"resources_js_Pages_Auth_TwoFactorAuth_tsx"
+	],
+	"./Dashboard": [
+		"./resources/js/Pages/Dashboard.tsx",
+		"resources_js_Pages_Dashboard_tsx"
+	],
+	"./Dashboard.tsx": [
+		"./resources/js/Pages/Dashboard.tsx",
+		"resources_js_Pages_Dashboard_tsx"
 	]
 };
 function webpackAsyncContext(req) {
@@ -36771,7 +36779,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Auth_AuthFramework_tsx":"18f0f0c5c5cf580d924b","resources_js_Pages_Auth_FogortPassword_tsx":"9bef4c277202f3e51233","resources_js_Pages_Auth_Login_tsx":"28dadf2580ca385748b0","resources_js_Pages_Auth_ResetPassword_tsx":"6e6f3c48053fa09df7cc","resources_js_Pages_Auth_TwoFactorAuth_tsx":"20e57cc61d5a70bddb69"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Auth_AuthFramework_tsx":"297c4acacb45557572bd","resources_js_Pages_Auth_ForgotPassword_tsx":"ee25ae1d2b83eb300bdc","resources_js_Pages_Auth_Login_tsx":"03756914357d719ef164","resources_js_Pages_Auth_ResetPassword_tsx":"85c4725233d26d6f7ee9","resources_js_Pages_Auth_TwoFactorAuth_tsx":"16708b30d1002460421f","resources_js_Pages_Dashboard_tsx":"17bcedac84b4ba9ed4e3"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

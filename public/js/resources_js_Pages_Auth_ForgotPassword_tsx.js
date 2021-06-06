@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Auth_FogortPassword_tsx"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Auth_ForgotPassword_tsx"],{
 
 /***/ "./resources/js/Pages/Auth/AuthFramework.tsx":
 /*!***************************************************!*\
@@ -72,9 +72,9 @@ exports.default = AuthFramework;
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Auth/FogortPassword.tsx":
+/***/ "./resources/js/Pages/Auth/ForgotPassword.tsx":
 /*!****************************************************!*\
-  !*** ./resources/js/Pages/Auth/FogortPassword.tsx ***!
+  !*** ./resources/js/Pages/Auth/ForgotPassword.tsx ***!
   \****************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
@@ -95,8 +95,6 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
-var inertia_1 = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-
 var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 
 var AuthFramework_1 = __importDefault(__webpack_require__(/*! ./AuthFramework */ "./resources/js/Pages/Auth/AuthFramework.tsx"));
@@ -105,15 +103,17 @@ var TextInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/TextInput
 
 var LoadingButton_1 = __importDefault(__webpack_require__(/*! ../../Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.tsx"));
 
+var ResponseAlert_1 = __importDefault(__webpack_require__(/*! ../../Shared/ResponseAlert */ "./resources/js/Shared/ResponseAlert.tsx"));
+
 var ILLUSTRATION_URL = '/assets/images/illustrations/forgot-password.svg';
 var TITLE = 'Forgotten Password?';
-var SUBTITLE = 'Enter your username to reset your password';
+var SUBTITLE = 'Enter your email to reset your password';
 
 exports.default = function () {
   var status = inertia_react_1.usePage().props.status;
 
   var _a = inertia_react_1.useForm({
-    username: ''
+    email: ''
   }),
       data = _a.data,
       setData = _a.setData,
@@ -123,27 +123,30 @@ exports.default = function () {
 
   function handleSubmit(e) {
     e.preventDefault();
-    inertia_1.Inertia.post(ziggy_js_1["default"]('password.email'));
+    post(ziggy_js_1["default"]('password.email'));
   }
 
   return react_1["default"].createElement(AuthFramework_1["default"], {
     illustrationUrl: ILLUSTRATION_URL,
     title: TITLE,
     subtitle: SUBTITLE
-  }, react_1["default"].createElement("form", {
+  }, status && react_1["default"].createElement(ResponseAlert_1["default"], {
+    type: "success",
+    message: status
+  }), react_1["default"].createElement("form", {
     onSubmit: handleSubmit,
     className: "form w-100"
   }, react_1["default"].createElement("div", {
     className: "fv-row mb-5"
   }, react_1["default"].createElement(TextInput_1["default"], {
     className: "mt-10",
-    label: "Your Username",
-    name: "username",
+    label: "Your Email",
+    name: "email",
     type: "text",
-    errors: errors.username,
-    value: data.username,
+    errors: errors.email,
+    value: data.email,
     onChange: function onChange(e) {
-      return setData('username', e.target.value);
+      return setData('email', e.target.value);
     }
   })), react_1["default"].createElement("div", {
     className: "fv-row "
@@ -234,6 +237,42 @@ exports.default = function (_a) {
   })), react_1["default"].createElement("span", {
     className: "indicator-label h4"
   }, children));
+};
+
+/***/ }),
+
+/***/ "./resources/js/Shared/ResponseAlert.tsx":
+/*!***********************************************!*\
+  !*** ./resources/js/Shared/ResponseAlert.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var type = _a.type,
+      message = _a.message,
+      link = _a.link,
+      linkMessage = _a.linkMessage;
+  return react_1["default"].createElement("div", {
+    className: "alert alert-" + type + " bg-" + type + " text-white border-0 mb-10 show mb-4",
+    role: "alert"
+  }, react_1["default"].createElement("strong", null, type === 'danger' ? 'Error' : 'Info', ":- "), " ", message, link && (link === null || link === void 0 ? void 0 : link.length) > 0 ? react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("hr", null), react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
+    className: "text-white fw-light btn btn-link p-0"
+  }, linkMessage + " " + link))) : null);
 };
 
 /***/ }),

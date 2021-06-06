@@ -103,31 +103,32 @@ var LoadingButton_1 = __importDefault(__webpack_require__(/*! ../../Shared/Loadi
 
 var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 
-var inertia_1 = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-
 var ILLUSTRATION_URL = '/assets/images/illustrations/new-password.svg';
 var TITLE = 'Create New Password';
 var SUBTITLE = 'Your new password must be different from the previous password';
 
 exports.default = function () {
   var _a = inertia_react_1.usePage().props,
-      username = _a.username,
+      email = _a.email,
       token = _a.token;
 
   var _b = inertia_react_1.useForm({
-    username: username,
     token: token,
+    email: email,
     password: '',
     password_confirmation: ''
   }),
       data = _b.data,
       setData = _b.setData,
       errors = _b.errors,
+      post = _b.post,
       processing = _b.processing;
+
+  console.log(email, token);
 
   function handleSubmit(e) {
     e.preventDefault();
-    inertia_1.Inertia.post(ziggy_js_1["default"]('password.reset'));
+    post(ziggy_js_1["default"]('password.update', token));
   }
 
   return react_1["default"].createElement(AuthFramework_1["default"], {
@@ -236,10 +237,10 @@ exports.default = function (_a) {
   }, props, {
     "data-kt-indicator": loading ? 'on' : 'off'
   }), loading && react_1["default"].createElement("span", {
-    className: "spinner-border spinner-border-sm mr-2 mb-0",
-    role: "status",
-    "aria-hidden": "true"
-  }), react_1["default"].createElement("span", {
+    className: "indicator-progress h4 mb-0"
+  }, "Please wait... ", react_1["default"].createElement("span", {
+    className: "spinner-border spinner-border-sm align-middle ms-2"
+  })), react_1["default"].createElement("span", {
     className: "indicator-label h4"
   }, children));
 };

@@ -103,8 +103,6 @@ var LoadingButton_1 = __importDefault(__webpack_require__(/*! ../../Shared/Loadi
 
 var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 
-var inertia_1 = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-
 var ILLUSTRATION_URL = '/assets/images/illustrations/login.svg';
 var TITLE = 'Sign In';
 var SUBTITLE = 'Provide your username and password to login';
@@ -123,7 +121,7 @@ exports.default = function () {
 
   function handleSubmit(e) {
     e.preventDefault();
-    inertia_1.Inertia.post(ziggy_js_1["default"]('login'));
+    post(ziggy_js_1["default"]('login'));
   }
 
   return react_1["default"].createElement(AuthFramework_1["default"], {
@@ -240,10 +238,10 @@ exports.default = function (_a) {
   }, props, {
     "data-kt-indicator": loading ? 'on' : 'off'
   }), loading && react_1["default"].createElement("span", {
-    className: "spinner-border spinner-border-sm mr-2 mb-0",
-    role: "status",
-    "aria-hidden": "true"
-  }), react_1["default"].createElement("span", {
+    className: "indicator-progress h4 mb-0"
+  }, "Please wait... ", react_1["default"].createElement("span", {
+    className: "spinner-border spinner-border-sm align-middle ms-2"
+  })), react_1["default"].createElement("span", {
     className: "indicator-label h4"
   }, children));
 };

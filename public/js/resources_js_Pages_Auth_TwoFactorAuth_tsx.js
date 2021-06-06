@@ -283,10 +283,10 @@ exports.default = function (_a) {
   }, props, {
     "data-kt-indicator": loading ? 'on' : 'off'
   }), loading && react_1["default"].createElement("span", {
-    className: "spinner-border spinner-border-sm mr-2 mb-0",
-    role: "status",
-    "aria-hidden": "true"
-  }), react_1["default"].createElement("span", {
+    className: "indicator-progress h4 mb-0"
+  }, "Please wait... ", react_1["default"].createElement("span", {
+    className: "spinner-border spinner-border-sm align-middle ms-2"
+  })), react_1["default"].createElement("span", {
     className: "indicator-label h4"
   }, children));
 };
