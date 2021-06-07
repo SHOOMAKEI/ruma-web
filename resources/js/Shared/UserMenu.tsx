@@ -58,16 +58,16 @@ const { user }: Props = usePage().props
                                 <div className="d-flex flex-column">
                                     <div className="fw-bolder d-flex align-items-center fs-5">{user?.username}
                                     </div>
-                                    <a href="#" className="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+                                    <a href="#" className="fw-bold text-muted text-hover-primary fs-7">{user?.email}</a>
                                 </div>
                             </div>
                         </Dropdown.Header>
                         <Dropdown.Item as={CustomDropdownMenuItem}>
-                            <a href="" className="menu-link px-5">My Profile</a>
+                            <InertiaLink href={route('profile')} className="menu-link px-5">My Profile</InertiaLink>
                         </Dropdown.Item>
-                        <Dropdown.Item as={CustomDropdownMenuItem}>
-                            <a href="" className="menu-link px-5">Account Settings</a>
-                        </Dropdown.Item>
+                        {/*<Dropdown.Item as={CustomDropdownMenuItem}>*/}
+                        {/*    <a href="" className="menu-link px-5">Account Settings</a>*/}
+                        {/*</Dropdown.Item>*/}
                         <Dropdown.Item as={CustomDropdownMenuItem}>
                             <InertiaLink href={route('logout')}   className="menu-link px-5" >Sign Out</InertiaLink>
                         </Dropdown.Item>

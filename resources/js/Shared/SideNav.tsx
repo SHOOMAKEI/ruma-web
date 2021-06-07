@@ -31,8 +31,8 @@ export default () => {
                         id="#kt_aside_menu"
                         data-kt-menu="true">
                         {
-                            dropdownMenus.map((menu: any) => (
-                                <Menu menu={menu}/>
+                            dropdownMenus.map((menu: any, ) => (
+                                <Menu key={Math.random()} menu={menu}/>
                             ))
                         }
                     </div>

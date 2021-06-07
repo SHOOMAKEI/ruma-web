@@ -1910,10 +1910,6 @@ var Ziggy = {
       "uri": "reset-password",
       "methods": ["POST"]
     },
-    "register": {
-      "uri": "register",
-      "methods": ["GET", "HEAD"]
-    },
     "user-profile-information.update": {
       "uri": "user\/profile-information",
       "methods": ["PUT"]
@@ -1957,6 +1953,10 @@ var Ziggy = {
     "graphql": {
       "uri": "graphql",
       "methods": ["GET", "POST", "HEAD"]
+    },
+    "home": {
+      "uri": "home",
+      "methods": ["GET", "HEAD"]
     }
   }
 };
@@ -36642,6 +36642,158 @@ var map = {
 	"./Dashboard.tsx": [
 		"./resources/js/Pages/Dashboard.tsx",
 		"resources_js_Pages_Dashboard_tsx"
+	],
+	"./Profile/Account": [
+		"./resources/js/Pages/Profile/Account.tsx",
+		"resources_js_Pages_Profile_Account_tsx"
+	],
+	"./Profile/Account.tsx": [
+		"./resources/js/Pages/Profile/Account.tsx",
+		"resources_js_Pages_Profile_Account_tsx"
+	],
+	"./Profile/Index": [
+		"./resources/js/Pages/Profile/Index.tsx",
+		"resources_js_Pages_Profile_Index_tsx"
+	],
+	"./Profile/Index.tsx": [
+		"./resources/js/Pages/Profile/Index.tsx",
+		"resources_js_Pages_Profile_Index_tsx"
+	],
+	"./Profile/Password": [
+		"./resources/js/Pages/Profile/Password.tsx",
+		"resources_js_Pages_Profile_Password_tsx"
+	],
+	"./Profile/Password.tsx": [
+		"./resources/js/Pages/Profile/Password.tsx",
+		"resources_js_Pages_Profile_Password_tsx"
+	],
+	"./Profile/Profile": [
+		"./resources/js/Pages/Profile/Profile.tsx",
+		"resources_js_Pages_Profile_Profile_tsx"
+	],
+	"./Profile/Profile.tsx": [
+		"./resources/js/Pages/Profile/Profile.tsx",
+		"resources_js_Pages_Profile_Profile_tsx"
+	],
+	"./Profile/Sections/Account/AccountInformation": [
+		"./resources/js/Pages/Profile/Sections/Account/AccountInformation.tsx",
+		"resources_js_Pages_Profile_Sections_Account_AccountInformation_tsx"
+	],
+	"./Profile/Sections/Account/AccountInformation.tsx": [
+		"./resources/js/Pages/Profile/Sections/Account/AccountInformation.tsx",
+		"resources_js_Pages_Profile_Sections_Account_AccountInformation_tsx"
+	],
+	"./Profile/Sections/Account/BrowserSessions": [
+		"./resources/js/Pages/Profile/Sections/Account/BrowserSessions.tsx",
+		"resources_js_Pages_Profile_Sections_Account_BrowserSessions_tsx"
+	],
+	"./Profile/Sections/Account/BrowserSessions.tsx": [
+		"./resources/js/Pages/Profile/Sections/Account/BrowserSessions.tsx",
+		"resources_js_Pages_Profile_Sections_Account_BrowserSessions_tsx"
+	],
+	"./Profile/Sections/Account/OneTimePassword": [
+		"./resources/js/Pages/Profile/Sections/Account/OneTimePassword.tsx",
+		"resources_js_Pages_Profile_Sections_Account_OneTimePassword_tsx"
+	],
+	"./Profile/Sections/Account/OneTimePassword.tsx": [
+		"./resources/js/Pages/Profile/Sections/Account/OneTimePassword.tsx",
+		"resources_js_Pages_Profile_Sections_Account_OneTimePassword_tsx"
+	],
+	"./Profile/Sections/Account/Permissions": [
+		"./resources/js/Pages/Profile/Sections/Account/Permissions.tsx",
+		"resources_js_Pages_Profile_Sections_Account_Permissions_tsx"
+	],
+	"./Profile/Sections/Account/Permissions.tsx": [
+		"./resources/js/Pages/Profile/Sections/Account/Permissions.tsx",
+		"resources_js_Pages_Profile_Sections_Account_Permissions_tsx"
+	],
+	"./Profile/Sections/Account/Roles": [
+		"./resources/js/Pages/Profile/Sections/Account/Roles.tsx",
+		"resources_js_Pages_Profile_Sections_Account_Roles_tsx"
+	],
+	"./Profile/Sections/Account/Roles.tsx": [
+		"./resources/js/Pages/Profile/Sections/Account/Roles.tsx",
+		"resources_js_Pages_Profile_Sections_Account_Roles_tsx"
+	],
+	"./Profile/Sections/Account/TwoFactorAuthentication": [
+		"./resources/js/Pages/Profile/Sections/Account/TwoFactorAuthentication.tsx",
+		"resources_js_Pages_Profile_Sections_Account_TwoFactorAuthentication_tsx"
+	],
+	"./Profile/Sections/Account/TwoFactorAuthentication.tsx": [
+		"./resources/js/Pages/Profile/Sections/Account/TwoFactorAuthentication.tsx",
+		"resources_js_Pages_Profile_Sections_Account_TwoFactorAuthentication_tsx"
+	],
+	"./Profile/Sections/Account/UpdatePassword": [
+		"./resources/js/Pages/Profile/Sections/Account/UpdatePassword.tsx",
+		"resources_js_Pages_Profile_Sections_Account_UpdatePassword_tsx"
+	],
+	"./Profile/Sections/Account/UpdatePassword.tsx": [
+		"./resources/js/Pages/Profile/Sections/Account/UpdatePassword.tsx",
+		"resources_js_Pages_Profile_Sections_Account_UpdatePassword_tsx"
+	],
+	"./Profile/Sections/Information/Address": [
+		"./resources/js/Pages/Profile/Sections/Information/Address.tsx",
+		"resources_js_Pages_Profile_Sections_Information_Address_tsx"
+	],
+	"./Profile/Sections/Information/Address.tsx": [
+		"./resources/js/Pages/Profile/Sections/Information/Address.tsx",
+		"resources_js_Pages_Profile_Sections_Information_Address_tsx"
+	],
+	"./Profile/Sections/Information/Company": [
+		"./resources/js/Pages/Profile/Sections/Information/Company.tsx",
+		"resources_js_Pages_Profile_Sections_Information_Company_tsx"
+	],
+	"./Profile/Sections/Information/Company.tsx": [
+		"./resources/js/Pages/Profile/Sections/Information/Company.tsx",
+		"resources_js_Pages_Profile_Sections_Information_Company_tsx"
+	],
+	"./Profile/Sections/Information/ContactInfo": [
+		"./resources/js/Pages/Profile/Sections/Information/ContactInfo.tsx",
+		"resources_js_Pages_Profile_Sections_Information_ContactInfo_tsx"
+	],
+	"./Profile/Sections/Information/ContactInfo.tsx": [
+		"./resources/js/Pages/Profile/Sections/Information/ContactInfo.tsx",
+		"resources_js_Pages_Profile_Sections_Information_ContactInfo_tsx"
+	],
+	"./Profile/Sections/Information/Employment": [
+		"./resources/js/Pages/Profile/Sections/Information/Employment.tsx",
+		"resources_js_Pages_Profile_Sections_Information_Employment_tsx"
+	],
+	"./Profile/Sections/Information/Employment.tsx": [
+		"./resources/js/Pages/Profile/Sections/Information/Employment.tsx",
+		"resources_js_Pages_Profile_Sections_Information_Employment_tsx"
+	],
+	"./Profile/Sections/Information/Other": [
+		"./resources/js/Pages/Profile/Sections/Information/Other.tsx",
+		"resources_js_Pages_Profile_Sections_Information_Other_tsx"
+	],
+	"./Profile/Sections/Information/Other.tsx": [
+		"./resources/js/Pages/Profile/Sections/Information/Other.tsx",
+		"resources_js_Pages_Profile_Sections_Information_Other_tsx"
+	],
+	"./Profile/Sections/Information/Personal": [
+		"./resources/js/Pages/Profile/Sections/Information/Personal.tsx",
+		"resources_js_Pages_Profile_Sections_Information_Personal_tsx"
+	],
+	"./Profile/Sections/Information/Personal.tsx": [
+		"./resources/js/Pages/Profile/Sections/Information/Personal.tsx",
+		"resources_js_Pages_Profile_Sections_Information_Personal_tsx"
+	],
+	"./Profile/Sections/Information/Section": [
+		"./resources/js/Pages/Profile/Sections/Information/Section.tsx",
+		"resources_js_Pages_Profile_Sections_Information_Section_tsx"
+	],
+	"./Profile/Sections/Information/Section.tsx": [
+		"./resources/js/Pages/Profile/Sections/Information/Section.tsx",
+		"resources_js_Pages_Profile_Sections_Information_Section_tsx"
+	],
+	"./Profile/Settings": [
+		"./resources/js/Pages/Profile/Settings.tsx",
+		"resources_js_Pages_Profile_Settings_tsx"
+	],
+	"./Profile/Settings.tsx": [
+		"./resources/js/Pages/Profile/Settings.tsx",
+		"resources_js_Pages_Profile_Settings_tsx"
 	]
 };
 function webpackAsyncContext(req) {
@@ -36779,7 +36931,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Auth_AuthFramework_tsx":"297c4acacb45557572bd","resources_js_Pages_Auth_ForgotPassword_tsx":"ee25ae1d2b83eb300bdc","resources_js_Pages_Auth_Login_tsx":"03756914357d719ef164","resources_js_Pages_Auth_ResetPassword_tsx":"85c4725233d26d6f7ee9","resources_js_Pages_Auth_TwoFactorAuth_tsx":"16708b30d1002460421f","resources_js_Pages_Dashboard_tsx":"17bcedac84b4ba9ed4e3"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Auth_AuthFramework_tsx":"297c4acacb45557572bd","resources_js_Pages_Auth_ForgotPassword_tsx":"ee25ae1d2b83eb300bdc","resources_js_Pages_Auth_Login_tsx":"03756914357d719ef164","resources_js_Pages_Auth_ResetPassword_tsx":"85c4725233d26d6f7ee9","resources_js_Pages_Auth_TwoFactorAuth_tsx":"16708b30d1002460421f","resources_js_Pages_Dashboard_tsx":"a49c460da5446c2e8a60","resources_js_Pages_Profile_Account_tsx":"5de1fc0c94ebc59c97aa","resources_js_Pages_Profile_Index_tsx":"e47bb81e1e361ff48b81","resources_js_Pages_Profile_Password_tsx":"aa91b16980d191c44fc4","resources_js_Pages_Profile_Profile_tsx":"34d64a14295304588857","resources_js_Pages_Profile_Sections_Account_AccountInformation_tsx":"d9d6ca2e6ff5bbec6fc2","resources_js_Pages_Profile_Sections_Account_BrowserSessions_tsx":"e11a5066c314ee38e6af","resources_js_Pages_Profile_Sections_Account_OneTimePassword_tsx":"ef4e4525fe0ac2808565","resources_js_Pages_Profile_Sections_Account_Permissions_tsx":"ad1ae535488c1c0f3677","resources_js_Pages_Profile_Sections_Account_Roles_tsx":"dad01102cf26884bc0f6","resources_js_Pages_Profile_Sections_Account_TwoFactorAuthentication_tsx":"9d48e0c99b075b5068f8","resources_js_Pages_Profile_Sections_Account_UpdatePassword_tsx":"a5c58e36368d7b762404","resources_js_Pages_Profile_Sections_Information_Address_tsx":"b6875e2ee17a54fd71a8","resources_js_Pages_Profile_Sections_Information_Company_tsx":"eacb2297d8184cc4a446","resources_js_Pages_Profile_Sections_Information_ContactInfo_tsx":"3a7c2351860813a91fb7","resources_js_Pages_Profile_Sections_Information_Employment_tsx":"3807078ee4811b1fc5cb","resources_js_Pages_Profile_Sections_Information_Other_tsx":"5c6b80bf1dbc7620bd97","resources_js_Pages_Profile_Sections_Information_Personal_tsx":"8805dd1293266d011696","resources_js_Pages_Profile_Sections_Information_Section_tsx":"2dcd5a9f1c011fd1834b","resources_js_Pages_Profile_Settings_tsx":"1c9707c94b97e516b96a"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

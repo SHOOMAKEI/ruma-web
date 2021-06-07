@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get('/home', function() {
     return inertia('Dashboard');
 })->name('home');
+
+Route::get('my-profile', function () {
+    return inertia('Profile/Index', ['user', \App\Models\User::find(auth()->user()->id)]);
+})->name('profile');

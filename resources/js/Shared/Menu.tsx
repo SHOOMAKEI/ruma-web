@@ -50,14 +50,12 @@ export default function Menu({menu}: Props) {
     if (menu.type === 'solo') {
         return (
             <div className="menu-item" key={menu.id}>
-                <InertiaLink href={menu.link}>
-                    <a className={`menu-link ${checkActiveLink(menu.link)}`} href="">
+                    <InertiaLink className={`menu-link ${checkActiveLink(menu.link)}`} href="">
                         <span className="menu-icon">
                             <Icon />
                         </span>
                         <span className="menu-title">{menu.name}</span>
-                    </a>
-                </InertiaLink>
+                    </InertiaLink>
             </div>
         )
     }
@@ -84,14 +82,12 @@ export default function Menu({menu}: Props) {
             <div className="menu-sub menu-sub-accordion">
                 {
                     menu.subMenus.map((submenu: { id: React.Key | null | undefined; link: string; name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; }) => (
-                        <div className="menu-item" key={submenu.id}>
-                            <InertiaLink href={submenu.link}>
-                                <a className={`menu-link ${checkActiveLink(submenu.link)}`} href="">
-                                    <span className="menu-bullet">
-                                        <span className="bullet bullet-dot"/>
-                                    </span>
-                                    <span className="menu-title">{submenu.name}</span>
-                                </a>
+                        <div className="menu-item" key={Math.random()}>
+                            <InertiaLink className={`menu-link ${checkActiveLink(submenu.link)}`} href="">
+                                <span className="menu-bullet">
+                                    <span className="bullet bullet-dot"/>
+                                </span>
+                                <span className="menu-title">{submenu.name}</span>
                             </InertiaLink>
                         </div>
                     ))
