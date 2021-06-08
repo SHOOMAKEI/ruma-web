@@ -1,4 +1,5 @@
 import React, {ReactNode} from "react";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 interface Props {
     title: string;

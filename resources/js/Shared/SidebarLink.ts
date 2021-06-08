@@ -11,6 +11,7 @@ import {
     MenuType,
     SideNavLinkType,
 } from "./Menu";
+import route from "ziggy-js";
 
 /**
  * Sidebar links urls are defined here, that's because we want to track
@@ -70,7 +71,7 @@ export const dropdownMenus: Array<MenuType> = [
         subMenus: [
             { id: "1", name: "Users", link: "#" },
             { id: "2", name: "Roles", link:  "#"},
-            { id: "2", name: "Companies", link:  "#"},
+            { id: "2", name: "Companies", link:  route('companies.index')},
         ],
         link: USERS.parent,
     },

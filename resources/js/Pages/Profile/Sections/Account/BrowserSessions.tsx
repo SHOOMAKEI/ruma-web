@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import LoadingButton from "../../../../Shared/LoadingButton";
 import TextInput from "../../../../Shared/TextInput";
 import {useForm, usePage} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
+import {SettingsContext} from "../../../../Shared/Contexts/SettingsContexts";
 
 type Sessions = Session[];
 
@@ -20,14 +21,15 @@ export type Agent = {
 }
 
 export default () => {
-    const { sessions } = usePage().props
-    const { data, setData, errors, post, processing } = useForm({
+    // @ts-ignore
+    const { sessions, errors } = useContext(SettingsContext)
+    const { data, setData, post, processing } = useForm({
         confirm_password: '',
     });
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        post(route('login'));
+        post(route('settings.sessions_browser'));
     }
 
     // @ts-ignore
@@ -79,20 +81,20 @@ export default () => {
 
                                                         </div>
 
-                                                        <div className="ml-2">
+                                                        <div className="px-2">
                                                             <div>
                                                                 {session.agent.platform} - {session.agent.browser}
                                                             </div>
 
                                                             <div>
                                                                 <div className="font-14 font-weight-lighter text-muted">
-                                                                    {session.ip_address},
+                                                                    {session.ip_address}
 
                                                                     {session.is_current_device && (
-                                                                        <span className="text-primary font-weight-bold ml-1">
+                                                                        <span className="text-primary font-weight-bold ml-1 px-3">
                                                                                 This device</span>                                                                        )}
                                                                     {!session.is_current_device &&(
-                                                                        <span className="text-secondary ml-1 font-14">
+                                                                        <span className="text-secondary ml-1 font-14 px-3">
                                                                                  Last active  {session.last_active}
                                                                             </span>
                                                                     )}
@@ -116,7 +118,7 @@ export default () => {
                                                     <div className="form-group mb-0 text-left">
                                                         <LoadingButton
                                                             type="submit"
-                                                            className="btn btn-dark btn-md"
+                                                            className="btn btn-primary btn-md"
                                                             loading={processing}
                                                         >
                                                             Logout Other Browser Sessions

@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import {InertiaLink} from "@inertiajs/inertia-react";
+import route from "ziggy-js";
 
 export interface SubmenuType {
     id: string;
@@ -28,10 +29,11 @@ interface Props {
 
 export default function Menu({menu}: Props) {
     const {Icon} = menu;
+    const [show, setShow] = useState(false)
 
     function checkActiveLink(link: string): string {
-        // if (router.pathname.includes(link))
-        //     return 'active'
+        if (route().current(link + '*'))
+            return 'active'
 
         return ''
     }
@@ -41,8 +43,8 @@ export default function Menu({menu}: Props) {
          * This is for sidebar dropdown menus, it determines which
          * sidebar dropdown menu is active
          * */
-        // if (router.pathname.includes(link))
-        //     return 'here show'
+        if (route().current(link + '*'))
+            return 'here show'
 
         return ''
     }
@@ -50,7 +52,7 @@ export default function Menu({menu}: Props) {
     if (menu.type === 'solo') {
         return (
             <div className="menu-item" key={menu.id}>
-                    <InertiaLink className={`menu-link ${checkActiveLink(menu.link)}`} href="">
+                    <InertiaLink className={`menu-link ${checkActiveLink(menu.link)}`} href={menu.link}>
                         <span className="menu-icon">
                             <Icon />
                         </span>
@@ -70,20 +72,22 @@ export default function Menu({menu}: Props) {
         )
     }
 
+
+
     return (
-        <div data-kt-menu-trigger="click" className={`menu-item menu-accordion ${checkActiveMenuParent(menu.link)}`} key={menu.id}>
-            <span className="menu-link">
+        <div data-kt-menu-trigger="click" onClick={ e => setShow(!show)} className={`menu-item menu-accordion ${checkActiveMenuParent(menu.link)}  ${show?'show':''} `} key={menu.id}>
+            <span className="menu-link" >
                 <span className="menu-icon">
                     <Icon />
                 </span>
                 <span className="menu-title">{menu.name}</span>
                 <span className="menu-arrow"/>
             </span>
-            <div className="menu-sub menu-sub-accordion">
+            <div className={`menu-sub menu-sub-accordion ${show?'show':''}`}>
                 {
                     menu.subMenus.map((submenu: { id: React.Key | null | undefined; link: string; name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; }) => (
                         <div className="menu-item" key={Math.random()}>
-                            <InertiaLink className={`menu-link ${checkActiveLink(submenu.link)}`} href="">
+                            <InertiaLink className={`menu-link ${checkActiveLink(submenu.link)}`} href={submenu.link}>
                                 <span className="menu-bullet">
                                     <span className="bullet bullet-dot"/>
                                 </span>

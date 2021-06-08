@@ -38,6 +38,10 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
+        $user = null;
+        $request->user()
+            ? $user = User::find(auth()->user()->id): null;
+
         return array_merge(parent::share($request), [
             'status' => session('status'),
             'auth.user' => isset($user)?function () use ($user) {
@@ -45,17 +49,17 @@ class HandleInertiaRequests extends Middleware
                 $data['username'] = $user->username;
                 $data['email'] = $user->email;
                 $data['profile_photo_path'] = $user->profile_photo_path;
-                $data['settings']['has_enabled_otp'] = $user->enabled_otp;
+                $data['settings']['has_enable_otp'] = $user->has_enable_otp;
                 $data['settings']['has_enable_two_factory_auth'] = $user->two_factor_recovery_codes != null;
                 $data['settings']['roles'] = $user->roles;
                 $data['settings']['permissions'] = $user->permissions;
                 return $data;
             }:null,
-            'roles' => function (Request $request) {
+            'auth.roles' => function (Request $request) {
                 return $request->user()
                     ? User::find(auth()->user()->id)->roles->only('id', 'name')
                     : null; },
-            'permissions' => function (Request $request) {
+            'auth.permissions' => function (Request $request) {
                 return $request->user()
                     ? User::find(auth()->user()->id)->permissions->only('id', 'name')
                     : null; },

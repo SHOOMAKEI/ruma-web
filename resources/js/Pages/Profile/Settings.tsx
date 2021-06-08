@@ -8,11 +8,11 @@ export default  () => {
 
     return (
         <>
-          {/*<TwoFactorAuthentication/>*/}
-          {/*  <hr/>*/}
-          {/*<OneTimePassword/>*/}
-          {/*  <hr/>*/}
-          {/*<BrowserSessions/>*/}
+          <TwoFactorAuthentication/>
+            <hr/>
+          <OneTimePassword/>
+            <hr/>
+          <BrowserSessions/>
         </>
     )
 }

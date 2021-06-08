@@ -9,6 +9,40 @@
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -19,7 +53,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var LoadingButton_1 = __importDefault(__webpack_require__(/*! ../../../../Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.tsx"));
 
@@ -29,21 +63,25 @@ var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./nod
 
 var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 
-exports.default = function () {
-  var sessions = inertia_react_1.usePage().props.sessions;
+var SettingsContexts_1 = __webpack_require__(/*! ../../../../Shared/Contexts/SettingsContexts */ "./resources/js/Shared/Contexts/SettingsContexts.tsx");
 
-  var _a = inertia_react_1.useForm({
+exports.default = function () {
+  // @ts-ignore
+  var _a = react_1.useContext(SettingsContexts_1.SettingsContext),
+      sessions = _a.sessions,
+      errors = _a.errors;
+
+  var _b = inertia_react_1.useForm({
     confirm_password: ''
   }),
-      data = _a.data,
-      setData = _a.setData,
-      errors = _a.errors,
-      post = _a.post,
-      processing = _a.processing;
+      data = _b.data,
+      setData = _b.setData,
+      post = _b.post,
+      processing = _b.processing;
 
   function handleSubmit(e) {
     e.preventDefault();
-    post(ziggy_js_1["default"]('login'));
+    post(ziggy_js_1["default"]('settings.sessions_browser'));
   } // @ts-ignore
 
 
@@ -108,13 +146,13 @@ exports.default = function () {
     }), react_1["default"].createElement("path", {
       d: "M11 5h2M12 17v.01"
     }))), react_1["default"].createElement("div", {
-      className: "ml-2"
+      className: "px-2"
     }, react_1["default"].createElement("div", null, session.agent.platform, " - ", session.agent.browser), react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
       className: "font-14 font-weight-lighter text-muted"
-    }, session.ip_address, ",", session.is_current_device && react_1["default"].createElement("span", {
-      className: "text-primary font-weight-bold ml-1"
+    }, session.ip_address, session.is_current_device && react_1["default"].createElement("span", {
+      className: "text-primary font-weight-bold ml-1 px-3"
     }, "This device"), !session.is_current_device && react_1["default"].createElement("span", {
-      className: "text-secondary ml-1 font-14"
+      className: "text-secondary ml-1 font-14 px-3"
     }, "Last active  ", session.last_active)))));
   }), react_1["default"].createElement("div", {
     className: "d-flex mt-3"
@@ -133,10 +171,30 @@ exports.default = function () {
     className: "form-group mb-0 text-left"
   }, react_1["default"].createElement(LoadingButton_1["default"], {
     type: "submit",
-    className: "btn btn-dark btn-md",
+    className: "btn btn-primary btn-md",
     loading: processing
   }, "Logout Other Browser Sessions")))))))))))));
 };
+
+/***/ }),
+
+/***/ "./resources/js/Shared/Contexts/SettingsContexts.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/js/Shared/Contexts/SettingsContexts.tsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.SettingsContext = void 0;
+
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+exports.SettingsContext = react_1.createContext({});
 
 /***/ }),
 
@@ -270,12 +328,13 @@ exports.default = function (_a) {
       name = _a.name,
       className = _a.className,
       errors = _a.errors,
-      props = __rest(_a, ["label", "name", "className", "errors"]);
+      label_required = _a.label_required,
+      props = __rest(_a, ["label", "name", "className", "errors", "label_required"]);
 
   return react_1["default"].createElement("div", {
     className: "form-group " + className
   }, label && react_1["default"].createElement("label", {
-    className: "h4 mb-3 fw-light",
+    className: "h4 mb-3 fw-light " + (label_required ? 'required form-label' : ''),
     htmlFor: name
   }, label), react_1["default"].createElement("input", __assign({
     id: name,

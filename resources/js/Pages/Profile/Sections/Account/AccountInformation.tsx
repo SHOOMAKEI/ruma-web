@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import TextInput from "../../../../Shared/TextInput";
 import LoadingButton from "../../../../Shared/LoadingButton";
 import {useForm} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
+import {SettingsContext} from "../../../../Shared/Contexts/SettingsContexts";
 
 
 class FileInput extends React.Component<{ errors: any, label: string, callback: any, name: string, value: any }> {
@@ -12,14 +13,17 @@ class FileInput extends React.Component<{ errors: any, label: string, callback: 
 }
 
 export default  () => {
-    const { data, setData, errors, post, processing } = useForm({
-        username: '',
-        email: '',
+    // @ts-ignore
+    const {auth,errors}  = useContext(SettingsContext)
+
+    const { data, setData, post, processing } = useForm({
+        username: auth.user.username,
+        email: auth.user.email,
     });
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        post(route('login'));
+        post(route('settings.updateAccountInfo'));
     }
 
 
@@ -39,10 +43,6 @@ export default  () => {
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-lg-12">
-                                    <div className="form-group text-center pb-3">
-                                        <img src='' alt="image"
-                                             className="img-fluid img-thumbnail rounded-circle mb-3" width="120"/>
-                                    </div>
                                     <div className="text-left">
                                         <form onSubmit={handleSubmit} >
                                             <TextInput

@@ -1,13 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
 import {useForm} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import TextInput from "../../../../Shared/TextInput";
 import LoadingButton from "../../../../Shared/LoadingButton";
+import {SettingsContext} from "../../../../Shared/Contexts/SettingsContexts";
 
 
 
 export default () =>{
-    const { data, setData, errors, post, processing } = useForm({
+    // @ts-ignore
+    const { errors } = useContext(SettingsContext)
+
+    const { data, setData, post, processing } = useForm({
         current_password: '',
         password: '',
         password_confirmation: '',
@@ -15,7 +19,7 @@ export default () =>{
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        post(route('login'));
+        post(route('settings.updatePassword'));
     }
 
     return (

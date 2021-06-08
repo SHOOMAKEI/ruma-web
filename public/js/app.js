@@ -1957,6 +1957,62 @@ var Ziggy = {
     "home": {
       "uri": "home",
       "methods": ["GET", "HEAD"]
+    },
+    "profile": {
+      "uri": "my-profile",
+      "methods": ["GET", "HEAD"]
+    },
+    "settings.updateAccountInfo": {
+      "uri": "settings\/update-account-information",
+      "methods": ["POST"]
+    },
+    "settings.updatePassword": {
+      "uri": "settings\/update-password",
+      "methods": ["POST"]
+    },
+    "settings.toggleOTP": {
+      "uri": "settings\/toggle_otp",
+      "methods": ["GET", "HEAD"]
+    },
+    "settings.toggle2fa": {
+      "uri": "settings\/toggle_2fa",
+      "methods": ["GET", "HEAD"]
+    },
+    "settings.recovery_code": {
+      "uri": "settings\/generate_recovery_code",
+      "methods": ["GET", "HEAD"]
+    },
+    "settings.sessions_browser": {
+      "uri": "settings\/logout_other_sessions_browser",
+      "methods": ["POST"]
+    },
+    "companies.index": {
+      "uri": "companies",
+      "methods": ["GET", "HEAD"]
+    },
+    "companies.create": {
+      "uri": "companies\/create",
+      "methods": ["GET", "HEAD"]
+    },
+    "companies.store": {
+      "uri": "companies",
+      "methods": ["POST"]
+    },
+    "companies.show": {
+      "uri": "companies\/{company}",
+      "methods": ["GET", "HEAD"]
+    },
+    "companies.edit": {
+      "uri": "companies\/{company}\/edit",
+      "methods": ["GET", "HEAD"]
+    },
+    "companies.update": {
+      "uri": "companies\/{company}",
+      "methods": ["PUT", "PATCH"]
+    },
+    "companies.destroy": {
+      "uri": "companies\/{company}",
+      "methods": ["DELETE"]
     }
   }
 };
@@ -36635,6 +36691,22 @@ var map = {
 		"./resources/js/Pages/Auth/TwoFactorAuth.tsx",
 		"resources_js_Pages_Auth_TwoFactorAuth_tsx"
 	],
+	"./Company/Create": [
+		"./resources/js/Pages/Company/Create.tsx",
+		"resources_js_Pages_Company_Create_tsx"
+	],
+	"./Company/Create.tsx": [
+		"./resources/js/Pages/Company/Create.tsx",
+		"resources_js_Pages_Company_Create_tsx"
+	],
+	"./Company/Index": [
+		"./resources/js/Pages/Company/Index.tsx",
+		"resources_js_Pages_Company_Index_tsx"
+	],
+	"./Company/Index.tsx": [
+		"./resources/js/Pages/Company/Index.tsx",
+		"resources_js_Pages_Company_Index_tsx"
+	],
 	"./Dashboard": [
 		"./resources/js/Pages/Dashboard.tsx",
 		"resources_js_Pages_Dashboard_tsx"
@@ -36931,7 +37003,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Auth_AuthFramework_tsx":"297c4acacb45557572bd","resources_js_Pages_Auth_ForgotPassword_tsx":"ee25ae1d2b83eb300bdc","resources_js_Pages_Auth_Login_tsx":"03756914357d719ef164","resources_js_Pages_Auth_ResetPassword_tsx":"85c4725233d26d6f7ee9","resources_js_Pages_Auth_TwoFactorAuth_tsx":"16708b30d1002460421f","resources_js_Pages_Dashboard_tsx":"a49c460da5446c2e8a60","resources_js_Pages_Profile_Account_tsx":"5de1fc0c94ebc59c97aa","resources_js_Pages_Profile_Index_tsx":"e47bb81e1e361ff48b81","resources_js_Pages_Profile_Password_tsx":"aa91b16980d191c44fc4","resources_js_Pages_Profile_Profile_tsx":"34d64a14295304588857","resources_js_Pages_Profile_Sections_Account_AccountInformation_tsx":"d9d6ca2e6ff5bbec6fc2","resources_js_Pages_Profile_Sections_Account_BrowserSessions_tsx":"e11a5066c314ee38e6af","resources_js_Pages_Profile_Sections_Account_OneTimePassword_tsx":"ef4e4525fe0ac2808565","resources_js_Pages_Profile_Sections_Account_Permissions_tsx":"ad1ae535488c1c0f3677","resources_js_Pages_Profile_Sections_Account_Roles_tsx":"dad01102cf26884bc0f6","resources_js_Pages_Profile_Sections_Account_TwoFactorAuthentication_tsx":"9d48e0c99b075b5068f8","resources_js_Pages_Profile_Sections_Account_UpdatePassword_tsx":"a5c58e36368d7b762404","resources_js_Pages_Profile_Sections_Information_Address_tsx":"b6875e2ee17a54fd71a8","resources_js_Pages_Profile_Sections_Information_Company_tsx":"eacb2297d8184cc4a446","resources_js_Pages_Profile_Sections_Information_ContactInfo_tsx":"3a7c2351860813a91fb7","resources_js_Pages_Profile_Sections_Information_Employment_tsx":"3807078ee4811b1fc5cb","resources_js_Pages_Profile_Sections_Information_Other_tsx":"5c6b80bf1dbc7620bd97","resources_js_Pages_Profile_Sections_Information_Personal_tsx":"8805dd1293266d011696","resources_js_Pages_Profile_Sections_Information_Section_tsx":"2dcd5a9f1c011fd1834b","resources_js_Pages_Profile_Settings_tsx":"1c9707c94b97e516b96a"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Auth_AuthFramework_tsx":"f74192ddc454b4c37f8d","resources_js_Pages_Auth_ForgotPassword_tsx":"2ac15f0469de1e6f5757","resources_js_Pages_Auth_Login_tsx":"6bb44557ac33bcba4aae","resources_js_Pages_Auth_ResetPassword_tsx":"bc295fdc6dc58eb25918","resources_js_Pages_Auth_TwoFactorAuth_tsx":"cc20d747727cfaf7d51a","resources_js_Pages_Company_Create_tsx":"b957e91a6771af48c81a","resources_js_Pages_Company_Index_tsx":"c1f5f0b1323a71550b03","resources_js_Pages_Dashboard_tsx":"1fee14741c8bb07ea76a","resources_js_Pages_Profile_Account_tsx":"49d280775fbc4a7a8e61","resources_js_Pages_Profile_Index_tsx":"1c101b1bd4d6e8e646fc","resources_js_Pages_Profile_Password_tsx":"8ecf29139b3fe378c782","resources_js_Pages_Profile_Profile_tsx":"7f1c9aa4ede6f023b4b8","resources_js_Pages_Profile_Sections_Account_AccountInformation_tsx":"ba88cfc4c05864837733","resources_js_Pages_Profile_Sections_Account_BrowserSessions_tsx":"705d2f73147b1d95b026","resources_js_Pages_Profile_Sections_Account_OneTimePassword_tsx":"d7219aefede363ca97c7","resources_js_Pages_Profile_Sections_Account_Permissions_tsx":"e07d13b549f4f869e05f","resources_js_Pages_Profile_Sections_Account_Roles_tsx":"2db28ffec494e2e16557","resources_js_Pages_Profile_Sections_Account_TwoFactorAuthentication_tsx":"b6af47bd8e6704050793","resources_js_Pages_Profile_Sections_Account_UpdatePassword_tsx":"62c2bbed1035c0fe8dad","resources_js_Pages_Profile_Sections_Information_Address_tsx":"64afc3a45e6b3a2c444e","resources_js_Pages_Profile_Sections_Information_Company_tsx":"ff9d09c881d937a948ff","resources_js_Pages_Profile_Sections_Information_ContactInfo_tsx":"bcdb6f40ec9d15d19f61","resources_js_Pages_Profile_Sections_Information_Employment_tsx":"14ca1b8d122175f41a8f","resources_js_Pages_Profile_Sections_Information_Other_tsx":"a123e04aa3b0a41d86e9","resources_js_Pages_Profile_Sections_Information_Personal_tsx":"3abc407c79b0870d12d2","resources_js_Pages_Profile_Sections_Information_Section_tsx":"ad838d1e61929b482abf","resources_js_Pages_Profile_Settings_tsx":"6f331876aa2b9925f399"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

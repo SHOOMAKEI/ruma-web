@@ -69,7 +69,7 @@ const { user }: Props = usePage().props
                         {/*    <a href="" className="menu-link px-5">Account Settings</a>*/}
                         {/*</Dropdown.Item>*/}
                         <Dropdown.Item as={CustomDropdownMenuItem}>
-                            <InertiaLink href={route('logout')}   className="menu-link px-5" >Sign Out</InertiaLink>
+                            <InertiaLink href={route('logout')}  method="post"  className="menu-link px-5" >Sign Out</InertiaLink>
                         </Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>

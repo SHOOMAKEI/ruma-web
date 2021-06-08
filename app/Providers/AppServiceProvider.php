@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,96 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Validator::extend('base64', function ($attribute, $value, $parameters, $validator) {
+            if (preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', $value)) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+        Validator::extend('base64image', function ($attribute, $value, $parameters, $validator) {
+            $explode = explode(',', $value);
+            $allow = ['png', 'jpg', 'svg', 'jpeg'];
+            $format = str_replace(
+                [
+                    'data:image/',
+                    ';',
+                    'base64',
+                ],
+                [
+                    '', '', '',
+                ],
+                $explode[0]
+            );
+
+            // check file format
+            if (!in_array($format, $allow)) {
+                return false;
+            }
+
+            // check base64 format
+            if (!preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', $explode[1])) {
+                return false;
+            }
+
+            return true;
+        });
+
+        Validator::extend('base64pdf', function ($attribute, $value, $parameters, $validator) {
+            $explode = explode(',', $value);
+            $allow = ['pdf'];
+            $format = str_replace(
+                [
+                    'data:application/',
+                    ';',
+                    'base64',
+                ],
+                [
+                    '', '', '',
+                ],
+                $explode[0]
+            );
+
+            // check file format
+            if (!in_array($format, $allow)) {
+                return false;
+            }
+
+            // check base64 format
+            if (!preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', $explode[1])) {
+                return false;
+            }
+
+            return true;
+        });
+
+        Validator::extend('base64excel', function ($attribute, $value, $parameters, $validator) {
+            $explode = explode(',', $value);
+            $allow = ['vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+            $format = str_replace(
+                [
+                    'data:@file/',
+                    ';',
+                    'base64',
+                ],
+                [
+                    '', '', '',
+                ],
+                $explode[0]
+            );
+
+            // check file format
+            if (!in_array($format, $allow)) {
+                return false;
+            }
+
+            // check base64 format
+            if (!preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', $explode[1])) {
+                return false;
+            }
+
+            return true;
+        });
     }
 }

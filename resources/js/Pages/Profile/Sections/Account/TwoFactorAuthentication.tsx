@@ -2,7 +2,8 @@ import React, {useContext} from "react";
 import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 import {User} from "../../../../Shared/Types";
 import route from "ziggy-js";
-import {AccountContext} from "../../Index";
+import {SettingsContext} from "../../../../Shared/Contexts/SettingsContexts";
+
 
 interface settings {
     two_factor_recovery_codes: code []
@@ -14,9 +15,12 @@ interface code {
 }
 
 export default () => {
-
+    // const {profile, auth, settings, sessions} = usePage().props
     // @ts-ignore
-    const {provider}= useContext(AccountContext)
+    const {settings, auth} = useContext(SettingsContext)
+    // @ts-ignore
+    const user = auth.user;
+
 
     return (
         <>
@@ -37,7 +41,7 @@ export default () => {
                                             When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.
                                         </small>
                                         {
-                                            (provider.user as User).settings?.has_enable_two_factory_auth?
+                                            (user as User).settings?.has_enable_two_factory_auth?
                                                 <>
                                                     <div className="mt-3">
                                                         <small className="font-14">
@@ -45,7 +49,7 @@ export default () => {
                                                         </small>
                                                     </div>
 
-                                                    <div className="mt-4" dangerouslySetInnerHTML={{__html: (provider.settings as settings).qrcode_svg}}>
+                                                    <div className="mt-4" dangerouslySetInnerHTML={{__html: (settings as settings).qrcode_svg}}>
 
                                                     </div>
                                                     <div className="my-4">
@@ -56,7 +60,7 @@ export default () => {
                                                     </div>
 
                                                     <div className="w-75 bg-light rounded p-3 mb-2">
-                                                        { provider.settings as settings && (provider.settings as settings)?.two_factor_recovery_codes?.map((code, index: number)=>(
+                                                        { settings as settings && (settings as settings)?.two_factor_recovery_codes?.map((code, index: number)=>(
                                                             <div key={index+1} className="py-1">{code.code}</div>
                                                         ))}
 
@@ -64,7 +68,7 @@ export default () => {
                                                     <div className="form-group mt-3 text-left">
                                                         <InertiaLink
                                                             href={route('settings.recovery_code')}
-                                                            className="btn btn-outline-secondary btn-md mr-3"
+                                                            className="btn btn-primary btn-md mx-3"
                                                         >
                                                             Generate Recovery Code
                                                         </InertiaLink>

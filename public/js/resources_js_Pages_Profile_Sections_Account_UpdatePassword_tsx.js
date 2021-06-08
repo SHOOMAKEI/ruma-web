@@ -9,6 +9,40 @@
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -19,7 +53,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
@@ -29,7 +63,12 @@ var TextInput_1 = __importDefault(__webpack_require__(/*! ../../../../Shared/Tex
 
 var LoadingButton_1 = __importDefault(__webpack_require__(/*! ../../../../Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.tsx"));
 
+var SettingsContexts_1 = __webpack_require__(/*! ../../../../Shared/Contexts/SettingsContexts */ "./resources/js/Shared/Contexts/SettingsContexts.tsx");
+
 exports.default = function () {
+  // @ts-ignore
+  var errors = react_1.useContext(SettingsContexts_1.SettingsContext).errors;
+
   var _a = inertia_react_1.useForm({
     current_password: '',
     password: '',
@@ -37,13 +76,12 @@ exports.default = function () {
   }),
       data = _a.data,
       setData = _a.setData,
-      errors = _a.errors,
       post = _a.post,
       processing = _a.processing;
 
   function handleSubmit(e) {
     e.preventDefault();
-    post(ziggy_js_1["default"]('login'));
+    post(ziggy_js_1["default"]('settings.updatePassword'));
   }
 
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("div", {
@@ -106,6 +144,26 @@ exports.default = function () {
     loading: processing
   }, "Save Changes")))))))))));
 };
+
+/***/ }),
+
+/***/ "./resources/js/Shared/Contexts/SettingsContexts.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/js/Shared/Contexts/SettingsContexts.tsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.SettingsContext = void 0;
+
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+exports.SettingsContext = react_1.createContext({});
 
 /***/ }),
 
@@ -239,12 +297,13 @@ exports.default = function (_a) {
       name = _a.name,
       className = _a.className,
       errors = _a.errors,
-      props = __rest(_a, ["label", "name", "className", "errors"]);
+      label_required = _a.label_required,
+      props = __rest(_a, ["label", "name", "className", "errors", "label_required"]);
 
   return react_1["default"].createElement("div", {
     className: "form-group " + className
   }, label && react_1["default"].createElement("label", {
-    className: "h4 mb-3 fw-light",
+    className: "h4 mb-3 fw-light " + (label_required ? 'required form-label' : ''),
     htmlFor: name
   }, label), react_1["default"].createElement("input", __assign({
     id: name,

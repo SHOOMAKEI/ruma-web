@@ -332,12 +332,13 @@ exports.default = function (_a) {
       name = _a.name,
       className = _a.className,
       errors = _a.errors,
-      props = __rest(_a, ["label", "name", "className", "errors"]);
+      label_required = _a.label_required,
+      props = __rest(_a, ["label", "name", "className", "errors", "label_required"]);
 
   return react_1["default"].createElement("div", {
     className: "form-group " + className
   }, label && react_1["default"].createElement("label", {
-    className: "h4 mb-3 fw-light",
+    className: "h4 mb-3 fw-light " + (label_required ? 'required form-label' : ''),
     htmlFor: name
   }, label), react_1["default"].createElement("input", __assign({
     id: name,

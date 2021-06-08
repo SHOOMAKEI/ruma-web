@@ -10,18 +10,22 @@
         <link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/css/base.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
         <link rel="preload" href="{{asset('fonts/EuclidCircularB-Regular.ttf')}}" as="font" crossOrigin=""/>
         <link rel="preload" href="{{asset('fonts/EuclidCircularB-SemiBold.ttf')}}" as="font" crossOrigin=""/>
         <link rel="preload" href="{{asset('fonts/EuclidCircularB-Bold.ttf')}}" as="font" crossOrigin=""/>
         @routes
         <script src="{{ mix('/js/app.js') }}" defer></script>
-        <script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
         <script src="{{asset('assets/js/plugins.bundle.js')}}"></script>
+        <script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
         <script src="{{asset('assets/js/custom/chat/chat.js')}}"></script>
         <script src="{{asset('assets/js/custom/api-keys/api-keys.js')}}"></script>
         <script src="{{asset('assets/plugins/datatables/datatables.bundle.js')}}"></script>
         <script src="{{asset('assets/plugins/fslightbox/fslightbox.bundle.js')}}"></script>
         <script src="{{asset('assets/js/base.js')}}"></script>
+        <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+
+
     </head>
     <body   id="kt_body"
             class="

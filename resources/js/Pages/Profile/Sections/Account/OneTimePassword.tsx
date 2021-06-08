@@ -1,21 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
 import {InertiaLink, useForm, usePage} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import {User} from "../../../../Shared/Types";
+import {SettingsContext} from "../../../../Shared/Contexts/SettingsContexts";
 
 
 
 export default () => {
-    const { user } = usePage().props
-    const { data, setData, errors, post, processing } = useForm({
-        username: '',
-        email: '',
-    });
 
-    function handleSubmit(e: { preventDefault: () => void; }) {
-        e.preventDefault();
-        post(route('login'));
-    }
+    // @ts-ignore
+    const {auth} = useContext(SettingsContext)
+    // @ts-ignore
+    const user = auth.user;
 
     return (
         <>

@@ -3556,40 +3556,6 @@ exports.default = function () {
 "use strict";
 
 
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -3599,9 +3565,8 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.AccountContextProvider = exports.AccountContext = void 0;
 
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var Profile_1 = __importDefault(__webpack_require__(/*! ./Profile */ "./resources/js/Pages/Profile/Profile.tsx"));
 
@@ -3618,6 +3583,8 @@ var TabNavigator_1 = __importDefault(__webpack_require__(/*! ../../Shared/Tab/Ta
 var TabContent_1 = __importDefault(__webpack_require__(/*! ../../Shared/Tab/TabContent */ "./resources/js/Shared/Tab/TabContent.tsx"));
 
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+
+var SettingsContexts_1 = __webpack_require__(/*! ../../Shared/Contexts/SettingsContexts */ "./resources/js/Shared/Contexts/SettingsContexts.tsx");
 
 var tabs = [{
   id: 'kt_user_edit_tab_1',
@@ -3636,38 +3603,22 @@ var tabs = [{
   title: 'Settings',
   component: react_1["default"].createElement(Settings_1["default"], null)
 }];
-var AccountContext = react_1.createContext({});
-exports.AccountContext = AccountContext; // @ts-ignore
-
-var AccountContextProvider = function AccountContextProvider(_a) {
-  var children = _a.children,
-      profile = _a.profile,
-      auth = _a.auth,
-      settings = _a.settings,
-      sessions = _a.sessions;
-  return react_1["default"].createElement(AccountContext.Provider, {
-    value: {
-      profile: profile,
-      auth: auth,
-      settings: settings,
-      sessions: sessions
-    }
-  }, children);
-};
-
-exports.AccountContextProvider = AccountContextProvider;
 
 function Index() {
   var _a = inertia_react_1.usePage().props,
       profile = _a.profile,
       auth = _a.auth,
       settings = _a.settings,
-      sessions = _a.sessions;
-  return react_1["default"].createElement(AccountContextProvider, {
-    profile: profile,
-    auth: auth,
-    settings: settings,
-    sessions: sessions
+      sessions = _a.sessions,
+      errors = _a.errors;
+  return react_1["default"].createElement(SettingsContexts_1.SettingsContext.Provider, {
+    value: {
+      profile: profile,
+      auth: auth,
+      settings: settings,
+      sessions: sessions,
+      errors: errors
+    }
   }, react_1["default"].createElement("div", {
     className: "d-flex flex-column flex-xl-row"
   }, react_1["default"].createElement("div", {
@@ -3799,6 +3750,40 @@ var __extends = this && this.__extends || function () {
   };
 }();
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -3809,7 +3794,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var TextInput_1 = __importDefault(__webpack_require__(/*! ../../../../Shared/TextInput */ "./resources/js/Shared/TextInput.tsx"));
 
@@ -3818,6 +3803,8 @@ var LoadingButton_1 = __importDefault(__webpack_require__(/*! ../../../../Shared
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
 var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
+
+var SettingsContexts_1 = __webpack_require__(/*! ../../../../Shared/Contexts/SettingsContexts */ "./resources/js/Shared/Contexts/SettingsContexts.tsx");
 
 var FileInput =
 /** @class */
@@ -3836,19 +3823,23 @@ function (_super) {
 }(react_1["default"].Component);
 
 exports.default = function () {
-  var _a = inertia_react_1.useForm({
-    username: '',
-    email: ''
+  // @ts-ignore
+  var _a = react_1.useContext(SettingsContexts_1.SettingsContext),
+      auth = _a.auth,
+      errors = _a.errors;
+
+  var _b = inertia_react_1.useForm({
+    username: auth.user.username,
+    email: auth.user.email
   }),
-      data = _a.data,
-      setData = _a.setData,
-      errors = _a.errors,
-      post = _a.post,
-      processing = _a.processing;
+      data = _b.data,
+      setData = _b.setData,
+      post = _b.post,
+      processing = _b.processing;
 
   function handleSubmit(e) {
     e.preventDefault();
-    post(ziggy_js_1["default"]('login'));
+    post(ziggy_js_1["default"]('settings.updateAccountInfo'));
   }
 
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("div", {
@@ -3870,13 +3861,6 @@ exports.default = function () {
   }, react_1["default"].createElement("div", {
     className: "col-lg-12"
   }, react_1["default"].createElement("div", {
-    className: "form-group text-center pb-3"
-  }, react_1["default"].createElement("img", {
-    src: '',
-    alt: "image",
-    className: "img-fluid img-thumbnail rounded-circle mb-3",
-    width: "120"
-  })), react_1["default"].createElement("div", {
     className: "text-left"
   }, react_1["default"].createElement("form", {
     onSubmit: handleSubmit
@@ -3907,6 +3891,291 @@ exports.default = function () {
     className: "btn btn-primary btn-md",
     loading: processing
   }, "Save Changes")))))))))));
+};
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Profile/Sections/Account/BrowserSessions.tsx":
+/*!*************************************************************************!*\
+  !*** ./resources/js/Pages/Profile/Sections/Account/BrowserSessions.tsx ***!
+  \*************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var LoadingButton_1 = __importDefault(__webpack_require__(/*! ../../../../Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.tsx"));
+
+var TextInput_1 = __importDefault(__webpack_require__(/*! ../../../../Shared/TextInput */ "./resources/js/Shared/TextInput.tsx"));
+
+var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
+
+var SettingsContexts_1 = __webpack_require__(/*! ../../../../Shared/Contexts/SettingsContexts */ "./resources/js/Shared/Contexts/SettingsContexts.tsx");
+
+exports.default = function () {
+  // @ts-ignore
+  var _a = react_1.useContext(SettingsContexts_1.SettingsContext),
+      sessions = _a.sessions,
+      errors = _a.errors;
+
+  var _b = inertia_react_1.useForm({
+    confirm_password: ''
+  }),
+      data = _b.data,
+      setData = _b.setData,
+      post = _b.post,
+      processing = _b.processing;
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    post(ziggy_js_1["default"]('settings.sessions_browser'));
+  } // @ts-ignore
+
+
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("div", {
+    className: "col-12"
+  }, react_1["default"].createElement("div", {
+    className: "row col-lg-12"
+  }, react_1["default"].createElement("div", {
+    className: "col-lg-5"
+  }, react_1["default"].createElement("h4", {
+    className: "header-title"
+  }, "Browser Sessions"), react_1["default"].createElement("small", {
+    className: "text-muted font-14"
+  }, "Manage and logout your active sessions on other browsers and devices.")), react_1["default"].createElement("div", {
+    className: "card col-lg-7"
+  }, react_1["default"].createElement("div", {
+    className: "card-body"
+  }, react_1["default"].createElement("div", {
+    className: "row"
+  }, react_1["default"].createElement("div", {
+    className: "col-lg-12"
+  }, react_1["default"].createElement("div", {
+    className: "text-left"
+  }, react_1["default"].createElement("small", {
+    className: " font-14"
+  }, "If necessary, you may logout of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password."), react_1["default"].createElement("div", {
+    className: "mt-3"
+  }, sessions && sessions.length > 0 && sessions.map(function (session, index) {
+    return react_1["default"].createElement("div", {
+      className: "d-flex mb-3",
+      key: index + 1
+    }, react_1["default"].createElement("div", null, session.agent.is_desktop && react_1["default"].createElement("svg", {
+      fill: "none",
+      width: "32",
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+      strokeWidth: "2",
+      viewBox: "0 0 24 24",
+      stroke: "currentColor",
+      className: "text-muted"
+    }, react_1["default"].createElement("path", {
+      d: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+    })), !session.agent.is_desktop && react_1["default"].createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "32",
+      viewBox: "0 0 24 24",
+      strokeWidth: "2",
+      stroke: "currentColor",
+      fill: "none",
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+      className: "text-muted"
+    }, react_1["default"].createElement("path", {
+      d: "M0 0h24v24H0z",
+      stroke: "none"
+    }), react_1["default"].createElement("rect", {
+      x: "7",
+      y: "4",
+      width: "10",
+      height: "16",
+      rx: "1"
+    }), react_1["default"].createElement("path", {
+      d: "M11 5h2M12 17v.01"
+    }))), react_1["default"].createElement("div", {
+      className: "px-2"
+    }, react_1["default"].createElement("div", null, session.agent.platform, " - ", session.agent.browser), react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
+      className: "font-14 font-weight-lighter text-muted"
+    }, session.ip_address, session.is_current_device && react_1["default"].createElement("span", {
+      className: "text-primary font-weight-bold ml-1 px-3"
+    }, "This device"), !session.is_current_device && react_1["default"].createElement("span", {
+      className: "text-secondary ml-1 font-14 px-3"
+    }, "Last active  ", session.last_active)))));
+  }), react_1["default"].createElement("div", {
+    className: "d-flex mt-3"
+  }, react_1["default"].createElement("form", {
+    onSubmit: handleSubmit
+  }, react_1["default"].createElement(TextInput_1["default"], {
+    name: "confirm_password",
+    type: "password",
+    label: "Enter Current Password To Logout Other Browser Sessions",
+    errors: errors.confirm_password,
+    value: data.confirm_password,
+    onChange: function onChange(e) {
+      return setData('confirm_password', e.target.value);
+    }
+  }), react_1["default"].createElement("div", {
+    className: "form-group mb-0 text-left"
+  }, react_1["default"].createElement(LoadingButton_1["default"], {
+    type: "submit",
+    className: "btn btn-primary btn-md",
+    loading: processing
+  }, "Logout Other Browser Sessions")))))))))))));
+};
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Profile/Sections/Account/OneTimePassword.tsx":
+/*!*************************************************************************!*\
+  !*** ./resources/js/Pages/Profile/Sections/Account/OneTimePassword.tsx ***!
+  \*************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
+
+var SettingsContexts_1 = __webpack_require__(/*! ../../../../Shared/Contexts/SettingsContexts */ "./resources/js/Shared/Contexts/SettingsContexts.tsx");
+
+exports.default = function () {
+  var _a, _b; // @ts-ignore
+
+
+  var auth = react_1.useContext(SettingsContexts_1.SettingsContext).auth; // @ts-ignore
+
+  var user = auth.user;
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("div", {
+    className: "col-12"
+  }, react_1["default"].createElement("div", {
+    className: "row col-lg-12"
+  }, react_1["default"].createElement("div", {
+    className: "col-lg-5"
+  }, react_1["default"].createElement("h4", {
+    className: "header-title"
+  }, "One Time Password Authentication"), react_1["default"].createElement("small", {
+    className: "text-muted font-14"
+  }, "Add additional security to your account using OTP (One Time Password Authentication).")), react_1["default"].createElement("div", {
+    className: "card col-lg-7"
+  }, react_1["default"].createElement("div", {
+    className: "card-body"
+  }, react_1["default"].createElement("div", {
+    className: "row"
+  }, react_1["default"].createElement("div", {
+    className: "col-lg-12"
+  }, react_1["default"].createElement("div", {
+    className: "text-left"
+  }, react_1["default"].createElement("small", {
+    className: " font-14"
+  }, "When OTP (One Time Password Authentication) is enabled, you will be prompted for a secure, random code that's sent to your mobile number during authentication. You may retrieve this code from sms that we sent to you."), ((_a = user.settings) === null || _a === void 0 ? void 0 : _a.has_enable_otp) ? react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("br", null), react_1["default"].createElement("br", null), react_1["default"].createElement("small", {
+    className: " font-14"
+  }, "The OTP (One Time Password Authentication) code will be sent to this number ", react_1["default"].createElement("strong", null, user.email), " .")) : '', ((_b = user.settings) === null || _b === void 0 ? void 0 : _b.has_enable_otp) ? react_1["default"].createElement("div", {
+    className: "form-group mt-3 text-left"
+  }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
+    href: ziggy_js_1["default"]('settings.toggleOTP'),
+    className: "btn btn-danger btn-md"
+  }, "Disable")) : react_1["default"].createElement("div", {
+    className: "form-group mt-3 text-left"
+  }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
+    href: ziggy_js_1["default"]('settings.toggleOTP'),
+    className: "btn btn-primary btn-md"
+  }, "Enable"))))))))));
 };
 
 /***/ }),
@@ -4020,14 +4289,48 @@ exports.default = Section_1["default"]({
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Profile/Sections/Account/UpdatePassword.tsx":
-/*!************************************************************************!*\
-  !*** ./resources/js/Pages/Profile/Sections/Account/UpdatePassword.tsx ***!
-  \************************************************************************/
+/***/ "./resources/js/Pages/Profile/Sections/Account/TwoFactorAuthentication.tsx":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/Pages/Profile/Sections/Account/TwoFactorAuthentication.tsx ***!
+  \*********************************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
 
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
@@ -4039,7 +4342,139 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
+
+var SettingsContexts_1 = __webpack_require__(/*! ../../../../Shared/Contexts/SettingsContexts */ "./resources/js/Shared/Contexts/SettingsContexts.tsx");
+
+exports.default = function () {
+  var _a, _b, _c; // const {profile, auth, settings, sessions} = usePage().props
+  // @ts-ignore
+
+
+  var _d = react_1.useContext(SettingsContexts_1.SettingsContext),
+      settings = _d.settings,
+      auth = _d.auth; // @ts-ignore
+
+
+  var user = auth.user;
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("div", {
+    className: "col-12"
+  }, react_1["default"].createElement("div", {
+    className: "row col-lg-12"
+  }, react_1["default"].createElement("div", {
+    className: "col-lg-5"
+  }, react_1["default"].createElement("h4", {
+    className: "header-title"
+  }, "Two Factor Authentication"), react_1["default"].createElement("small", {
+    className: "text-muted font-14"
+  }, "Additional security to your account using two factor authentication.")), react_1["default"].createElement("div", {
+    className: "card col-lg-7"
+  }, react_1["default"].createElement("div", {
+    className: "card-body"
+  }, react_1["default"].createElement("div", {
+    className: "row"
+  }, react_1["default"].createElement("div", {
+    className: "col-lg-12"
+  }, react_1["default"].createElement("div", {
+    className: "text-left"
+  }, react_1["default"].createElement("small", {
+    className: " font-14"
+  }, "When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application."), ((_a = user.settings) === null || _a === void 0 ? void 0 : _a.has_enable_two_factory_auth) ? react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("div", {
+    className: "mt-3"
+  }, react_1["default"].createElement("small", {
+    className: "font-14"
+  }, "Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application.")), react_1["default"].createElement("div", {
+    className: "mt-4",
+    dangerouslySetInnerHTML: {
+      __html: settings.qrcode_svg
+    }
+  }), react_1["default"].createElement("div", {
+    className: "my-4"
+  }, react_1["default"].createElement("small", {
+    className: " font-14"
+  }, "Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.")), react_1["default"].createElement("div", {
+    className: "w-75 bg-light rounded p-3 mb-2"
+  }, settings && ((_c = (_b = settings) === null || _b === void 0 ? void 0 : _b.two_factor_recovery_codes) === null || _c === void 0 ? void 0 : _c.map(function (code, index) {
+    return react_1["default"].createElement("div", {
+      key: index + 1,
+      className: "py-1"
+    }, code.code);
+  }))), react_1["default"].createElement("div", {
+    className: "form-group mt-3 text-left"
+  }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
+    href: ziggy_js_1["default"]('settings.recovery_code'),
+    className: "btn btn-primary btn-md mx-3"
+  }, "Generate Recovery Code"), react_1["default"].createElement(inertia_react_1.InertiaLink, {
+    href: ziggy_js_1["default"]('settings.toggle2fa'),
+    className: "btn btn-danger btn-md"
+  }, "Disable"))) : react_1["default"].createElement("div", {
+    className: "form-group mt-3 text-left"
+  }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
+    href: ziggy_js_1["default"]('settings.toggle2fa'),
+    className: "btn btn-primary btn-md"
+  }, "Enable"))))))))));
+};
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Profile/Sections/Account/UpdatePassword.tsx":
+/*!************************************************************************!*\
+  !*** ./resources/js/Pages/Profile/Sections/Account/UpdatePassword.tsx ***!
+  \************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
@@ -4049,7 +4484,12 @@ var TextInput_1 = __importDefault(__webpack_require__(/*! ../../../../Shared/Tex
 
 var LoadingButton_1 = __importDefault(__webpack_require__(/*! ../../../../Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.tsx"));
 
+var SettingsContexts_1 = __webpack_require__(/*! ../../../../Shared/Contexts/SettingsContexts */ "./resources/js/Shared/Contexts/SettingsContexts.tsx");
+
 exports.default = function () {
+  // @ts-ignore
+  var errors = react_1.useContext(SettingsContexts_1.SettingsContext).errors;
+
   var _a = inertia_react_1.useForm({
     current_password: '',
     password: '',
@@ -4057,13 +4497,12 @@ exports.default = function () {
   }),
       data = _a.data,
       setData = _a.setData,
-      errors = _a.errors,
       post = _a.post,
       processing = _a.processing;
 
   function handleSubmit(e) {
     e.preventDefault();
-    post(ziggy_js_1["default"]('login'));
+    post(ziggy_js_1["default"]('settings.updatePassword'));
   }
 
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("div", {
@@ -4585,9 +5024,35 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var TwoFactorAuthentication_1 = __importDefault(__webpack_require__(/*! ./Sections/Account/TwoFactorAuthentication */ "./resources/js/Pages/Profile/Sections/Account/TwoFactorAuthentication.tsx"));
+
+var OneTimePassword_1 = __importDefault(__webpack_require__(/*! ./Sections/Account/OneTimePassword */ "./resources/js/Pages/Profile/Sections/Account/OneTimePassword.tsx"));
+
+var BrowserSessions_1 = __importDefault(__webpack_require__(/*! ./Sections/Account/BrowserSessions */ "./resources/js/Pages/Profile/Sections/Account/BrowserSessions.tsx"));
+
 exports.default = function () {
-  return react_1["default"].createElement(react_1["default"].Fragment, null);
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(TwoFactorAuthentication_1["default"], null), react_1["default"].createElement("hr", null), react_1["default"].createElement(OneTimePassword_1["default"], null), react_1["default"].createElement("hr", null), react_1["default"].createElement(BrowserSessions_1["default"], null));
 };
+
+/***/ }),
+
+/***/ "./resources/js/Shared/Contexts/SettingsContexts.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/js/Shared/Contexts/SettingsContexts.tsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.SettingsContext = void 0;
+
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+exports.SettingsContext = react_1.createContext({});
 
 /***/ }),
 
@@ -5455,6 +5920,40 @@ exports.default = function (_a) {
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -5465,17 +5964,22 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 
 function Menu(_a) {
   var menu = _a.menu;
   var Icon = menu.Icon;
 
+  var _b = react_1.useState(false),
+      show = _b[0],
+      setShow = _b[1];
+
   function checkActiveLink(link) {
-    // if (router.pathname.includes(link))
-    //     return 'active'
+    if (ziggy_js_1["default"]().current(link + '*')) return 'active';
     return '';
   }
 
@@ -5484,8 +5988,7 @@ function Menu(_a) {
      * This is for sidebar dropdown menus, it determines which
      * sidebar dropdown menu is active
      * */
-    // if (router.pathname.includes(link))
-    //     return 'here show'
+    if (ziggy_js_1["default"]().current(link + '*')) return 'here show';
     return '';
   }
 
@@ -5495,7 +5998,7 @@ function Menu(_a) {
       key: menu.id
     }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
       className: "menu-link " + checkActiveLink(menu.link),
-      href: ""
+      href: menu.link
     }, react_1["default"].createElement("span", {
       className: "menu-icon"
     }, react_1["default"].createElement(Icon, null)), react_1["default"].createElement("span", {
@@ -5516,7 +6019,10 @@ function Menu(_a) {
 
   return react_1["default"].createElement("div", {
     "data-kt-menu-trigger": "click",
-    className: "menu-item menu-accordion " + checkActiveMenuParent(menu.link),
+    onClick: function onClick(e) {
+      return setShow(!show);
+    },
+    className: "menu-item menu-accordion " + checkActiveMenuParent(menu.link) + "  " + (show ? 'show' : '') + " ",
     key: menu.id
   }, react_1["default"].createElement("span", {
     className: "menu-link"
@@ -5527,14 +6033,14 @@ function Menu(_a) {
   }, menu.name), react_1["default"].createElement("span", {
     className: "menu-arrow"
   })), react_1["default"].createElement("div", {
-    className: "menu-sub menu-sub-accordion"
+    className: "menu-sub menu-sub-accordion " + (show ? 'show' : '')
   }, menu.subMenus.map(function (submenu) {
     return react_1["default"].createElement("div", {
       className: "menu-item",
       key: Math.random()
     }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
       className: "menu-link " + checkActiveLink(submenu.link),
-      href: ""
+      href: submenu.link
     }, react_1["default"].createElement("span", {
       className: "menu-bullet"
     }, react_1["default"].createElement("span", {
@@ -5633,10 +6139,16 @@ exports.default = function () {
 /*!********************************************!*\
   !*** ./resources/js/Shared/SidebarLink.ts ***!
   \********************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
@@ -5644,6 +6156,8 @@ Object.defineProperty(exports, "__esModule", ({
 exports.dropdownMenus = exports.PRODUCTS = exports.USERS = exports.DASHBOARD = void 0;
 
 var svg_1 = __webpack_require__(/*! ./Icons/svg */ "./resources/js/Shared/Icons/svg.tsx");
+
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 /**
  * Sidebar links urls are defined here, that's because we want to track
  * active link to determine which element to set active on the sidebar during
@@ -5707,7 +6221,7 @@ exports.dropdownMenus = [{
   }, {
     id: "2",
     name: "Companies",
-    link: "#"
+    link: ziggy_js_1["default"]('companies.index')
   }],
   link: exports.USERS.parent
 }, {
@@ -5979,12 +6493,13 @@ exports.default = function (_a) {
       name = _a.name,
       className = _a.className,
       errors = _a.errors,
-      props = __rest(_a, ["label", "name", "className", "errors"]);
+      label_required = _a.label_required,
+      props = __rest(_a, ["label", "name", "className", "errors", "label_required"]);
 
   return react_1["default"].createElement("div", {
     className: "form-group " + className
   }, label && react_1["default"].createElement("label", {
-    className: "h4 mb-3 fw-light",
+    className: "h4 mb-3 fw-light " + (label_required ? 'required form-label' : ''),
     htmlFor: name
   }, label), react_1["default"].createElement("input", __assign({
     id: name,
@@ -6241,6 +6756,7 @@ exports.default = function () {
     as: ToggleDropdown_1.CustomDropdownMenuItem
   }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
     href: ziggy_js_1["default"]('logout'),
+    method: "post",
     className: "menu-link px-5"
   }, "Sign Out"))))));
 };

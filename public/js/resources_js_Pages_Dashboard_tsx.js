@@ -4351,6 +4351,40 @@ exports.default = Framework;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -4361,17 +4395,22 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 
 function Menu(_a) {
   var menu = _a.menu;
   var Icon = menu.Icon;
 
+  var _b = react_1.useState(false),
+      show = _b[0],
+      setShow = _b[1];
+
   function checkActiveLink(link) {
-    // if (router.pathname.includes(link))
-    //     return 'active'
+    if (ziggy_js_1["default"]().current(link + '*')) return 'active';
     return '';
   }
 
@@ -4380,8 +4419,7 @@ function Menu(_a) {
      * This is for sidebar dropdown menus, it determines which
      * sidebar dropdown menu is active
      * */
-    // if (router.pathname.includes(link))
-    //     return 'here show'
+    if (ziggy_js_1["default"]().current(link + '*')) return 'here show';
     return '';
   }
 
@@ -4391,7 +4429,7 @@ function Menu(_a) {
       key: menu.id
     }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
       className: "menu-link " + checkActiveLink(menu.link),
-      href: ""
+      href: menu.link
     }, react_1["default"].createElement("span", {
       className: "menu-icon"
     }, react_1["default"].createElement(Icon, null)), react_1["default"].createElement("span", {
@@ -4412,7 +4450,10 @@ function Menu(_a) {
 
   return react_1["default"].createElement("div", {
     "data-kt-menu-trigger": "click",
-    className: "menu-item menu-accordion " + checkActiveMenuParent(menu.link),
+    onClick: function onClick(e) {
+      return setShow(!show);
+    },
+    className: "menu-item menu-accordion " + checkActiveMenuParent(menu.link) + "  " + (show ? 'show' : '') + " ",
     key: menu.id
   }, react_1["default"].createElement("span", {
     className: "menu-link"
@@ -4423,14 +4464,14 @@ function Menu(_a) {
   }, menu.name), react_1["default"].createElement("span", {
     className: "menu-arrow"
   })), react_1["default"].createElement("div", {
-    className: "menu-sub menu-sub-accordion"
+    className: "menu-sub menu-sub-accordion " + (show ? 'show' : '')
   }, menu.subMenus.map(function (submenu) {
     return react_1["default"].createElement("div", {
       className: "menu-item",
       key: Math.random()
     }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
       className: "menu-link " + checkActiveLink(submenu.link),
-      href: ""
+      href: submenu.link
     }, react_1["default"].createElement("span", {
       className: "menu-bullet"
     }, react_1["default"].createElement("span", {
@@ -4529,10 +4570,16 @@ exports.default = function () {
 /*!********************************************!*\
   !*** ./resources/js/Shared/SidebarLink.ts ***!
   \********************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
@@ -4540,6 +4587,8 @@ Object.defineProperty(exports, "__esModule", ({
 exports.dropdownMenus = exports.PRODUCTS = exports.USERS = exports.DASHBOARD = void 0;
 
 var svg_1 = __webpack_require__(/*! ./Icons/svg */ "./resources/js/Shared/Icons/svg.tsx");
+
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 /**
  * Sidebar links urls are defined here, that's because we want to track
  * active link to determine which element to set active on the sidebar during
@@ -4603,7 +4652,7 @@ exports.dropdownMenus = [{
   }, {
     id: "2",
     name: "Companies",
-    link: "#"
+    link: ziggy_js_1["default"]('companies.index')
   }],
   link: exports.USERS.parent
 }, {
@@ -4968,6 +5017,7 @@ exports.default = function () {
     as: ToggleDropdown_1.CustomDropdownMenuItem
   }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
     href: ziggy_js_1["default"]('logout'),
+    method: "post",
     className: "menu-link px-5"
   }, "Sign Out"))))));
 };

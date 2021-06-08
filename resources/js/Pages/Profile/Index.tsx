@@ -9,6 +9,7 @@ import TabContent from "../../Shared/Tab/TabContent";
 import {usePage} from "@inertiajs/inertia-react";
 import {Settings as Setting, Employee, User} from "../../Shared/Types";
 import {Session} from "./Sections/Account/BrowserSessions";
+import {SettingsContext} from '../../Shared/Contexts/SettingsContexts'
 
 interface auth {
     user : User
@@ -21,21 +22,11 @@ const tabs: Array<TabItemType> = [
 ]
 
 
-const AccountContext = createContext({});
-// @ts-ignore
-const AccountContextProvider = ({ children, profile, auth, settings, sessions }) => {
-    return (
-        <AccountContext.Provider value={{ profile, auth, settings, sessions}}>
-            {children}
-        </AccountContext.Provider>
-    );
-};
-
 function Index()  {
-const {profile, auth, settings, sessions} = usePage().props
+    const {profile, auth, settings, sessions, errors} = usePage().props
 
     return(
-        <AccountContextProvider profile={profile} auth={auth} settings={settings}  sessions={sessions} >
+        <SettingsContext.Provider value={{profile, auth, settings, sessions, errors}}>
         <div className="d-flex flex-column flex-xl-row">
             <div className="flex-lg-row-fluid">
                 <div className="card">
@@ -46,11 +37,10 @@ const {profile, auth, settings, sessions} = usePage().props
                 </div>
             </div>
         </div>
-        </AccountContextProvider>
+        </SettingsContext.Provider>
     )
 }
 
-export { AccountContext, AccountContextProvider };
 
 Index.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout children={page}  title="Profile Information"/>;
 
