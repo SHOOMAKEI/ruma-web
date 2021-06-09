@@ -69,11 +69,11 @@ class CompanyController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Company $company
-     * @return Response|\Inertia\Response|\Inertia\ResponseFactory
+     * @return \Inertia\Response
      */
-    public function edit(Company $company)
+    public function edit(Company $company): \Inertia\Response
     {
-        return inertia('Company/Edit');
+        return inertia('Company/Edit', ['company' => $company]);
     }
 
     /**

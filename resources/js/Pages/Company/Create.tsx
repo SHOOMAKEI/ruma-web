@@ -11,6 +11,7 @@ import SelectInput from "../../Shared/SelectInput";
 import CheckBoxInput from "../../Shared/CheckBoxInput";
 // @ts-ignore
 import FileInput from "../../Shared/FileInput";
+import CardWaper from "../../Shared/CardWaper";
 
 function Create() {
     const { data, setData, errors, post, processing } = useForm({
@@ -30,10 +31,7 @@ function Create() {
     }
 
     return(
-
-
-        <div className="card pt-4 mb-6 mb-xl-9">
-            <div className="card-body pt-0">
+        <CardWaper>
                 <form onSubmit={handleSubmit} className="form w-100">
                     <div className="fv-row mb-5 row">
                         <TextInput
@@ -147,8 +145,7 @@ function Create() {
                         </LoadingButton>
                     </div>
                 </form>
-            </div>
-        </div>
+        </CardWaper>
     )
 }
 

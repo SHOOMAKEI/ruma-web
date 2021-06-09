@@ -6,9 +6,31 @@ const KeyCodes = {
     enter: 13,
 };
 
+
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 export default ({ label, name, tags, suggestions, ...props }) => {
+
+    function handleTagDelete(i) {
+        setValues(values => ({...values ,tags:values.tags.filter((tag, index) => index !== i)}));
+    }
+
+    function handleTagAddition(tag){
+        setValues(values => ({...values,tags:[...values.tags, tag
+            ]
+        }));
+    }
+
+    function  handleTagDrag(tag, currPos, newPos){
+        let tags = [...values.tags];
+        const newTags = tags.slice();
+
+        newTags.splice(currPos, 1);
+        newTags.splice(newPos, 0, tag);
+
+        // re-render
+        setValues(values => ({...values, tags: newTags}));
+    }
 
     return (
         <div className="form-group">

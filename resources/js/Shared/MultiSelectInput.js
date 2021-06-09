@@ -10,7 +10,7 @@ export default ({
   ...props
 }) => {
   return (
-    <div className={`form-group ${className} ${errors.length?'is-invalid':''}`}>
+    <div className={`form-group ${className} `}>
       {label && (
         <label htmlFor={name}>
           {label}
@@ -21,13 +21,11 @@ export default ({
           isMulti
           name={name}
           {...props}
-          className={` ${errors.length ? 'error' : ''}`}
-          aria-invalid={errors.length?'true':''}
-          aria-describedby={errors.length?name+'-error':''}
+          className={` form-select form-control-solid mb-2`}
           options={options}
           isSearchable={true}
         />
-      {errors && <div id={name+'-error'} className="invalid-feedback animated fadeInDown">{errors[0]}</div>}
+      {errors && <div id={name+'-error'} className="invalid-feedback animated fadeInDown">{errors}</div>}
     </div>
   );
 };

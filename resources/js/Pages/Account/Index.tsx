@@ -2,7 +2,7 @@ import React from "react";
 import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 import Layout from "../../Shared/Layout";
 import route from "ziggy-js";
-import {Company} from "../../Shared/Types";
+import {Company, User} from "../../Shared/Types";
 import CardWaper from "../../Shared/CardWaper";
 import {Dropdown} from "react-bootstrap";
 import {CustomDropdownMenuItem, CustomButtonDropdownToggle} from '../../Shared/ToggleDropdown'
@@ -10,12 +10,12 @@ import { DropdownIcon } from "../../Shared/Icons/svg";
 
 
 interface props {
-    company?: Company []
+    users?: User []
     [key: string]: any
 }
 
 function Index()  {
-    const { companies }:props = usePage().props
+    const { users }:props = usePage().props
 
 
 
@@ -26,20 +26,26 @@ function Index()  {
         <table id="kt_datatable_example_5" className="table table-striped table-row-bordered gy-5 gs-7 border rounded">
             <thead>
             <tr className="fw-bolder fs-6 text-gray-800 px-7">
-                <th>Name</th>
-                <th>phone</th>
-                <th>email</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
                 <th>Is Active</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            {companies as props && companies.map((company: Company)=>(
-                <tr key={company.id}>
-                    <td>{company.name}</td>
-                    <td>{company.phone}</td>
-                    <td>{company.email}</td>
-                    <td>{company.is_active? <span className="badge badge-light-primary">Active</span>:
+            {users as props && (users as props).map((user: User)=>(
+                <tr key={user.id}>
+                    <td>{user.username}</td>
+                    <td>{user.email}</td>
+                    <td>
+                        <ul>
+                        {user.account_roles?.map((role)=>(
+                        <li>{role.name}</li>
+                        ))}
+                        </ul>
+                    </td>
+                    <td>{user.is_active? <span className="badge badge-light-primary">Active</span>:
                         <span className="badge badge-light-warning">In Active</span>}</td>
                     <td>
                         <Dropdown>
@@ -50,7 +56,10 @@ function Index()  {
 
                             <Dropdown.Menu className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold py-4 fs-6 w-275px">
                                 <Dropdown.Item as={CustomDropdownMenuItem}>
-                                        <InertiaLink href={route('companies.edit', company.id)} className="menu-link px-3" >Edit</InertiaLink>
+                                        <InertiaLink href={route('accounts.edit', user.id)} className="menu-link px-3" >Edit</InertiaLink>
+                                </Dropdown.Item>
+                                <Dropdown.Item as={CustomDropdownMenuItem}>
+                                    <InertiaLink href={route('accounts.destroy', user.id)} className="menu-link px-3" >Delete</InertiaLink>
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>

@@ -1,5 +1,5 @@
-import React from "react";
-import {InertiaLink, useForm} from "@inertiajs/inertia-react";
+import React, {Component} from "react";
+import {InertiaLink, useForm, usePage} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import TextInput from "../../Shared/TextInput";
 import LoadingButton from "../../Shared/LoadingButton";
@@ -12,22 +12,28 @@ import CheckBoxInput from "../../Shared/CheckBoxInput";
 // @ts-ignore
 import FileInput from "../../Shared/FileInput";
 import CardWaper from "../../Shared/CardWaper";
+import {Company} from "../../Shared/Types";
+
 
 function Create() {
-    const { data, setData, errors, post, processing } = useForm({
-        name: '',
-        email: '',
-        phone: '',
-        currency: 'NGN',
-        tax_number: '',
-        address: '',
-        is_active: true,
+    const {company} = usePage().props
+    let checked: boolean = false;
+    // @ts-ignore
+    const { data, setData, errors, put, processing } = useForm({
+        id: (company as Company).id || '',
+        name: (company as Company).name || '',
+        email: (company as Company).email || '',
+        phone: (company as Company).phone,
+        currency: (company as Company).currency || '',
+        tax_number: (company as Company).tax_number || '',
+        address: (company as Company).address || '',
+        is_active: (company as Company).is_active || (checked),
         logo: ''
     });
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        post(route('companies.store'));
+        put(route('companies.update', (company as Company).id));
     }
 
     return(
@@ -150,7 +156,7 @@ function Create() {
 }
 
 Create.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
-    children={page}  title="Create Company"
+    children={page}  title="Edit Company"
  />;
 
 export default Create;

@@ -3,11 +3,11 @@ import {InertiaLink, useForm} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import TextInput from "../../Shared/TextInput";
 import LoadingButton from "../../Shared/LoadingButton";
-import AuthFramework from "../Auth/AuthFramework";
 import Layout from "../../Shared/Layout";
 import Index from "./Index";
 import TextAreaInput from "../../Shared/TextAreaInput";
-import SelectInput from "../../Shared/SelectInput";
+// @ts-ignore
+import TagInput from "../../Shared/TagInput";
 import CheckBoxInput from "../../Shared/CheckBoxInput";
 // @ts-ignore
 import FileInput from "../../Shared/FileInput";
@@ -15,19 +15,20 @@ import CardWaper from "../../Shared/CardWaper";
 
 function Create() {
     const { data, setData, errors, post, processing } = useForm({
-        name: '',
+        username: '',
         email: '',
-        phone: '',
-        currency: 'NGN',
-        tax_number: '',
-        address: '',
+        password: '',
+        password_confirmation: '',
+        roles: [],
+        companies: [],
         is_active: true,
-        logo: ''
     });
+
+
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        post(route('companies.store'));
+        post(route('accounts.store'));
     }
 
     return(
@@ -36,15 +37,15 @@ function Create() {
                     <div className="fv-row mb-5 row">
                         <TextInput
                             className="mt-10 col-md-6"
-                            label="Name"
-                            placeholder="Name"
-                            name="name"
+                            label="Username"
+                            placeholder="Username"
+                            name="username"
                             type="text"
                             label_required={true}
                             required
-                            errors={errors.name}
-                            value={data.name}
-                            onChange={(e: { target: { value: string; }; }) => setData('name', e.target.value)}
+                            errors={errors.username}
+                            value={data.username}
+                            onChange={(e: { target: { value: string; }; }) => setData('username', e.target.value)}
                         />
                         <TextInput
                             className="mt-10 col-md-6"
@@ -60,22 +61,21 @@ function Create() {
                         />
                     </div>
                     <div className="fv-row mb-5 row">
-                        <SelectInput
+                        <TagInput
                             className="mt-10 col-md-6"
                             label="Currency"
                             placeholder="Currency"
                             name="currency"
-                            type="text"
-                            required
                             label_required={true}
-                            errors={errors.currency}
-                            value={data.currency}
-                            onChange={(e: { target: { value: string; }; }) => setData('currency', e.target.value)}
+                            errors={errors.companies}
+                            tags={data.companies}
+                            suggestions={suggestions}
+                            onChange={(e: { target: { value: string; }; }) => setData('companies', e.target.value)}
                         >
                             <option value="USD"> USD</option>
                             <option value="NGN"> NGN</option>
                             <option value="TZS"> TZS</option>
-                            </SelectInput>
+                            </TagInput>
                         <TextInput
                             className="mt-10 col-md-6"
                             label="Tax Number"

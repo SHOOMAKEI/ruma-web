@@ -15,7 +15,7 @@
         <link rel="preload" href="{{asset('fonts/EuclidCircularB-SemiBold.ttf')}}" as="font" crossOrigin=""/>
         <link rel="preload" href="{{asset('fonts/EuclidCircularB-Bold.ttf')}}" as="font" crossOrigin=""/>
         @routes
-        <script src="{{ mix('/js/app.js') }}" defer></script>
+
         <script src="{{asset('assets/js/plugins.bundle.js')}}"></script>
         <script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
         <script src="{{asset('assets/js/custom/chat/chat.js')}}"></script>
@@ -24,6 +24,8 @@
         <script src="{{asset('assets/plugins/fslightbox/fslightbox.bundle.js')}}"></script>
         <script src="{{asset('assets/js/base.js')}}"></script>
         <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+        <script src="{{asset('assets/js/custom/documentation/general/datatables/advanced.js')}}"></script>
+        <script src="{{ mix('/js/app.js') }}" defer></script>
 
 
     </head>

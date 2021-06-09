@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Company_Create_tsx"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Company_Edit_tsx"],{
 
 /***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
 /*!************************************************************!*\
@@ -3514,10 +3514,10 @@ function useWillUnmount(fn) {
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Company/Create.tsx":
-/*!***********************************************!*\
-  !*** ./resources/js/Pages/Company/Create.tsx ***!
-  \***********************************************/
+/***/ "./resources/js/Pages/Company/Edit.tsx":
+/*!*********************************************!*\
+  !*** ./resources/js/Pages/Company/Edit.tsx ***!
+  \*********************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -3557,25 +3557,29 @@ var FileInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/FileInput
 var CardWaper_1 = __importDefault(__webpack_require__(/*! ../../Shared/CardWaper */ "./resources/js/Shared/CardWaper.tsx"));
 
 function Create() {
+  var company = inertia_react_1.usePage().props.company;
+  var checked = false; // @ts-ignore
+
   var _a = inertia_react_1.useForm({
-    name: '',
-    email: '',
-    phone: '',
-    currency: 'NGN',
-    tax_number: '',
-    address: '',
-    is_active: true,
+    id: company.id || '',
+    name: company.name || '',
+    email: company.email || '',
+    phone: company.phone,
+    currency: company.currency || '',
+    tax_number: company.tax_number || '',
+    address: company.address || '',
+    is_active: company.is_active || checked,
     logo: ''
   }),
       data = _a.data,
       setData = _a.setData,
       errors = _a.errors,
-      post = _a.post,
+      put = _a.put,
       processing = _a.processing;
 
   function handleSubmit(e) {
     e.preventDefault();
-    post(ziggy_js_1["default"]('companies.store'));
+    put(ziggy_js_1["default"]('companies.update', company.id));
   }
 
   return react_1["default"].createElement(CardWaper_1["default"], null, react_1["default"].createElement("form", {
