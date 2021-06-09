@@ -131,6 +131,7 @@ function Create() {
                         label="Is Active"
                         name="is_active"
                         required
+                        checked={data.is_active}
                         label_required={true}
                         errors={errors.is_active}
                         value={data.is_active}

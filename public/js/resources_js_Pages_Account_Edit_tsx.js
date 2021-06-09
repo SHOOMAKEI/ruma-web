@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Dashboard_tsx"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Account_Edit_tsx"],{
 
 /***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
 /*!************************************************************!*\
@@ -3514,10 +3514,10 @@ function useWillUnmount(fn) {
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Dashboard.tsx":
-/*!******************************************!*\
-  !*** ./resources/js/Pages/Dashboard.tsx ***!
-  \******************************************/
+/***/ "./resources/js/Pages/Account/Edit.tsx":
+/*!*********************************************!*\
+  !*** ./resources/js/Pages/Account/Edit.tsx ***!
+  \*********************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -3535,30 +3535,296 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var Layout_1 = __importDefault(__webpack_require__(/*! ../Shared/Layout */ "./resources/js/Shared/Layout.tsx"));
+var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
-var Dashboard = function Dashboard() {
-  return react_1["default"].createElement("div", {
-    className: "card mt-3"
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
+
+var TextInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/TextInput */ "./resources/js/Shared/TextInput.tsx"));
+
+var LoadingButton_1 = __importDefault(__webpack_require__(/*! ../../Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.tsx"));
+
+var Layout_1 = __importDefault(__webpack_require__(/*! ../../Shared/Layout */ "./resources/js/Shared/Layout.tsx"));
+
+var TextAreaInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/TextAreaInput */ "./resources/js/Shared/TextAreaInput.tsx"));
+
+var SelectInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/SelectInput */ "./resources/js/Shared/SelectInput.tsx"));
+
+var CheckBoxInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/CheckBoxInput */ "./resources/js/Shared/CheckBoxInput.tsx")); // @ts-ignore
+
+
+var FileInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/FileInput */ "./resources/js/Shared/FileInput.jsx"));
+
+var CardWaper_1 = __importDefault(__webpack_require__(/*! ../../Shared/CardWaper */ "./resources/js/Shared/CardWaper.tsx"));
+
+function Create() {
+  var company = inertia_react_1.usePage().props.company;
+  var checked = false; // @ts-ignore
+
+  var _a = inertia_react_1.useForm({
+    id: company.id || '',
+    name: company.name || '',
+    email: company.email || '',
+    phone: company.phone,
+    currency: company.currency || '',
+    tax_number: company.tax_number || '',
+    address: company.address || '',
+    is_active: company.is_active || checked,
+    logo: ''
+  }),
+      data = _a.data,
+      setData = _a.setData,
+      errors = _a.errors,
+      put = _a.put,
+      processing = _a.processing;
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    put(ziggy_js_1["default"]('companies.update', company.id));
+  }
+
+  return react_1["default"].createElement(CardWaper_1["default"], null, react_1["default"].createElement("form", {
+    onSubmit: handleSubmit,
+    className: "form w-100"
   }, react_1["default"].createElement("div", {
-    className: "card-header pdn-20 pdn-sm-x-40"
-  }, react_1["default"].createElement("h6", null, "Blank Page")), react_1["default"].createElement("div", {
-    className: "card-body pdn-sm-40 pdn-t-20-imp"
-  }, react_1["default"].createElement("p", {
-    className: "card-text mb-3 wth-sm-70p"
-  }, "Paragraph title"), react_1["default"].createElement("div", {
-    className: "pdn-sm-55 pdn-15 bdr"
-  }, "Page contents go here. Create something awesome!")));
-};
+    className: "fv-row mb-5 row"
+  }, react_1["default"].createElement(TextInput_1["default"], {
+    className: "mt-10 col-md-6",
+    label: "Name",
+    placeholder: "Name",
+    name: "name",
+    type: "text",
+    label_required: true,
+    required: true,
+    errors: errors.name,
+    value: data.name,
+    onChange: function onChange(e) {
+      return setData('name', e.target.value);
+    }
+  }), react_1["default"].createElement(TextInput_1["default"], {
+    className: "mt-10 col-md-6",
+    label: "Email",
+    placeholder: "Email",
+    name: "email",
+    type: "text",
+    required: true,
+    label_required: true,
+    errors: errors.email,
+    value: data.email,
+    onChange: function onChange(e) {
+      return setData('email', e.target.value);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "fv-row mb-5 row"
+  }, react_1["default"].createElement(SelectInput_1["default"], {
+    className: "mt-10 col-md-6",
+    label: "Currency",
+    placeholder: "Currency",
+    name: "currency",
+    type: "text",
+    required: true,
+    label_required: true,
+    errors: errors.currency,
+    value: data.currency,
+    onChange: function onChange(e) {
+      return setData('currency', e.target.value);
+    }
+  }, react_1["default"].createElement("option", {
+    value: "USD"
+  }, " USD"), react_1["default"].createElement("option", {
+    value: "NGN"
+  }, " NGN"), react_1["default"].createElement("option", {
+    value: "TZS"
+  }, " TZS")), react_1["default"].createElement(TextInput_1["default"], {
+    className: "mt-10 col-md-6",
+    label: "Tax Number",
+    placeholder: "Tax Number",
+    name: "tax_number",
+    type: "text",
+    required: true,
+    label_required: true,
+    errors: errors.tax_number,
+    value: data.tax_number,
+    onChange: function onChange(e) {
+      return setData('tax_number', e.target.value);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "fv-row mb-5 row"
+  }, react_1["default"].createElement(TextInput_1["default"], {
+    className: "mt-10 col-md-6",
+    label: "Phone",
+    placeholder: "Phone",
+    name: "phone",
+    type: "text",
+    required: true,
+    label_required: true,
+    errors: errors.phone,
+    value: data.phone,
+    onChange: function onChange(e) {
+      return setData('phone', e.target.value);
+    }
+  }), react_1["default"].createElement(TextAreaInput_1["default"], {
+    className: "mt-10 col-md-6",
+    label: "Address",
+    placeholder: "Address",
+    name: "address",
+    required: true,
+    label_required: true,
+    errors: errors.address,
+    value: data.address,
+    onChange: function onChange(e) {
+      return setData('address', e.target.value);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "fv-row mb-5 row"
+  }, react_1["default"].createElement(FileInput_1["default"], {
+    className: "mt-10 col-md-6",
+    name: "logo",
+    label: "Logo",
+    accept: "image/*",
+    required: true,
+    label_required: true,
+    errors: errors.logo,
+    value: data.logo,
+    callback: setData
+  }), react_1["default"].createElement(CheckBoxInput_1["default"], {
+    className: "mt-10 col-md-6",
+    label: "Is Active",
+    name: "is_active",
+    required: true,
+    label_required: true,
+    errors: errors.is_active,
+    value: data.is_active,
+    onChange: function onChange(e) {
+      return setData('is_active', e.target.checked);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "fv-row"
+  }, react_1["default"].createElement(LoadingButton_1["default"], {
+    type: "submit",
+    loading: processing
+  }, "Save"))));
+}
 
-Dashboard.layout = function (page) {
+Create.layout = function (page) {
   return react_1["default"].createElement(Layout_1["default"], {
     children: page,
-    title: "Dashboard"
+    title: "Create Company"
   });
 };
 
-exports.default = Dashboard;
+exports.default = Create;
+
+/***/ }),
+
+/***/ "./resources/js/Shared/CardWaper.tsx":
+/*!*******************************************!*\
+  !*** ./resources/js/Shared/CardWaper.tsx ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var children = _a.children;
+  return react_1["default"].createElement("div", {
+    className: "card pt-4 mb-6 mb-xl-9"
+  }, react_1["default"].createElement("div", {
+    className: "card-body pt-0"
+  }, children));
+};
+
+/***/ }),
+
+/***/ "./resources/js/Shared/CheckBoxInput.tsx":
+/*!***********************************************!*\
+  !*** ./resources/js/Shared/CheckBoxInput.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var label = _a.label,
+      name = _a.name,
+      className = _a.className,
+      value = _a.value,
+      errors = _a.errors,
+      label_required = _a.label_required,
+      props = __rest(_a, ["label", "name", "className", "value", "errors", "label_required"]);
+
+  return react_1["default"].createElement("div", {
+    className: "form-check form-switch form-check-custom form-check-solid px-5 pt-5 " + className
+  }, react_1["default"].createElement("input", __assign({
+    id: name,
+    name: name
+  }, props, {
+    type: "checkbox",
+    className: "form-check-input h-30px w-50px "
+  })), label && react_1["default"].createElement("label", {
+    className: "form-check-label " + (label_required ? 'required form-label' : ''),
+    htmlFor: name
+  }, label), errors && react_1["default"].createElement("div", {
+    className: "invalid-feedback ",
+    style: {
+      display: 'block'
+    }
+  }, errors));
+};
 
 /***/ }),
 
@@ -4342,6 +4608,81 @@ exports.default = Framework;
 
 /***/ }),
 
+/***/ "./resources/js/Shared/LoadingButton.tsx":
+/*!***********************************************!*\
+  !*** ./resources/js/Shared/LoadingButton.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var loading = _a.loading,
+      className = _a.className,
+      type = _a.type,
+      _b = _a.color,
+      color = _b === void 0 ? 'primary' : _b,
+      children = _a.children,
+      props = __rest(_a, ["loading", "className", "type", "color", "children"]);
+
+  return react_1["default"].createElement("button", __assign({
+    disabled: loading,
+    className: "btn btn-" + color + " " + className
+  }, props, {
+    "data-kt-indicator": loading ? 'on' : 'off'
+  }), loading && react_1["default"].createElement("span", {
+    className: "indicator-progress h4 mb-0"
+  }, "Please wait... ", react_1["default"].createElement("span", {
+    className: "spinner-border spinner-border-sm align-middle ms-2"
+  })), react_1["default"].createElement("span", {
+    className: "indicator-label h4"
+  }, children));
+};
+
+/***/ }),
+
 /***/ "./resources/js/Shared/Menu.tsx":
 /*!**************************************!*\
   !*** ./resources/js/Shared/Menu.tsx ***!
@@ -4483,6 +4824,85 @@ function Menu(_a) {
 }
 
 exports.default = Menu;
+
+/***/ }),
+
+/***/ "./resources/js/Shared/SelectInput.tsx":
+/*!*********************************************!*\
+  !*** ./resources/js/Shared/SelectInput.tsx ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var label = _a.label,
+      name = _a.name,
+      className = _a.className,
+      children = _a.children,
+      errors = _a.errors,
+      label_required = _a.label_required,
+      props = __rest(_a, ["label", "name", "className", "children", "errors", "label_required"]);
+
+  return react_1["default"].createElement("div", {
+    className: "form-group " + className
+  }, label && react_1["default"].createElement("label", {
+    className: "h4 mb-3 fw-light " + (label_required ? 'required form-label' : ''),
+    htmlFor: name
+  }, label), react_1["default"].createElement("select", __assign({
+    id: name,
+    name: name
+  }, props, {
+    className: "form-select form-control-solid mb-2"
+  }), children), errors && react_1["default"].createElement("div", {
+    className: "invalid-feedback ",
+    style: {
+      display: 'block'
+    }
+  }, errors));
+};
 
 /***/ }),
 
@@ -4777,6 +5197,165 @@ exports.dropdownMenus = [{
 
 /***/ }),
 
+/***/ "./resources/js/Shared/TextAreaInput.tsx":
+/*!***********************************************!*\
+  !*** ./resources/js/Shared/TextAreaInput.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var label = _a.label,
+      name = _a.name,
+      className = _a.className,
+      errors = _a.errors,
+      value = _a.value,
+      label_required = _a.label_required,
+      props = __rest(_a, ["label", "name", "className", "errors", "value", "label_required"]);
+
+  return react_1["default"].createElement("div", {
+    className: "form-group " + className
+  }, label && react_1["default"].createElement("label", {
+    className: "h4 mb-3 fw-light " + (label_required ? 'required form-label' : ''),
+    htmlFor: name
+  }, label), react_1["default"].createElement("textarea", __assign({
+    id: name,
+    name: name
+  }, props, {
+    className: "form-input form-control",
+    rows: 2,
+    value: value ? value : ""
+  })), errors && react_1["default"].createElement("div", {
+    className: "invalid-feedback",
+    style: {
+      display: 'block'
+    }
+  }, errors));
+};
+
+/***/ }),
+
+/***/ "./resources/js/Shared/TextInput.tsx":
+/*!*******************************************!*\
+  !*** ./resources/js/Shared/TextInput.tsx ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var label = _a.label,
+      name = _a.name,
+      className = _a.className,
+      errors = _a.errors,
+      label_required = _a.label_required,
+      props = __rest(_a, ["label", "name", "className", "errors", "label_required"]);
+
+  return react_1["default"].createElement("div", {
+    className: "form-group " + className
+  }, label && react_1["default"].createElement("label", {
+    className: "h4 mb-3 fw-light " + (label_required ? 'required form-label' : ''),
+    htmlFor: name
+  }, label), react_1["default"].createElement("input", __assign({
+    id: name,
+    name: name
+  }, props, {
+    className: "form-control form-control-solid mb-2"
+  })), errors && react_1["default"].createElement("div", {
+    className: "invalid-feedback text-danger mt-2",
+    style: {
+      display: 'block'
+    }
+  }, errors));
+};
+
+/***/ }),
+
 /***/ "./resources/js/Shared/ToggleDropdown.tsx":
 /*!************************************************!*\
   !*** ./resources/js/Shared/ToggleDropdown.tsx ***!
@@ -5040,6 +5619,107 @@ exports.siteDescription = exports.siteTitle = exports.author = void 0;
 exports.author = "OMUHA COMPANY (T) Limited";
 exports.siteTitle = "RUMA APP";
 exports.siteDescription = "Dummy description";
+
+/***/ }),
+
+/***/ "./resources/js/Shared/FileInput.jsx":
+/*!*******************************************!*\
+  !*** ./resources/js/Shared/FileInput.jsx ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var _excluded = ["className", "name", "label", "accept", "errors", "label_required", "callback"];
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+ // type InputProps = {
+//     label?: string
+//     name: string
+//     className? : string
+//     label_required? : boolean
+//     errors: string
+//     [key: string]: any
+// }
+// @ts-ignore
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (_ref) {
+  var className = _ref.className,
+      name = _ref.name,
+      label = _ref.label,
+      accept = _ref.accept,
+      errors = _ref.errors,
+      label_required = _ref.label_required,
+      callback = _ref.callback,
+      props = _objectWithoutProperties(_ref, _excluded);
+
+  var fileInput = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      file = _useState2[0],
+      setFile = _useState2[1];
+
+  function handleFileChange(e) {
+    var data = e.target.files[0];
+    var reader = new FileReader();
+    reader.readAsDataURL(data);
+    var base64;
+
+    reader.onload = function (event) {
+      var _event$target;
+
+      base64 = (_event$target = event.target) === null || _event$target === void 0 ? void 0 : _event$target.result; // @ts-ignore
+
+      setFile(base64);
+      callback(base64);
+      console.log(base64);
+    };
+  } // @ts-ignore
+
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "form-group ".concat(className, " ")
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    className: "h4 mb-3 fw-light ".concat(label_required ? 'required form-label' : ''),
+    htmlFor: name
+  }, label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "custom-file pl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    id: name,
+    name: name,
+    accept: accept,
+    ref: fileInput,
+    type: "file",
+    "data-toggle": "custom-file-input",
+    className: "custom-file-input js-custom-file-input-enabled",
+    onChange: handleFileChange
+  }), errors && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "invalid-feedback",
+    style: {
+      display: 'block'
+    }
+  }, errors)));
+});
 
 /***/ }),
 

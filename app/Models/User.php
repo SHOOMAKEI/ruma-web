@@ -4,8 +4,12 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
+use JetBrains\PhpStorm\ArrayShape;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -58,11 +62,66 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'otp_expired_at' => 'datetime',
     ];
 
+    protected $appends = [
+        'settings', 'account_roles', 'account_permissions', 'profile_photo'
+    ];
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
+    }
+
+    public function getAccountRolesAttribute(): array
+    {
+        $data=[];
+        $index=0;
+        foreach ($this->getRoleNames()?->toArray() as $roles)
+        {
+            $data[$index]['name'] = $roles;
+            $index++;
+        }
+        return $data;
+    }
+
+    public function getAccountPermissionsAttribute(): Collection
+    {
+        return $this->getAllPermissions();
+    }
+
+    public function getProfilePhotoAttribute(): string
+    {
+        if ($this->getFirstMediaUrl('profile-photo') == null) {
+            return asset('avatar/company_avatar.jpg');
+        }
+
+        return $this->getFirstMediaUrl('profile-photo');
+    }
+
+    public function companies(): BelongsToMany
+    {
+        return $this->belongsToMany(Company::class, 'user_companies')->withPivot('user_type');
+    }
+
+//    public function employee(): BelongsTo
+//    {
+//        return $this->belongsTo(Employee::class);
+//    }
+
+
+    #[ArrayShape([
+        'has_verify_email' => "bool",
+        'has_enable_otp' => "mixed",
+        'has_enable_two_factory_auth' => "bool"
+    ])]
+    public function getSettingsAttribute(): array
+    {
+        return  [
+            'has_verify_email' => $this->attributes['email_verified_at'] != null,
+            'has_enable_otp' => $this->attributes['has_enable_otp'],
+            'has_enable_two_factory_auth' => $this->attributes['two_factor_recovery_codes'] != null
+        ];
     }
 
 }

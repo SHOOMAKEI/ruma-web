@@ -3692,6 +3692,7 @@ function Create() {
     name: "is_active",
     required: true,
     label_required: true,
+    checked: data.is_active,
     errors: errors.is_active,
     value: data.is_active,
     onChange: function onChange(e) {
@@ -3708,7 +3709,7 @@ function Create() {
 Create.layout = function (page) {
   return react_1["default"].createElement(Layout_1["default"], {
     children: page,
-    title: "Create Company"
+    title: "Edit Company"
   });
 };
 
@@ -5064,7 +5065,7 @@ exports.dropdownMenus = [{
   subMenus: [{
     id: "1",
     name: "Users",
-    link: "#"
+    link: ziggy_js_1["default"]('users.index')
   }, {
     id: "2",
     name: "Roles",
@@ -5672,15 +5673,15 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
       callback = _ref.callback,
       props = _objectWithoutProperties(_ref, _excluded);
 
-  // const fileInput = useRef();
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+  var fileInput = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       file = _useState2[0],
       setFile = _useState2[1];
 
   function handleFileChange(e) {
     var data = e.target.files[0];
-    console.log(data);
     var reader = new FileReader();
     reader.readAsDataURL(data);
     var base64;
@@ -5691,9 +5692,8 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
       base64 = (_event$target = event.target) === null || _event$target === void 0 ? void 0 : _event$target.result; // @ts-ignore
 
       setFile(base64);
-      callback(name, base64);
+      callback(base64);
       console.log(base64);
-      console.log(file);
     };
   } // @ts-ignore
 
@@ -5709,12 +5709,11 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
     id: name,
     name: name,
     accept: accept,
+    ref: fileInput,
     type: "file",
     "data-toggle": "custom-file-input",
     className: "custom-file-input js-custom-file-input-enabled",
-    onChange: function onChange(e) {
-      return handleFileChange;
-    }
+    onChange: handleFileChange
   }), errors && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "invalid-feedback",
     style: {

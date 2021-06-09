@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
@@ -45,5 +46,6 @@ Route::middleware([ 'auth','auth:sanctum'])
 Route::middleware([ 'auth','auth:sanctum', 'role:system-administrator'])
     ->group(function () {
         Route::resource('companies', CompanyController::class);
+        Route::resource('users', AccountController::class);
 
     });

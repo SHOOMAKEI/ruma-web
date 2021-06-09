@@ -138,6 +138,7 @@ function Create() {
                         name="is_active"
                         required
                         label_required={true}
+                        checked={data.is_active}
                         errors={errors.is_active}
                         value={data.is_active}
                         onChange={(e: { target: { checked: boolean; }; }) => setData('is_active', e.target.checked)}

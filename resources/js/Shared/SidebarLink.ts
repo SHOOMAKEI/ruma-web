@@ -69,7 +69,7 @@ export const dropdownMenus: Array<MenuType> = [
         Icon: UsersIcon,
         type: "dropdown",
         subMenus: [
-            { id: "1", name: "Users", link: "#" },
+            { id: "1", name: "Users", link: route('users.index') },
             { id: "2", name: "Roles", link:  "#"},
             { id: "2", name: "Companies", link:  route('companies.index')},
         ],

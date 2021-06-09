@@ -6213,7 +6213,7 @@ exports.dropdownMenus = [{
   subMenus: [{
     id: "1",
     name: "Users",
-    link: "#"
+    link: ziggy_js_1["default"]('users.index')
   }, {
     id: "2",
     name: "Roles",

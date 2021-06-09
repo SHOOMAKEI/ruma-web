@@ -18,7 +18,7 @@ class CompanyController extends Controller
     public function index()
     {
         return  inertia('Company/Index', [
-            'companies' => Company::where('is_active', true)->get()
+            'companies' => Company::all()
         ]);
     }
 
@@ -118,15 +118,26 @@ class CompanyController extends Controller
     public function validateInput(array $args)
     {
         $validator =  Validator::make($args,[
-            'email' => ['required', 'email', 'string'],
-            'name' => ['required','string'],
-            'phone' => ['required','string'],
+            'email' => ['required', 'email', 'string', 'max:255'],
+            'name' => ['required','string', 'max:255'],
+            'phone' => ['required','string', 'max:255'],
             'currency' => ['required','string', 'max:3'],
-            'tax_number' => ['required', 'string'],
-            'address' => ['required', 'string'],
+            'tax_number' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
             'is_active' => ['required', 'bool'],
-//            'logo' => ['sometimes', 'base64image'],
         ]);
+
+        if(!is_null($args['logo']))
+        {
+            $validator =  Validator::make($args,[
+                'logo' => ['sometimes', 'base64image'],
+            ]);
+
+
+            if($validator->fails()) {
+                return redirect()->back()->withErrors($validator);
+            }
+        }
 
         if($validator->fails()) {
             return redirect()->back()->withErrors($validator);

@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Dashboard_tsx"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Account_Index_tsx"],{
 
 /***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
 /*!************************************************************!*\
@@ -3514,10 +3514,10 @@ function useWillUnmount(fn) {
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Dashboard.tsx":
-/*!******************************************!*\
-  !*** ./resources/js/Pages/Dashboard.tsx ***!
-  \******************************************/
+/***/ "./resources/js/Pages/Account/Index.tsx":
+/*!**********************************************!*\
+  !*** ./resources/js/Pages/Account/Index.tsx ***!
+  \**********************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -3535,30 +3535,108 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var Layout_1 = __importDefault(__webpack_require__(/*! ../Shared/Layout */ "./resources/js/Shared/Layout.tsx"));
+var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
-var Dashboard = function Dashboard() {
-  return react_1["default"].createElement("div", {
-    className: "card mt-3"
-  }, react_1["default"].createElement("div", {
-    className: "card-header pdn-20 pdn-sm-x-40"
-  }, react_1["default"].createElement("h6", null, "Blank Page")), react_1["default"].createElement("div", {
-    className: "card-body pdn-sm-40 pdn-t-20-imp"
-  }, react_1["default"].createElement("p", {
-    className: "card-text mb-3 wth-sm-70p"
-  }, "Paragraph title"), react_1["default"].createElement("div", {
-    className: "pdn-sm-55 pdn-15 bdr"
-  }, "Page contents go here. Create something awesome!")));
-};
+var Layout_1 = __importDefault(__webpack_require__(/*! ../../Shared/Layout */ "./resources/js/Shared/Layout.tsx"));
 
-Dashboard.layout = function (page) {
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
+
+var CardWaper_1 = __importDefault(__webpack_require__(/*! ../../Shared/CardWaper */ "./resources/js/Shared/CardWaper.tsx"));
+
+var react_bootstrap_1 = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+
+var ToggleDropdown_1 = __webpack_require__(/*! ../../Shared/ToggleDropdown */ "./resources/js/Shared/ToggleDropdown.tsx");
+
+var svg_1 = __webpack_require__(/*! ../../Shared/Icons/svg */ "./resources/js/Shared/Icons/svg.tsx");
+
+function Index() {
+  var users = inertia_react_1.usePage().props.users; // @ts-ignore
+
+  return react_1["default"].createElement(CardWaper_1["default"], null, react_1["default"].createElement("table", {
+    id: "kt_datatable_example_5",
+    className: "table table-striped table-row-bordered gy-5 gs-7 border rounded"
+  }, react_1["default"].createElement("thead", null, react_1["default"].createElement("tr", {
+    className: "fw-bolder fs-6 text-gray-800 px-7"
+  }, react_1["default"].createElement("th", null, "Username"), react_1["default"].createElement("th", null, "Email"), react_1["default"].createElement("th", null, "Role"), react_1["default"].createElement("th", null, "Is Active"), react_1["default"].createElement("th", null, "Actions"))), react_1["default"].createElement("tbody", null, users && users.map(function (user) {
+    var _a;
+
+    return react_1["default"].createElement("tr", {
+      key: user.id
+    }, react_1["default"].createElement("td", null, user.username), react_1["default"].createElement("td", null, user.email), react_1["default"].createElement("td", null, (_a = user.account_roles) === null || _a === void 0 ? void 0 : _a.map(function (role) {
+      var _a;
+
+      return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("span", {
+        className: "badge badge-light-info"
+      }, (_a = role.name) === null || _a === void 0 ? void 0 : _a.replace('-', ' ')), " ", react_1["default"].createElement("br", null));
+    })), react_1["default"].createElement("td", null, user.is_active ? react_1["default"].createElement("span", {
+      className: "badge badge-light-primary"
+    }, "Active") : react_1["default"].createElement("span", {
+      className: "badge badge-light-warning"
+    }, "In Active")), react_1["default"].createElement("td", null, react_1["default"].createElement(react_bootstrap_1.Dropdown, null, react_1["default"].createElement(react_bootstrap_1.Dropdown.Toggle, {
+      cssClass: "btn btn-sm btn-light btn-active-light-primary",
+      variant: "success",
+      id: "dropdown-basic",
+      as: ToggleDropdown_1.CustomButtonDropdownToggle
+    }, "Actions", react_1["default"].createElement(svg_1.DropdownIcon, null)), react_1["default"].createElement(react_bootstrap_1.Dropdown.Menu, {
+      className: "menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold py-4 fs-6 w-275px"
+    }, react_1["default"].createElement(react_bootstrap_1.Dropdown.Item, {
+      as: ToggleDropdown_1.CustomDropdownMenuItem
+    }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
+      href: ziggy_js_1["default"]('users.edit', user.id),
+      className: "menu-link px-3"
+    }, "Edit")), react_1["default"].createElement(react_bootstrap_1.Dropdown.Item, {
+      as: ToggleDropdown_1.CustomDropdownMenuItem
+    }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
+      href: ziggy_js_1["default"]('users.destroy', user.id),
+      className: "menu-link px-3"
+    }, "Delete"))))));
+  }))));
+}
+
+Index.layout = function (page) {
   return react_1["default"].createElement(Layout_1["default"], {
     children: page,
-    title: "Dashboard"
+    title: "Users Accounts",
+    toolBarLeftContent: react_1["default"].createElement(inertia_react_1.InertiaLink, {
+      href: ziggy_js_1["default"]('users.create'),
+      className: "btn btn-primary"
+    }, "Add User Account")
   });
 };
 
-exports.default = Dashboard;
+exports.default = Index;
+
+/***/ }),
+
+/***/ "./resources/js/Shared/CardWaper.tsx":
+/*!*******************************************!*\
+  !*** ./resources/js/Shared/CardWaper.tsx ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var children = _a.children;
+  return react_1["default"].createElement("div", {
+    className: "card pt-4 mb-6 mb-xl-9"
+  }, react_1["default"].createElement("div", {
+    className: "card-body pt-0"
+  }, children));
+};
 
 /***/ }),
 

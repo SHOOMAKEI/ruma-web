@@ -10,12 +10,12 @@ import React, { useState, useRef } from 'react';
 // }
 // @ts-ignore
 export default ({ className, name, label, accept, errors, label_required, callback, ...props }) => {
-  // const fileInput = useRef();
-  const [file, setFile] = useState(null);
+  const fileInput = useRef();
+  const [file, setFile] = useState('');
 
   function handleFileChange(e) {
       const data = e.target.files[0];
-      console.log(data)
+
       const reader = new FileReader();
       reader.readAsDataURL(data);
       let base64;
@@ -24,9 +24,8 @@ export default ({ className, name, label, accept, errors, label_required, callba
 
           // @ts-ignore
           setFile(base64);
-          callback(name,base64);
-          console.log(base64)
-          console.log(file)
+          callback(base64);
+          console.log((base64))
       }
   }
 
@@ -41,10 +40,11 @@ export default ({ className, name, label, accept, errors, label_required, callba
           id={name}
           name={name}
           accept={accept}
+          ref={fileInput}
           type="file"
           data-toggle="custom-file-input"
           className="custom-file-input js-custom-file-input-enabled"
-          onChange={ e => handleFileChange}
+          onChange={handleFileChange}
         />
 
       {errors && <div className="invalid-feedback" style={{display:'block'}}>{errors}</div>}

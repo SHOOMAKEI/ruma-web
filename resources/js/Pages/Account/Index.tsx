@@ -39,11 +39,11 @@ function Index()  {
                     <td>{user.username}</td>
                     <td>{user.email}</td>
                     <td>
-                        <ul>
                         {user.account_roles?.map((role)=>(
-                        <li>{role.name}</li>
+                            <>
+                                <span className="badge badge-light-info">{role.name?.replace('-', ' ')}</span> <br/>
+                            </>
                         ))}
-                        </ul>
                     </td>
                     <td>{user.is_active? <span className="badge badge-light-primary">Active</span>:
                         <span className="badge badge-light-warning">In Active</span>}</td>
@@ -56,10 +56,10 @@ function Index()  {
 
                             <Dropdown.Menu className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold py-4 fs-6 w-275px">
                                 <Dropdown.Item as={CustomDropdownMenuItem}>
-                                        <InertiaLink href={route('accounts.edit', user.id)} className="menu-link px-3" >Edit</InertiaLink>
+                                        <InertiaLink href={route('users.edit', user.id)} className="menu-link px-3" >Edit</InertiaLink>
                                 </Dropdown.Item>
                                 <Dropdown.Item as={CustomDropdownMenuItem}>
-                                    <InertiaLink href={route('accounts.destroy', user.id)} className="menu-link px-3" >Delete</InertiaLink>
+                                    <InertiaLink href={route('users.destroy', user.id)} className="menu-link px-3" >Delete</InertiaLink>
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -74,7 +74,7 @@ function Index()  {
 }
 
 Index.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
-    children={page}  title="Companies"
-    toolBarLeftContent={ <InertiaLink href={route('companies.create')} className="btn btn-primary">Add Company</InertiaLink>} />;
+    children={page}  title="Users Accounts"
+    toolBarLeftContent={ <InertiaLink href={route('users.create')} className="btn btn-primary">Add User Account</InertiaLink>} />;
 
 export default Index;

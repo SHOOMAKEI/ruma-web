@@ -36651,6 +36651,30 @@ module.exports = function getSideChannel() {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./Account/Create": [
+		"./resources/js/Pages/Account/Create.tsx",
+		"resources_js_Pages_Account_Create_tsx"
+	],
+	"./Account/Create.tsx": [
+		"./resources/js/Pages/Account/Create.tsx",
+		"resources_js_Pages_Account_Create_tsx"
+	],
+	"./Account/Edit": [
+		"./resources/js/Pages/Account/Edit.tsx",
+		"resources_js_Pages_Account_Edit_tsx"
+	],
+	"./Account/Edit.tsx": [
+		"./resources/js/Pages/Account/Edit.tsx",
+		"resources_js_Pages_Account_Edit_tsx"
+	],
+	"./Account/Index": [
+		"./resources/js/Pages/Account/Index.tsx",
+		"resources_js_Pages_Account_Index_tsx"
+	],
+	"./Account/Index.tsx": [
+		"./resources/js/Pages/Account/Index.tsx",
+		"resources_js_Pages_Account_Index_tsx"
+	],
 	"./Auth/AuthFramework": [
 		"./resources/js/Pages/Auth/AuthFramework.tsx",
 		"resources_js_Pages_Auth_AuthFramework_tsx"
@@ -37011,7 +37035,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Auth_AuthFramework_tsx":"84ab71fac1707acaa2b8","resources_js_Pages_Auth_ForgotPassword_tsx":"ce2b2912489e850d0abc","resources_js_Pages_Auth_Login_tsx":"3b337a39afc9d959403a","resources_js_Pages_Auth_ResetPassword_tsx":"00e9be5490d2c7283ed6","resources_js_Pages_Auth_TwoFactorAuth_tsx":"7e19755e34a4ed35afba","resources_js_Pages_Company_Create_tsx":"1ebfb2b6ff181d1fe953","resources_js_Pages_Company_Edit_tsx":"53a01a37edb2293b78c1","resources_js_Pages_Company_Index_tsx":"b2ab9ffeb17d033fa8f3","resources_js_Pages_Dashboard_tsx":"6738a8fa7743cf5e43d1","resources_js_Pages_Profile_Account_tsx":"b0cf42dce5496568d29a","resources_js_Pages_Profile_Index_tsx":"d6428c188b23596fb874","resources_js_Pages_Profile_Password_tsx":"4979c8ad596314566d86","resources_js_Pages_Profile_Profile_tsx":"3886822d86d9f9841734","resources_js_Pages_Profile_Sections_Account_AccountInformation_tsx":"7f6a0c51076ba2241d21","resources_js_Pages_Profile_Sections_Account_BrowserSessions_tsx":"8ccabbd6bda3527f4311","resources_js_Pages_Profile_Sections_Account_OneTimePassword_tsx":"cfd8765becb62aa72a83","resources_js_Pages_Profile_Sections_Account_Permissions_tsx":"5a7b72e26e2c8b1eaee9","resources_js_Pages_Profile_Sections_Account_Roles_tsx":"1df6f368eb8d9d341636","resources_js_Pages_Profile_Sections_Account_TwoFactorAuthentication_tsx":"e82f21c589eee696652a","resources_js_Pages_Profile_Sections_Account_UpdatePassword_tsx":"aba2b95fa1522e371221","resources_js_Pages_Profile_Sections_Information_Address_tsx":"681491139f88fcbc00f5","resources_js_Pages_Profile_Sections_Information_Company_tsx":"2f1c1d6971b98680ca7d","resources_js_Pages_Profile_Sections_Information_ContactInfo_tsx":"7aaa1e211d24fc88eb2a","resources_js_Pages_Profile_Sections_Information_Employment_tsx":"ae3d1c8330b2ff198d8e","resources_js_Pages_Profile_Sections_Information_Other_tsx":"6d9b120bb835842ddc39","resources_js_Pages_Profile_Sections_Information_Personal_tsx":"f5574793c3986714877c","resources_js_Pages_Profile_Sections_Information_Section_tsx":"ed31590699bde3e8e515","resources_js_Pages_Profile_Settings_tsx":"32e3e07c55e051bfab75"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Account_Create_tsx":"58579d692ac537d68783","resources_js_Pages_Account_Edit_tsx":"1718a8893a837e4251e3","resources_js_Pages_Account_Index_tsx":"eddebbb3fc764d148a8e","resources_js_Pages_Auth_AuthFramework_tsx":"d1daf37b04c673a779fa","resources_js_Pages_Auth_ForgotPassword_tsx":"0cda1c0a15b6acc5acc0","resources_js_Pages_Auth_Login_tsx":"baa74ffe3d1896d4a6e0","resources_js_Pages_Auth_ResetPassword_tsx":"e3e556f4d36efcb7ff7f","resources_js_Pages_Auth_TwoFactorAuth_tsx":"02925a0b3ffb72f16948","resources_js_Pages_Company_Create_tsx":"44a3598e05cec079cae7","resources_js_Pages_Company_Edit_tsx":"6806ae16300c4ad04688","resources_js_Pages_Company_Index_tsx":"96d12e979239ffcc3b06","resources_js_Pages_Dashboard_tsx":"7ce198ffeba9a7f48af8","resources_js_Pages_Profile_Account_tsx":"bc121bdce4d3015d00c3","resources_js_Pages_Profile_Index_tsx":"d69f2bdd6a6fa291ebd6","resources_js_Pages_Profile_Password_tsx":"b65b5c33e470bed8b0e8","resources_js_Pages_Profile_Profile_tsx":"b8afa02d37262bdba711","resources_js_Pages_Profile_Sections_Account_AccountInformation_tsx":"1b6bc4e4586932ca1175","resources_js_Pages_Profile_Sections_Account_BrowserSessions_tsx":"5fdd4062cf689fe3cfc6","resources_js_Pages_Profile_Sections_Account_OneTimePassword_tsx":"97596fd1f841ce1d8740","resources_js_Pages_Profile_Sections_Account_Permissions_tsx":"96e638972e5ea7cf8afb","resources_js_Pages_Profile_Sections_Account_Roles_tsx":"e1d402416ac31be3fbb8","resources_js_Pages_Profile_Sections_Account_TwoFactorAuthentication_tsx":"0d7df7225ebf71ee0bee","resources_js_Pages_Profile_Sections_Account_UpdatePassword_tsx":"4ff19b6f70407be79434","resources_js_Pages_Profile_Sections_Information_Address_tsx":"956c2ad4d28ea832d235","resources_js_Pages_Profile_Sections_Information_Company_tsx":"5b2202d53047c2845c64","resources_js_Pages_Profile_Sections_Information_ContactInfo_tsx":"9e183853a6a72678b3b8","resources_js_Pages_Profile_Sections_Information_Employment_tsx":"e81635e0f4d7ca337cce","resources_js_Pages_Profile_Sections_Information_Other_tsx":"ebe1536969bbb5a6a5eb","resources_js_Pages_Profile_Sections_Information_Personal_tsx":"8f56bafacd8a87bcba9b","resources_js_Pages_Profile_Sections_Information_Section_tsx":"8a54625332378940087c","resources_js_Pages_Profile_Settings_tsx":"190d99a8757e7367335c"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

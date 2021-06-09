@@ -9,46 +9,53 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-export default ({ label, name, tags, suggestions, ...props }) => {
+export default ({ label, name, tags, suggestions, data,callback,label_required, className ,...props }) => {
 
     function handleTagDelete(i) {
-        setValues(values => ({...values ,tags:values.tags.filter((tag, index) => index !== i)}));
+        callback(data => ({...data ,[name]:data[name].filter((tag, index) => index !== i)}));
     }
 
     function handleTagAddition(tag){
-        setValues(values => ({...values,tags:[...values.tags, tag
+        console.log(tag)
+        callback(data => ({...data,tags:[...data[name], tag
             ]
         }));
     }
 
     function  handleTagDrag(tag, currPos, newPos){
-        let tags = [...values.tags];
+        let tags = [...data[name]];
         const newTags = tags.slice();
 
         newTags.splice(currPos, 1);
         newTags.splice(newPos, 0, tag);
 
         // re-render
-        setValues(values => ({...values, tags: newTags}));
+        callback(data => ({...data, [name]: newTags}));
     }
 
     return (
-        <div className="form-group">
-            <label className="form-control-label">{label}</label>
-            <div className="bootstrap-tagsinput">
+        <div className={`form-group ${className}`}>
+            <label className={`h4 mb-3 fw-light ${ label_required?'required form-label': ''}`}>{label}</label>
                 <ReactTags
-                    // classNames={{
-                    //     tag: 'tag badge badge-primary',
-                    //     remove: 'tag-input-remove',
-                    //     suggestions: 'list-group-item',
-                    //     activeSuggestion: 'active list-group-item'
-                    // }}
+                    classNames={{
+                        tagInputField: 'form-control form-control-solid',
+                        tag: 'tagify__tag tagify--noAnim badge badge-primary',
+                        remove: 'tag-input-remove',
+                        suggestions: 'tagify__inline__suggestions',
+                        activeSuggestion: 'active list-group-item'
+                    }}
                     tags={tags}
                     suggestions={suggestions}
+                    inline
                     delimiters={delimiters}
+                    autocomplete
+                    handleDelete={handleTagDelete}
+                    handleAddition={handleTagAddition}
+                    handleDrag={handleTagDrag}
+                    inputFieldPosition="top"
+
                     {...props}
                 />
-            </div>
         </div>
     )
 };

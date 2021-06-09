@@ -3576,13 +3576,7 @@ function Index() {
     }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
       href: ziggy_js_1["default"]('companies.edit', company.id),
       className: "menu-link px-3"
-    }, "Edit")), react_1["default"].createElement(react_bootstrap_1.Dropdown.Item, {
-      as: ToggleDropdown_1.CustomDropdownMenuItem
-    }, react_1["default"].createElement("a", {
-      href: "#",
-      className: "menu-link px-3",
-      "data-kt-customer-table-filter": "delete_row"
-    }, "Delete"))))));
+    }, "Edit"))))));
   }))));
 }
 
@@ -4715,7 +4709,7 @@ exports.dropdownMenus = [{
   subMenus: [{
     id: "1",
     name: "Users",
-    link: "#"
+    link: ziggy_js_1["default"]('users.index')
   }, {
     id: "2",
     name: "Roles",
