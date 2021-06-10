@@ -3619,22 +3619,6 @@ exports.default = Edit;
 "use strict";
 
 
-var __assign = this && this.__assign || function () {
-  __assign = Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-
-      for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-      }
-    }
-
-    return t;
-  };
-
-  return __assign.apply(this, arguments);
-};
-
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
   Object.defineProperty(o, k2, {
@@ -3700,7 +3684,7 @@ var FILTERS = [{
 }];
 
 exports.default = function (_a) {
-  var employee = _a.employee,
+  var user = _a.user,
       permissions = _a.permissions,
       callback = _a.callback;
 
@@ -3709,12 +3693,16 @@ exports.default = function (_a) {
       setSelectedPermissions = _b[1];
 
   var _c = react_1.useState(),
-      shownPermissions = _c[0],
-      setShownPermissions = _c[1];
+      selectedPermission = _c[0],
+      setSelectedPermission = _c[1];
 
-  var _d = react_1.useState(FILTERS[0]),
-      activeFilter = _d[0],
-      setActiveFilter = _d[1];
+  var _d = react_1.useState(),
+      shownPermissions = _d[0],
+      setShownPermissions = _d[1];
+
+  var _e = react_1.useState(FILTERS[0]),
+      activeFilter = _e[0],
+      setActiveFilter = _e[1];
 
   react_1.useEffect(function () {
     setShownPermissions(permissions);
@@ -3735,21 +3723,26 @@ exports.default = function (_a) {
     }));
   }
 
-  function handleChange(e, permission) {
+  function handleChange(e, permission, i) {
     var key = e.target.id; // @ts-ignore
 
     var value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    var newPer = {
+      id: permission.id,
+      name: permission.name,
+      checked: !permission.checked
+    }; // @ts-ignore
 
-    var newObject = __assign(__assign({}, permission), {
-      checked: value
+    setSelectedPermission(newPer); // @ts-ignore
+
+    var newTags = shownPermissions.filter(function (tag, index) {
+      return index !== i;
     });
+    newTags[i] = newPer; // @ts-ignore
 
-    console.log(newObject); // setSelectedPermissions(selectedPermissions => ([
-    //     // @ts-ignore
-    //     ...selectedPermissions,
-    //     newObject
-    //   ]))
-    // callback(setSelectedPermissions)
+    var inserted = newTags;
+    setShownPermissions(inserted);
+    callback(shownPermissions);
   }
 
   return react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
@@ -3773,7 +3766,7 @@ exports.default = function (_a) {
     }, filter.name);
   }))), react_1["default"].createElement("div", {
     className: "row"
-  }, shownPermissions === null || shownPermissions === void 0 ? void 0 : shownPermissions.map(function (permission) {
+  }, shownPermissions === null || shownPermissions === void 0 ? void 0 : shownPermissions.map(function (permission, index) {
     var _a, _b, _c;
 
     if ((_a = permission.name) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase().includes(activeFilter.name.toLocaleLowerCase())) {
@@ -3788,8 +3781,8 @@ exports.default = function (_a) {
         checked: permission.checked,
         value: permission.checked,
         errors: '',
-        onChange: function onChange(e, permission) {
-          return handleChange(e, permission);
+        onChange: function onChange(e) {
+          return handleChange(e, permission, index);
         }
       }));
     }

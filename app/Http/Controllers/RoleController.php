@@ -32,18 +32,27 @@ class RoleController extends Controller
     {
         $validator =  Validator::make($request->toArray(),[
             'name' => ['required','string', 'max:255'],
-            'permissions.*.id' => ['required','string', 'exists:permissions,id'],
+            'permissions.*.id' => ['required','numeric', 'exists:permissions,id'],
         ]);
 
         if($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
+////        dd(config('auth.guards'));
+//        foreach (config('auth.guards') as $guard=>$value)
+//        {
+//            $role = Role::create([
+//                'name' => $request['name'],
+//                'guard_name' => $guard
+//            ]);
+//
+//            $permissions = array_filter($request['permissions'], function($permission) {
+//                return $permission['checked'] == true;
+//            } );
+//
+//            $role->syncPermissions($permissions, $guard);
+//        }
 
-        $role = Role::create([
-            'name' => $request['name']
-        ]);
-
-        $role->syncPermissions($request['permissions']);
 
         return redirect()->route('roles.index')->with(['status' => 'Operation Complete successful']);
     }
@@ -51,24 +60,24 @@ class RoleController extends Controller
 
     public function show(Role $role)
     {
-        return inertia('Role/Create', [ 'role' => $role]);
+        return inertia('Role/Show', [ 'role' => $role]);
     }
 
 
     public function edit(Role $role)
     {
         $role_data['id'] = $role->id;
-        $role_data['name'] = $role->id;
+        $role_data['name'] = $role->name;
         $role_data['permissions'] = $role->permissions->map(function ($permission){
             $data['id'] =  $permission->id;
             $data['name'] =  $permission->name;
             $data['checked'] =  true;
             return $data;
         });
-        return inertia('Role/Create', ['permissions' => Permission::all('id', 'name')->map(function ($permission){
+        return inertia('Role/Edit', ['permissions' => Permission::all('id', 'name')->map(function ($permission) use($role){
             $data['id'] =  $permission->id;
             $data['name'] =  $permission->name;
-            $data['checked'] =  false;
+            $data['checked'] = $role->hasPermissionTo($permission->name);
             return $data;
         }), 'role' => $role_data]);
     }
@@ -78,7 +87,7 @@ class RoleController extends Controller
     {
         $validator =  Validator::make($request->toArray(),[
             'name' => ['required','string', 'max:255'],
-            'permissions.*.id' => ['required','string', 'exists:permissions,id'],
+            'permissions.*.id' => ['required','numeric', 'exists:permissions,id'],
         ]);
 
         if($validator->fails()) {

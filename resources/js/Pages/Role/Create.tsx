@@ -48,7 +48,7 @@ function Create() {
         e.preventDefault();
         setLoading(true)
         //@ts-ignore
-        Inertia.post(route('companies.store'), data).then(() => {
+        Inertia.post(route('roles.store'), data).then(() => {
             setLoading(false);
         })
     }
