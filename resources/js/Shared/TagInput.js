@@ -17,7 +17,7 @@ export default ({ label, name, tags, suggestions, data,callback,label_required, 
 
     function handleTagAddition(tag){
         console.log(tag)
-        callback(data => ({...data,tags:[...data[name], tag
+        callback(data => ({...data,[name]:[...data[name], tag
             ]
         }));
     }
@@ -39,11 +39,13 @@ export default ({ label, name, tags, suggestions, data,callback,label_required, 
                 <ReactTags
                     classNames={{
                         tagInputField: 'form-control form-control-solid',
-                        tag: 'tagify__tag tagify--noAnim badge badge-primary',
-                        remove: 'tag-input-remove',
-                        suggestions: 'tagify__inline__suggestions',
+                        tag: 'badge badge-light-success mx-2 my-2',
+                        remove: 'btn btn-icon btn-sm btn-active-light-info text-uppercase font-weight-bold',
+                        suggestions: 'rounded bg-light p-1 ',
                         activeSuggestion: 'active list-group-item'
+
                     }}
+
                     tags={tags}
                     suggestions={suggestions}
                     inline

@@ -3541,7 +3541,7 @@ var Layout_1 = __importDefault(__webpack_require__(/*! ../../Shared/Layout */ ".
 
 var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 
-var CardWaper_1 = __importDefault(__webpack_require__(/*! ../../Shared/CardWaper */ "./resources/js/Shared/CardWaper.tsx"));
+var CardWrapper_1 = __importDefault(__webpack_require__(/*! ../../Shared/CardWrapper */ "./resources/js/Shared/CardWrapper.tsx"));
 
 var react_bootstrap_1 = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
 
@@ -3552,7 +3552,7 @@ var svg_1 = __webpack_require__(/*! ../../Shared/Icons/svg */ "./resources/js/Sh
 function Index() {
   var users = inertia_react_1.usePage().props.users; // @ts-ignore
 
-  return react_1["default"].createElement(CardWaper_1["default"], null, react_1["default"].createElement("table", {
+  return react_1["default"].createElement(CardWrapper_1["default"], null, react_1["default"].createElement("table", {
     id: "kt_datatable_example_5",
     className: "table table-striped table-row-bordered gy-5 gs-7 border rounded"
   }, react_1["default"].createElement("thead", null, react_1["default"].createElement("tr", {
@@ -3566,7 +3566,8 @@ function Index() {
       var _a;
 
       return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("span", {
-        className: "badge badge-light-info"
+        className: "badge badge-light-info my-1",
+        key: Math.random()
       }, (_a = role.name) === null || _a === void 0 ? void 0 : _a.replace('-', ' ')), " ", react_1["default"].createElement("br", null));
     })), react_1["default"].createElement("td", null, user.is_active ? react_1["default"].createElement("span", {
       className: "badge badge-light-primary"
@@ -3608,10 +3609,10 @@ exports.default = Index;
 
 /***/ }),
 
-/***/ "./resources/js/Shared/CardWaper.tsx":
-/*!*******************************************!*\
-  !*** ./resources/js/Shared/CardWaper.tsx ***!
-  \*******************************************/
+/***/ "./resources/js/Shared/CardWrapper.tsx":
+/*!*********************************************!*\
+  !*** ./resources/js/Shared/CardWrapper.tsx ***!
+  \*********************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";

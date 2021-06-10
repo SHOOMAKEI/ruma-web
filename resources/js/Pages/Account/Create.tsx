@@ -4,20 +4,17 @@ import route from "ziggy-js";
 import TextInput from "../../Shared/TextInput";
 import LoadingButton from "../../Shared/LoadingButton";
 import Layout from "../../Shared/Layout";
-import Index from "./Index";
-import TextAreaInput from "../../Shared/TextAreaInput";
 // @ts-ignore
 import TagInput from "../../Shared/TagInput";
 import CheckBoxInput from "../../Shared/CheckBoxInput";
 // @ts-ignore
 import FileInput from "../../Shared/FileInput";
-import CardWaper from "../../Shared/CardWaper";
+import CardWrapper from "../../Shared/CardWrapper";
+import {Inertia} from "@inertiajs/inertia";
 
 function Create() {
-    const {companies, roles} = usePage().props
-    const [file, setFile] = useState('');
-
-    const { data, setData, errors, post, processing } = useForm({
+    const {companies, roles, errors} = usePage().props
+    const [data, setData] = useState({
         username: '',
         email: '',
         password: '',
@@ -27,34 +24,39 @@ function Create() {
         is_active: true,
         photo: '',
         send_reset_password_notification: false
-    });
+    })
+    const [loading, setLoading] = useState(false)
 
-
+    function handleChange(e: { target: { id: any; value: any; }; }) {
+        const key = e.target.id;
+        // @ts-ignore
+        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        setData(data => ({
+            ...data,
+            [key]: value,
+        }))
+    }
 
     function handleSubmit(e: { preventDefault: () => void; }) {
-        e.preventDefault();
-        post(route('users.store'));
+        e.preventDefault()
+        setLoading(true)
+        // @ts-ignore
+        Inertia.post(route('users.store'), data)
+        setLoading(false)
     }
-    // @ts-ignore
-    useEffect((file:string)=> {
-        console.log(data.photo)
-        console.log(file)
-        setData('photo', file)
-        console.log(data.photo)
-        console.log(file)
-    },[file])
+
 
     function setPhoto(photo: string){
-        console.log(photo)
-        console.log(data.photo)
-        setData('photo', photo)
-        setFile(photo)
-        console.log(data.photo)
-        console.log(file)
+        setData(data => ({
+            ...data,
+            ['photo']: photo,
+        }))
     }
 
+    // @ts-ignore
+    // @ts-ignore
     return(
-        <CardWaper>
+        <CardWrapper>
                 <form onSubmit={handleSubmit} className="form w-100">
                     <div className="fv-row mb-5 row">
                         <TextInput
@@ -67,7 +69,7 @@ function Create() {
                             required
                             errors={errors.username}
                             value={data.username}
-                            onChange={(e: { target: { value: string; }; }) => setData('username', e.target.value)}
+                            onChange={handleChange}
                         />
                         <TextInput
                             className="mt-10 col-md-6"
@@ -79,7 +81,7 @@ function Create() {
                             label_required={true}
                             errors={errors.email}
                             value={data.email}
-                            onChange={(e: { target: { value: string; }; }) => setData('email', e.target.value)}
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="fv-row mb-5 row">
@@ -93,7 +95,7 @@ function Create() {
                             required
                             errors={errors.password}
                             value={data.password}
-                            onChange={(e: { target: { value: string; }; }) => setData('password', e.target.value)}
+                            onChange={handleChange}
                         />
                         <TextInput
                             className="mt-10 col-md-6"
@@ -105,7 +107,7 @@ function Create() {
                             required
                             errors={errors.password_confirmation}
                             value={data.password_confirmation}
-                            onChange={(e: { target: { value: string; }; }) => setData('password_confirmation', e.target.value)}
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="fv-row mb-5 row">
@@ -116,9 +118,10 @@ function Create() {
                             placeholder="Press enter to select new Company"
                             label_required={true}
                             errors={errors.companies}
-                            tags={companies}
+                            data={data}
+                            tags={data.companies}
                             suggestions={companies}
-                            callback={setPhoto}
+                            callback={setData}
                         />
                         <TagInput
                             className="mt-10 col-md-6"
@@ -127,7 +130,8 @@ function Create() {
                             placeholder="Press enter to select new Role"
                             label_required={true}
                             errors={errors.roles}
-                            tags={roles}
+                            data={data}
+                            tags={data.roles}
                             suggestions={roles}
                             callback={setData}
                         />
@@ -142,7 +146,7 @@ function Create() {
                         label_required={true}
                         errors={errors.photo}
                         value={data.photo}
-                        callback={setFile}
+                        callback={setPhoto}
                     />
                     <CheckBoxInput
                         className="mt-10 col-md-6"
@@ -152,7 +156,7 @@ function Create() {
                         errors={errors.is_active}
                         checked={data.is_active}
                         value={data.is_active}
-                        onChange={(e: { target: { checked: boolean; }; }) => setData('is_active', e.target.checked)}
+                        onChange={handleChange}
                     />
                 </div>
                     <div className="fv-row mb-5 row">
@@ -163,18 +167,18 @@ function Create() {
                             checked={data.send_reset_password_notification}
                             errors={errors.send_reset_password_notification}
                             value={data.send_reset_password_notification}
-                            onChange={(e: { target: { checked: boolean; }; }) => setData('send_reset_password_notification', e.target.checked)}
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="fv-row">
                         <LoadingButton
                             type="submit"
-                            loading={processing} >
+                            loading={loading} >
                             Save
                         </LoadingButton>
                     </div>
                 </form>
-        </CardWaper>
+        </CardWrapper>
     )
 }
 

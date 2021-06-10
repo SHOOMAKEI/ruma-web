@@ -11,7 +11,7 @@ import SelectInput from "../../Shared/SelectInput";
 import CheckBoxInput from "../../Shared/CheckBoxInput";
 // @ts-ignore
 import FileInput from "../../Shared/FileInput";
-import CardWaper from "../../Shared/CardWaper";
+import CardWrapper from "../../Shared/CardWrapper";
 import {Company} from "../../Shared/Types";
 
 
@@ -37,7 +37,7 @@ function Create() {
     }
 
     return(
-        <CardWaper>
+        <CardWrapper>
                 <form onSubmit={handleSubmit} className="form w-100">
                     <div className="fv-row mb-5 row">
                         <TextInput
@@ -152,7 +152,7 @@ function Create() {
                         </LoadingButton>
                     </div>
                 </form>
-        </CardWaper>
+        </CardWrapper>
     )
 }
 

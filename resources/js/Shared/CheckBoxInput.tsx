@@ -25,6 +25,7 @@ export default ({ label, name, className, value, errors, label_required, ...prop
           {label}
         </label>
       )}
+        <br/>
       {errors && <div className="invalid-feedback " style={{display:'block'}}>{errors}</div>}
     </div>
   );

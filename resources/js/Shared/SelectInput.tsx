@@ -29,7 +29,7 @@ export default ({
         id={name}
         name={name}
         {...props}
-        className={`form-select form-control-solid mb-2`}
+        className={`form-select form-select-solid`}
       >
         {children}
       </select>

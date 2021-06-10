@@ -3,7 +3,7 @@ import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 import Layout from "../../Shared/Layout";
 import route from "ziggy-js";
 import {Company, User} from "../../Shared/Types";
-import CardWaper from "../../Shared/CardWaper";
+import CardWrapper from "../../Shared/CardWrapper";
 import {Dropdown} from "react-bootstrap";
 import {CustomDropdownMenuItem, CustomButtonDropdownToggle} from '../../Shared/ToggleDropdown'
 import { DropdownIcon } from "../../Shared/Icons/svg";
@@ -22,7 +22,7 @@ function Index()  {
     // @ts-ignore
     return (
 
-<CardWaper>
+<CardWrapper>
         <table id="kt_datatable_example_5" className="table table-striped table-row-bordered gy-5 gs-7 border rounded">
             <thead>
             <tr className="fw-bolder fs-6 text-gray-800 px-7">
@@ -41,7 +41,7 @@ function Index()  {
                     <td>
                         {user.account_roles?.map((role)=>(
                             <>
-                                <span className="badge badge-light-info">{role.name?.replace('-', ' ')}</span> <br/>
+                                <span className="badge badge-light-info my-1" key={Math.random()}>{role.name?.replace('-', ' ')}</span> <br/>
                             </>
                         ))}
                     </td>
@@ -69,7 +69,7 @@ function Index()  {
 
             </tbody>
         </table>
-</CardWaper>
+</CardWrapper>
     )
 }
 

@@ -4017,6 +4017,22 @@ function autobind() {
 "use strict";
 
 
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
   Object.defineProperty(o, k2, {
@@ -4081,18 +4097,17 @@ var CheckBoxInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/Check
 
 var FileInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/FileInput */ "./resources/js/Shared/FileInput.jsx"));
 
-var CardWaper_1 = __importDefault(__webpack_require__(/*! ../../Shared/CardWaper */ "./resources/js/Shared/CardWaper.tsx"));
+var CardWrapper_1 = __importDefault(__webpack_require__(/*! ../../Shared/CardWrapper */ "./resources/js/Shared/CardWrapper.tsx"));
+
+var inertia_1 = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 
 function Create() {
   var _a = inertia_react_1.usePage().props,
       companies = _a.companies,
-      roles = _a.roles;
+      roles = _a.roles,
+      errors = _a.errors;
 
-  var _b = react_1.useState(''),
-      file = _b[0],
-      setFile = _b[1];
-
-  var _c = inertia_react_1.useForm({
+  var _b = react_1.useState({
     username: '',
     email: '',
     password: '',
@@ -4103,36 +4118,43 @@ function Create() {
     photo: '',
     send_reset_password_notification: false
   }),
-      data = _c.data,
-      setData = _c.setData,
-      errors = _c.errors,
-      post = _c.post,
-      processing = _c.processing;
+      data = _b[0],
+      setData = _b[1];
+
+  var _c = react_1.useState(false),
+      loading = _c[0],
+      setLoading = _c[1];
+
+  function handleChange(e) {
+    var key = e.target.id; // @ts-ignore
+
+    var value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    setData(function (data) {
+      var _a;
+
+      return __assign(__assign({}, data), (_a = {}, _a[key] = value, _a));
+    });
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    post(ziggy_js_1["default"]('users.store'));
-  } // @ts-ignore
+    setLoading(true); // @ts-ignore
 
-
-  react_1.useEffect(function (file) {
-    console.log(data.photo);
-    console.log(file);
-    setData('photo', file);
-    console.log(data.photo);
-    console.log(file);
-  }, [file]);
-
-  function setPhoto(photo) {
-    console.log(photo);
-    console.log(data.photo);
-    setData('photo', photo);
-    setFile(photo);
-    console.log(data.photo);
-    console.log(file);
+    inertia_1.Inertia.post(ziggy_js_1["default"]('users.store'), data);
+    setLoading(false);
   }
 
-  return react_1["default"].createElement(CardWaper_1["default"], null, react_1["default"].createElement("form", {
+  function setPhoto(photo) {
+    setData(function (data) {
+      var _a;
+
+      return __assign(__assign({}, data), (_a = {}, _a['photo'] = photo, _a));
+    });
+  } // @ts-ignore
+  // @ts-ignore
+
+
+  return react_1["default"].createElement(CardWrapper_1["default"], null, react_1["default"].createElement("form", {
     onSubmit: handleSubmit,
     className: "form w-100"
   }, react_1["default"].createElement("div", {
@@ -4147,9 +4169,7 @@ function Create() {
     required: true,
     errors: errors.username,
     value: data.username,
-    onChange: function onChange(e) {
-      return setData('username', e.target.value);
-    }
+    onChange: handleChange
   }), react_1["default"].createElement(TextInput_1["default"], {
     className: "mt-10 col-md-6",
     label: "Email",
@@ -4160,9 +4180,7 @@ function Create() {
     label_required: true,
     errors: errors.email,
     value: data.email,
-    onChange: function onChange(e) {
-      return setData('email', e.target.value);
-    }
+    onChange: handleChange
   })), react_1["default"].createElement("div", {
     className: "fv-row mb-5 row"
   }, react_1["default"].createElement(TextInput_1["default"], {
@@ -4175,9 +4193,7 @@ function Create() {
     required: true,
     errors: errors.password,
     value: data.password,
-    onChange: function onChange(e) {
-      return setData('password', e.target.value);
-    }
+    onChange: handleChange
   }), react_1["default"].createElement(TextInput_1["default"], {
     className: "mt-10 col-md-6",
     label: "Password Confirmation",
@@ -4188,9 +4204,7 @@ function Create() {
     required: true,
     errors: errors.password_confirmation,
     value: data.password_confirmation,
-    onChange: function onChange(e) {
-      return setData('password_confirmation', e.target.value);
-    }
+    onChange: handleChange
   })), react_1["default"].createElement("div", {
     className: "fv-row mb-5 row"
   }, react_1["default"].createElement(TagInput_1["default"], {
@@ -4200,9 +4214,10 @@ function Create() {
     placeholder: "Press enter to select new Company",
     label_required: true,
     errors: errors.companies,
-    tags: companies,
+    data: data,
+    tags: data.companies,
     suggestions: companies,
-    callback: setPhoto
+    callback: setData
   }), react_1["default"].createElement(TagInput_1["default"], {
     className: "mt-10 col-md-6",
     label: "Roles",
@@ -4210,7 +4225,8 @@ function Create() {
     placeholder: "Press enter to select new Role",
     label_required: true,
     errors: errors.roles,
-    tags: roles,
+    data: data,
+    tags: data.roles,
     suggestions: roles,
     callback: setData
   })), react_1["default"].createElement("div", {
@@ -4224,7 +4240,7 @@ function Create() {
     label_required: true,
     errors: errors.photo,
     value: data.photo,
-    callback: setFile
+    callback: setPhoto
   }), react_1["default"].createElement(CheckBoxInput_1["default"], {
     className: "mt-10 col-md-6",
     label: "Is Active",
@@ -4233,9 +4249,7 @@ function Create() {
     errors: errors.is_active,
     checked: data.is_active,
     value: data.is_active,
-    onChange: function onChange(e) {
-      return setData('is_active', e.target.checked);
-    }
+    onChange: handleChange
   })), react_1["default"].createElement("div", {
     className: "fv-row mb-5 row"
   }, react_1["default"].createElement(CheckBoxInput_1["default"], {
@@ -4245,14 +4259,12 @@ function Create() {
     checked: data.send_reset_password_notification,
     errors: errors.send_reset_password_notification,
     value: data.send_reset_password_notification,
-    onChange: function onChange(e) {
-      return setData('send_reset_password_notification', e.target.checked);
-    }
+    onChange: handleChange
   })), react_1["default"].createElement("div", {
     className: "fv-row"
   }, react_1["default"].createElement(LoadingButton_1["default"], {
     type: "submit",
-    loading: processing
+    loading: loading
   }, "Save"))));
 }
 
@@ -4267,10 +4279,10 @@ exports.default = Create;
 
 /***/ }),
 
-/***/ "./resources/js/Shared/CardWaper.tsx":
-/*!*******************************************!*\
-  !*** ./resources/js/Shared/CardWaper.tsx ***!
-  \*******************************************/
+/***/ "./resources/js/Shared/CardWrapper.tsx":
+/*!*********************************************!*\
+  !*** ./resources/js/Shared/CardWrapper.tsx ***!
+  \*********************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -4369,7 +4381,7 @@ exports.default = function (_a) {
   })), label && react_1["default"].createElement("label", {
     className: "form-check-label " + (label_required ? 'required form-label' : ''),
     htmlFor: name
-  }, label), errors && react_1["default"].createElement("div", {
+  }, label), react_1["default"].createElement("br", null), errors && react_1["default"].createElement("div", {
     className: "invalid-feedback ",
     style: {
       display: 'block'
@@ -6183,9 +6195,7 @@ var delimiters = [KeyCodes.comma, KeyCodes.enter];
   function handleTagAddition(tag) {
     console.log(tag);
     callback(function (data) {
-      return _objectSpread(_objectSpread({}, data), {}, {
-        tags: [].concat(_toConsumableArray(data[name]), [tag])
-      });
+      return _objectSpread(_objectSpread({}, data), {}, _defineProperty({}, name, [].concat(_toConsumableArray(data[name]), [tag])));
     });
   }
 
@@ -6208,9 +6218,9 @@ var delimiters = [KeyCodes.comma, KeyCodes.enter];
   }, label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_tag_input__WEBPACK_IMPORTED_MODULE_1__.WithContext, _extends({
     classNames: {
       tagInputField: 'form-control form-control-solid',
-      tag: 'tagify__tag tagify--noAnim badge badge-primary',
-      remove: 'tag-input-remove',
-      suggestions: 'tagify__inline__suggestions',
+      tag: 'badge badge-light-success mx-2 my-2',
+      remove: 'btn btn-icon btn-sm btn-active-light-info text-uppercase font-weight-bold',
+      suggestions: 'rounded bg-light p-1 ',
       activeSuggestion: 'active list-group-item'
     },
     tags: tags,

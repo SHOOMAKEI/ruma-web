@@ -3554,7 +3554,7 @@ var CheckBoxInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/Check
 
 var FileInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/FileInput */ "./resources/js/Shared/FileInput.jsx"));
 
-var CardWaper_1 = __importDefault(__webpack_require__(/*! ../../Shared/CardWaper */ "./resources/js/Shared/CardWaper.tsx"));
+var CardWrapper_1 = __importDefault(__webpack_require__(/*! ../../Shared/CardWrapper */ "./resources/js/Shared/CardWrapper.tsx"));
 
 function Create() {
   var company = inertia_react_1.usePage().props.company;
@@ -3582,7 +3582,7 @@ function Create() {
     put(ziggy_js_1["default"]('companies.update', company.id));
   }
 
-  return react_1["default"].createElement(CardWaper_1["default"], null, react_1["default"].createElement("form", {
+  return react_1["default"].createElement(CardWrapper_1["default"], null, react_1["default"].createElement("form", {
     onSubmit: handleSubmit,
     className: "form w-100"
   }, react_1["default"].createElement("div", {
@@ -3717,10 +3717,10 @@ exports.default = Create;
 
 /***/ }),
 
-/***/ "./resources/js/Shared/CardWaper.tsx":
-/*!*******************************************!*\
-  !*** ./resources/js/Shared/CardWaper.tsx ***!
-  \*******************************************/
+/***/ "./resources/js/Shared/CardWrapper.tsx":
+/*!*********************************************!*\
+  !*** ./resources/js/Shared/CardWrapper.tsx ***!
+  \*********************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -3819,7 +3819,7 @@ exports.default = function (_a) {
   })), label && react_1["default"].createElement("label", {
     className: "form-check-label " + (label_required ? 'required form-label' : ''),
     htmlFor: name
-  }, label), errors && react_1["default"].createElement("div", {
+  }, label), react_1["default"].createElement("br", null), errors && react_1["default"].createElement("div", {
     className: "invalid-feedback ",
     style: {
       display: 'block'
@@ -4896,7 +4896,7 @@ exports.default = function (_a) {
     id: name,
     name: name
   }, props, {
-    className: "form-select form-control-solid mb-2"
+    className: "form-select form-select-solid"
   }), children), errors && react_1["default"].createElement("div", {
     className: "invalid-feedback ",
     style: {
