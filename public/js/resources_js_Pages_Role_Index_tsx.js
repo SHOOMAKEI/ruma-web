@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Company_Index_tsx"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Role_Index_tsx"],{
 
 /***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
 /*!************************************************************!*\
@@ -3514,10 +3514,10 @@ function useWillUnmount(fn) {
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Company/Index.tsx":
-/*!**********************************************!*\
-  !*** ./resources/js/Pages/Company/Index.tsx ***!
-  \**********************************************/
+/***/ "./resources/js/Pages/Role/Index.tsx":
+/*!*******************************************!*\
+  !*** ./resources/js/Pages/Role/Index.tsx ***!
+  \*******************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -3550,21 +3550,17 @@ var ToggleDropdown_1 = __webpack_require__(/*! ../../Shared/ToggleDropdown */ ".
 var svg_1 = __webpack_require__(/*! ../../Shared/Icons/svg */ "./resources/js/Shared/Icons/svg.tsx");
 
 function Index() {
-  var companies = inertia_react_1.usePage().props.companies; // @ts-ignore
+  var roles = inertia_react_1.usePage().props.roles; // @ts-ignore
 
   return react_1["default"].createElement(CardWrapper_1["default"], null, react_1["default"].createElement("table", {
     id: "kt_datatable_example_5",
     className: "table table-striped table-row-bordered gy-5 gs-7 border rounded"
   }, react_1["default"].createElement("thead", null, react_1["default"].createElement("tr", {
     className: "fw-bolder fs-6 text-gray-800 px-7"
-  }, react_1["default"].createElement("th", null, "Name"), react_1["default"].createElement("th", null, "phone"), react_1["default"].createElement("th", null, "email"), react_1["default"].createElement("th", null, "Is Active"), react_1["default"].createElement("th", null, "Actions"))), react_1["default"].createElement("tbody", null, companies && companies.map(function (company) {
+  }, react_1["default"].createElement("th", null, "Name"), react_1["default"].createElement("th", null, "Actions"))), react_1["default"].createElement("tbody", null, roles && roles.map(function (role) {
     return react_1["default"].createElement("tr", {
-      key: company.id
-    }, react_1["default"].createElement("td", null, company.name), react_1["default"].createElement("td", null, company.phone), react_1["default"].createElement("td", null, company.email), react_1["default"].createElement("td", null, company.is_active ? react_1["default"].createElement("span", {
-      className: "badge badge-light-primary"
-    }, "Active") : react_1["default"].createElement("span", {
-      className: "badge badge-light-warning"
-    }, "In Active")), react_1["default"].createElement("td", null, react_1["default"].createElement(react_bootstrap_1.Dropdown, null, react_1["default"].createElement(react_bootstrap_1.Dropdown.Toggle, {
+      key: role.id
+    }, react_1["default"].createElement("td", null, role.name), react_1["default"].createElement("td", null, react_1["default"].createElement(react_bootstrap_1.Dropdown, null, react_1["default"].createElement(react_bootstrap_1.Dropdown.Toggle, {
       cssClass: "btn btn-sm btn-light btn-active-light-primary",
       variant: "success",
       id: "dropdown-basic",
@@ -3574,25 +3570,25 @@ function Index() {
     }, react_1["default"].createElement(react_bootstrap_1.Dropdown.Item, {
       as: ToggleDropdown_1.CustomDropdownMenuItem
     }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
-      href: ziggy_js_1["default"]('companies.edit', company.id),
+      href: ziggy_js_1["default"]('roles.edit', role.id),
       className: "menu-link px-3"
     }, "Edit")), react_1["default"].createElement(react_bootstrap_1.Dropdown.Item, {
       as: ToggleDropdown_1.CustomDropdownMenuItem
     }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
-      href: ziggy_js_1["default"]('departments.index', company.id),
+      href: ziggy_js_1["default"]('roles.show', role.id),
       className: "menu-link px-3"
-    }, "View Departments"))))));
+    }, "Show"))))));
   }))));
 }
 
 Index.layout = function (page) {
   return react_1["default"].createElement(Layout_1["default"], {
     children: page,
-    title: "Companies",
+    title: "Roles",
     toolBarLeftContent: react_1["default"].createElement(inertia_react_1.InertiaLink, {
-      href: ziggy_js_1["default"]('companies.create'),
+      href: ziggy_js_1["default"]('roles.create'),
       className: "btn btn-primary"
-    }, "Add Company")
+    }, "Add Role ")
   });
 };
 

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Notifications\NewAccountResetPasswordNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 
@@ -25,14 +26,14 @@ class AccountController extends Controller
     {
         return inertia('Account/Create',
             ['roles' => Role::all()->map(function ($role){
-                $data['id'] = (string) $role->id;
-                $data['text'] = $role->name;
+                $data['value'] = (string) $role->id;
+                $data['label'] = $role->name;
 
                 return $data;
             }),
             'companies' => Company::all()->map(function ($company){
-                $data['id'] = (string) $company->id;
-                $data['text'] = $company->name;
+                $data['value'] = (string) $company->id;
+                $data['label'] = $company->name;
 
                 return $data;
             })
@@ -57,7 +58,7 @@ class AccountController extends Controller
             $roleData = [];
             $index = 0;
             foreach ($request['roles'] as $role) {
-                $roleData[$index] = $role['id'];
+                $roleData[$index] = $role['value'];
                 $index++;
             }
 
@@ -66,7 +67,7 @@ class AccountController extends Controller
             $companyData = [];
             $index = 0;
             foreach ($request['companies'] as $role) {
-                $companyData[$index] = $role['id'];
+                $companyData[$index] = $role['value'];
                 $index++;
             }
 
@@ -88,41 +89,112 @@ class AccountController extends Controller
 
     public function edit(User $user)
     {
-        return inertia('Account/Create',
+        $account['id'] =  $user->id;
+        $account['email'] =  $user->email;
+        $account['username'] =  $user->username;
+        $account['is_active'] =  $user->is_active;
+        $account['companies'] =  $user->companies->map(function ($company){
+            $data['value'] = (string) $company->id;
+            $data['label'] = $company->name;
+
+            return $data;
+        });
+        $account['account_roles'] =  $user->roles->map(function ($role){
+            $data['value'] = (string) $role->id;
+            $data['label'] = $role->name;
+
+            return $data;
+        });
+
+        return inertia('Account/Edit',
             ['roles' => Role::all()->map(function ($role){
-                $data['id'] = (string) $role->id;
-                $data['text'] = $role->name;
+                $data['value'] = (string) $role->id;
+                $data['label'] = $role->name;
 
                 return $data;
             }),
                 'companies' => Company::all()->map(function ($company){
-                    $data['id'] = (string) $company->id;
-                    $data['text'] = $company->name;
+                    $data['value'] = (string) $company->id;
+                    $data['label'] = $company->name;
 
                     return $data;
                 }),
-                'user' => $user
+                'user' => $account
             ]);
     }
 
 
     public function update(Request $request, User $user)
     {
-        if(($user->email != $request['email']) ||
-            ($user->username != $request['username'])
-        )
+        if(($user->email != $request['email'])) {
+            $validator =  Validator::make($request->toArray(),[
+                'email' => ['required', 'email', 'string', 'max:255', 'unique:users,email'],
+            ]);
+
+            if($validator->fails()) {
+                return redirect()->back()->withErrors($validator);
+            }
+        }
+
+        if(($user->username != $request['username'])) {
+            $validator =  Validator::make($request->toArray(),[
+                'username' => ['required', 'email', 'string', 'max:255', 'unique:users,email'],
+            ]);
+
+            if($validator->fails()) {
+                return redirect()->back()->withErrors($validator);
+            }
+        }
+
+        if(!is_null( $request['password'])) {
+            $validator =  Validator::make($request->toArray(),[
+                'password' => ['required','string', 'max:255', 'confirmed'],
+            ]);
+
+            if($validator->fails()) {
+                return redirect()->back()->withErrors($validator);
+            }
+        }
+        if(!is_null($request['photo']))
         {
-            return respondWithErrors('The Id number already exists.');
+            $validator =  Validator::make($request->toArray(),[
+                'photo' => ['sometimes', 'base64image'],
+            ]);
+
+
+            if($validator->fails()) {
+                return redirect()->back()->withErrors($validator);
+            }
+        }
+
+        $validator =  Validator::make($request->toArray(),[
+            'roles.*.value' => ['required','numeric', 'exists:roles,id'],
+            'companies.*.value' => ['required', 'numeric', 'exists:companies,id'],
+            'is_active' => ['required', 'boolean'],
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
         }
 
 
         DB::transaction(function () use ($request, $user) {
-            $user->force($this->getModelAttribute($request->toArray()));
+            $user->forceFill([
+                'email' => $request['email'],
+                'username' => $request['username'],
+                'is_active' => $request['is_active']
+            ])->save();
+
+            if(!is_null($request['password'])){
+                $user->forceFill([
+                    'password' => Hash::make($request['password'])
+                ])->save();
+            }
 
             $roleData = [];
             $index = 0;
             foreach ($request['roles'] as $role) {
-                $roleData[$index] = $role['id'];
+                $roleData[$index] = $role['value'];
                 $index++;
             }
 
@@ -131,7 +203,7 @@ class AccountController extends Controller
             $companyData = [];
             $index = 0;
             foreach ($request['companies'] as $role) {
-                $companyData[$index] = $role['id'];
+                $companyData[$index] = $role['value'];
                 $index++;
             }
 
@@ -169,9 +241,9 @@ class AccountController extends Controller
             'email' => ['required', 'email', 'string', 'max:255', 'unique:users,email'],
             'username' => ['required','string' , 'unique:users,username', 'max:255'],
             'password' => ['required','string', 'max:255', 'confirmed'],
-            'role.*.id' => ['required','numeric', 'exists:roles,id'],
-            'companies.*.id' => ['required', 'numeric', 'exists:companies,id'],
-            'is_active' => ['required', 'bool'],
+            'roles.*.value' => ['required','numeric', 'exists:roles,id'],
+            'companies.*.value' => ['required', 'numeric', 'exists:companies,id'],
+            'is_active' => ['required', 'boolean'],
         ]);
 
         if(!is_null($args['photo']))
@@ -196,7 +268,7 @@ class AccountController extends Controller
         return [
             'email' => $args['email'],
             'username' => $args['username'],
-            'password' => $args['password'],
+            'password' => Hash::make($args['password']),
             'is_active' => $args['is_active'],
         ];
     }

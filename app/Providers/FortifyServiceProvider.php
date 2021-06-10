@@ -61,7 +61,7 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::twoFactorChallengeView(function ($request) {
-            return inertia('Auth/TwoFactoryAuth', [
+            return inertia('Auth/TwoFactorAuth', [
                 'email' => $request->email ]);
         });
 

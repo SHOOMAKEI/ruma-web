@@ -13,9 +13,10 @@ import FileInput from "../../Shared/FileInput";
 import CardWrapper from "../../Shared/CardWrapper";
 import { User} from "../../Shared/Types";
 import {Inertia} from "@inertiajs/inertia";
+import MultiSelectInput from "../../Shared/MultiSelectInput";
 
 
-function Create() {
+function Edit() {
     const {companies, user, roles, errors} = usePage().props
     const [data, setData] = useState({
         username: (user as User).username || '',
@@ -44,8 +45,48 @@ function Create() {
         e.preventDefault()
         setLoading(true)
         // @ts-ignore
-        Inertia.post(route('users.store'), data)
-        setLoading(false)
+        Inertia.put(route('users.update', user.id), data).then(() => {
+            setLoading(false);
+        })
+    }
+
+    function handleSelectChange(newValue: any, actionMeta: any) {
+
+        if(actionMeta.action === 'select-option'){
+            //@ts-ignore
+            let stateValue = data[actionMeta.name].find(role=> (role === newValue))
+
+            if(!stateValue) {
+                // @ts-ignore
+                setData(data => ({
+                    ...data,
+                    // @ts-ignore
+                    [actionMeta.name]: newValue,
+                }))
+            }
+        }
+
+        if(actionMeta.action === 'remove-value') {
+
+            // @ts-ignore
+                setData(data => ({
+                    ...data,
+                    // @ts-ignore
+                    [actionMeta.name]: newValue,
+                }))
+        }
+
+        if(actionMeta.action === 'clear'){
+
+            // @ts-ignore
+            setData(data => ({
+                ...data,
+                // @ts-ignore
+                [actionMeta.name]: [],
+            }))
+
+        }
+
     }
 
 
@@ -94,8 +135,6 @@ function Create() {
                         placeholder="Password"
                         name="password"
                         type="password"
-                        label_required={true}
-                        required
                         errors={errors.password}
                         value={data.password}
                         onChange={handleChange}
@@ -106,37 +145,35 @@ function Create() {
                         placeholder="Password Confirmation"
                         name="password_confirmation"
                         type="password"
-                        label_required={true}
-                        required
                         errors={errors.password_confirmation}
                         value={data.password_confirmation}
                         onChange={handleChange}
                     />
                 </div>
                 <div className="fv-row mb-5 row">
-                    <TagInput
+                    <MultiSelectInput
                         className="mt-10 col-md-6"
                         label="Companies"
                         name="companies"
                         placeholder="Press enter to select new Company"
                         label_required={true}
                         errors={errors.companies}
-                        data={data}
-                        tags={data.companies}
-                        suggestions={companies}
-                        callback={setData}
+                        value={data.companies}
+                        defaultValues={data.companies}
+                        options={companies}
+                        onChange={handleSelectChange}
                     />
-                    <TagInput
+                    <MultiSelectInput
                         className="mt-10 col-md-6"
                         label="Roles"
                         name="roles"
                         placeholder="Press enter to select new Role"
                         label_required={true}
                         errors={errors.roles}
-                        data={data}
-                        tags={data.roles}
-                        suggestions={roles}
-                        callback={setData}
+                        value={data.roles}
+                        defaultValues={data.roles}
+                        options={roles}
+                        onChange={handleSelectChange}
                     />
                 </div>
                 <div className="fv-row mb-5 row">
@@ -185,8 +222,8 @@ function Create() {
     )
 }
 
-Create.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
+Edit.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
     children={page}  title="Create Company"
  />;
 
-export default Create;
+export default Edit;

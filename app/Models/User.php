@@ -101,7 +101,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 
     public function companies(): BelongsToMany
     {
-        return $this->belongsToMany(Company::class, 'user_companies')->withPivot('user_type');
+        return $this->belongsToMany(Company::class, 'user_companies');
     }
 
 //    public function employee(): BelongsTo

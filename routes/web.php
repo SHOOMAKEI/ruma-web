@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,5 +49,21 @@ Route::middleware([ 'auth','auth:sanctum', 'role:system-administrator'])
     ->group(function () {
         Route::resource('companies', CompanyController::class);
         Route::resource('users', AccountController::class);
+        Route::resource('departments', DepartmentController::class);
+        Route::resource('roles', RoleController::class);
 
+        Route::get('departments/{company}/company', [DepartmentController::class, 'index'])
+            ->name('departments.index');
+        Route::get('departments/{department}/edit', [DepartmentController::class, 'edit'])
+            ->name('departments.edit');
+        Route::get('departments/create', [DepartmentController::class, 'create'])
+            ->name('departments.create');
+        Route::post('departments/store', [DepartmentController::class, 'store'])
+            ->name('departments.store');
+        Route::put('departments/{department}/update', [DepartmentController::class, 'update'])
+            ->name('departments.update');
+        Route::get('departments/{department}/child-departments', [DepartmentController::class, 'child_departments'])
+            ->name('departments.child_department');
+        Route::delete('departments/{department}/delete', [DepartmentController::class, 'destroy'])
+            ->name('departments.delete');
     });

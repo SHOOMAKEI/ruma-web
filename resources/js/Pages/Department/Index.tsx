@@ -7,17 +7,24 @@ import CardWrapper from "../../Shared/CardWrapper";
 import {Dropdown} from "react-bootstrap";
 import {CustomDropdownMenuItem, CustomButtonDropdownToggle} from '../../Shared/ToggleDropdown'
 import { DropdownIcon } from "../../Shared/Icons/svg";
-import {comment} from "postcss";
 
 
 interface props {
-    company?: Company []
+    department?: Department []
     [key: string]: any
 }
 
-function Index()  {
-    const { companies }:props = usePage().props
+interface Department {
+    id: number
+    name: string
+    code_name: string
+    parent_department: {id?: number, name?:string}
+    company: {id: number, name:string}
+}
 
+
+function Index()  {
+    const { departments, company }:props = usePage().props
 
 
     // @ts-ignore
@@ -28,20 +35,19 @@ function Index()  {
             <thead>
             <tr className="fw-bolder fs-6 text-gray-800 px-7">
                 <th>Name</th>
-                <th>phone</th>
-                <th>email</th>
-                <th>Is Active</th>
+                <th>Code Name</th>
+                <th>Company</th>
+                <th>Parent Department</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            {companies as props && companies.map((company: Company)=>(
-                <tr key={company.id}>
-                    <td>{company.name}</td>
-                    <td>{company.phone}</td>
-                    <td>{company.email}</td>
-                    <td>{company.is_active? <span className="badge badge-light-primary">Active</span>:
-                        <span className="badge badge-light-warning">In Active</span>}</td>
+            {departments as props && departments.map((department: Department)=>(
+                <tr key={department.id}>
+                    <td>{department.name}</td>
+                    <td>{department.code_name}</td>
+                    <td>{department.company.name}</td>
+                    <td>{department.parent_department?.name}</td>
                     <td>
                         <Dropdown>
                             <Dropdown.Toggle cssClass={"btn btn-sm btn-light btn-active-light-primary"} variant="success" id="dropdown-basic" as={CustomButtonDropdownToggle}>
@@ -51,10 +57,10 @@ function Index()  {
 
                             <Dropdown.Menu className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold py-4 fs-6 w-275px">
                                 <Dropdown.Item as={CustomDropdownMenuItem}>
-                                        <InertiaLink href={route('companies.edit', company.id)} className="menu-link px-3" >Edit</InertiaLink>
+                                        <InertiaLink href={route('departments.edit', department.id)} className="menu-link px-3" >Edit</InertiaLink>
                                 </Dropdown.Item>
                                 <Dropdown.Item as={CustomDropdownMenuItem}>
-                                    <InertiaLink href={route('departments.index', company.id)} className="menu-link px-3" >View Departments</InertiaLink>
+                                    <InertiaLink href={route('departments.child_department', department.id)} className="menu-link px-3" >Show Sub Department</InertiaLink>
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -69,7 +75,7 @@ function Index()  {
 }
 
 Index.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
-    children={page}  title="Companies"
-    toolBarLeftContent={ <InertiaLink href={route('companies.create')} className="btn btn-primary">Add Company</InertiaLink>} />;
+    children={page}  title={`Departments`}
+    toolBarLeftContent={ <InertiaLink href={route('departments.create')} className="btn btn-primary">Add Department </InertiaLink>} />;
 
 export default Index;

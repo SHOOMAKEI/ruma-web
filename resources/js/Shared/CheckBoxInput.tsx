@@ -5,7 +5,7 @@ type InputProps = {
     name: string
     className? : string
     label_required? : boolean
-    errors: string
+    errors?: string
     [key: string]: any
 }
 
@@ -18,7 +18,7 @@ export default ({ label, name, className, value, errors, label_required, ...prop
         name={name}
         {...props}
         type="checkbox"
-        className="form-check-input h-30px w-50px "
+        className="form-check-input h-20px w-30px "
       />
        {label && (
         <label className={`form-check-label ${ label_required?'required form-label': ''}`} htmlFor={name}>

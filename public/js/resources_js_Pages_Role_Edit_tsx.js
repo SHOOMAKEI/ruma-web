@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Company_Index_tsx"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Role_Edit_tsx"],{
 
 /***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
 /*!************************************************************!*\
@@ -3514,10 +3514,10 @@ function useWillUnmount(fn) {
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Company/Index.tsx":
-/*!**********************************************!*\
-  !*** ./resources/js/Pages/Company/Index.tsx ***!
-  \**********************************************/
+/***/ "./resources/js/Pages/Role/Edit.tsx":
+/*!******************************************!*\
+  !*** ./resources/js/Pages/Role/Edit.tsx ***!
+  \******************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -3537,66 +3537,264 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
-var Layout_1 = __importDefault(__webpack_require__(/*! ../../Shared/Layout */ "./resources/js/Shared/Layout.tsx"));
-
 var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
+
+var TextInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/TextInput */ "./resources/js/Shared/TextInput.tsx"));
+
+var LoadingButton_1 = __importDefault(__webpack_require__(/*! ../../Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.tsx"));
+
+var Layout_1 = __importDefault(__webpack_require__(/*! ../../Shared/Layout */ "./resources/js/Shared/Layout.tsx"));
 
 var CardWrapper_1 = __importDefault(__webpack_require__(/*! ../../Shared/CardWrapper */ "./resources/js/Shared/CardWrapper.tsx"));
 
-var react_bootstrap_1 = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+var Permission_1 = __importDefault(__webpack_require__(/*! ./Permission */ "./resources/js/Pages/Role/Permission.tsx"));
 
-var ToggleDropdown_1 = __webpack_require__(/*! ../../Shared/ToggleDropdown */ "./resources/js/Shared/ToggleDropdown.tsx");
+function Edit() {
+  var _a = inertia_react_1.usePage().props,
+      permissions = _a.permissions,
+      role = _a.role; // @ts-ignore
 
-var svg_1 = __webpack_require__(/*! ../../Shared/Icons/svg */ "./resources/js/Shared/Icons/svg.tsx");
+  var _b = inertia_react_1.useForm({
+    name: role.name,
+    permissions: role.permissions
+  }),
+      data = _b.data,
+      setData = _b.setData,
+      errors = _b.errors,
+      post = _b.post,
+      processing = _b.processing;
 
-function Index() {
-  var companies = inertia_react_1.usePage().props.companies; // @ts-ignore
+  function handleSubmit(e) {
+    e.preventDefault();
+    post(ziggy_js_1["default"]('roles.store'));
+  }
 
-  return react_1["default"].createElement(CardWrapper_1["default"], null, react_1["default"].createElement("table", {
-    id: "kt_datatable_example_5",
-    className: "table table-striped table-row-bordered gy-5 gs-7 border rounded"
-  }, react_1["default"].createElement("thead", null, react_1["default"].createElement("tr", {
-    className: "fw-bolder fs-6 text-gray-800 px-7"
-  }, react_1["default"].createElement("th", null, "Name"), react_1["default"].createElement("th", null, "phone"), react_1["default"].createElement("th", null, "email"), react_1["default"].createElement("th", null, "Is Active"), react_1["default"].createElement("th", null, "Actions"))), react_1["default"].createElement("tbody", null, companies && companies.map(function (company) {
-    return react_1["default"].createElement("tr", {
-      key: company.id
-    }, react_1["default"].createElement("td", null, company.name), react_1["default"].createElement("td", null, company.phone), react_1["default"].createElement("td", null, company.email), react_1["default"].createElement("td", null, company.is_active ? react_1["default"].createElement("span", {
-      className: "badge badge-light-primary"
-    }, "Active") : react_1["default"].createElement("span", {
-      className: "badge badge-light-warning"
-    }, "In Active")), react_1["default"].createElement("td", null, react_1["default"].createElement(react_bootstrap_1.Dropdown, null, react_1["default"].createElement(react_bootstrap_1.Dropdown.Toggle, {
-      cssClass: "btn btn-sm btn-light btn-active-light-primary",
-      variant: "success",
-      id: "dropdown-basic",
-      as: ToggleDropdown_1.CustomButtonDropdownToggle
-    }, "Actions", react_1["default"].createElement(svg_1.DropdownIcon, null)), react_1["default"].createElement(react_bootstrap_1.Dropdown.Menu, {
-      className: "menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold py-4 fs-6 w-275px"
-    }, react_1["default"].createElement(react_bootstrap_1.Dropdown.Item, {
-      as: ToggleDropdown_1.CustomDropdownMenuItem
-    }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
-      href: ziggy_js_1["default"]('companies.edit', company.id),
-      className: "menu-link px-3"
-    }, "Edit")), react_1["default"].createElement(react_bootstrap_1.Dropdown.Item, {
-      as: ToggleDropdown_1.CustomDropdownMenuItem
-    }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
-      href: ziggy_js_1["default"]('departments.index', company.id),
-      className: "menu-link px-3"
-    }, "View Departments"))))));
-  }))));
+  return react_1["default"].createElement(CardWrapper_1["default"], null, react_1["default"].createElement("form", {
+    onSubmit: handleSubmit,
+    className: "form w-100"
+  }, react_1["default"].createElement("div", {
+    className: "fv-row mb-5 row"
+  }, react_1["default"].createElement(TextInput_1["default"], {
+    className: "mt-10 col-md-6",
+    label: "Name",
+    placeholder: "Name",
+    name: "name",
+    type: "text",
+    label_required: true,
+    required: true,
+    errors: errors.name,
+    value: data.name,
+    onChange: function onChange(e) {
+      return setData('name', e.target.value);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "fv-row mb-5 row"
+  }, react_1["default"].createElement(Permission_1["default"], {
+    permissions: permissions
+  })), react_1["default"].createElement("div", {
+    className: "fv-row"
+  }, react_1["default"].createElement(LoadingButton_1["default"], {
+    type: "submit",
+    loading: processing
+  }, "Save"))));
 }
 
-Index.layout = function (page) {
+Edit.layout = function (page) {
   return react_1["default"].createElement(Layout_1["default"], {
     children: page,
-    title: "Companies",
-    toolBarLeftContent: react_1["default"].createElement(inertia_react_1.InertiaLink, {
-      href: ziggy_js_1["default"]('companies.create'),
-      className: "btn btn-primary"
-    }, "Add Company")
+    title: "Edit Role"
   });
 };
 
-exports.default = Index;
+exports.default = Edit;
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Role/Permission.tsx":
+/*!************************************************!*\
+  !*** ./resources/js/Pages/Role/Permission.tsx ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var SearchBar_1 = __importDefault(__webpack_require__(/*! ../../Shared/SearchBar */ "./resources/js/Shared/SearchBar.tsx"));
+
+var CheckBoxInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/CheckBoxInput */ "./resources/js/Shared/CheckBoxInput.tsx"));
+
+var FILTERS = [{
+  id: '1',
+  name: 'Read'
+}, {
+  id: '2',
+  name: 'Create'
+}, {
+  id: '3',
+  name: 'Update'
+}, {
+  id: '4',
+  name: 'Delete'
+}];
+
+exports.default = function (_a) {
+  var employee = _a.employee,
+      permissions = _a.permissions,
+      callback = _a.callback;
+
+  var _b = react_1.useState(),
+      selectedPermissions = _b[0],
+      setSelectedPermissions = _b[1];
+
+  var _c = react_1.useState(),
+      shownPermissions = _c[0],
+      setShownPermissions = _c[1];
+
+  var _d = react_1.useState(FILTERS[0]),
+      activeFilter = _d[0],
+      setActiveFilter = _d[1];
+
+  react_1.useEffect(function () {
+    setShownPermissions(permissions);
+  }, [permissions]);
+
+  function searchPermissions(text) {
+    if (text.length === 0) {
+      setShownPermissions(permissions);
+      return;
+    }
+
+    setShownPermissions(permissions === null || permissions === void 0 ? void 0 : permissions.filter(function (permission) {
+      var _a;
+
+      if ((_a = permission.name) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase().includes(text.toLocaleLowerCase())) {
+        return permission;
+      }
+    }));
+  }
+
+  function handleChange(e, permission) {
+    var key = e.target.id; // @ts-ignore
+
+    var value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+
+    var newObject = __assign(__assign({}, permission), {
+      checked: value
+    });
+
+    console.log(newObject); // setSelectedPermissions(selectedPermissions => ([
+    //     // @ts-ignore
+    //     ...selectedPermissions,
+    //     newObject
+    //   ]))
+    // callback(setSelectedPermissions)
+  }
+
+  return react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
+    className: "row mb-5"
+  }, react_1["default"].createElement("div", {
+    className: "col"
+  }, react_1["default"].createElement(SearchBar_1["default"], {
+    onSearch: searchPermissions,
+    placeHolder: "Search permissions"
+  }))), react_1["default"].createElement("div", {
+    className: "row mb-8"
+  }, react_1["default"].createElement("div", {
+    className: "col d-flex"
+  }, FILTERS.map(function (filter) {
+    return react_1["default"].createElement("button", {
+      type: "button",
+      onClick: function onClick() {
+        return setActiveFilter(filter);
+      },
+      className: "btn btn-sm btn-flex " + (filter.id === activeFilter.id ? 'btn-primary' : 'btn-light-primary') + " me-3"
+    }, filter.name);
+  }))), react_1["default"].createElement("div", {
+    className: "row"
+  }, shownPermissions === null || shownPermissions === void 0 ? void 0 : shownPermissions.map(function (permission) {
+    var _a, _b, _c;
+
+    if ((_a = permission.name) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase().includes(activeFilter.name.toLocaleLowerCase())) {
+      return react_1["default"].createElement("div", {
+        className: "col-md-4",
+        key: permission.id
+      }, react_1["default"].createElement(CheckBoxInput_1["default"], {
+        key: permission.id,
+        label: "can " + ((_b = permission.name) === null || _b === void 0 ? void 0 : _b.split('.')[1].replace('_', ' ')) + " " + ((_c = permission.name) === null || _c === void 0 ? void 0 : _c.split('.')[0].replace('_', ' ')),
+        type: "checkbox",
+        name: "permission",
+        checked: permission.checked,
+        value: permission.checked,
+        errors: '',
+        onChange: function onChange(e, permission) {
+          return handleChange(e, permission);
+        }
+      }));
+    }
+  })));
+};
 
 /***/ }),
 
@@ -3628,6 +3826,86 @@ exports.default = function (_a) {
   }, react_1["default"].createElement("div", {
     className: "card-body pt-0"
   }, children));
+};
+
+/***/ }),
+
+/***/ "./resources/js/Shared/CheckBoxInput.tsx":
+/*!***********************************************!*\
+  !*** ./resources/js/Shared/CheckBoxInput.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var label = _a.label,
+      name = _a.name,
+      className = _a.className,
+      value = _a.value,
+      errors = _a.errors,
+      label_required = _a.label_required,
+      props = __rest(_a, ["label", "name", "className", "value", "errors", "label_required"]);
+
+  return react_1["default"].createElement("div", {
+    className: "form-check form-switch form-check-custom form-check-solid px-5 pt-5 " + className
+  }, react_1["default"].createElement("input", __assign({
+    id: name,
+    name: name
+  }, props, {
+    type: "checkbox",
+    className: "form-check-input h-20px w-30px "
+  })), label && react_1["default"].createElement("label", {
+    className: "form-check-label " + (label_required ? 'required form-label' : ''),
+    htmlFor: name
+  }, label), react_1["default"].createElement("br", null), errors && react_1["default"].createElement("div", {
+    className: "invalid-feedback ",
+    style: {
+      display: 'block'
+    }
+  }, errors));
 };
 
 /***/ }),
@@ -4412,6 +4690,81 @@ exports.default = Framework;
 
 /***/ }),
 
+/***/ "./resources/js/Shared/LoadingButton.tsx":
+/*!***********************************************!*\
+  !*** ./resources/js/Shared/LoadingButton.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var loading = _a.loading,
+      className = _a.className,
+      type = _a.type,
+      _b = _a.color,
+      color = _b === void 0 ? 'primary' : _b,
+      children = _a.children,
+      props = __rest(_a, ["loading", "className", "type", "color", "children"]);
+
+  return react_1["default"].createElement("button", __assign({
+    disabled: loading,
+    className: "btn btn-" + color + " " + className
+  }, props, {
+    "data-kt-indicator": loading ? 'on' : 'off'
+  }), loading && react_1["default"].createElement("span", {
+    className: "indicator-progress h4 mb-0"
+  }, "Please wait... ", react_1["default"].createElement("span", {
+    className: "spinner-border spinner-border-sm align-middle ms-2"
+  })), react_1["default"].createElement("span", {
+    className: "indicator-label h4"
+  }, children));
+};
+
+/***/ }),
+
 /***/ "./resources/js/Shared/Menu.tsx":
 /*!**************************************!*\
   !*** ./resources/js/Shared/Menu.tsx ***!
@@ -4553,6 +4906,54 @@ function Menu(_a) {
 }
 
 exports.default = Menu;
+
+/***/ }),
+
+/***/ "./resources/js/Shared/SearchBar.tsx":
+/*!*******************************************!*\
+  !*** ./resources/js/Shared/SearchBar.tsx ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var svg_1 = __webpack_require__(/*! ./Icons/svg */ "./resources/js/Shared/Icons/svg.tsx");
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+function SearchBar(_a) {
+  var onSearch = _a.onSearch,
+      placeHolder = _a.placeHolder;
+
+  function _onSearch(event) {
+    onSearch(event.target.value);
+  }
+
+  return react_1["default"].createElement("div", {
+    className: "d-flex align-items-center position-relative my-1"
+  }, react_1["default"].createElement(svg_1.SearchIcon, {
+    extraClasses: 'position-absolute ms-3'
+  }), react_1["default"].createElement("input", {
+    type: "text",
+    "data-kt-customer-table-filter": "search",
+    className: "form-control form-control-sm form-control-solid w-250px ps-11",
+    placeholder: placeHolder,
+    onChange: _onSearch
+  }));
+}
+
+exports.default = SearchBar;
 
 /***/ }),
 
@@ -4844,6 +5245,84 @@ exports.dropdownMenus = [{
   }],
   link: "#"
 }];
+
+/***/ }),
+
+/***/ "./resources/js/Shared/TextInput.tsx":
+/*!*******************************************!*\
+  !*** ./resources/js/Shared/TextInput.tsx ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var label = _a.label,
+      name = _a.name,
+      className = _a.className,
+      errors = _a.errors,
+      label_required = _a.label_required,
+      props = __rest(_a, ["label", "name", "className", "errors", "label_required"]);
+
+  return react_1["default"].createElement("div", {
+    className: "form-group " + className
+  }, label && react_1["default"].createElement("label", {
+    className: "h4 mb-3 fw-light " + (label_required ? 'required form-label' : ''),
+    htmlFor: name
+  }, label), react_1["default"].createElement("input", __assign({
+    id: name,
+    name: name
+  }, props, {
+    className: "form-control form-control-solid mb-2"
+  })), errors && react_1["default"].createElement("div", {
+    className: "invalid-feedback text-danger mt-2",
+    style: {
+      display: 'block'
+    }
+  }, errors));
+};
 
 /***/ }),
 

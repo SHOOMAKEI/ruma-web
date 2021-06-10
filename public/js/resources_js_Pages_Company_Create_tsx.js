@@ -3523,6 +3523,56 @@ function useWillUnmount(fn) {
 "use strict";
 
 
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -3533,7 +3583,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
@@ -3556,8 +3606,10 @@ var FileInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/FileInput
 
 var CardWrapper_1 = __importDefault(__webpack_require__(/*! ../../Shared/CardWrapper */ "./resources/js/Shared/CardWrapper.tsx"));
 
+var inertia_1 = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+
 function Create() {
-  var _a = inertia_react_1.useForm({
+  var _a = react_1.useState({
     name: '',
     email: '',
     phone: '',
@@ -3567,15 +3619,41 @@ function Create() {
     is_active: true,
     logo: ''
   }),
-      data = _a.data,
-      setData = _a.setData,
-      errors = _a.errors,
-      post = _a.post,
-      processing = _a.processing;
+      data = _a[0],
+      setData = _a[1];
+
+  var _b = react_1.useState(false),
+      loading = _b[0],
+      setLoading = _b[1];
+
+  var errors = inertia_react_1.usePage().props.errors;
+
+  function handleChange(e) {
+    var key = e.target.id; // @ts-ignore
+
+    var value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    setData(function (data) {
+      var _a;
+
+      return __assign(__assign({}, data), (_a = {}, _a[key] = value, _a));
+    });
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    post(ziggy_js_1["default"]('companies.store'));
+    setLoading(true); //@ts-ignore
+
+    inertia_1.Inertia.post(ziggy_js_1["default"]('companies.store'), data).then(function () {
+      setLoading(false);
+    });
+  }
+
+  function setLogo(photo) {
+    setData(function (data) {
+      var _a;
+
+      return __assign(__assign({}, data), (_a = {}, _a['photo'] = photo, _a));
+    });
   }
 
   return react_1["default"].createElement(CardWrapper_1["default"], null, react_1["default"].createElement("form", {
@@ -3593,9 +3671,7 @@ function Create() {
     required: true,
     errors: errors.name,
     value: data.name,
-    onChange: function onChange(e) {
-      return setData('name', e.target.value);
-    }
+    onChange: handleChange
   }), react_1["default"].createElement(TextInput_1["default"], {
     className: "mt-10 col-md-6",
     label: "Email",
@@ -3606,9 +3682,7 @@ function Create() {
     label_required: true,
     errors: errors.email,
     value: data.email,
-    onChange: function onChange(e) {
-      return setData('email', e.target.value);
-    }
+    onChange: handleChange
   })), react_1["default"].createElement("div", {
     className: "fv-row mb-5 row"
   }, react_1["default"].createElement(SelectInput_1["default"], {
@@ -3621,9 +3695,7 @@ function Create() {
     label_required: true,
     errors: errors.currency,
     value: data.currency,
-    onChange: function onChange(e) {
-      return setData('currency', e.target.value);
-    }
+    onChange: handleChange
   }, react_1["default"].createElement("option", {
     value: "USD"
   }, " USD"), react_1["default"].createElement("option", {
@@ -3640,9 +3712,7 @@ function Create() {
     label_required: true,
     errors: errors.tax_number,
     value: data.tax_number,
-    onChange: function onChange(e) {
-      return setData('tax_number', e.target.value);
-    }
+    onChange: handleChange
   })), react_1["default"].createElement("div", {
     className: "fv-row mb-5 row"
   }, react_1["default"].createElement(TextInput_1["default"], {
@@ -3655,9 +3725,7 @@ function Create() {
     label_required: true,
     errors: errors.phone,
     value: data.phone,
-    onChange: function onChange(e) {
-      return setData('phone', e.target.value);
-    }
+    onChange: handleChange
   }), react_1["default"].createElement(TextAreaInput_1["default"], {
     className: "mt-10 col-md-6",
     label: "Address",
@@ -3667,9 +3735,7 @@ function Create() {
     label_required: true,
     errors: errors.address,
     value: data.address,
-    onChange: function onChange(e) {
-      return setData('address', e.target.value);
-    }
+    onChange: handleChange
   })), react_1["default"].createElement("div", {
     className: "fv-row mb-5 row"
   }, react_1["default"].createElement(FileInput_1["default"], {
@@ -3681,7 +3747,7 @@ function Create() {
     label_required: true,
     errors: errors.logo,
     value: data.logo,
-    callback: setData
+    callback: setLogo
   }), react_1["default"].createElement(CheckBoxInput_1["default"], {
     className: "mt-10 col-md-6",
     label: "Is Active",
@@ -3691,14 +3757,12 @@ function Create() {
     label_required: true,
     errors: errors.is_active,
     value: data.is_active,
-    onChange: function onChange(e) {
-      return setData('is_active', e.target.checked);
-    }
+    onChange: handleChange
   })), react_1["default"].createElement("div", {
     className: "fv-row"
   }, react_1["default"].createElement(LoadingButton_1["default"], {
     type: "submit",
-    loading: processing
+    loading: loading
   }, "Save"))));
 }
 
@@ -3811,7 +3875,7 @@ exports.default = function (_a) {
     name: name
   }, props, {
     type: "checkbox",
-    className: "form-check-input h-30px w-50px "
+    className: "form-check-input h-20px w-30px "
   })), label && react_1["default"].createElement("label", {
     className: "form-check-label " + (label_required ? 'required form-label' : ''),
     htmlFor: name
@@ -5065,9 +5129,9 @@ exports.dropdownMenus = [{
   }, {
     id: "2",
     name: "Roles",
-    link: "#"
+    link: ziggy_js_1["default"]('roles.index')
   }, {
-    id: "2",
+    id: "3",
     name: "Companies",
     link: ziggy_js_1["default"]('companies.index')
   }],

@@ -40,7 +40,7 @@ export default ({ label, name, tags, suggestions, data,callback,label_required, 
                     classNames={{
                         tagInputField: 'form-control form-control-solid',
                         tag: 'badge badge-light-success mx-2 my-2',
-                        remove: 'btn btn-icon btn-sm btn-active-light-info text-uppercase font-weight-bold',
+                        remove: 'btn btn-icon btn-sm btn-active-light-dark text-uppercase font-weight-bold',
                         suggestions: 'rounded bg-light p-1 ',
                         activeSuggestion: 'active list-group-item'
 
@@ -55,8 +55,8 @@ export default ({ label, name, tags, suggestions, data,callback,label_required, 
                     handleAddition={handleTagAddition}
                     handleDrag={handleTagDrag}
                     inputFieldPosition="top"
-
-                    {...props}
+                    allowUnique={true}
+                    inputProps={props}
                 />
         </div>
     )

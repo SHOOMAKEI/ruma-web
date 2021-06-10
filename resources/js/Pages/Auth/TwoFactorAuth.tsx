@@ -15,13 +15,13 @@ const SUBTITLE = 'Please provide verification code sent to your email or verific
      const { status } = usePage().props
      const { data, setData, errors, post, processing } = useForm({
          username: '',
-         two_factory_code: '',
+         code: '',
          recovery_code: ''
      });
 
      function handleSubmit(e: { preventDefault: () => void; }) {
          e.preventDefault();
-         Inertia.post(route('two-factor.login'));
+         post(route('two-factor.login'));
      }
 
 
@@ -44,9 +44,9 @@ const SUBTITLE = 'Please provide verification code sent to your email or verific
                                 label="Two Factor Code"
                                 name="two_factory_code"
                                 type="text"
-                                errors={errors.two_factory_code}
-                                value={data.two_factory_code}
-                                onChange={(e: { target: { value: string; }; }) => setData('two_factory_code', e.target.value)}
+                                errors={errors.code}
+                                value={data.code}
+                                onChange={(e: { target: { value: string; }; }) => setData('code', e.target.value)}
                             />
                         </div>
                         <div className="fv-row ">

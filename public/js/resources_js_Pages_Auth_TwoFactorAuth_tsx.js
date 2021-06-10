@@ -97,8 +97,6 @@ var TextInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/TextInput
 
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
-var inertia_1 = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-
 var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 
 var LoadingButton_1 = __importDefault(__webpack_require__(/*! ../../Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.tsx"));
@@ -114,7 +112,7 @@ exports.default = function () {
 
   var _a = inertia_react_1.useForm({
     username: '',
-    two_factory_code: '',
+    code: '',
     recovery_code: ''
   }),
       data = _a.data,
@@ -125,7 +123,7 @@ exports.default = function () {
 
   function handleSubmit(e) {
     e.preventDefault();
-    inertia_1.Inertia.post(ziggy_js_1["default"]('two-factor.login'));
+    post(ziggy_js_1["default"]('two-factor.login'));
   }
 
   return react_1["default"].createElement(AuthFramework_1["default"], {
@@ -163,10 +161,10 @@ exports.default = function () {
     label: "Two Factor Code",
     name: "two_factory_code",
     type: "text",
-    errors: errors.two_factory_code,
-    value: data.two_factory_code,
+    errors: errors.code,
+    value: data.code,
     onChange: function onChange(e) {
-      return setData('two_factory_code', e.target.value);
+      return setData('code', e.target.value);
     }
   })), react_1["default"].createElement("div", {
     className: "fv-row "

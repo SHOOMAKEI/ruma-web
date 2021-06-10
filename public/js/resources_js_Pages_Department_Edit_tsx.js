@@ -1,4 +1,4 @@
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Company_Index_tsx"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Department_Edit_tsx"],{
 
 /***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
 /*!************************************************************!*\
@@ -3514,10 +3514,10 @@ function useWillUnmount(fn) {
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Company/Index.tsx":
-/*!**********************************************!*\
-  !*** ./resources/js/Pages/Company/Index.tsx ***!
-  \**********************************************/
+/***/ "./resources/js/Pages/Department/Edit.tsx":
+/*!************************************************!*\
+  !*** ./resources/js/Pages/Department/Edit.tsx ***!
+  \************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -3537,66 +3537,129 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
+
+var TextInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/TextInput */ "./resources/js/Shared/TextInput.tsx"));
+
+var LoadingButton_1 = __importDefault(__webpack_require__(/*! ../../Shared/LoadingButton */ "./resources/js/Shared/LoadingButton.tsx"));
+
 var Layout_1 = __importDefault(__webpack_require__(/*! ../../Shared/Layout */ "./resources/js/Shared/Layout.tsx"));
 
-var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
+var SelectInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/SelectInput */ "./resources/js/Shared/SelectInput.tsx"));
 
 var CardWrapper_1 = __importDefault(__webpack_require__(/*! ../../Shared/CardWrapper */ "./resources/js/Shared/CardWrapper.tsx"));
 
-var react_bootstrap_1 = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+function Edit() {
+  // @ts-ignore
+  var _a = inertia_react_1.usePage().props,
+      companies = _a.companies,
+      department = _a.department,
+      departments = _a.departments; // @ts-ignore
 
-var ToggleDropdown_1 = __webpack_require__(/*! ../../Shared/ToggleDropdown */ "./resources/js/Shared/ToggleDropdown.tsx");
+  var _b = inertia_react_1.useForm({
+    name: department.name || '',
+    code_name: department.code_name || '',
+    // @ts-ignore
+    company_id: department.company_id || '',
+    parent_department_id: department.parent_department_id || ''
+  }),
+      data = _b.data,
+      setData = _b.setData,
+      errors = _b.errors,
+      put = _b.put,
+      processing = _b.processing;
 
-var svg_1 = __webpack_require__(/*! ../../Shared/Icons/svg */ "./resources/js/Shared/Icons/svg.tsx");
+  function handleSubmit(e) {
+    e.preventDefault();
+    put(ziggy_js_1["default"]('departments.update', department.id));
+  }
 
-function Index() {
-  var companies = inertia_react_1.usePage().props.companies; // @ts-ignore
-
-  return react_1["default"].createElement(CardWrapper_1["default"], null, react_1["default"].createElement("table", {
-    id: "kt_datatable_example_5",
-    className: "table table-striped table-row-bordered gy-5 gs-7 border rounded"
-  }, react_1["default"].createElement("thead", null, react_1["default"].createElement("tr", {
-    className: "fw-bolder fs-6 text-gray-800 px-7"
-  }, react_1["default"].createElement("th", null, "Name"), react_1["default"].createElement("th", null, "phone"), react_1["default"].createElement("th", null, "email"), react_1["default"].createElement("th", null, "Is Active"), react_1["default"].createElement("th", null, "Actions"))), react_1["default"].createElement("tbody", null, companies && companies.map(function (company) {
-    return react_1["default"].createElement("tr", {
-      key: company.id
-    }, react_1["default"].createElement("td", null, company.name), react_1["default"].createElement("td", null, company.phone), react_1["default"].createElement("td", null, company.email), react_1["default"].createElement("td", null, company.is_active ? react_1["default"].createElement("span", {
-      className: "badge badge-light-primary"
-    }, "Active") : react_1["default"].createElement("span", {
-      className: "badge badge-light-warning"
-    }, "In Active")), react_1["default"].createElement("td", null, react_1["default"].createElement(react_bootstrap_1.Dropdown, null, react_1["default"].createElement(react_bootstrap_1.Dropdown.Toggle, {
-      cssClass: "btn btn-sm btn-light btn-active-light-primary",
-      variant: "success",
-      id: "dropdown-basic",
-      as: ToggleDropdown_1.CustomButtonDropdownToggle
-    }, "Actions", react_1["default"].createElement(svg_1.DropdownIcon, null)), react_1["default"].createElement(react_bootstrap_1.Dropdown.Menu, {
-      className: "menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold py-4 fs-6 w-275px"
-    }, react_1["default"].createElement(react_bootstrap_1.Dropdown.Item, {
-      as: ToggleDropdown_1.CustomDropdownMenuItem
-    }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
-      href: ziggy_js_1["default"]('companies.edit', company.id),
-      className: "menu-link px-3"
-    }, "Edit")), react_1["default"].createElement(react_bootstrap_1.Dropdown.Item, {
-      as: ToggleDropdown_1.CustomDropdownMenuItem
-    }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
-      href: ziggy_js_1["default"]('departments.index', company.id),
-      className: "menu-link px-3"
-    }, "View Departments"))))));
-  }))));
+  return react_1["default"].createElement(CardWrapper_1["default"], null, react_1["default"].createElement("form", {
+    onSubmit: handleSubmit,
+    className: "form w-100"
+  }, react_1["default"].createElement("div", {
+    className: "fv-row mb-5 row"
+  }, react_1["default"].createElement(TextInput_1["default"], {
+    className: "mt-10 col-md-6",
+    label: "Name",
+    placeholder: "Name",
+    name: "name",
+    type: "text",
+    label_required: true,
+    required: true,
+    errors: errors.name,
+    value: data.name,
+    onChange: function onChange(e) {
+      return setData('name', e.target.value);
+    }
+  }), react_1["default"].createElement(TextInput_1["default"], {
+    className: "mt-10 col-md-6",
+    label: "Code Name",
+    placeholder: "Code Name",
+    name: "code_name",
+    type: "text",
+    label_required: true,
+    required: true,
+    errors: errors.code_name,
+    value: data.code_name,
+    onChange: function onChange(e) {
+      return setData('code_name', e.target.value);
+    }
+  })), react_1["default"].createElement("div", {
+    className: "fv-row mb-5 row"
+  }, react_1["default"].createElement(SelectInput_1["default"], {
+    className: "mt-10 col-md-6",
+    label: "Company",
+    placeholder: "Company",
+    name: "company_id",
+    required: true,
+    label_required: true,
+    errors: errors.company_id,
+    value: data.company_id,
+    onChange: function onChange(e) {
+      return setData('company_id', e.target.value);
+    }
+  }, // @ts-ignore
+  companies && companies.map(function (company) {
+    return react_1["default"].createElement("option", {
+      value: company.id,
+      key: Math.random()
+    }, " ", company.name);
+  })), react_1["default"].createElement(SelectInput_1["default"], {
+    className: "mt-10 col-md-6",
+    label: "Parent Department",
+    placeholder: "Parent Department",
+    name: "parent_department_id",
+    errors: errors.parent_department_id,
+    value: data.parent_department_id,
+    onChange: function onChange(e) {
+      return setData('parent_department_id', e.target.value);
+    }
+  }, react_1["default"].createElement("option", {
+    value: "",
+    disabled: true
+  }, "Select Parent Department"), // @ts-ignore
+  departments && departments.map(function (dep) {
+    return react_1["default"].createElement("option", {
+      value: dep.id,
+      key: Math.random()
+    }, " ", dep.name, " - ", dep.company);
+  }))), react_1["default"].createElement("div", {
+    className: "fv-row"
+  }, react_1["default"].createElement(LoadingButton_1["default"], {
+    type: "submit",
+    loading: processing
+  }, "Save"))));
 }
 
-Index.layout = function (page) {
+Edit.layout = function (page) {
   return react_1["default"].createElement(Layout_1["default"], {
     children: page,
-    title: "Companies",
-    toolBarLeftContent: react_1["default"].createElement(inertia_react_1.InertiaLink, {
-      href: ziggy_js_1["default"]('companies.create'),
-      className: "btn btn-primary"
-    }, "Add Company")
+    title: "Edit Department"
   });
 };
 
-exports.default = Index;
+exports.default = Edit;
 
 /***/ }),
 
@@ -4412,6 +4475,81 @@ exports.default = Framework;
 
 /***/ }),
 
+/***/ "./resources/js/Shared/LoadingButton.tsx":
+/*!***********************************************!*\
+  !*** ./resources/js/Shared/LoadingButton.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var loading = _a.loading,
+      className = _a.className,
+      type = _a.type,
+      _b = _a.color,
+      color = _b === void 0 ? 'primary' : _b,
+      children = _a.children,
+      props = __rest(_a, ["loading", "className", "type", "color", "children"]);
+
+  return react_1["default"].createElement("button", __assign({
+    disabled: loading,
+    className: "btn btn-" + color + " " + className
+  }, props, {
+    "data-kt-indicator": loading ? 'on' : 'off'
+  }), loading && react_1["default"].createElement("span", {
+    className: "indicator-progress h4 mb-0"
+  }, "Please wait... ", react_1["default"].createElement("span", {
+    className: "spinner-border spinner-border-sm align-middle ms-2"
+  })), react_1["default"].createElement("span", {
+    className: "indicator-label h4"
+  }, children));
+};
+
+/***/ }),
+
 /***/ "./resources/js/Shared/Menu.tsx":
 /*!**************************************!*\
   !*** ./resources/js/Shared/Menu.tsx ***!
@@ -4553,6 +4691,85 @@ function Menu(_a) {
 }
 
 exports.default = Menu;
+
+/***/ }),
+
+/***/ "./resources/js/Shared/SelectInput.tsx":
+/*!*********************************************!*\
+  !*** ./resources/js/Shared/SelectInput.tsx ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var label = _a.label,
+      name = _a.name,
+      className = _a.className,
+      children = _a.children,
+      errors = _a.errors,
+      label_required = _a.label_required,
+      props = __rest(_a, ["label", "name", "className", "children", "errors", "label_required"]);
+
+  return react_1["default"].createElement("div", {
+    className: "form-group " + className
+  }, label && react_1["default"].createElement("label", {
+    className: "h4 mb-3 fw-light " + (label_required ? 'required form-label' : ''),
+    htmlFor: name
+  }, label), react_1["default"].createElement("select", __assign({
+    id: name,
+    name: name
+  }, props, {
+    className: "form-select form-select-solid"
+  }), children), errors && react_1["default"].createElement("div", {
+    className: "invalid-feedback ",
+    style: {
+      display: 'block'
+    }
+  }, errors));
+};
 
 /***/ }),
 
@@ -4844,6 +5061,84 @@ exports.dropdownMenus = [{
   }],
   link: "#"
 }];
+
+/***/ }),
+
+/***/ "./resources/js/Shared/TextInput.tsx":
+/*!*******************************************!*\
+  !*** ./resources/js/Shared/TextInput.tsx ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var label = _a.label,
+      name = _a.name,
+      className = _a.className,
+      errors = _a.errors,
+      label_required = _a.label_required,
+      props = __rest(_a, ["label", "name", "className", "errors", "label_required"]);
+
+  return react_1["default"].createElement("div", {
+    className: "form-group " + className
+  }, label && react_1["default"].createElement("label", {
+    className: "h4 mb-3 fw-light " + (label_required ? 'required form-label' : ''),
+    htmlFor: name
+  }, label), react_1["default"].createElement("input", __assign({
+    id: name,
+    name: name
+  }, props, {
+    className: "form-control form-control-solid mb-2"
+  })), errors && react_1["default"].createElement("div", {
+    className: "invalid-feedback text-danger mt-2",
+    style: {
+      display: 'block'
+    }
+  }, errors));
+};
 
 /***/ }),
 

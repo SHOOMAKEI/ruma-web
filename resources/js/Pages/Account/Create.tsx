@@ -11,6 +11,7 @@ import CheckBoxInput from "../../Shared/CheckBoxInput";
 import FileInput from "../../Shared/FileInput";
 import CardWrapper from "../../Shared/CardWrapper";
 import {Inertia} from "@inertiajs/inertia";
+import MultiSelectInput from "../../Shared/MultiSelectInput";
 
 function Create() {
     const {companies, roles, errors} = usePage().props
@@ -37,12 +38,52 @@ function Create() {
         }))
     }
 
+    function handleSelectChange(newValue: any, actionMeta: any) {
+
+       if(actionMeta.action === 'select-option'){
+           //@ts-ignore
+           let stateValue = data[actionMeta.name].find(role=> (role === newValue))
+
+           if(!stateValue) {
+               // @ts-ignore
+               setData(data => ({
+                   ...data,
+                   // @ts-ignore
+                   [actionMeta.name]: newValue,
+               }))
+           }
+       }
+
+       if(actionMeta.action === 'remove-value') {
+
+           // @ts-ignore
+           setData(data => ({
+               ...data,
+               // @ts-ignore
+               [actionMeta.name]: [stateValue],
+           }))
+       }
+
+       if(actionMeta.action === 'clear'){
+
+           // @ts-ignore
+           setData(data => ({
+               ...data,
+               // @ts-ignore
+               [actionMeta.name]: [],
+           }))
+
+       }
+
+    }
+
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault()
         setLoading(true)
         // @ts-ignore
-        Inertia.post(route('users.store'), data)
-        setLoading(false)
+        Inertia.post(route('users.store'), data).then(() => {
+            setLoading(false);
+        })
     }
 
 
@@ -111,29 +152,27 @@ function Create() {
                         />
                     </div>
                     <div className="fv-row mb-5 row">
-                        <TagInput
+                        <MultiSelectInput
                             className="mt-10 col-md-6"
                             label="Companies"
                             name="companies"
                             placeholder="Press enter to select new Company"
                             label_required={true}
                             errors={errors.companies}
-                            data={data}
-                            tags={data.companies}
-                            suggestions={companies}
-                            callback={setData}
+                            value={data.companies}
+                            options={companies}
+                            onChange={handleSelectChange}
                         />
-                        <TagInput
+                        <MultiSelectInput
                             className="mt-10 col-md-6"
                             label="Roles"
                             name="roles"
                             placeholder="Press enter to select new Role"
                             label_required={true}
                             errors={errors.roles}
-                            data={data}
-                            tags={data.roles}
-                            suggestions={roles}
-                            callback={setData}
+                            value={data.roles}
+                            options={roles}
+                            onChange={handleSelectChange}
                         />
                     </div>
                 <div className="fv-row mb-5 row">

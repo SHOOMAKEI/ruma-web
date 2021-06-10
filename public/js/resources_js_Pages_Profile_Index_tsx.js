@@ -6217,9 +6217,9 @@ exports.dropdownMenus = [{
   }, {
     id: "2",
     name: "Roles",
-    link: "#"
+    link: ziggy_js_1["default"]('roles.index')
   }, {
-    id: "2",
+    id: "3",
     name: "Companies",
     link: ziggy_js_1["default"]('companies.index')
   }],
