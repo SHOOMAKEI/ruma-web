@@ -9,8 +9,16 @@ export function initializeDataTable() {
                 next: "<i class='uil uil-angle-right'>",
             },
         },
+
         drawCallback: function () {
             $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
         },
+        pageLength: 10,
+        filter: true,
+        deferRender: true,
+        scrollY: 200,
+        scrollCollapse: true,
+        scroller: true,
+        "searching": true,
     });
 }

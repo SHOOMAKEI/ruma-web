@@ -7,7 +7,7 @@
         <link href="{{asset('assets/css/fonts.css')}}" rel="stylesheet" type="text/css" />
         <link rel="shortcut icon" href="{{asset('assets/images/brand/logo.png')}}">
         <link href="{{asset('assets/css/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
+{{--        <link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />--}}
         <link href="{{asset('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/css/base.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
@@ -20,11 +20,9 @@
         <script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
         <script src="{{asset('assets/js/custom/chat/chat.js')}}"></script>
         <script src="{{asset('assets/js/custom/api-keys/api-keys.js')}}"></script>
-        <script src="{{asset('assets/plugins/datatables/datatables.bundle.js')}}"></script>
+        <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
         <script src="{{asset('assets/plugins/fslightbox/fslightbox.bundle.js')}}"></script>
         <script src="{{asset('assets/js/base.js')}}"></script>
-        <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-        <script src="{{asset('assets/js/custom/documentation/general/datatables/advanced.js')}}"></script>
         <script src="{{ mix('/js/app.js') }}" defer></script>
 
 
@@ -36,7 +34,10 @@
             toolbar-enabled toolbar-fixed
             toolbar-tablet-and-mobile-fixed
             aside-enabled aside-fixed">
+    <div class="d-flex flex-column flex-root">
         @inertia
+    </div>
+
 
 
 

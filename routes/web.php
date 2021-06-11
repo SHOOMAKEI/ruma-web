@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\OperationYearController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,7 @@ Route::middleware([ 'auth','auth:sanctum', 'role:system-administrator'])
         Route::resource('users', AccountController::class);
         Route::resource('departments', DepartmentController::class);
         Route::resource('roles', RoleController::class);
+        Route::resource('operation-years', OperationYearController::class);
 
         Route::get('departments/{company}/company', [DepartmentController::class, 'index'])
             ->name('departments.index');
@@ -66,4 +68,11 @@ Route::middleware([ 'auth','auth:sanctum', 'role:system-administrator'])
             ->name('departments.child_department');
         Route::delete('departments/{department}/delete', [DepartmentController::class, 'destroy'])
             ->name('departments.delete');
+    });
+
+Route::middleware([ 'auth','auth:sanctum'])
+    ->group(function () {
+        Route::get('{company}/dashboard', [CompanyController::class, 'defaultCompany'])
+            ->name('company.default_dashboard');
+
     });

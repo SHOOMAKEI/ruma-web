@@ -32,7 +32,7 @@ export default function Framework({children, title, toolBarLeftContent}: Props) 
             </InertiaHead>
             <main className="page d-flex flex-row flex-column-fluid">
                 <SideNav />
-                <div className="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+                <div className="wrapper d-flex flex-column flex-row-fluid flex-root" id="kt_wrapper">
                     <TopNav />
                     <div className="content d-flex flex-column flex-column-fluid" id="kt_content">
                         <ToolBar title={title} leftContent={toolBarLeftContent}/>

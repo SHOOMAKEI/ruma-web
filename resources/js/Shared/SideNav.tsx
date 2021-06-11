@@ -1,18 +1,47 @@
 import Menu from "./Menu";
 import {dropdownMenus} from "./SidebarLink";
-import {SideNavCollapse} from "./Icons/svg";
+import {DropdownIcon, SideNavCollapse} from "./Icons/svg";
 import React from "react";
+import SelectInput from "./SelectInput";
+import {InertiaLink, usePage} from "@inertiajs/inertia-react";
+import {Dropdown} from "react-bootstrap";
+import {CustomButtonDropdownToggle, CustomDropdownMenuItem} from "./ToggleDropdown";
+import route from "ziggy-js";
+import {comment} from "postcss";
 export default () => {
+    const { auth } = usePage().props
+
     return (
         <div id="kt_aside" className="aside aside-dark aside-hoverable" data-kt-drawer="true"
              data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}"
              data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}"
              data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
             <div className="aside-logo flex-column-auto" id="kt_aside_logo">
-                <a href="">
-                    {/*<img alt="Logo" src={"/images/brand/logo.png"} className="h-15px logo"/>*/}
-                    <span className={"text-white h1"}>RUMA</span>
+                <a href={route('home')}>
+                    <img alt="Logo" src={"/assets/images/brand/logo.png"} className="h-15px logo"/>
+                    {/*<span className={"text-white h1"}>RUMA</span>*/}
                 </a>
+                <Dropdown>
+                    <Dropdown.Toggle cssClass={"btn btn-sm btn-light btn-primary"} variant="success" id="dropdown-basic" as={CustomButtonDropdownToggle}>
+                        {
+                            //@ts-ignore
+                            auth.current_company.substring(0,20)
+                        }
+
+                        <DropdownIcon />
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-900 menu-state-bg-light-primary fw-bold py-1 px-1 mr-3 fs-6 w-200px">
+                        {
+                            //@ts-ignore
+                            auth.companies && auth.companies.map((company)=>(
+                                <Dropdown.Item as={CustomDropdownMenuItem} key={Math.random()}>
+                                    <InertiaLink href={route('company.default_dashboard', company.id)} className="menu-link px-1 text-primary text-hover-white">{company.name}</InertiaLink>
+                                </Dropdown.Item>
+                            ))
+                        }
+                    </Dropdown.Menu>
+                </Dropdown>
                 <div id="kt_aside_toggle"
                      className="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
                      data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
