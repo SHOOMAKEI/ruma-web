@@ -12,13 +12,13 @@ class RoleController extends Controller
 
     public function index()
     {
-        return inertia('Role/Index', ['roles' => Role::all('id', 'name')]);
+        return inertia('Role/Index', ['roles' => Role::where('guard_name', 'web')->get()]);
     }
 
 
     public function create()
     {
-        return inertia('Role/Create', ['permissions' => Permission::all()->map(function ($permission){
+        return inertia('Role/Create', ['permissions' => Permission::where('guard_name', 'web')->get()->map(function ($permission){
             $data['id'] =  $permission->id;
             $data['name'] =  $permission->name;
             $data['checked'] =  false;
@@ -38,20 +38,30 @@ class RoleController extends Controller
         if($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-////        dd(config('auth.guards'));
-//        foreach (config('auth.guards') as $guard=>$value)
-//        {
-//            $role = Role::create([
-//                'name' => $request['name'],
-//                'guard_name' => $guard
-//            ]);
-//
-//            $permissions = array_filter($request['permissions'], function($permission) {
-//                return $permission['checked'] == true;
-//            } );
-//
-//            $role->syncPermissions($permissions, $guard);
-//        }
+
+        foreach (config('auth.guards') as $guard=>$value)
+        {
+            $role = Role::create([
+                'name' => $request['name'],
+                'guard_name' => $guard
+            ]);
+
+            if(!empty($request['permissions'])) {
+
+                $permissions = array_filter($request['permissions'], function($permission) {
+                    return $permission['checked'] == true;
+                } );
+
+                $role->permissions()->detach();
+
+                collect($permissions)->map(function ($permission) use ($guard, $role){
+
+                    $role->givePermissionTo($permission['name']);
+
+                });
+            }
+
+        }
 
 
         return redirect()->route('roles.index')->with(['status' => 'Operation Complete successful']);
@@ -74,7 +84,7 @@ class RoleController extends Controller
             $data['checked'] =  true;
             return $data;
         });
-        return inertia('Role/Edit', ['permissions' => Permission::all('id', 'name')->map(function ($permission) use($role){
+        return inertia('Role/Edit', ['permissions' => Permission::where('guard_name', 'web')->get()->map(function ($permission) use($role){
             $data['id'] =  $permission->id;
             $data['name'] =  $permission->name;
             $data['checked'] = $role->hasPermissionTo($permission->name);
@@ -93,12 +103,29 @@ class RoleController extends Controller
         if($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
+        foreach (config('auth.guards') as $guard=>$value)
+        {
 
-        $role->update([
-            'name' => $request['name']
-        ]);
+            $role_data = Role::findOrCreate($role->name,$guard);
 
-        $role->syncPermissions($request['permissions']);
+            if(!empty($request['permissions'])) {
+
+                $permissions = array_filter($request['permissions'], function($permission) {
+                    return $permission['checked'] == true;
+                } );
+
+                $role_data->permissions()->detach();
+
+                collect($permissions)->map(function ($permission) use ($guard, $role_data){
+
+                    $role_data->givePermissionTo($permission['name']);
+
+                });
+
+            }
+
+        }
+
 
         return redirect()->route('roles.index')->with(['status' => 'Operation Complete successful']);
     }
