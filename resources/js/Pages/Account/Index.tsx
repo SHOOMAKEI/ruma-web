@@ -11,24 +11,33 @@ import { DropdownIcon } from "../../Shared/Icons/svg";
 
 interface props {
     users?: User []
+    auth?: auth
     [key: string]: any
 }
 
-function Index()  {
-    const { users }:props = usePage().props
+interface auth {
+    user: User
+}
 
+function Index()  {
+    const { users, auth }:props = usePage().props
+
+    //@ts-ignore
+    $(document).ready(function() {
+        //@ts-ignore
+        $('#account-data-table').DataTable();
+    });
 
 
     // @ts-ignore
     return (
 
 <CardWrapper>
-        <table id="kt_datatable_example_5" className="table table-striped table-row-bordered gy-5 gs-7 border rounded">
+        <table id="account-data-table" className="table table-row-bordered gy-5 gs-7 border rounded">
             <thead>
             <tr className="fw-bolder fs-6 text-gray-800 px-7">
                 <th>Username</th>
                 <th>Email</th>
-                <th>Role</th>
                 <th>Is Active</th>
                 <th>Actions</th>
             </tr>
@@ -38,13 +47,6 @@ function Index()  {
                 <tr key={user.id}>
                     <td>{user.username}</td>
                     <td>{user.email}</td>
-                    <td>
-                        {user.account_roles?.map((role)=>(
-                            <>
-                                <span className="badge badge-light-info my-1" key={Math.random()}>{role.name?.replace('-', ' ')}</span> <br/>
-                            </>
-                        ))}
-                    </td>
                     <td>{user.is_active? <span className="badge badge-light-primary">Active</span>:
                         <span className="badge badge-light-warning">In Active</span>}</td>
                     <td>
@@ -58,9 +60,13 @@ function Index()  {
                                 <Dropdown.Item as={CustomDropdownMenuItem}>
                                         <InertiaLink href={route('users.edit', user.id)} className="menu-link px-3" >Edit</InertiaLink>
                                 </Dropdown.Item>
-                                <Dropdown.Item as={CustomDropdownMenuItem}>
-                                    <InertiaLink href={route('users.destroy', user.id)} className="menu-link px-3" >Delete</InertiaLink>
-                                </Dropdown.Item>
+                                {
+                                    // @ts-ignore
+                                    auth.user.id === user.id?'':
+                                    <Dropdown.Item as={CustomDropdownMenuItem}>
+                                        <InertiaLink href={route('users.destroy', user.id)} method="delete" className="menu-link px-3" >Delete</InertiaLink>
+                                    </Dropdown.Item>
+                                }
                             </Dropdown.Menu>
                         </Dropdown>
                     </td>

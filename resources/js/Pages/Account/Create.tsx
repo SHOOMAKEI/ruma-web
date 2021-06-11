@@ -12,9 +12,21 @@ import FileInput from "../../Shared/FileInput";
 import CardWrapper from "../../Shared/CardWrapper";
 import {Inertia} from "@inertiajs/inertia";
 import MultiSelectInput from "../../Shared/MultiSelectInput";
+import Permission from "../Role/Permission";
+
+interface permission {
+    id: number
+    name: string
+    checked: boolean
+}
+
+interface props {
+    permissions?: permission []
+    [key:string]: any
+}
 
 function Create() {
-    const {companies, roles, errors} = usePage().props
+    const {companies, roles, permissions, errors}: props = usePage().props
     const [data, setData] = useState({
         username: '',
         email: '',
@@ -24,6 +36,7 @@ function Create() {
         companies: [],
         is_active: true,
         photo: '',
+        permissions: [],
         send_reset_password_notification: false
     })
     const [loading, setLoading] = useState(false)
@@ -60,7 +73,7 @@ function Create() {
            setData(data => ({
                ...data,
                // @ts-ignore
-               [actionMeta.name]: [stateValue],
+               [actionMeta.name]: newValue,
            }))
        }
 
@@ -91,6 +104,14 @@ function Create() {
         setData(data => ({
             ...data,
             ['photo']: photo,
+        }))
+    }
+
+    //@ts-ignore
+    function setPermission(permissions){
+        setData(data => ({
+            ...data,
+            ['permissions']: permissions,
         }))
     }
 
@@ -198,6 +219,10 @@ function Create() {
                         onChange={handleChange}
                     />
                 </div>
+                    <div className="fv-row mb-5 row">
+                        <h4 className="py-4">Direct Permissions</h4>
+                        <Permission permissions={permissions} callback={setPermission}/>
+                    </div>
                     <div className="fv-row mb-5 row">
                         <CheckBoxInput
                             className="mt-10 col-md-6"

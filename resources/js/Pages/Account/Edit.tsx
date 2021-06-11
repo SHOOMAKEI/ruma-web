@@ -11,13 +11,24 @@ import CheckBoxInput from "../../Shared/CheckBoxInput";
 // @ts-ignore
 import FileInput from "../../Shared/FileInput";
 import CardWrapper from "../../Shared/CardWrapper";
-import { User} from "../../Shared/Types";
+import  { User} from "../../Shared/Types";
 import {Inertia} from "@inertiajs/inertia";
 import MultiSelectInput from "../../Shared/MultiSelectInput";
+import Permission from "../Role/Permission";
 
+interface permission {
+    id: number
+    name: string
+    checked: boolean
+}
+
+interface props {
+    permissions?: permission []
+    [key:string]: any
+}
 
 function Edit() {
-    const {companies, user, roles, errors} = usePage().props
+    const {companies, user, roles, permissions, errors}:props = usePage().props
     const [data, setData] = useState({
         username: (user as User).username || '',
         email: (user as User).email || '',
@@ -27,6 +38,7 @@ function Edit() {
         companies: (user as User).companies || [],
         is_active: (user as User).is_active || '',
         photo: '',
+        permissions: [],
         send_reset_password_notification: false
     })
     const [loading, setLoading] = useState(false)
@@ -94,6 +106,14 @@ function Edit() {
         setData(data => ({
             ...data,
             ['photo']: photo,
+        }))
+    }
+
+    //@ts-ignore
+    function setPermission(permissions){
+        setData(data => ({
+            ...data,
+            ['permissions']: permissions,
         }))
     }
 
@@ -210,6 +230,10 @@ function Edit() {
                         onChange={handleChange}
                     />
                 </div>
+                <div className="fv-row mb-5 row">
+                    <h4 className="py-4">Direct Permissions</h4>
+                    <Permission permissions={user.permissions} callback={setPermission}/>
+                </div>
                 <div className="fv-row">
                     <LoadingButton
                         type="submit"
@@ -223,7 +247,7 @@ function Edit() {
 }
 
 Edit.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
-    children={page}  title="Create Company"
+    children={page}  title="Edit User Account"
  />;
 
 export default Edit;

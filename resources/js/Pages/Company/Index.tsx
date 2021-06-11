@@ -18,13 +18,22 @@ interface props {
 function Index()  {
     const { companies }:props = usePage().props
 
+    //@ts-ignore
+    $(document).ready(function() {
+        //@ts-ignore
+        $('#kt_datatable_example_5').DataTable();
+        //@ts-ignore
+        $('.dataTables_filter input[type="search"]').css(
+            {'width':'145px','display':'inline-block'}
+        );
+    });
 
 
     // @ts-ignore
     return (
 
 <CardWrapper>
-        <table id="kt_datatable_example_5" className="table table-striped table-row-bordered gy-5 gs-7 border rounded">
+        <table id="kt_datatable_example_5" className="table table-row-bordered gy-5 gs-7 border rounded">
             <thead>
             <tr className="fw-bolder fs-6 text-gray-800 px-7">
                 <th>Name</th>
