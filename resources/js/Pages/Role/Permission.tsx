@@ -64,7 +64,7 @@ export default ({user, permissions, callback}: Props) => {
         setSelectedPermission(newPer)
 
         // @ts-ignore
-        let newTags: permission [] = shownPermissions.filter((tag, index) => index !== i)
+        let newTags: permission [] = shownPermissions.filter((permission, index) => index !== i)
 
         newTags[i] = newPer;
         // @ts-ignore
@@ -100,9 +100,9 @@ export default ({user, permissions, callback}: Props) => {
                     shownPermissions?.map((permission , index) => {
                         if (permission.name?.toLocaleLowerCase().includes(activeFilter.name.toLocaleLowerCase())) {
                             return (
-                                <div className="col-md-4" key={permission.id}>
+                                <div className="col-md-4" key={Math.random()}>
                                         <CheckBoxInput
-                                            key={permission.id}
+                                            key={Math.random()}
                                             label={`can ${permission.name?.split('.')[1].replace('_', ' ')} ${permission.name?.split('.')[0].replace('_', ' ')}`}
                                             type="checkbox"
                                             name="permission"

@@ -19,11 +19,17 @@ function Index()  {
     const { roles }:props = usePage().props
 
 
+    //@ts-ignore
+    $(document).ready(function() {
+        //@ts-ignore
+        $('#role-data-table').DataTable();
+    });
+
     // @ts-ignore
     return (
 
 <CardWrapper>
-        <table id="kt_datatable_example_5" className="table table-striped table-row-bordered gy-5 gs-7 border rounded">
+        <table id="role-data-table" className="table table-row-bordered gy-5 gs-7 border rounded">
             <thead>
             <tr className="fw-bolder fs-6 text-gray-800 px-7">
                 <th>Name</th>

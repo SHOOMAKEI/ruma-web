@@ -29,16 +29,23 @@ interface permission {
 function Edit() {
     const { permissions, role }: props = usePage().props
     // @ts-ignore
-    const { data, setData, errors, post, processing } = useForm({
+    const { data, setData, errors, put, processing } = useForm({
         name: role.name,
         permissions: role.permissions
     });
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        post(route('roles.store'));
+        put(route('roles.update', role.id));
     }
 
+    //@ts-ignore
+    function setPermission(permissions){
+        setData(data => ({
+            ...data,
+            ['permissions']: permissions,
+        }))
+    }
 
     return(
         <CardWrapper>
@@ -58,7 +65,7 @@ function Edit() {
                     />
                 </div>
                 <div className="fv-row mb-5 row">
-                    <Permission permissions={permissions} />
+                    <Permission permissions={permissions} callback={setPermission}/>
                 </div>
 
                 <div className="fv-row">
