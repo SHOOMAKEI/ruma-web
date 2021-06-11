@@ -55,14 +55,33 @@ class HandleInertiaRequests extends Middleware
                 $data['settings']['permissions'] = $user->permissions;
                 return $data;
             }:null,
-            'auth.roles' => function (Request $request) {
-                return $request->user()
-                    ? User::find(auth()->user()->id)->roles->only('id', 'name')
-                    : null; },
-            'auth.permissions' => function (Request $request) {
-                return $request->user()
-                    ? User::find(auth()->user()->id)->permissions->only('id', 'name')
-                    : null; },
+            'auth.roles' => isset($user)? function () use ($user) {
+                return $user->roles->map(function($role){
+                    $data['id'] = $role->id;
+                    $data['name'] = $role->name;
+
+                    return $data;
+                });
+                     } : null,
+            'auth.permissions' => isset($user)? function () use ($user) {
+                 $user->permissions->map(function($permission){
+                    $data['id'] = $permission->id;
+                    $data['name'] = $permission->name;
+
+                    return $data;
+                 });
+                }: null,
+            'auth.companies' => isset($user)?
+                $user->companies->map(function($company){
+                    $data['id'] = $company->id;
+                    $data['name'] = $company->name;
+
+                    return $data;
+                })
+                     : null,
+            'auth.current_company' => isset($user)? function () use ($user) {
+                return $user->current_company()?->name;
+            } : null
         ]);
     }
 }
