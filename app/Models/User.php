@@ -104,6 +104,15 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         return $this->belongsToMany(Company::class, 'user_companies');
     }
 
+    public function current_company()
+    {
+        if(!is_numeric($this->current_company_id)){
+            return null;
+        }
+
+        return Company::find($this->current_company_id);
+    }
+
 //    public function employee(): BelongsTo
 //    {
 //        return $this->belongsTo(Employee::class);
