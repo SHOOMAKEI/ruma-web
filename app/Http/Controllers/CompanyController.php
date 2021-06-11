@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -155,5 +156,17 @@ class CompanyController extends Controller
             'address' => $args['address'],
             'is_active' => $args['is_active'],
         ];
+    }
+
+    public function defaultCompany(Company $company)
+    {
+        if(!is_null($company)) {
+           $user = User::find(auth()->user()->id);
+            $user->forceFill([
+                'current_company_id' => $company->id
+            ])->save();
+        }
+
+        return inertia('Dashboard');
     }
 }
