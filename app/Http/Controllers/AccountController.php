@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class AccountController extends Controller
@@ -25,7 +26,7 @@ class AccountController extends Controller
     public function create()
     {
         return inertia('Account/Create',
-            ['roles' => Role::all()->map(function ($role){
+            ['roles' => Role::where('guard_name','web')->get()->map(function ($role){
                 $data['value'] = (string) $role->id;
                 $data['label'] = $role->name;
 
@@ -34,6 +35,13 @@ class AccountController extends Controller
             'companies' => Company::all()->map(function ($company){
                 $data['value'] = (string) $company->id;
                 $data['label'] = $company->name;
+
+                return $data;
+            }),
+             'permissions' => Permission::where('guard_name', 'web')->get()->map(function ($permission){
+                $data['id'] =  $permission->id;
+                $data['name'] = $permission->name;
+                $data['checked'] = false;
 
                 return $data;
             })
@@ -73,6 +81,18 @@ class AccountController extends Controller
 
             $user->companies()->sync($companyData);
 
+            $permissions = array_filter($request['permissions'], function($permission) {
+                return $permission['checked'] == true;
+            } );
+
+            $user->permissions()->detach();
+
+            collect($permissions)->map(function ($permission) use ($user){
+
+                $user->givePermissionTo($permission['name']);
+
+            });
+
             if($request['send_reset_password_notification']) {
 
                 $token =  insertForgotPasswordUserToDatabase($user);
@@ -105,9 +125,16 @@ class AccountController extends Controller
 
             return $data;
         });
+        $account['permissions'] = Permission::where('guard_name', 'web')->get()->map(function ($permission) use ($user){
+        $data['id'] =  $permission->id;
+        $data['name'] = $permission->name;
+        $data['checked'] = $user->hasPermissionTo($permission->name);
+
+        return $data;
+    });
 
         return inertia('Account/Edit',
-            ['roles' => Role::all()->map(function ($role){
+            ['roles' => Role::where('guard_name','web')->get()->map(function ($role){
                 $data['value'] = (string) $role->id;
                 $data['label'] = $role->name;
 
@@ -138,7 +165,7 @@ class AccountController extends Controller
 
         if(($user->username != $request['username'])) {
             $validator =  Validator::make($request->toArray(),[
-                'username' => ['required', 'email', 'string', 'max:255', 'unique:users,email'],
+                'username' => ['required', 'string', 'max:255', 'unique:users,username'],
             ]);
 
             if($validator->fails()) {
@@ -171,6 +198,7 @@ class AccountController extends Controller
             'roles.*.value' => ['required','numeric', 'exists:roles,id'],
             'companies.*.value' => ['required', 'numeric', 'exists:companies,id'],
             'is_active' => ['required', 'boolean'],
+            'permissions.*.id' => ['required', 'numeric', 'exists:permissions,id']
         ]);
 
         if($validator->fails()) {
@@ -209,6 +237,22 @@ class AccountController extends Controller
 
             $user->companies()->sync($companyData);
 
+            if(!empty($request['permissions'])){
+
+                $permissions = array_filter($request['permissions'], function($permission) {
+                    return $permission['checked'] == true;
+                } );
+
+                $user->permissions()->detach();
+
+                collect($permissions)->map(function ($permission) use ($user){
+
+                    $user->givePermissionTo($permission['name']);
+
+                });
+
+            }
+
             if(!empty($request['photo'])){
                 uploadBase64Image($user, 'profile-photo', $request['photo'], true);
             }
@@ -228,7 +272,10 @@ class AccountController extends Controller
 
     public function destroy(user $user)
     {
+
+
         if(!is_null($user)) {
+            $user->companies()->detach();
             $user->delete();
         }
 
