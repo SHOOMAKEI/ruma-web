@@ -5082,9 +5082,11 @@ exports.default = function () {
     href: ziggy_js_1["default"]('home')
   }, react_1["default"].createElement("img", {
     alt: "Logo",
-    src: "/assets/images/brand/logo.png",
-    className: "h-15px logo"
-  })), react_1["default"].createElement("div", {
+    src: "/assets/images/brand/logoicon.png",
+    className: "h-55px logo"
+  }), react_1["default"].createElement("span", {
+    className: "text-white h1 mx-20"
+  }, "RUMA")), react_1["default"].createElement("div", {
     id: "kt_aside_toggle",
     className: "btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle",
     "data-kt-toggle": "true",

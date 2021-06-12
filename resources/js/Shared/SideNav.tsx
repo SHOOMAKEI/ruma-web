@@ -18,8 +18,8 @@ export default () => {
              data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
             <div className="aside-logo flex-column-auto" id="kt_aside_logo">
                 <a href={route('home')}>
-                    <img alt="Logo" src={"/assets/images/brand/logo.png"} className="h-15px logo"/>
-                    {/*<span className={"text-white h1"}>RUMA</span>*/}
+                    <img alt="Logo" src="/assets/images/brand/logoicon.png" className="h-55px logo"/>
+                    <span className="text-white h1 mx-20">RUMA</span>
                 </a>
 
                 <div id="kt_aside_toggle"
