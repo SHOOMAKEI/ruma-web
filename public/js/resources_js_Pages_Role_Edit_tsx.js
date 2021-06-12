@@ -3523,6 +3523,22 @@ function useWillUnmount(fn) {
 "use strict";
 
 
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -3561,12 +3577,21 @@ function Edit() {
       data = _b.data,
       setData = _b.setData,
       errors = _b.errors,
-      post = _b.post,
+      put = _b.put,
       processing = _b.processing;
 
   function handleSubmit(e) {
     e.preventDefault();
-    post(ziggy_js_1["default"]('roles.store'));
+    put(ziggy_js_1["default"]('roles.update', role.id));
+  } //@ts-ignore
+
+
+  function setPermission(permissions) {
+    setData(function (data) {
+      var _a;
+
+      return __assign(__assign({}, data), (_a = {}, _a['permissions'] = permissions, _a));
+    });
   }
 
   return react_1["default"].createElement(CardWrapper_1["default"], null, react_1["default"].createElement("form", {
@@ -3590,7 +3615,8 @@ function Edit() {
   })), react_1["default"].createElement("div", {
     className: "fv-row mb-5 row"
   }, react_1["default"].createElement(Permission_1["default"], {
-    permissions: permissions
+    permissions: permissions,
+    callback: setPermission
   })), react_1["default"].createElement("div", {
     className: "fv-row"
   }, react_1["default"].createElement(LoadingButton_1["default"], {
@@ -3735,7 +3761,7 @@ exports.default = function (_a) {
 
     setSelectedPermission(newPer); // @ts-ignore
 
-    var newTags = shownPermissions.filter(function (tag, index) {
+    var newTags = shownPermissions.filter(function (permission, index) {
       return index !== i;
     });
     newTags[i] = newPer; // @ts-ignore
@@ -3772,9 +3798,9 @@ exports.default = function (_a) {
     if ((_a = permission.name) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase().includes(activeFilter.name.toLocaleLowerCase())) {
       return react_1["default"].createElement("div", {
         className: "col-md-4",
-        key: permission.id
+        key: Math.random()
       }, react_1["default"].createElement(CheckBoxInput_1["default"], {
-        key: permission.id,
+        key: Math.random(),
         label: "can " + ((_b = permission.name) === null || _b === void 0 ? void 0 : _b.split('.')[1].replace('_', ' ')) + " " + ((_c = permission.name) === null || _c === void 0 ? void 0 : _c.split('.')[0].replace('_', ' ')),
         type: "checkbox",
         name: "permission",
@@ -4662,7 +4688,7 @@ function Framework(_a) {
   }), react_1["default"].createElement("title", null, config_1.siteTitle)), react_1["default"].createElement("main", {
     className: "page d-flex flex-row flex-column-fluid"
   }, react_1["default"].createElement(SideNav_1["default"], null), react_1["default"].createElement("div", {
-    className: "wrapper d-flex flex-column flex-row-fluid",
+    className: "wrapper d-flex flex-column flex-row-fluid flex-root",
     id: "kt_wrapper"
   }, react_1["default"].createElement(TopNav_1["default"], null), react_1["default"].createElement("div", {
     className: "content d-flex flex-column flex-column-fluid",
@@ -4825,6 +4851,8 @@ function Menu(_a) {
       show = _b[0],
       setShow = _b[1];
 
+  var auth = inertia_react_1.usePage().props.auth;
+
   function checkActiveLink(link) {
     if (ziggy_js_1["default"]().current(link + '*')) return 'active';
     return '';
@@ -4977,7 +5005,16 @@ var svg_1 = __webpack_require__(/*! ./Icons/svg */ "./resources/js/Shared/Icons/
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+
+var react_bootstrap_1 = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+
+var ToggleDropdown_1 = __webpack_require__(/*! ./ToggleDropdown */ "./resources/js/Shared/ToggleDropdown.tsx");
+
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
+
 exports.default = function () {
+  var auth = inertia_react_1.usePage().props.auth;
   return react_1["default"].createElement("div", {
     id: "kt_aside",
     className: "aside aside-dark aside-hoverable",
@@ -4992,10 +5029,12 @@ exports.default = function () {
     className: "aside-logo flex-column-auto",
     id: "kt_aside_logo"
   }, react_1["default"].createElement("a", {
-    href: ""
-  }, react_1["default"].createElement("span", {
-    className: "text-white h1"
-  }, "RUMA")), react_1["default"].createElement("div", {
+    href: ziggy_js_1["default"]('home')
+  }, react_1["default"].createElement("img", {
+    alt: "Logo",
+    src: "/assets/images/brand/logo.png",
+    className: "h-15px logo"
+  })), react_1["default"].createElement("div", {
     id: "kt_aside_toggle",
     className: "btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle",
     "data-kt-toggle": "true",
@@ -5025,7 +5064,24 @@ exports.default = function () {
   })))), react_1["default"].createElement("div", {
     className: "aside-footer flex-column-auto",
     id: "kt_aside_footer"
-  }));
+  }, react_1["default"].createElement(react_bootstrap_1.Dropdown, null, react_1["default"].createElement(react_bootstrap_1.Dropdown.Toggle, {
+    cssClass: "btn btn-sm btn-light btn-primary w-100",
+    variant: "success",
+    id: "dropdown-basic",
+    as: ToggleDropdown_1.CustomButtonDropdownToggle
+  }, //@ts-ignore
+  auth.current_company.substring(0, 20), react_1["default"].createElement(svg_1.DropdownIcon, null)), react_1["default"].createElement(react_bootstrap_1.Dropdown.Menu, {
+    className: "menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-900   fw-bold py-1 px-1 mr-3 fs-6 w-100"
+  }, //@ts-ignore
+  auth.companies && auth.companies.map(function (company) {
+    return react_1["default"].createElement(react_bootstrap_1.Dropdown.Item, {
+      as: ToggleDropdown_1.CustomDropdownMenuItem,
+      key: Math.random()
+    }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
+      href: ziggy_js_1["default"]('company.default_dashboard', company.id),
+      className: "menu-link px-1 text-primary text-hover-white"
+    }, company.name));
+  })))));
 };
 
 /***/ }),
@@ -5117,6 +5173,10 @@ exports.dropdownMenus = [{
     id: "3",
     name: "Companies",
     link: ziggy_js_1["default"]('companies.index')
+  }, {
+    id: "3",
+    name: "Operation Years",
+    link: ziggy_js_1["default"]('operation-years.index')
   }],
   link: exports.USERS.parent
 }, {

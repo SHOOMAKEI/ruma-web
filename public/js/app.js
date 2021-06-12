@@ -36875,6 +36875,30 @@ var map = {
 		"./resources/js/Pages/Department/Index.tsx",
 		"resources_js_Pages_Department_Index_tsx"
 	],
+	"./OperationYear/Create": [
+		"./resources/js/Pages/OperationYear/Create.tsx",
+		"resources_js_Pages_OperationYear_Create_tsx"
+	],
+	"./OperationYear/Create.tsx": [
+		"./resources/js/Pages/OperationYear/Create.tsx",
+		"resources_js_Pages_OperationYear_Create_tsx"
+	],
+	"./OperationYear/Edit": [
+		"./resources/js/Pages/OperationYear/Edit.tsx",
+		"resources_js_Pages_OperationYear_Edit_tsx"
+	],
+	"./OperationYear/Edit.tsx": [
+		"./resources/js/Pages/OperationYear/Edit.tsx",
+		"resources_js_Pages_OperationYear_Edit_tsx"
+	],
+	"./OperationYear/Index": [
+		"./resources/js/Pages/OperationYear/Index.tsx",
+		"resources_js_Pages_OperationYear_Index_tsx"
+	],
+	"./OperationYear/Index.tsx": [
+		"./resources/js/Pages/OperationYear/Index.tsx",
+		"resources_js_Pages_OperationYear_Index_tsx"
+	],
 	"./Profile/Account": [
 		"./resources/js/Pages/Profile/Account.tsx",
 		"resources_js_Pages_Profile_Account_tsx"
@@ -37195,7 +37219,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Account_Create_tsx":"c5a45bcf375a8ff6466d","resources_js_Pages_Account_Edit_tsx":"f1a4ba5f1a409af8a4d2","resources_js_Pages_Account_Index_tsx":"ee953397220d6752ca4c","resources_js_Pages_Auth_AuthFramework_tsx":"c3f5e2da7eeae995003a","resources_js_Pages_Auth_ForgotPassword_tsx":"9074874cd91775ddb030","resources_js_Pages_Auth_Login_tsx":"88b5bd4105b6ed9a42c7","resources_js_Pages_Auth_ResetPassword_tsx":"31fa8e68513fa669afeb","resources_js_Pages_Auth_TwoFactorAuth_tsx":"37902d1185eb5e236386","resources_js_Pages_Company_Create_tsx":"af6771f3395a2d6e3892","resources_js_Pages_Company_Edit_tsx":"93c7fa35cf35738e2d4f","resources_js_Pages_Company_Index_tsx":"767078e4caa53a4f356b","resources_js_Pages_Dashboard_tsx":"ad84f6642afb5ed7e95a","resources_js_Pages_Department_Create_tsx":"fbdaa836f0147faa7de7","resources_js_Pages_Department_Edit_tsx":"549d81617768e1583c32","resources_js_Pages_Department_Index_tsx":"74902413de0f4bddb091","resources_js_Pages_Profile_Account_tsx":"285aad974a687659dc11","resources_js_Pages_Profile_Index_tsx":"7ccc1cc0c75613b8bea8","resources_js_Pages_Profile_Password_tsx":"4bdcfcc2e6029179ab0d","resources_js_Pages_Profile_Profile_tsx":"67d303945303f5e3ab69","resources_js_Pages_Profile_Sections_Account_AccountInformation_tsx":"327eb0bc00f241475be3","resources_js_Pages_Profile_Sections_Account_BrowserSessions_tsx":"ba82817e21c40864fcca","resources_js_Pages_Profile_Sections_Account_OneTimePassword_tsx":"fd8f4813218e589e8441","resources_js_Pages_Profile_Sections_Account_Permissions_tsx":"22057eb4d6df92a6a855","resources_js_Pages_Profile_Sections_Account_Roles_tsx":"f37bac57455f68c71a0c","resources_js_Pages_Profile_Sections_Account_TwoFactorAuthentication_tsx":"bcca31f0bb0635ddaa8c","resources_js_Pages_Profile_Sections_Account_UpdatePassword_tsx":"7a3794d14498fc030399","resources_js_Pages_Profile_Sections_Information_Address_tsx":"77d44169b4659a526250","resources_js_Pages_Profile_Sections_Information_Company_tsx":"14fad3b08729d61f183c","resources_js_Pages_Profile_Sections_Information_ContactInfo_tsx":"1ce55a95d5011b35ca22","resources_js_Pages_Profile_Sections_Information_Employment_tsx":"51dba3228fd1d0958650","resources_js_Pages_Profile_Sections_Information_Other_tsx":"5ab4ff0947bbe1ece101","resources_js_Pages_Profile_Sections_Information_Personal_tsx":"5e571f25421d3b3588b8","resources_js_Pages_Profile_Sections_Information_Section_tsx":"c6ffa5cd4370195039a7","resources_js_Pages_Profile_Settings_tsx":"e524218dc5ca1749a88f","resources_js_Pages_Role_Create_tsx":"d89d75142c43fe56ccdf","resources_js_Pages_Role_Edit_tsx":"53dd6aab8b7bbdfdd610","resources_js_Pages_Role_Index_tsx":"5a814a38b0a44e541fc7","resources_js_Pages_Role_Permission_tsx":"96467f21d0c63417b903"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Account_Create_tsx":"819578f5b49b5a10f2c0","resources_js_Pages_Account_Edit_tsx":"f598ff4049f081380f61","resources_js_Pages_Account_Index_tsx":"d41cfb60c7ade931b4ba","resources_js_Pages_Auth_AuthFramework_tsx":"c3f5e2da7eeae995003a","resources_js_Pages_Auth_ForgotPassword_tsx":"9074874cd91775ddb030","resources_js_Pages_Auth_Login_tsx":"88b5bd4105b6ed9a42c7","resources_js_Pages_Auth_ResetPassword_tsx":"31fa8e68513fa669afeb","resources_js_Pages_Auth_TwoFactorAuth_tsx":"37902d1185eb5e236386","resources_js_Pages_Company_Create_tsx":"f57cc05e6056cae3b4de","resources_js_Pages_Company_Edit_tsx":"c28d17c46c22714e0cac","resources_js_Pages_Company_Index_tsx":"85cc2e308fb57f04cf3a","resources_js_Pages_Dashboard_tsx":"ffc93ad0e21fd714a948","resources_js_Pages_Department_Create_tsx":"0fbf5f678ad2d4132630","resources_js_Pages_Department_Edit_tsx":"869c4caaa0dd5a569ca4","resources_js_Pages_Department_Index_tsx":"96f8e83b9463192cb90e","resources_js_Pages_OperationYear_Create_tsx":"1a7211df71e11cf85271","resources_js_Pages_OperationYear_Edit_tsx":"c99dadad3e3a28a56b3d","resources_js_Pages_OperationYear_Index_tsx":"786d031488cc8b15761a","resources_js_Pages_Profile_Account_tsx":"285aad974a687659dc11","resources_js_Pages_Profile_Index_tsx":"ebabb0b984b5c14e6974","resources_js_Pages_Profile_Password_tsx":"4bdcfcc2e6029179ab0d","resources_js_Pages_Profile_Profile_tsx":"67d303945303f5e3ab69","resources_js_Pages_Profile_Sections_Account_AccountInformation_tsx":"327eb0bc00f241475be3","resources_js_Pages_Profile_Sections_Account_BrowserSessions_tsx":"ba82817e21c40864fcca","resources_js_Pages_Profile_Sections_Account_OneTimePassword_tsx":"fd8f4813218e589e8441","resources_js_Pages_Profile_Sections_Account_Permissions_tsx":"22057eb4d6df92a6a855","resources_js_Pages_Profile_Sections_Account_Roles_tsx":"f37bac57455f68c71a0c","resources_js_Pages_Profile_Sections_Account_TwoFactorAuthentication_tsx":"bcca31f0bb0635ddaa8c","resources_js_Pages_Profile_Sections_Account_UpdatePassword_tsx":"7a3794d14498fc030399","resources_js_Pages_Profile_Sections_Information_Address_tsx":"77d44169b4659a526250","resources_js_Pages_Profile_Sections_Information_Company_tsx":"14fad3b08729d61f183c","resources_js_Pages_Profile_Sections_Information_ContactInfo_tsx":"1ce55a95d5011b35ca22","resources_js_Pages_Profile_Sections_Information_Employment_tsx":"51dba3228fd1d0958650","resources_js_Pages_Profile_Sections_Information_Other_tsx":"5ab4ff0947bbe1ece101","resources_js_Pages_Profile_Sections_Information_Personal_tsx":"5e571f25421d3b3588b8","resources_js_Pages_Profile_Sections_Information_Section_tsx":"c6ffa5cd4370195039a7","resources_js_Pages_Profile_Settings_tsx":"e524218dc5ca1749a88f","resources_js_Pages_Role_Create_tsx":"f50ed85d6e0636660449","resources_js_Pages_Role_Edit_tsx":"41a1210c63ebcb17d83e","resources_js_Pages_Role_Index_tsx":"6fe4ac8dce1336481777","resources_js_Pages_Role_Permission_tsx":"2ce8de5f185e33bbb742"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

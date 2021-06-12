@@ -5608,11 +5608,14 @@ var inertia_1 = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@i
 
 var MultiSelectInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/MultiSelectInput */ "./resources/js/Shared/MultiSelectInput.tsx"));
 
+var Permission_1 = __importDefault(__webpack_require__(/*! ../Role/Permission */ "./resources/js/Pages/Role/Permission.tsx"));
+
 function Edit() {
   var _a = inertia_react_1.usePage().props,
       companies = _a.companies,
       user = _a.user,
       roles = _a.roles,
+      permissions = _a.permissions,
       errors = _a.errors;
 
   var _b = react_1.useState({
@@ -5624,6 +5627,7 @@ function Edit() {
     companies: user.companies || [],
     is_active: user.is_active || '',
     photo: '',
+    permissions: [],
     send_reset_password_notification: false
   }),
       data = _b[0],
@@ -5694,6 +5698,15 @@ function Edit() {
       var _a;
 
       return __assign(__assign({}, data), (_a = {}, _a['photo'] = photo, _a));
+    });
+  } //@ts-ignore
+
+
+  function setPermission(permissions) {
+    setData(function (data) {
+      var _a;
+
+      return __assign(__assign({}, data), (_a = {}, _a['permissions'] = permissions, _a));
     });
   } // @ts-ignore
   // @ts-ignore
@@ -5802,6 +5815,13 @@ function Edit() {
     value: data.send_reset_password_notification,
     onChange: handleChange
   })), react_1["default"].createElement("div", {
+    className: "fv-row mb-5 row"
+  }, react_1["default"].createElement("h4", {
+    className: "py-4"
+  }, "Direct Permissions"), react_1["default"].createElement(Permission_1["default"], {
+    permissions: user.permissions,
+    callback: setPermission
+  })), react_1["default"].createElement("div", {
     className: "fv-row"
   }, react_1["default"].createElement(LoadingButton_1["default"], {
     type: "submit",
@@ -5812,11 +5832,192 @@ function Edit() {
 Edit.layout = function (page) {
   return react_1["default"].createElement(Layout_1["default"], {
     children: page,
-    title: "Create Company"
+    title: "Edit User Account"
   });
 };
 
 exports.default = Edit;
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Role/Permission.tsx":
+/*!************************************************!*\
+  !*** ./resources/js/Pages/Role/Permission.tsx ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var SearchBar_1 = __importDefault(__webpack_require__(/*! ../../Shared/SearchBar */ "./resources/js/Shared/SearchBar.tsx"));
+
+var CheckBoxInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/CheckBoxInput */ "./resources/js/Shared/CheckBoxInput.tsx"));
+
+var FILTERS = [{
+  id: '1',
+  name: 'Read'
+}, {
+  id: '2',
+  name: 'Create'
+}, {
+  id: '3',
+  name: 'Update'
+}, {
+  id: '4',
+  name: 'Delete'
+}];
+
+exports.default = function (_a) {
+  var user = _a.user,
+      permissions = _a.permissions,
+      callback = _a.callback;
+
+  var _b = react_1.useState(),
+      selectedPermissions = _b[0],
+      setSelectedPermissions = _b[1];
+
+  var _c = react_1.useState(),
+      selectedPermission = _c[0],
+      setSelectedPermission = _c[1];
+
+  var _d = react_1.useState(),
+      shownPermissions = _d[0],
+      setShownPermissions = _d[1];
+
+  var _e = react_1.useState(FILTERS[0]),
+      activeFilter = _e[0],
+      setActiveFilter = _e[1];
+
+  react_1.useEffect(function () {
+    setShownPermissions(permissions);
+  }, [permissions]);
+
+  function searchPermissions(text) {
+    if (text.length === 0) {
+      setShownPermissions(permissions);
+      return;
+    }
+
+    setShownPermissions(permissions === null || permissions === void 0 ? void 0 : permissions.filter(function (permission) {
+      var _a;
+
+      if ((_a = permission.name) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase().includes(text.toLocaleLowerCase())) {
+        return permission;
+      }
+    }));
+  }
+
+  function handleChange(e, permission, i) {
+    var key = e.target.id; // @ts-ignore
+
+    var value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    var newPer = {
+      id: permission.id,
+      name: permission.name,
+      checked: !permission.checked
+    }; // @ts-ignore
+
+    setSelectedPermission(newPer); // @ts-ignore
+
+    var newTags = shownPermissions.filter(function (permission, index) {
+      return index !== i;
+    });
+    newTags[i] = newPer; // @ts-ignore
+
+    var inserted = newTags;
+    setShownPermissions(inserted);
+    callback(shownPermissions);
+  }
+
+  return react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
+    className: "row mb-5"
+  }, react_1["default"].createElement("div", {
+    className: "col"
+  }, react_1["default"].createElement(SearchBar_1["default"], {
+    onSearch: searchPermissions,
+    placeHolder: "Search permissions"
+  }))), react_1["default"].createElement("div", {
+    className: "row mb-8"
+  }, react_1["default"].createElement("div", {
+    className: "col d-flex"
+  }, FILTERS.map(function (filter) {
+    return react_1["default"].createElement("button", {
+      type: "button",
+      onClick: function onClick() {
+        return setActiveFilter(filter);
+      },
+      className: "btn btn-sm btn-flex " + (filter.id === activeFilter.id ? 'btn-primary' : 'btn-light-primary') + " me-3"
+    }, filter.name);
+  }))), react_1["default"].createElement("div", {
+    className: "row"
+  }, shownPermissions === null || shownPermissions === void 0 ? void 0 : shownPermissions.map(function (permission, index) {
+    var _a, _b, _c;
+
+    if ((_a = permission.name) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase().includes(activeFilter.name.toLocaleLowerCase())) {
+      return react_1["default"].createElement("div", {
+        className: "col-md-4",
+        key: Math.random()
+      }, react_1["default"].createElement(CheckBoxInput_1["default"], {
+        key: Math.random(),
+        label: "can " + ((_b = permission.name) === null || _b === void 0 ? void 0 : _b.split('.')[1].replace('_', ' ')) + " " + ((_c = permission.name) === null || _c === void 0 ? void 0 : _c.split('.')[0].replace('_', ' ')),
+        type: "checkbox",
+        name: "permission",
+        checked: permission.checked,
+        value: permission.checked,
+        errors: '',
+        onChange: function onChange(e) {
+          return handleChange(e, permission, index);
+        }
+      }));
+    }
+  })));
+};
 
 /***/ }),
 
@@ -6691,7 +6892,7 @@ function Framework(_a) {
   }), react_1["default"].createElement("title", null, config_1.siteTitle)), react_1["default"].createElement("main", {
     className: "page d-flex flex-row flex-column-fluid"
   }, react_1["default"].createElement(SideNav_1["default"], null), react_1["default"].createElement("div", {
-    className: "wrapper d-flex flex-column flex-row-fluid",
+    className: "wrapper d-flex flex-column flex-row-fluid flex-root",
     id: "kt_wrapper"
   }, react_1["default"].createElement(TopNav_1["default"], null), react_1["default"].createElement("div", {
     className: "content d-flex flex-column flex-column-fluid",
@@ -6854,6 +7055,8 @@ function Menu(_a) {
       show = _b[0],
       setShow = _b[1];
 
+  var auth = inertia_react_1.usePage().props.auth;
+
   function checkActiveLink(link) {
     if (ziggy_js_1["default"]().current(link + '*')) return 'active';
     return '';
@@ -7013,6 +7216,54 @@ exports.default = function (_a) {
 
 /***/ }),
 
+/***/ "./resources/js/Shared/SearchBar.tsx":
+/*!*******************************************!*\
+  !*** ./resources/js/Shared/SearchBar.tsx ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var svg_1 = __webpack_require__(/*! ./Icons/svg */ "./resources/js/Shared/Icons/svg.tsx");
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+function SearchBar(_a) {
+  var onSearch = _a.onSearch,
+      placeHolder = _a.placeHolder;
+
+  function _onSearch(event) {
+    onSearch(event.target.value);
+  }
+
+  return react_1["default"].createElement("div", {
+    className: "d-flex align-items-center position-relative my-1"
+  }, react_1["default"].createElement(svg_1.SearchIcon, {
+    extraClasses: 'position-absolute ms-3'
+  }), react_1["default"].createElement("input", {
+    type: "text",
+    "data-kt-customer-table-filter": "search",
+    className: "form-control form-control-sm form-control-solid w-250px ps-11",
+    placeholder: placeHolder,
+    onChange: _onSearch
+  }));
+}
+
+exports.default = SearchBar;
+
+/***/ }),
+
 /***/ "./resources/js/Shared/SideNav.tsx":
 /*!*****************************************!*\
   !*** ./resources/js/Shared/SideNav.tsx ***!
@@ -7040,7 +7291,16 @@ var svg_1 = __webpack_require__(/*! ./Icons/svg */ "./resources/js/Shared/Icons/
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+
+var react_bootstrap_1 = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+
+var ToggleDropdown_1 = __webpack_require__(/*! ./ToggleDropdown */ "./resources/js/Shared/ToggleDropdown.tsx");
+
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
+
 exports.default = function () {
+  var auth = inertia_react_1.usePage().props.auth;
   return react_1["default"].createElement("div", {
     id: "kt_aside",
     className: "aside aside-dark aside-hoverable",
@@ -7055,10 +7315,12 @@ exports.default = function () {
     className: "aside-logo flex-column-auto",
     id: "kt_aside_logo"
   }, react_1["default"].createElement("a", {
-    href: ""
-  }, react_1["default"].createElement("span", {
-    className: "text-white h1"
-  }, "RUMA")), react_1["default"].createElement("div", {
+    href: ziggy_js_1["default"]('home')
+  }, react_1["default"].createElement("img", {
+    alt: "Logo",
+    src: "/assets/images/brand/logo.png",
+    className: "h-15px logo"
+  })), react_1["default"].createElement("div", {
     id: "kt_aside_toggle",
     className: "btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle",
     "data-kt-toggle": "true",
@@ -7088,7 +7350,24 @@ exports.default = function () {
   })))), react_1["default"].createElement("div", {
     className: "aside-footer flex-column-auto",
     id: "kt_aside_footer"
-  }));
+  }, react_1["default"].createElement(react_bootstrap_1.Dropdown, null, react_1["default"].createElement(react_bootstrap_1.Dropdown.Toggle, {
+    cssClass: "btn btn-sm btn-light btn-primary w-100",
+    variant: "success",
+    id: "dropdown-basic",
+    as: ToggleDropdown_1.CustomButtonDropdownToggle
+  }, //@ts-ignore
+  auth.current_company.substring(0, 20), react_1["default"].createElement(svg_1.DropdownIcon, null)), react_1["default"].createElement(react_bootstrap_1.Dropdown.Menu, {
+    className: "menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-900   fw-bold py-1 px-1 mr-3 fs-6 w-100"
+  }, //@ts-ignore
+  auth.companies && auth.companies.map(function (company) {
+    return react_1["default"].createElement(react_bootstrap_1.Dropdown.Item, {
+      as: ToggleDropdown_1.CustomDropdownMenuItem,
+      key: Math.random()
+    }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
+      href: ziggy_js_1["default"]('company.default_dashboard', company.id),
+      className: "menu-link px-1 text-primary text-hover-white"
+    }, company.name));
+  })))));
 };
 
 /***/ }),
@@ -7180,6 +7459,10 @@ exports.dropdownMenus = [{
     id: "3",
     name: "Companies",
     link: ziggy_js_1["default"]('companies.index')
+  }, {
+    id: "3",
+    name: "Operation Years",
+    link: ziggy_js_1["default"]('operation-years.index')
   }],
   link: exports.USERS.parent
 }, {

@@ -125,7 +125,7 @@ exports.default = function (_a) {
 
     setSelectedPermission(newPer); // @ts-ignore
 
-    var newTags = shownPermissions.filter(function (tag, index) {
+    var newTags = shownPermissions.filter(function (permission, index) {
       return index !== i;
     });
     newTags[i] = newPer; // @ts-ignore
@@ -162,9 +162,9 @@ exports.default = function (_a) {
     if ((_a = permission.name) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase().includes(activeFilter.name.toLocaleLowerCase())) {
       return react_1["default"].createElement("div", {
         className: "col-md-4",
-        key: permission.id
+        key: Math.random()
       }, react_1["default"].createElement(CheckBoxInput_1["default"], {
-        key: permission.id,
+        key: Math.random(),
         label: "can " + ((_b = permission.name) === null || _b === void 0 ? void 0 : _b.split('.')[1].replace('_', ' ')) + " " + ((_c = permission.name) === null || _c === void 0 ? void 0 : _c.split('.')[0].replace('_', ' ')),
         type: "checkbox",
         name: "permission",

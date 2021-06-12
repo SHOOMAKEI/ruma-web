@@ -18,8 +18,8 @@ class CreateOperationYearsTable extends Migration
             $table->string('name');
             $table->string('code_name');
             $table->foreignId('company_id')->constrained()->restrictOnDelete();
-            $table->timestamp('start_at');
-            $table->timestamp('end_at');
+            $table->timestamp('start_at')->nullable();
+            $table->timestamp('end_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -1,6 +1,9 @@
 import React, {useState} from "react";
-import {InertiaLink} from "@inertiajs/inertia-react";
+import {InertiaLink,usePage} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
+import {Dropdown} from "react-bootstrap";
+import {CustomButtonDropdownToggle, CustomDropdownMenuItem} from "./ToggleDropdown";
+import {DropdownIcon, SideNavCollapse} from "./Icons/svg";
 
 export interface SubmenuType {
     id: string;
@@ -30,6 +33,7 @@ interface Props {
 export default function Menu({menu}: Props) {
     const {Icon} = menu;
     const [show, setShow] = useState(false)
+    const { auth } = usePage().props
 
     function checkActiveLink(link: string): string {
         if (route().current(link + '*'))

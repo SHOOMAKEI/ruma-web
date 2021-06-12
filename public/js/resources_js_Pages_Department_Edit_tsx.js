@@ -4454,7 +4454,7 @@ function Framework(_a) {
   }), react_1["default"].createElement("title", null, config_1.siteTitle)), react_1["default"].createElement("main", {
     className: "page d-flex flex-row flex-column-fluid"
   }, react_1["default"].createElement(SideNav_1["default"], null), react_1["default"].createElement("div", {
-    className: "wrapper d-flex flex-column flex-row-fluid",
+    className: "wrapper d-flex flex-column flex-row-fluid flex-root",
     id: "kt_wrapper"
   }, react_1["default"].createElement(TopNav_1["default"], null), react_1["default"].createElement("div", {
     className: "content d-flex flex-column flex-column-fluid",
@@ -4616,6 +4616,8 @@ function Menu(_a) {
   var _b = react_1.useState(false),
       show = _b[0],
       setShow = _b[1];
+
+  var auth = inertia_react_1.usePage().props.auth;
 
   function checkActiveLink(link) {
     if (ziggy_js_1["default"]().current(link + '*')) return 'active';
@@ -4800,7 +4802,16 @@ var svg_1 = __webpack_require__(/*! ./Icons/svg */ "./resources/js/Shared/Icons/
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+
+var react_bootstrap_1 = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+
+var ToggleDropdown_1 = __webpack_require__(/*! ./ToggleDropdown */ "./resources/js/Shared/ToggleDropdown.tsx");
+
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
+
 exports.default = function () {
+  var auth = inertia_react_1.usePage().props.auth;
   return react_1["default"].createElement("div", {
     id: "kt_aside",
     className: "aside aside-dark aside-hoverable",
@@ -4815,10 +4826,12 @@ exports.default = function () {
     className: "aside-logo flex-column-auto",
     id: "kt_aside_logo"
   }, react_1["default"].createElement("a", {
-    href: ""
-  }, react_1["default"].createElement("span", {
-    className: "text-white h1"
-  }, "RUMA")), react_1["default"].createElement("div", {
+    href: ziggy_js_1["default"]('home')
+  }, react_1["default"].createElement("img", {
+    alt: "Logo",
+    src: "/assets/images/brand/logo.png",
+    className: "h-15px logo"
+  })), react_1["default"].createElement("div", {
     id: "kt_aside_toggle",
     className: "btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle",
     "data-kt-toggle": "true",
@@ -4848,7 +4861,24 @@ exports.default = function () {
   })))), react_1["default"].createElement("div", {
     className: "aside-footer flex-column-auto",
     id: "kt_aside_footer"
-  }));
+  }, react_1["default"].createElement(react_bootstrap_1.Dropdown, null, react_1["default"].createElement(react_bootstrap_1.Dropdown.Toggle, {
+    cssClass: "btn btn-sm btn-light btn-primary w-100",
+    variant: "success",
+    id: "dropdown-basic",
+    as: ToggleDropdown_1.CustomButtonDropdownToggle
+  }, //@ts-ignore
+  auth.current_company.substring(0, 20), react_1["default"].createElement(svg_1.DropdownIcon, null)), react_1["default"].createElement(react_bootstrap_1.Dropdown.Menu, {
+    className: "menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-900   fw-bold py-1 px-1 mr-3 fs-6 w-100"
+  }, //@ts-ignore
+  auth.companies && auth.companies.map(function (company) {
+    return react_1["default"].createElement(react_bootstrap_1.Dropdown.Item, {
+      as: ToggleDropdown_1.CustomDropdownMenuItem,
+      key: Math.random()
+    }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
+      href: ziggy_js_1["default"]('company.default_dashboard', company.id),
+      className: "menu-link px-1 text-primary text-hover-white"
+    }, company.name));
+  })))));
 };
 
 /***/ }),
@@ -4940,6 +4970,10 @@ exports.dropdownMenus = [{
     id: "3",
     name: "Companies",
     link: ziggy_js_1["default"]('companies.index')
+  }, {
+    id: "3",
+    name: "Operation Years",
+    link: ziggy_js_1["default"]('operation-years.index')
   }],
   link: exports.USERS.parent
 }, {
