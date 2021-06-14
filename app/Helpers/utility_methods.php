@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Utilities\Menu;
 use Carbon\Traits\Creator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -41,6 +42,24 @@ if (!function_exists('respondWithErrors')) {
             'success' => false,
             'errors' => $data
         ];
+    }
+}
+
+if (!function_exists('mainMenu')) {
+
+    function mainMenu()
+    {
+        return app('mainMenu');
+
+    }
+}
+
+if (!function_exists('user')) {
+
+    function user()
+    {
+        return User::find(auth()->user()->id);
+
     }
 }
 

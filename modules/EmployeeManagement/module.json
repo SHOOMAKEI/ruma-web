@@ -1,0 +1,19 @@
+{
+    "alias": "employee-management",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\EmployeeManagement\\Providers\\Main",
+        "Modules\\EmployeeManagement\\Providers\\Event"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "name": "",
+    "minimumCoreVersion": "",
+    "title": "",
+    "version":"1.0",
+    "author": ""
+}

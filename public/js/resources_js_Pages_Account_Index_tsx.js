@@ -4603,7 +4603,9 @@ var ToggleDropdown_1 = __webpack_require__(/*! ./ToggleDropdown */ "./resources/
 var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 
 exports.default = function () {
-  var auth = inertia_react_1.usePage().props.auth;
+  var _a = inertia_react_1.usePage().props,
+      auth = _a.auth,
+      main_menu = _a.main_menu;
   return react_1["default"].createElement("div", {
     id: "kt_aside",
     className: "aside aside-dark aside-hoverable",

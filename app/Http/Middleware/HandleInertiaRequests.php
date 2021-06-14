@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\User;
+use App\Utilities\Sidebar;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use MongoDB\Driver\Session;
@@ -38,6 +39,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
+//        dd(mainMenu()->all());
         $user = null;
         $request->user()
             ? $user = User::find(auth()->user()->id): null;
@@ -81,7 +83,8 @@ class HandleInertiaRequests extends Middleware
                      : null,
             'auth.current_company' => isset($user)? function () use ($user) {
                 return $user->current_company()?->name;
-            } : null
+            } : null,
+            'main_menu' => mainMenu()->all()
         ]);
     }
 }

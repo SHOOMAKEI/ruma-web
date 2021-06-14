@@ -9,7 +9,7 @@ import {CustomButtonDropdownToggle, CustomDropdownMenuItem} from "./ToggleDropdo
 import route from "ziggy-js";
 import {comment} from "postcss";
 export default () => {
-    const { auth } = usePage().props
+    const { auth, main_menu } = usePage().props
 
     return (
         <div id="kt_aside" className="aside aside-dark aside-hoverable" data-kt-drawer="true"
@@ -47,6 +47,7 @@ export default () => {
                     </div>
                 </div>
             </div>
+
             <div className="aside-footer flex-column-auto" id="kt_aside_footer">
             <Dropdown>
                     <Dropdown.Toggle cssClass={"btn btn-sm btn-light btn-primary w-100"} variant="success" id="dropdown-basic" as={CustomButtonDropdownToggle}>
