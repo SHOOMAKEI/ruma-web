@@ -5048,7 +5048,7 @@ exports.default = function () {
     "data-kt-scroll-wrappers": "#kt_aside_menu",
     "data-kt-scroll-offset": "0"
   }, react_1["default"].createElement("div", {
-    className: "menu menu-column menu-title-gray-800 menu-state-title-primary\n                    menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500",
+    className: "menu menu-column menu-title-gray-800 menu-state-title-primary\r\n                    menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500",
     id: "#kt_aside_menu",
     "data-kt-menu": "true"
   }, SidebarLink_1.dropdownMenus.map(function (menu) {

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\EmployeeManagement\Http\Middleware\HandleInertiaRequests;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/employee-management', function (Request $request) {
+Route::middleware([HandleInertiaRequests::class, 'web'])->get('/employee-management', function (Request $request) {
     return inertia('Module/EmployeeManagement/Dashboard');
 });

@@ -1,5 +1,5 @@
 import React from 'react'
-// import Layout from '../../../../../../resources/js/Shared/Layout';
+import Layout from '../../../../../../resources/js/Shared/Layout';
 
 
 const Dashboard = () => {
@@ -19,6 +19,6 @@ const Dashboard = () => {
     )
 }
 
-// Dashboard.layout = (page) => <Layout children={page}  title="Dashboard"/>;
+Dashboard.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout children={page}  title="Dashboard"/>;
 
 export default Dashboard;

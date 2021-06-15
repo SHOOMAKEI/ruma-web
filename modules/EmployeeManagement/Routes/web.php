@@ -15,10 +15,9 @@
 use Modules\EmployeeManagement\Http\Middleware\HandleInertiaRequests;
 
 
-Route::prefix('employee-management')
-    ->middleware(HandleInertiaRequests::class)
+Route::middleware(HandleInertiaRequests::class)
     ->group(function() {
     Route::get('/employee-management/home', function (){
-        return inertia('Dashboard');
+        return "omakei";
     });
 });

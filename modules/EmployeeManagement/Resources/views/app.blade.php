@@ -25,6 +25,7 @@
     <script src="{{asset('assets/js/base.js')}}"></script>
     {{-- Laravel Mix - JS File --}}
     <script src="{{ mix('js/employee-management.js') }}"></script>
+{{--    <script src="{{ mix('js/app.js') }}"></script>--}}
 
     {{-- Laravel Mix - CSS File --}}
     {{-- <link rel="stylesheet" href="{{ mix('css/employee-management.css') }}"> --}}

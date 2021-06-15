@@ -38,6 +38,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
+//        dd($request->user());
         $user = null;
         $request->user()
             ? \user():null;
