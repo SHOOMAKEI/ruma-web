@@ -17,6 +17,8 @@ class CreateContractsTable extends Migration
             $table->bigIncrements('id');
             $table->timestamp('started_at');
             $table->timestamp('ended_at');
+            $table->foreignId('employee_id')->constrained()->restrictOnDelete();
+            $table->foreignId('contract_definition_id')->constrained()->restrictOnDelete();
             $table->enum('status',['ON-LEAVE', 'TERMINATED', 'IN-ACTIVE', 'ACTIVE', 'SUSPENDED'])->default('ACTIVE');
             $table->softDeletes();
             $table->timestamps();

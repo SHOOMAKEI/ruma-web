@@ -16,6 +16,7 @@ class CreateContractStatusesTable extends Migration
         Schema::create('contract_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('employee_id')->constrained()->restrictOnDelete();
+            $table->foreignId('contract_id')->constrained()->restrictOnDelete();
             $table->dateTime('from');
             $table->dateTime('to');
             $table->enum('job_status',['ON-LEAVE', 'TERMINATED', 'IN-ACTIVE', 'ACTIVE', 'SUSPENDED']);
