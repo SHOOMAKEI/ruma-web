@@ -17,7 +17,7 @@ class CreateContractDefinitionLeaveGroupTable extends Migration
             $table->bigIncrements('id');
             $table->foreignId('contract_definition_id')->constrained()->restrictOnDelete();
             $table->foreignId('leave_group_id')->constrained()->restrictOnDelete();
-            $table->integer('number_of_times')->default(1);     
+            $table->integer('number_of_times')->default(1);
             $table->timestamps();
         });
     }

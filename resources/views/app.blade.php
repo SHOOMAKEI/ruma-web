@@ -22,7 +22,7 @@
         <script src="{{asset('assets/js/custom/api-keys/api-keys.js')}}"></script>
         <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
         <script src="{{asset('assets/plugins/fslightbox/fslightbox.bundle.js')}}"></script>
-        <script src="{{asset('assets/js/base.js')}}"></script>
+{{--        <script src="{{asset('assets/js/base.js')}}"></script>--}}
         <script src="{{ mix('/js/app.js') }}" defer></script>
 
 

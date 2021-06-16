@@ -115,8 +115,9 @@ class Main extends Provider
         }
 
         $routes = [
-            'web.php',
             'api.php',
+            'web.php',
+
         ];
 
         foreach ($routes as $route) {

@@ -14,7 +14,7 @@ export interface SubmenuType {
 export interface MenuType {
     id: string;
     name: string;
-    Icon: React.FunctionComponent;
+    Icon: any;
     link: string;
     type: 'dropdown' | 'solo' | 'separator';
     subMenus: Array<SubmenuType>; // pass an empty array in case the menu is a solo menu
@@ -36,8 +36,9 @@ export default function Menu({menu}: Props) {
     const { auth } = usePage().props
 
     function checkActiveLink(link: string): string {
-        if (route().current(link + '*'))
-            return 'active'
+        if (route().current(link + '*')) {
+            return 'here show'
+        }
 
         return ''
     }
@@ -48,7 +49,10 @@ export default function Menu({menu}: Props) {
          * sidebar dropdown menu is active
          * */
         if (route().current(link + '*'))
-            return 'here show'
+        {
+            return 'active'
+        }
+
 
         return ''
     }
@@ -58,7 +62,9 @@ export default function Menu({menu}: Props) {
             <div className="menu-item" key={menu.id}>
                     <InertiaLink className={`menu-link ${checkActiveLink(menu.link)}`} href={menu.link}>
                         <span className="menu-icon">
-                            <Icon />
+                             <span className={`svg-icon svg-icon-2 svg-icon-white`}>
+                            <img src={menu.Icon} alt={menu.name}/>
+                             </span>
                         </span>
                         <span className="menu-title">{menu.name}</span>
                     </InertiaLink>
@@ -77,12 +83,14 @@ export default function Menu({menu}: Props) {
     }
 
 
-
+    //@ts-ignore
     return (
-        <div data-kt-menu-trigger="click" onClick={ e => setShow(!show)} className={`menu-item menu-accordion ${checkActiveMenuParent(menu.link)}  ${show?'show':''} `} key={menu.id}>
+        <div data-kt-menu-trigger="click" onClick={ e => setShow(!show)} className={`menu-item menu-accordion ${checkActiveMenuParent(menu.link)}  ${show?'hover show':''} `} key={menu.id}>
             <span className="menu-link" >
                 <span className="menu-icon">
-                    <Icon />
+                      <span className={`svg-icon svg-icon-2 svg-icon-white`}>
+                            <img src={menu.Icon} alt={menu.name}/>
+                      </span>
                 </span>
                 <span className="menu-title">{menu.name}</span>
                 <span className="menu-arrow"/>
