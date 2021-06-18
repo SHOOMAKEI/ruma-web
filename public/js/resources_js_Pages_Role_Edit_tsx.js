@@ -3841,9 +3841,9 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 exports.default = function (_a) {
   var children = _a.children;
   return react_1["default"].createElement("div", {
-    className: "card pt-4 mb-6 mb-xl-9"
+    className: "card pt-4 mb-6 mb-xl-9 h-100"
   }, react_1["default"].createElement("div", {
-    className: "card-body pt-0"
+    className: "card-body pt-0 h-100"
   }, children));
 };
 
@@ -4881,13 +4881,11 @@ function Menu(_a) {
       className: "menu-link " + checkActiveLink(menu.link),
       href: menu.link
     }, react_1["default"].createElement("span", {
-      className: "menu-icon"
-    }, react_1["default"].createElement("span", {
-      className: "svg-icon svg-icon-2 svg-icon-white"
-    }, react_1["default"].createElement("img", {
-      src: menu.Icon,
-      alt: menu.name
-    }))), react_1["default"].createElement("span", {
+      className: "menu-icon",
+      dangerouslySetInnerHTML: {
+        __html: menu.Icon
+      }
+    }), react_1["default"].createElement("span", {
       className: "menu-title"
     }, menu.name)));
   }
@@ -4914,13 +4912,11 @@ function Menu(_a) {
   }, react_1["default"].createElement("span", {
     className: "menu-link"
   }, react_1["default"].createElement("span", {
-    className: "menu-icon"
-  }, react_1["default"].createElement("span", {
-    className: "svg-icon svg-icon-2 svg-icon-white"
-  }, react_1["default"].createElement("img", {
-    src: menu.Icon,
-    alt: menu.name
-  }))), react_1["default"].createElement("span", {
+    className: "menu-icon",
+    dangerouslySetInnerHTML: {
+      __html: menu.Icon
+    }
+  }), react_1["default"].createElement("span", {
     className: "menu-title"
   }, menu.name), react_1["default"].createElement("span", {
     className: "menu-arrow"

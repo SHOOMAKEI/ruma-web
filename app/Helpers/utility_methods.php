@@ -59,7 +59,13 @@ if (!function_exists('user')) {
     function user()
     {
         return User::find(auth()->user()->id);
+    }
+}
+if (!function_exists('getLastIdNumberCount')) {
 
+    function getLastIdNumberCount()
+    {
+        return User::find(auth()->user()->id);
     }
 }
 
@@ -99,9 +105,9 @@ if(!function_exists('getJobStatuses')) {
     }
 }
 
-if(!function_exists('getEmploymentStatuses')) {
+if(!function_exists('getContractType')) {
 
-    function getEmploymentStatuses(): array
+    function getContractType(): array
     {
         return [
             ['name' => EMPLOYMENT_STATUS_FULL_TIME],

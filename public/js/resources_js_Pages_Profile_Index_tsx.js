@@ -6008,13 +6008,11 @@ function Menu(_a) {
       className: "menu-link " + checkActiveLink(menu.link),
       href: menu.link
     }, react_1["default"].createElement("span", {
-      className: "menu-icon"
-    }, react_1["default"].createElement("span", {
-      className: "svg-icon svg-icon-2 svg-icon-white"
-    }, react_1["default"].createElement("img", {
-      src: menu.Icon,
-      alt: menu.name
-    }))), react_1["default"].createElement("span", {
+      className: "menu-icon",
+      dangerouslySetInnerHTML: {
+        __html: menu.Icon
+      }
+    }), react_1["default"].createElement("span", {
       className: "menu-title"
     }, menu.name)));
   }
@@ -6041,13 +6039,11 @@ function Menu(_a) {
   }, react_1["default"].createElement("span", {
     className: "menu-link"
   }, react_1["default"].createElement("span", {
-    className: "menu-icon"
-  }, react_1["default"].createElement("span", {
-    className: "svg-icon svg-icon-2 svg-icon-white"
-  }, react_1["default"].createElement("img", {
-    src: menu.Icon,
-    alt: menu.name
-  }))), react_1["default"].createElement("span", {
+    className: "menu-icon",
+    dangerouslySetInnerHTML: {
+      __html: menu.Icon
+    }
+  }), react_1["default"].createElement("span", {
     className: "menu-title"
   }, menu.name), react_1["default"].createElement("span", {
     className: "menu-arrow"

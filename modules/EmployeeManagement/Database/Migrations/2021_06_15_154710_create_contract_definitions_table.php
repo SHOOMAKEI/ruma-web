@@ -17,7 +17,7 @@ class CreateContractDefinitionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->enum('type', ['PROBATION-PERIOD', 'PART-TIME', 'FULL-TIME'])->default('FULL-TIME');
-            $table->text('description')->nullable();
+            $table->longText('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

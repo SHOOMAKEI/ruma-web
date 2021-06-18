@@ -3805,9 +3805,9 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 exports.default = function (_a) {
   var children = _a.children;
   return react_1["default"].createElement("div", {
-    className: "card pt-4 mb-6 mb-xl-9"
+    className: "card pt-4 mb-6 mb-xl-9 h-100"
   }, react_1["default"].createElement("div", {
-    className: "card-body pt-0"
+    className: "card-body pt-0 h-100"
   }, children));
 };
 
@@ -4845,13 +4845,11 @@ function Menu(_a) {
       className: "menu-link " + checkActiveLink(menu.link),
       href: menu.link
     }, react_1["default"].createElement("span", {
-      className: "menu-icon"
-    }, react_1["default"].createElement("span", {
-      className: "svg-icon svg-icon-2 svg-icon-white"
-    }, react_1["default"].createElement("img", {
-      src: menu.Icon,
-      alt: menu.name
-    }))), react_1["default"].createElement("span", {
+      className: "menu-icon",
+      dangerouslySetInnerHTML: {
+        __html: menu.Icon
+      }
+    }), react_1["default"].createElement("span", {
       className: "menu-title"
     }, menu.name)));
   }
@@ -4878,13 +4876,11 @@ function Menu(_a) {
   }, react_1["default"].createElement("span", {
     className: "menu-link"
   }, react_1["default"].createElement("span", {
-    className: "menu-icon"
-  }, react_1["default"].createElement("span", {
-    className: "svg-icon svg-icon-2 svg-icon-white"
-  }, react_1["default"].createElement("img", {
-    src: menu.Icon,
-    alt: menu.name
-  }))), react_1["default"].createElement("span", {
+    className: "menu-icon",
+    dangerouslySetInnerHTML: {
+      __html: menu.Icon
+    }
+  }), react_1["default"].createElement("span", {
     className: "menu-title"
   }, menu.name), react_1["default"].createElement("span", {
     className: "menu-arrow"
@@ -5590,7 +5586,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 

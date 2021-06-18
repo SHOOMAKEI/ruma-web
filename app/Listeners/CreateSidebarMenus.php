@@ -33,7 +33,7 @@ class CreateSidebarMenus
                 [
                     'id'=> "link-dashboard",
                     'name'=> "Dashboard",
-                    'Icon'=> asset('assets/media/icons/duotone/Shopping/Sort2.svg'),
+                    'Icon'=> DashboardIcon(),
                     'type'=> "solo",
                     'subMenus' => [],
                     'link' => '#'
@@ -57,7 +57,7 @@ class CreateSidebarMenus
                     [
                         'id'=> "link-users",
                         'name'=> "Users",
-                        'Icon'=> asset('assets/media/icons/duotone/Communication/Group.svg'),
+                        'Icon'=> UsersIcon(),
                         'type'=> "dropdown",
                         'subMenus' => [
                             ['id'=> "link-users-sub-1", 'name'=> "Users", 'link'=>  route('users.index') ],
@@ -73,7 +73,7 @@ class CreateSidebarMenus
                 [
                     'id'=> "link-sales",
                     'name'=> "Sales",
-                    'Icon'=> asset('assets/media/icons/duotone/Interface/Line-03-Up.svg'),
+                    'Icon'=> SalesIcon(),
                     'type'=> "dropdown",
                     'subMenus' => [
                         ['id'=> "link-sales-sub-1", 'name'=> "Reports", 'link'=>  '#' ],
@@ -87,7 +87,7 @@ class CreateSidebarMenus
                 [
                     'id'=> "link-stores",
                     'name'=> "Stores",
-                    'Icon'=> asset('assets/media/icons/duotone/Shopping/Box1.svg'),
+                    'Icon'=> ShopsIcon(),
                     'type'=> "dropdown",
                     'subMenus' => [
                         ['id'=> "link-stores-sub-1", 'name'=> "Shops", 'link'=>  '#' ],
@@ -101,7 +101,7 @@ class CreateSidebarMenus
                 [
                     'id'=> "link-inventory",
                     'name'=> "Inventory",
-                    'Icon'=> asset('assets/media/icons/duotone/Shopping/Cart4.svg'),
+                    'Icon'=> ProductsIcon(),
                     'type'=> "dropdown",
                     'subMenus' => [
                         ['id'=> "link-inventory-sub-1", 'name'=> "Products", 'link'=>  '#' ],
@@ -116,7 +116,7 @@ class CreateSidebarMenus
             [
                 'id'=> "link-e-learning",
                 'name'=> "E-Learning",
-                'Icon'=> asset('assets/media/icons/duotone/Media/Youtube.svg'),
+                'Icon'=> YoutubeIcon(),
                 'type'=> "dropdown",
                 'subMenus' => [
                     ['id'=> "link-e-learning-sub-1", 'name'=> "Resource", 'link'=>  '#' ],

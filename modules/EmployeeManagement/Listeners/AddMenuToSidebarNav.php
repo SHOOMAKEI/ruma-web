@@ -31,13 +31,13 @@ class AddMenuToSidebarNav
                 [
                     'id'=> "link-employees",
                     'name'=> "Employees",
-                    'Icon'=> asset('assets/media/icons/duotone/Interface/Briefcase.svg'),
+                    'Icon'=> BriefcaseIcon(),
                     'type'=> "dropdown",
                     'subMenus' => [
-                        ['id'=> "link-employees-sub-1", 'name'=> "Employees", 'link'=>  '#' ],
+                        ['id'=> "link-employees-sub-1", 'name'=> "Employees", 'link'=>  route('employees.index') ],
                         ['id'=> "link-employees-sub-2", 'name'=> "Attendance", 'link'=>  '#'],
-                        ['id'=> "link-employees-sub-3", 'name'=> "Leave Management", 'link'=>  '#' ],
-                        ['id'=> "link-employees-sub-4", 'name'=> "Contract Management", 'link'=>  '#' ],
+                        ['id'=> "link-employees-sub-3", 'name'=> "Leave Management", 'link'=>   route('leave-groups.index') ],
+                        ['id'=> "link-employees-sub-4", 'name'=> "Contract Management", 'link'=>  route('contract-definitions.index') ],
                     ]
                 ]
             );

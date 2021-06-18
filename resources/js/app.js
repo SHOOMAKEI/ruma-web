@@ -20,7 +20,7 @@ createInertiaApp({
         let type = parts[0]
         let  module_name = parts[1]
         if(type == 'Module'){
-            let  name = parts[2]
+            let  name = parts[2] + '/' + parts[3]
            return  import(`@/../../modules/EmployeeManagement/Resources/assets/js/Pages/${name}`)
         }
         return import(`./Pages/${name}`)

@@ -23,7 +23,7 @@ class CreateEmployeesTable extends Migration
             $table->string('mobile_number')->unique();
             $table->string('alternative_email')->nullable();
             $table->string('alternative_mobile_number')->nullable();
-            $table->foreignId('region_id')->constrained()->restrictOnDelete();
+            $table->string('region');
             $table->string('location');
             $table->string('position');
             $table->string('address');

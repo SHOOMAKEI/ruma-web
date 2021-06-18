@@ -61,10 +61,8 @@ export default function Menu({menu}: Props) {
         return (
             <div className="menu-item" key={menu.id}>
                     <InertiaLink className={`menu-link ${checkActiveLink(menu.link)}`} href={menu.link}>
-                        <span className="menu-icon">
-                             <span className={`svg-icon svg-icon-2 svg-icon-white`}>
-                            <img src={menu.Icon} alt={menu.name}/>
-                             </span>
+                        <span className="menu-icon" dangerouslySetInnerHTML={{__html:menu.Icon}}>
+
                         </span>
                         <span className="menu-title">{menu.name}</span>
                     </InertiaLink>
@@ -87,10 +85,8 @@ export default function Menu({menu}: Props) {
     return (
         <div data-kt-menu-trigger="click" onClick={ e => setShow(!show)} className={`menu-item menu-accordion ${checkActiveMenuParent(menu.link)}  ${show?'hover show':''} `} key={menu.id}>
             <span className="menu-link" >
-                <span className="menu-icon">
-                      <span className={`svg-icon svg-icon-2 svg-icon-white`}>
-                            <img src={menu.Icon} alt={menu.name}/>
-                      </span>
+                <span className="menu-icon" dangerouslySetInnerHTML={{__html:menu.Icon}}>
+
                 </span>
                 <span className="menu-title">{menu.name}</span>
                 <span className="menu-arrow"/>
