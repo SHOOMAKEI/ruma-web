@@ -155,9 +155,9 @@ class EmployeeController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Employee $employee)
     {
-        return view('employee-management::show');
+        return inertia('Module/EmployeeManagement/Profile/Index', ['employee' => $employee]);
     }
 
 
