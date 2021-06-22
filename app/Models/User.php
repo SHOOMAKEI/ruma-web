@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\ArrayShape;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Modules\EmployeeManagement\Models\Employee;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
@@ -113,10 +114,10 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         return Company::find($this->current_company_id);
     }
 
-//    public function employee(): BelongsTo
-//    {
-//        return $this->belongsTo(Employee::class);
-//    }
+    public function employee(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
+    }
 
 
     #[ArrayShape([

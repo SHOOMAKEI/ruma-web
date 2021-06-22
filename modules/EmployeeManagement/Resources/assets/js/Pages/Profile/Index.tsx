@@ -10,12 +10,15 @@ import {usePage} from "@inertiajs/inertia-react";
 import {Settings as Setting, Employee, User} from "../../../../../../../resources/js/Shared/Types";
 import {Session} from "./Sections/Account/BrowserSessions";
 import {EmployeeContext} from '../../Shared/Contexts/Contexts'
+import ZonesAndShops from "./ZonesAndShops";
 
 interface auth {
     user : User
 }
 const tabs: Array<TabItemType> = [
     {id: 'kt_user_edit_tab_1', title: 'Profile', component: <Profile />},
+    {id: 'kt_employee_account_tab', title: 'Account', component: <Account />},
+    {id: 'kt_employee_zones_tab', title: 'Zones & Shops', component: <ZonesAndShops />},
 ]
 
 

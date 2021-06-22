@@ -2,10 +2,13 @@ import InformationSectionTemplate from "./Section";
 import {Employee} from "../../../../../../../../../resources/js/Shared/Types";
 import React, {useContext} from "react";
 import {EmployeeContext} from "../../../../Shared/Contexts/Contexts";
+import ContactInfoModal from "./ContactInfoModal";
 
 interface Props {
     employee: Employee
 }
+
+const CONTACT_INFO_EDIT_MODAL = 'contact-information-modal'
 
 function PersonalInformationContactSection( ) {
 
@@ -22,6 +25,7 @@ function PersonalInformationContactSection( ) {
                 <div className="text-gray-400 fw-bold w-125px">Email</div>
                 <div className="text-gray-800 fw-bold">{employee.email}</div>
             </div>
+            <ContactInfoModal modalId={CONTACT_INFO_EDIT_MODAL} employee={employee} />
         </div>
     )
 }

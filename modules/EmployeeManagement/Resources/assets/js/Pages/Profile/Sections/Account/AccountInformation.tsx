@@ -4,6 +4,7 @@ import LoadingButton from "../../../../../../../../../resources/js/Shared/Loadin
 import {useForm} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import {SettingsContext} from "../../../../../../../../../resources/js/Shared/Contexts/SettingsContexts";
+import {EmployeeContext} from "../../../../Shared/Contexts/Contexts";
 
 
 class FileInput extends React.Component<{ errors: any, label: string, callback: any, name: string, value: any }> {
@@ -14,7 +15,7 @@ class FileInput extends React.Component<{ errors: any, label: string, callback: 
 
 export default  () => {
     // @ts-ignore
-    const {auth,errors}  = useContext(SettingsContext)
+    const {auth,errors}  = useContext(EmployeeContext)
 
     const { data, setData, post, processing } = useForm({
         username: auth.user.username,

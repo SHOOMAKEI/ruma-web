@@ -18,7 +18,7 @@ function PersonalInformationCompanySection() {
                 <div className="text-gray-400 fw-bold w-125px">Companies</div>
                 <div className="text-gray-800 fw-bold">
                     {
-                        employee.account?.companies?.map((company: { name: any; }) => `${company?.name}, `)
+                        employee.companies?.map((company: { name: any; }) => `${company?.name}, `)
                     }
                 </div>
             </div>

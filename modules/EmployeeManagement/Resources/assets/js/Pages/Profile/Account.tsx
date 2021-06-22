@@ -7,7 +7,6 @@ export default () => {
 
     return (
         <div>
-            <AccountInformation/>
             <EmployeeAccountRoles />
             <EmployeeAccountPermissions />
         </div>

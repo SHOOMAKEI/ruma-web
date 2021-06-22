@@ -157,7 +157,7 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        return inertia('Module/EmployeeManagement/Profile/Index', ['employee' => $employee]);
+        return inertia('Module/EmployeeManagement/Profile/Index', ['employee' => $employee->with('leaves','contracts', 'account', 'companies')->first()]);
     }
 
 
@@ -176,5 +176,67 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function personalInformation(Request $request, Employee $employee)
+    {
+        $request->validate([
+            'surname' => ['required', 'string', 'max:255'],
+            'other_name' => ['required', 'string', 'max:255'],
+            'gender' => ['required', 'string', 'max:255', Rule::in(['MALE', 'FEMALE'])],
+            'date_of_birth' => ['required', 'date'],
+        ]);
+
+        if($employee->id_number != $request['id_number']){
+            $request->validate([
+                'id_number' => ['required', 'string', 'unique:employees,id_number'],
+            ]);
+        }
+
+        if(!empty($employee->account?->username)){
+
+            if($employee->account?->username != $request['username']){
+                $request->validate([
+                    'username' => ['required', 'string', 'unique:users,username'],
+                ]);
+            }
+
+            $request->validate([
+                'is_active' => ['required', 'boolean'],
+            ]);
+
+            $employee->account->forceFill([
+                'username' => $request['username'],
+                'is_active' => $request['is_active'],
+            ])->save();
+        }
+
+        $employee->forceFill([
+            'surname' => $request['surname'],
+            'id_number' => $request['id_number'],
+            'other_name' => $request['other_name'],
+            'gender' => $request['gender'],
+            'date_of_birth' => $request['date_of_birth'],
+        ])->save();
+
+        return redirect()->back()->with(['status' => 'Operation Complete successful']);
+
+    }
+
+    public function profilePhoto(Request $request, Employee $employee)
+    {
+        $request->validate([
+            'photo' => ['required', 'base64image'],
+        ]);
+
+        uploadBase64Image($employee, 'profile-photo', $request['photo'], true);
+
+        if(!empty($employee->account->id)){
+
+            uploadBase64Image(User::find($employee->account->id), 'profile-photo', $request['photo'], true);
+        }
+
+        return redirect()->back()->with(['status' => 'Operation Complete successful']);
+
     }
 }

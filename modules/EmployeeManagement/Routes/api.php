@@ -21,5 +21,9 @@ Route::prefix('employee-management')
         Route::resource('contract-definitions', 'ContractsDefinitionController');
         Route::resource('leave-groups', 'LeaveGroupController');
         Route::resource('employees', 'EmployeeController');
+        Route::post('employees-personal-info/{employee}', 'EmployeeController@personalInformation')
+            ->name('employee.personal_info');
+        Route::post('employees-profile-photo/{employee}', 'EmployeeController@profilePhoto')
+            ->name('employee.profile_photo');
     });
 

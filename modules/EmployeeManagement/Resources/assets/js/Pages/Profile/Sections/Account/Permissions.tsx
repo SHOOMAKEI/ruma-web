@@ -33,7 +33,7 @@ function EmployeeAccountPermissions({employee}:Props) {
                         FILTERS.map(filter => (
                             <button
                                 type="button"
-
+                                key={Math.random()}
                                 className={`btn btn-sm btn-flex ${'btn-primary'} me-3`}>
                                 {filter.name}
                             </button>

@@ -20,7 +20,8 @@ export default function InformationSectionTemplate({title, modalId, Content, sho
                     <div className="card-toolbar">
                         {
                             showEditButton ? (
-                                <button type="button" className="btn btn-sm btn-flex btn-light-primary">
+                                <button type="button" className="btn btn-sm btn-flex btn-light-primary" data-bs-toggle="modal" data-bs-target={`#${modalId}`}
+                                >
                                     Edit
                                 </button>
                             ) : null

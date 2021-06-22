@@ -5766,6 +5766,40 @@ exports.Message = Message;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -5785,20 +5819,25 @@ var Footer_1 = __importDefault(__webpack_require__(/*! ./Footer */ "./resources/
 
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var config_1 = __webpack_require__(/*! ../config */ "./resources/js/config.tsx");
 
 var ToolBar_1 = __importDefault(__webpack_require__(/*! ./ToolBar */ "./resources/js/Shared/ToolBar.tsx"));
 
+var SuccessToast_1 = __importDefault(__webpack_require__(/*! ./SuccessToast */ "./resources/js/Shared/SuccessToast.tsx"));
+
 function Framework(_a) {
   var children = _a.children,
       title = _a.title,
       toolBarLeftContent = _a.toolBarLeftContent;
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(inertia_react_1.InertiaHead, null, react_1["default"].createElement("link", {
-    rel: "icon",
-    href: "/favicon.ico"
-  }), react_1["default"].createElement("meta", {
+  var status = inertia_react_1.usePage().props.status;
+  react_1.useEffect(function () {
+    return (//@ts-ignore
+      $('#success-toast').toast('show')
+    );
+  }, []);
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(inertia_react_1.InertiaHead, null, react_1["default"].createElement("meta", {
     charSet: "utf-8"
   }), react_1["default"].createElement("meta", {
     name: "viewport",
@@ -5814,7 +5853,9 @@ function Framework(_a) {
     content: config_1.author
   }), react_1["default"].createElement("title", null, config_1.siteTitle)), react_1["default"].createElement("main", {
     className: "page d-flex flex-row flex-column-fluid"
-  }, react_1["default"].createElement(SideNav_1["default"], null), react_1["default"].createElement("div", {
+  }, react_1["default"].createElement(SuccessToast_1["default"], {
+    status: status
+  }), react_1["default"].createElement(SideNav_1["default"], null), react_1["default"].createElement("div", {
     className: "wrapper d-flex flex-column flex-row-fluid flex-root",
     id: "kt_wrapper"
   }, react_1["default"].createElement(TopNav_1["default"], null), react_1["default"].createElement("div", {
@@ -6219,6 +6260,73 @@ exports.default = function () {
       className: "menu-link px-1 text-primary text-hover-white"
     }, company.name));
   })))));
+};
+
+/***/ }),
+
+/***/ "./resources/js/Shared/SuccessToast.tsx":
+/*!**********************************************!*\
+  !*** ./resources/js/Shared/SuccessToast.tsx ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+exports.default = function (_a) {
+  var status = _a.status;
+  return react_1["default"].createElement("div", {
+    id: "success-toast",
+    "aria-live": "polite",
+    "aria-atomic": "true",
+    style: {
+      position: "relative",
+      minHeight: "200px"
+    }
+  }, react_1["default"].createElement("div", {
+    style: {
+      position: "absolute",
+      top: 0,
+      right: 0
+    }
+  }, react_1["default"].createElement("div", {
+    className: "toast bg-primary",
+    role: "alert",
+    "aria-live": "assertive",
+    "aria-atomic": "true",
+    "data-autohide": true
+  }, react_1["default"].createElement("div", {
+    className: "toast-header"
+  }, react_1["default"].createElement("img", {
+    src: "",
+    className: "rounded mr-2",
+    alt: "..."
+  }), react_1["default"].createElement("strong", {
+    className: "mr-auto text-white"
+  }, "Success"), react_1["default"].createElement("small", {
+    className: "text-muted text-white"
+  }, "just now"), react_1["default"].createElement("button", {
+    type: "button",
+    className: "ml-2 mb-1 close",
+    "data-dismiss": "toast",
+    "aria-label": "Close"
+  }, react_1["default"].createElement("span", {
+    "aria-hidden": "true"
+  }, "\xD7"))), react_1["default"].createElement("div", {
+    className: "toast-body bg-primary text-white"
+  }, status))));
 };
 
 /***/ }),
