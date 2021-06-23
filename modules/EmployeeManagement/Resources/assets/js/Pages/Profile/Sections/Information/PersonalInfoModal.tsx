@@ -51,7 +51,7 @@ export default function PersonalInfoModal({modalId}: Props) {
             <form onSubmit={handleSubmit} className="form w-100">
                 <div className="fv-row mb-1">
                     <TextInput
-                        className="mt-10"
+                        className="mt-0"
                         label="ID Number"
                         name="id_number"
                         type="text"
@@ -67,7 +67,7 @@ export default function PersonalInfoModal({modalId}: Props) {
                     employee.account?
                         <div className="fv-row mb-1 row">
                             <TextInput
-                                className="mt-10"
+                                className="mt-2"
                                 label="Username"
                                 name="username"
                                 type="text"
@@ -82,7 +82,7 @@ export default function PersonalInfoModal({modalId}: Props) {
                 }
                 <div className="fv-row mb-1 row">
                     <TextInput
-                        className="mt-10"
+                        className="mt-2"
                         label="Surname"
                         name="surname"
                         type="text"
@@ -95,7 +95,7 @@ export default function PersonalInfoModal({modalId}: Props) {
                 </div>
                 <div className="fv-row mb-1 row">
                     <TextInput
-                        className="mt-10"
+                        className="mt-2"
                         label="Other Name"
                         name="other_name"
                         type="text"
@@ -108,7 +108,7 @@ export default function PersonalInfoModal({modalId}: Props) {
                 </div>
                 <div className="fv-row mb-1 row">
                     <SelectInput
-                        className="mt-10"
+                        className="mt-2"
                         label="Gender"
                         name="gender"
                         type="text"
@@ -124,7 +124,7 @@ export default function PersonalInfoModal({modalId}: Props) {
                 </div>
                 <div className="fv-row mb-1 row">
                     <TextInput
-                        className="mt-10"
+                        className="mt-2"
                         label="Date of Birth"
                         name="date_of_birth"
                         type="date"
@@ -139,7 +139,7 @@ export default function PersonalInfoModal({modalId}: Props) {
                     employee.account?
                         <div className="fv-row mb-3 row">
                             <CheckBoxInput
-                                className="mt-10"
+                                className="mt-2"
                                 label="Is Active"
                                 name="is_active"
                                 type="text"

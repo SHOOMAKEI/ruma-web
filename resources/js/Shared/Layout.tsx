@@ -15,12 +15,7 @@ interface Props {
 }
 
 export default function Framework({children, title, toolBarLeftContent}: Props) {
-    const { status } = usePage().props;
 
-    useEffect(()=>(
-        //@ts-ignore
-        $('#success-toast').toast('show')
-    ),[])
 
     return (
         <React.Fragment>
@@ -36,7 +31,7 @@ export default function Framework({children, title, toolBarLeftContent}: Props) 
                 {/* End meta content */}
             </InertiaHead>
             <main className="page d-flex flex-row flex-column-fluid">
-                <SuccessToast status={status as string}/>
+                <SuccessToast/>
                 <SideNav />
                 <div className="wrapper d-flex flex-column flex-row-fluid flex-root" id="kt_wrapper">
                     <TopNav />

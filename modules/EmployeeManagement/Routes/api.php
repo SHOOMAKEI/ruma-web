@@ -25,5 +25,9 @@ Route::prefix('employee-management')
             ->name('employee.personal_info');
         Route::post('employees-profile-photo/{employee}', 'EmployeeController@profilePhoto')
             ->name('employee.profile_photo');
+        Route::post('employees-contact-info/{employee}', 'EmployeeController@contactInformation')
+            ->name('employee.contact_info');
+        Route::post('employees-address-info/{employee}', 'EmployeeController@addressInformation')
+            ->name('employee.address_info');
     });
 

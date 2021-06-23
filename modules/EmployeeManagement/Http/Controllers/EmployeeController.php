@@ -239,4 +239,51 @@ class EmployeeController extends Controller
         return redirect()->back()->with(['status' => 'Operation Complete successful']);
 
     }
+
+    public function contactInformation(Request $request, Employee $employee)
+    {
+        $request->validate([
+            'alternative_mobile_number' => ['string', 'max:255'],
+            'alternative_email' => ['email', 'max:255'],
+            'mobile_number' => ['required', 'string', 'max:255'],
+        ]);
+
+        if(!empty($employee->account?->username)){
+
+            if($employee->account?->username != $request['username']){
+                $request->validate([
+                    'email' => ['required', 'email', 'max:255', 'unique:users,email'],
+                ]);
+            }
+
+            $employee->account->forceFill([
+                'email' => $request['email'],
+            ])->save();
+        }
+
+        $employee->forceFill([
+            'alternative_mobile_number' => $request['alternative_mobile_number'],
+            'alternative_email' => $request['alternative_email'],
+            'mobile_number' => $request['mobile_number'],
+        ])->save();
+
+        return redirect()->back()->with(['status' => 'Operation Complete successful']);
+    }
+
+    public function addressInformation(Request $request, Employee $employee)
+    {
+        $request->validate([
+            'region' => ['string', 'max:255'],
+            'location' => ['email', 'max:255'],
+            'address' => ['string', 'max:255'],
+        ]);
+
+        $employee->forceFill([
+            'region' => $request['region'],
+            'location' => $request['location'],
+            'address' => $request['address'],
+        ])->save();
+
+        return redirect()->back()->with(['status' => 'Operation Complete successful']);
+    }
 }
