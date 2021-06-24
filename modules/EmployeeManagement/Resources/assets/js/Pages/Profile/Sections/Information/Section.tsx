@@ -5,10 +5,12 @@ interface Props {
     title: string;
     modalId: string;
     showEditButton?: boolean;
+    showContractButton?:boolean;
+    addContractButton?:boolean;
 }
 
 
-export default function InformationSectionTemplate({title, modalId, Content, showEditButton=true}: Props) {
+export default function InformationSectionTemplate({title, modalId, Content, showEditButton=true, addContractButton=false}: Props) {
     return () => {
 
         return (
@@ -18,6 +20,14 @@ export default function InformationSectionTemplate({title, modalId, Content, sho
                         <h3>{title}</h3>
                     </div>
                     <div className="card-toolbar">
+                        {
+                            addContractButton ? (
+                                <button type="button" className="btn btn-sm btn-flex btn-light-success mx-2" data-bs-toggle="modal" data-bs-target={`#${modalId}-add`}
+                                >
+                                    Add Contract
+                                </button>
+                            ) : null
+                        }
                         {
                             showEditButton ? (
                                 <button type="button" className="btn btn-sm btn-flex btn-light-primary" data-bs-toggle="modal" data-bs-target={`#${modalId}`}

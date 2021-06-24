@@ -2,12 +2,15 @@ import InformationSectionTemplate from "./Section";
 import {Employee} from "../../../../../../../../../resources/js/Shared/Types";
 import React, {useContext} from "react";
 import {EmployeeContext} from "../../../../Shared/Contexts/Contexts";
+import EmploymentInfoModal from "./EmploymentModal";
+import CompanyInfoModal from "./CompanyModal";
 
 interface Props {
     employee: Employee
 }
 
 function PersonalInformationCompanySection() {
+    const COMPANIES_INFO_MODAL_ID = 'company-information-modal';
 
     // @ts-ignore
     const {employee,errors}  = useContext(EmployeeContext)
@@ -22,6 +25,7 @@ function PersonalInformationCompanySection() {
                     }
                 </div>
             </div>
+            <CompanyInfoModal modalId={COMPANIES_INFO_MODAL_ID} employee={employee} />
         </div>
     )
 }

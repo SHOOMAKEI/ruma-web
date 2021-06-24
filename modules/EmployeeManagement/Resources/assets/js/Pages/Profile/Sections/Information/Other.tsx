@@ -2,10 +2,14 @@ import InformationSectionTemplate from "./Section";
 import {Employee} from "../../../../../../../../../resources/js/Shared/Types";
 import React, {useContext} from "react";
 import {EmployeeContext} from "../../../../Shared/Contexts/Contexts";
+import EmploymentInfoModal from "./EmploymentModal";
+import OtherInfoModal from "./OtherModal";
 
 interface Props {
     employee: Employee
 }
+
+const OTHER_INFO_MODAL_ID = 'other-information-modal';
 
 function PersonalInformationOtherSection() {
 
@@ -22,6 +26,7 @@ function PersonalInformationOtherSection() {
                 <div className="text-gray-400 fw-bold w-125px">Due date</div>
                 <div className="text-gray-800 fw-bold">{employee.due_date}</div>
             </div>
+            <OtherInfoModal modalId={OTHER_INFO_MODAL_ID} employee={employee} />
         </div>
     )
 }

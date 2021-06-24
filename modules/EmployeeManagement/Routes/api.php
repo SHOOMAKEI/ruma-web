@@ -29,5 +29,13 @@ Route::prefix('employee-management')
             ->name('employee.contact_info');
         Route::post('employees-address-info/{employee}', 'EmployeeController@addressInformation')
             ->name('employee.address_info');
+        Route::post('employees-other-info/{employee}', 'EmployeeController@otherInformation')
+            ->name('employee.other_info');
+        Route::post('employees-companies-info/{employee}', 'EmployeeController@companiesInformation')
+            ->name('employee.companies_info');
+        Route::post('employees-contract-info/{employee}', 'EmployeeController@contractInformation')
+            ->name('employee.contract_info');
+        Route::post('employees-add-contract-info/{employee}', 'EmployeeController@addContractInformation')
+            ->name('employee.add_contract_info');
     });
 

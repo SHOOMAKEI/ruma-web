@@ -23,10 +23,10 @@ const tabs: Array<TabItemType> = [
 
 
 function Index()  {
-    const {employee,auth, errors} = usePage().props
+    const {employee,job_statuses, contract_definitions, auth, errors, companies} = usePage().props
 
     return(
-        <EmployeeContext.Provider value={{employee, auth, errors}}>
+        <EmployeeContext.Provider value={{employee, job_statuses, contract_definitions, auth, errors, companies}}>
         <div className="d-flex flex-column flex-xl-row">
             <div className="flex-lg-row-fluid">
                 <div className="card">

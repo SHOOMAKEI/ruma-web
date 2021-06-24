@@ -12,6 +12,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Modules\EmployeeManagement\Models\Contract;
+use Modules\EmployeeManagement\Models\ContractDefinition;
 use Modules\EmployeeManagement\Models\Employee;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -157,7 +159,18 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        return inertia('Module/EmployeeManagement/Profile/Index', ['employee' => $employee->with('leaves','contracts', 'account', 'companies')->first()]);
+        return inertia('Module/EmployeeManagement/Profile/Index',
+            [
+             'employee' => $employee->with('leaves','contracts.contract_definition', 'account', 'companies')->first(),
+             'companies' => Company::all()->map(function ($company){
+                 $data['value'] = (string) $company->id;
+                 $data['label'] = $company->name;
+
+                 return $data;
+             }),
+                'job_statuses' => getJobStatuses(),
+                'contract_definitions' => ContractDefinition::all()
+            ]);
     }
 
 
@@ -231,7 +244,7 @@ class EmployeeController extends Controller
 
         uploadBase64Image($employee, 'profile-photo', $request['photo'], true);
 
-        if(!empty($employee->account->id)){
+        if(!empty($employee->account?->id)){
 
             uploadBase64Image(User::find($employee->account->id), 'profile-photo', $request['photo'], true);
         }
@@ -274,16 +287,81 @@ class EmployeeController extends Controller
     {
         $request->validate([
             'region' => ['string', 'max:255'],
-            'location' => ['email', 'max:255'],
+            'location' => ['string', 'max:255'],
             'address' => ['string', 'max:255'],
         ]);
 
         $employee->forceFill([
-            'region' => $request['region'],
-            'location' => $request['location'],
-            'address' => $request['address'],
+            'region' => $request['region']?? null,
+            'location' => $request['location']?? null,
+            'address' => $request['address']?? null,
         ])->save();
 
         return redirect()->back()->with(['status' => 'Operation Complete successful']);
+    }
+
+    public function otherInformation(Request $request, Employee $employee)
+    {
+        $request->validate([
+            'resumption_date' => ['required', 'date', 'max:255'],
+            'due_date' => ['required', 'date', 'max:255'],
+        ]);
+
+        $employee->forceFill([
+            'resumption_date' => $request['resumption_date'],
+            'due_date' => $request['due_date'],
+        ])->save();
+
+        return redirect()->back()->with(['status' => 'Operation Complete successful']);
+    }
+
+    public function companiesInformation(Request $request, Employee $employee)
+    {
+
+        $request->validate([
+            'companies' => ['required'],
+            'companies.*.value' => ['required', 'numeric', 'exists:companies,id'],
+        ]);
+
+
+        $companyData = [];
+        $index = 0;
+        foreach ($request['companies'] as $role) {
+            $companyData[$index] = $role['value'];
+            $index++;
+        }
+
+        $employee->companies()->sync($companyData);
+
+
+        if(!empty($employee->account?->id)){
+
+            User::find($employee->account->id)->companies()->sync($companyData);
+        }
+
+        return redirect()->back()->with(['status' => 'Operation Complete successful']);
+
+    }
+
+    public function addContractInformation(Request $request, Employee $employee)
+    {
+
+        $request->validate([
+            'started_at' => ['required', 'date'],
+            'ended_at' => ['required', 'date', 'after:started_at'],
+            'contract_definition_id' => ['required', 'numeric', 'exists:contract_definitions,id'],
+            'status' => ['required', 'string', Rule::in(['SUSPENDED','ACTIVE', 'TERMINATED'])],
+        ]);
+
+        Contract::create([
+            'started_at' => $request['started_at'],
+            'ended_at' => $request['ended_at'],
+            'contract_definition_id' => $request['contract_definition_id'],
+            'status' => $request['status'],
+            'employee_id' => $employee->id
+        ]);
+
+        return redirect()->back()->with(['status' => 'Operation Complete successful']);
+
     }
 }
