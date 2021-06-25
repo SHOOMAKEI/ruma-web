@@ -159,9 +159,22 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
+        $user = null;
+
+        if(!empty($employee->account?->id)) {
+            $user = User::find($employee->account->id);
+        }
+
+        $permissions =  Permission::where('guard_name', 'web')->get()->map(function ($permission) use ($user){
+            $data['id'] =  $permission->id;
+            $data['name'] = $permission->name;
+            $data['checked'] = $user?->hasPermissionTo($permission->name);
+
+            return $data;
+        });
         return inertia('Module/EmployeeManagement/Profile/Index',
             [
-             'employee' => $employee->with('leaves','contracts.contract_definition', 'account', 'companies')->first(),
+             'employee' => $employee->with('leaves','contracts.contract_definition', 'account.roles', 'companies')->first(),
              'companies' => Company::all()->map(function ($company){
                  $data['value'] = (string) $company->id;
                  $data['label'] = $company->name;
@@ -169,7 +182,14 @@ class EmployeeController extends Controller
                  return $data;
              }),
                 'job_statuses' => getJobStatuses(),
-                'contract_definitions' => ContractDefinition::all()
+                'contract_definitions' => ContractDefinition::all(),
+                'roles' => Role::where('guard_name','web')->get()->map(function ($company){
+                    $data['value'] = (string) $company->id;
+                    $data['label'] = $company->name;
+
+                    return $data;
+                }),
+                'permissions' => $permissions,
             ]);
     }
 
@@ -363,5 +383,59 @@ class EmployeeController extends Controller
 
         return redirect()->back()->with(['status' => 'Operation Complete successful']);
 
+    }
+
+    public function rolesInformation(Request $request, Employee $employee)
+    {
+        $request->validate([
+            'roles' => ['required'],
+            'roles.*.value' => ['required', 'numeric', 'exists:roles,id'],
+        ]);
+
+
+        $roleData = [];
+        $index = 0;
+        foreach ($request['roles'] as $role) {
+            $roleData[$index] = $role['value'];
+            $index++;
+        }
+
+        if(!empty($employee->account?->id)){
+
+            User::find($employee->account->id)->syncRoles($roleData);;
+        }
+
+        return redirect()->back()->with(['status' => 'Operation Complete successful']);
+
+    }
+
+    public function permissionsInformation(Request $request, Employee $employee)
+    {
+        $request->validate([
+            'permissions' => ['required'],
+            'permissions.*.id' => ['required', 'numeric', 'exists:permissions,id'],
+        ]);
+
+
+        if(!empty($employee->account?->id)){
+
+           $user = User::find($employee->account->id);
+
+            $permissions = array_filter($request['permissions'], function($permission) {
+                return $permission['checked'] == true;
+            } );
+
+            $user->permissions()->detach();
+
+            collect($permissions)->map(function ($permission) use ($user){
+
+                $user->givePermissionTo($permission['name']);
+
+            });
+
+
+        }
+
+        return redirect()->back()->with(['status' => 'Operation Complete successful']);
     }
 }

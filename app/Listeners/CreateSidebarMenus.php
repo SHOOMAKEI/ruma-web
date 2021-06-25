@@ -83,19 +83,6 @@ class CreateSidebarMenus
                 ]
             );
 
-            $event->menu->addMenuBlock(
-                [
-                    'id'=> "link-stores",
-                    'name'=> "Stores",
-                    'Icon'=> ShopsIcon(),
-                    'type'=> "dropdown",
-                    'subMenus' => [
-                        ['id'=> "link-stores-sub-1", 'name'=> "Shops", 'link'=>  '#' ],
-                        ['id'=> "link-stores-sub-2", 'name'=> "States", 'link'=>  '#' ],
-                        ['id'=> "link-stores-sub-3", 'name'=> "Region", 'link'=>  '#' ],
-                    ]
-                ]
-            );
 
             $event->menu->addMenuBlock(
                 [

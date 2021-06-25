@@ -7552,8 +7552,6 @@ exports.default = function () {
 "use strict";
 
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
   Object.defineProperty(o, k2, {
@@ -7607,7 +7605,11 @@ exports.default = function () {
       status = _b.status,
       errors = _b.errors;
   react_1.useEffect(function () {
-    if (status || errors === (typeof Object === "undefined" ? "undefined" : _typeof(Object))) {
+    if (status !== null) {
+      setVisible(true);
+    }
+
+    if (!(JSON.stringify(errors) === JSON.stringify({}))) {
       setVisible(true);
     }
   }, [status, errors]);
@@ -7616,7 +7618,8 @@ exports.default = function () {
       position: "absolute",
       top: 64,
       right: 10,
-      zIndex: 99999
+      zIndex: 99999,
+      display: visible ? 'block' : 'none'
     }
   }, react_1["default"].createElement("div", {
     className: "toast fade " + (status ? 'bg-success' : 'bg-danger') + " " + (visible ? 'show' : ''),
@@ -7627,9 +7630,9 @@ exports.default = function () {
   }, react_1["default"].createElement("div", {
     className: "toast-header"
   }, react_1["default"].createElement("strong", {
-    className: "mr-auto text-white"
+    className: "w-150px text-dark"
   }, status ? 'Success' : 'Error'), react_1["default"].createElement("small", {
-    className: "text-muted text-white"
+    className: "mx-3 text-muted text-white"
   }, "just now"), react_1["default"].createElement("div", {
     onClick: function onClick() {
       return setVisible(false);
@@ -7639,7 +7642,7 @@ exports.default = function () {
     "aria-label": "Close"
   }, react_1["default"].createElement(svg_1.CloseIcon, null))), react_1["default"].createElement("div", {
     className: "toast-body " + (status ? 'bg-success' : 'bg-danger') + " text-white"
-  }, status ? status : '', "The resource at \u201Chttp://127.0.0.1:8050/fonts/EuclidCircularB-Bold.ttf\u201D preloaded with link preload was not used within a few seconds. Make sure all attributes of the preload tag are set correctly.")));
+  }, status ? status : '', JSON.stringify(errors) === JSON.stringify({}) ? '' : JSON.stringify(errors))));
 };
 
 /***/ }),

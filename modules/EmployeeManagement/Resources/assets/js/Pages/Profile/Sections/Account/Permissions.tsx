@@ -1,65 +1,58 @@
 import InformationSectionTemplate from "../Information/Section";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Employee} from "../../../../../../../../../resources/js/Shared/Types";
+import {EmployeeContext} from "../../../../Shared/Contexts/Contexts";
+import {useForm} from "@inertiajs/inertia-react";
+import Permission from "../../../../../../../../../resources/js/Pages/Role/Permission";
+import route from "ziggy-js";
+import LoadingButton from "../../../../../../../../../resources/js/Shared/LoadingButton";
 
 export interface Props {
     employee: Employee
 }
 
+function EmployeeAccountPermissions() {
+    // @ts-ignore
+    const {employee, permissions}  = useContext(EmployeeContext)
 
-interface filterType {
-    id: string;
-    name: string;
-}
+    const { data, setData, errors, post, processing } = useForm({
+        permissions: permissions || [],
+    });
 
-const FILTERS: Array<filterType> = [
-    {id: '1', name: 'Read'},
-    {id: '2', name: 'Create'},
-    {id: '3', name: 'Update'},
-    {id: '4', name: 'Delete'},
-]
+    function handleSubmit(e: { preventDefault: () => void; }) {
+        e.preventDefault();
+        post(route('employee.permission_info', employee.id));
+    }
 
-function EmployeeAccountPermissions({employee}:Props) {
+    //@ts-ignore
+    function setPermission(permissions){
+        setData(data => ({
+            ...data,
+            ['permissions']: permissions,
+        }))
+    }
+
 
     return (
-        <div>
-            <div className="row mb-5">
-                <div className="col">
-                </div>
-            </div>
-            <div className="row mb-8">
-                <div className="col d-flex">
-                    {
-                        FILTERS.map(filter => (
-                            <button
-                                type="button"
-                                key={Math.random()}
-                                className={`btn btn-sm btn-flex ${'btn-primary'} me-3`}>
-                                {filter.name}
-                            </button>
-                        ))
-                    }
-                </div>
-            </div>
-            <div className="row">
-                {/*{*/}
-                {/*    shownPermissions?.map(permission => {*/}
-                {/*        if (permission.name?.toLocaleLowerCase().includes(activeFilter.name.toLocaleLowerCase())) {*/}
-                {/*            return (*/}
-                {/*                <div className="col-md-4" key={permission.id}>*/}
-                {/*                    <label className="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack mb-5">*/}
-                {/*                        <span className="form-check-label ms-0 fs-6 text-gray-700">*/}
-                {/*                            {`can ${permission.name?.split('.')[1].replace('_', ' ')} ${permission.name?.split('.')[0].replace('_', ' ')}`}*/}
-                {/*                        </span>*/}
-                {/*                        <input className="form-check-input me-8" type="checkbox" defaultChecked={false} value="" />*/}
-                {/*                    </label>*/}
-                {/*                </div>*/}
-                {/*            )*/}
-                {/*        }*/}
-                {/*    })*/}
-                {/*}*/}
-            </div>
-        </div>
+        <>
+            {
+                // @ts-ignore
+                employee.account?.id?
+                    <div>
+                        <form onSubmit={handleSubmit}>
+                            <Permission permissions={permissions} callback={setPermission}/>
+                            <div className="fv-row mt-5">
+                                <LoadingButton
+                                    type="submit"
+                                    loading={processing} >
+                                    Save
+                                </LoadingButton>
+                            </div>
+                        </form>
+
+                    </div>: null
+            }
+        </>
     )
 }
 

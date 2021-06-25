@@ -37,5 +37,9 @@ Route::prefix('employee-management')
             ->name('employee.contract_info');
         Route::post('employees-add-contract-info/{employee}', 'EmployeeController@addContractInformation')
             ->name('employee.add_contract_info');
+        Route::post('employees-roles-info/{employee}', 'EmployeeController@rolesInformation')
+            ->name('employee.role_info');
+        Route::post('employees-permissions-info/{employee}', 'EmployeeController@permissionsInformation')
+            ->name('employee.permission_info');
     });
 
