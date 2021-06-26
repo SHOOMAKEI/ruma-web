@@ -1,6 +1,6 @@
 {
     "alias": "employee-management",
-    "description": "",
+    "description": "Employee Management Sub system",
     "keywords": [],
     "active": 1,
     "order": 0,
@@ -11,9 +11,9 @@
     "aliases": {},
     "files": [],
     "requires": [],
-    "name": "",
-    "minimumCoreVersion": "",
-    "title": "",
+    "name": "Employee Management",
+    "minimumCoreVersion": "1.0",
+    "title": "Employee Management",
     "version":"1.0",
-    "author": ""
+    "author": "Michael Omakei"
 }

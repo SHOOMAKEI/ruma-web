@@ -2,7 +2,7 @@
 
 namespace App\GraphQL\Region\Queries;
 
-use App\Models\Region\District;
+use Modules\StoreManagement\Models\District;
 use Illuminate\Support\Facades\Validator;
 
 class DistrictQueries

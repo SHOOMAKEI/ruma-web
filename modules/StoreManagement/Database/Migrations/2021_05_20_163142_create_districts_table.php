@@ -18,8 +18,8 @@ class CreateDistrictsTable extends Migration
             $table->string('name');
             $table->string('code_name');
             $table->foreignId('region_id')->constrained()->restrictOnDelete();
-            $table->float('longitude')->nullable();
-            $table->float('latitude')->nullable();
+            $table->double('longitude')->nullable();
+            $table->double('latitude')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

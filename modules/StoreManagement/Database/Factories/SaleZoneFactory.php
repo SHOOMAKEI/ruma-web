@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Factories;
+namespace Modules\StoreManagement\Database\Factories;
 
-use App\Models\Region\SaleZone;
+use Modules\StoreManagement\Models\SaleZone;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SaleZoneFactory extends Factory

@@ -2,7 +2,7 @@
 
 namespace App\GraphQL\Region\Mutations;
 
-use App\Models\Region\GeopoliticalZone;
+use Modules\StoreManagement\Models\GeopoliticalZone;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use JetBrains\PhpStorm\ArrayShape;

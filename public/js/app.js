@@ -357,6 +357,106 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
+/***/ "./modules/StoreManagement/Resources/assets/js/Pages lazy recursive ^\\.\\/.*$":
+/*!*******************************************************************************************!*\
+  !*** ./modules/StoreManagement/Resources/assets/js/Pages/ lazy ^\.\/.*$ namespace object ***!
+  \*******************************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var map = {
+	"./Districts/Create": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Districts/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Districts_Create_tsx"
+	],
+	"./Districts/Create.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Districts/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Districts_Create_tsx"
+	],
+	"./Districts/Edit": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Districts/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Districts_Edit_tsx"
+	],
+	"./Districts/Edit.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Districts/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Districts_Edit_tsx"
+	],
+	"./Districts/Index": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Districts/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Districts_Index_tsx"
+	],
+	"./Districts/Index.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Districts/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Districts_Index_tsx"
+	],
+	"./GeopoliticalZone/Create": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/GeopoliticalZone/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Create_tsx"
+	],
+	"./GeopoliticalZone/Create.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/GeopoliticalZone/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Create_tsx"
+	],
+	"./GeopoliticalZone/Edit": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/GeopoliticalZone/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Edit_tsx"
+	],
+	"./GeopoliticalZone/Edit.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/GeopoliticalZone/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Edit_tsx"
+	],
+	"./GeopoliticalZone/Index": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/GeopoliticalZone/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Index_tsx"
+	],
+	"./GeopoliticalZone/Index.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/GeopoliticalZone/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Index_tsx"
+	],
+	"./Region/Create": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Region/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Region_Create_tsx"
+	],
+	"./Region/Create.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Region/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Region_Create_tsx"
+	],
+	"./Region/Edit": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Region/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Region_Edit_tsx"
+	],
+	"./Region/Edit.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Region/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Region_Edit_tsx"
+	],
+	"./Region/Index": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Region/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Region_Index_tsx"
+	],
+	"./Region/Index.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Region/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Region_Index_tsx"
+	]
+};
+function webpackAsyncContext(req) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(() => {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+
+	var ids = map[req], id = ids[0];
+	return __webpack_require__.e(ids[1]).then(() => {
+		return __webpack_require__.t(id, 7 | 16);
+	});
+}
+webpackAsyncContext.keys = () => (Object.keys(map));
+webpackAsyncContext.id = "./modules/StoreManagement/Resources/assets/js/Pages lazy recursive ^\\.\\/.*$";
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
 /***/ "./node_modules/@inertiajs/inertia-react/dist/index.js":
 /*!*************************************************************!*\
   !*** ./node_modules/@inertiajs/inertia-react/dist/index.js ***!
@@ -37575,7 +37675,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Create_tsx":"18b7cef2b7aeb34f1e69","modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Edit_tsx":"5b16f724495ee23a87c0","modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Index_tsx":"fa7c572e1aff73a3653f","modules_EmployeeManagement_Resources_assets_js_Pages_Dashboard_tsx":"0fed866de9d5fac7db57","modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Create_tsx":"12f14c1bb9e4ef4fd67c","modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Edit_tsx":"8f8144ebea03d1cbe9a4","modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Index_tsx":"826e2613aaf665931ca4","modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Create_tsx":"8507709f5aa894fbad51","modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Edit_tsx":"bcfdd7f57590f650067b","modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Index_tsx":"18c2da8721334f39792d","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Account_tsx":"7d5ac942a173bbd63924","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Index_tsx":"0eabdccbf86fcf633563","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Password_tsx":"c432e0ce4e699c18a913","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Profile_tsx":"8d2e8584eb58ff2a7ff3","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_AccountInformat-df43fc":"41b7680335807cd66b4c","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_BrowserSessions_tsx":"54876db6e28a35b9e845","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_OneTimePassword_tsx":"21e39430265a8dbe68b4","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_Permissions_tsx":"2447b032ad59519a75cd","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_Roles_tsx":"6423b6dceb8ebecfd5c2","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_TwoFactorAuthen-b343b3":"4b0657981d81b5175ae2","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_UpdatePassword_tsx":"9ccf5ca9097fe3ce3ef6","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_AddContract-984597":"9d5f27e122375a745ef4","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Address_tsx":"f10182392e2b16b9b398","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_AddressInfo-066606":"833c8750fd3da3eedb1e","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Company_tsx":"95c87e2cd051e9d931e7","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_CompanyModal_tsx":"0705abd5683a2176b5f5","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_ContactInfo_tsx":"184e7bc1d049b1e23e9c","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_ContactInfo-bd4658":"8590c960024339301b5d","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Employment_tsx":"3b735b272af81eb01832","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_EmploymentC-6ecfeb":"8284d1b172707948bb4e","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_EmploymentM-ab17a8":"a161e39e3c0bd4a5cb09","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Modal_tsx":"93125df1d916cd6279b0","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Other_tsx":"dfda26144e51aeb737d3","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_OtherModal_tsx":"a11cfa4744e9a165b146","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Personal_tsx":"e633abc42f7f80672d82","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_PersonalInf-02d3c3":"5753cc59ea11c37d40cf","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Section_tsx":"9b84619c54fe3614407d","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_zones-and-shops_Shops_tsx":"99ae98531addf37fe80e","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_zones-and-shops_Zones_tsx":"a5cf4fa3e5bcd96b230d","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Settings_tsx":"2b96fb76f1429642115b","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_ZonesAndShops_tsx":"6242726bc4c3d85ce232","resources_js_Pages_Account_Create_tsx":"1585d0182beb2c013141","resources_js_Pages_Account_Edit_tsx":"c5f8786fdd0bb0322102","resources_js_Pages_Account_Index_tsx":"118b8ad91c4e34a17da7","resources_js_Pages_Auth_AuthFramework_tsx":"910dd5d64ca756b71242","resources_js_Pages_Auth_ForgotPassword_tsx":"ad2fb296fdff41880d94","resources_js_Pages_Auth_Login_tsx":"85082f57484f763734e6","resources_js_Pages_Auth_ResetPassword_tsx":"c49f0c297c03f2d881ea","resources_js_Pages_Auth_TwoFactorAuth_tsx":"18e1b81d70155de0f386","resources_js_Pages_Company_Create_tsx":"bb784e7b86102df033f2","resources_js_Pages_Company_Edit_tsx":"91fd491cdde635bc31eb","resources_js_Pages_Company_Index_tsx":"8d171e20e9e47cf5c527","resources_js_Pages_Dashboard_tsx":"e8dbf3ca575a42259d54","resources_js_Pages_Department_Create_tsx":"704fe641bd98defbef36","resources_js_Pages_Department_Edit_tsx":"078e5a4cc30fbe2d69c5","resources_js_Pages_Department_Index_tsx":"54bed59b3d84cfd751be","resources_js_Pages_OperationYear_Create_tsx":"c193753839453a17d022","resources_js_Pages_OperationYear_Edit_tsx":"0185092c6e6ca593e90c","resources_js_Pages_OperationYear_Index_tsx":"cfc176c8ae50f830b8bb","resources_js_Pages_Profile_Account_tsx":"a66603f9c12357a0bebb","resources_js_Pages_Profile_Index_tsx":"f982e3b29431dded9712","resources_js_Pages_Profile_Password_tsx":"c82b7034010ee8b13270","resources_js_Pages_Profile_Profile_tsx":"09f65ebfd07d578c960e","resources_js_Pages_Profile_Sections_Account_AccountInformation_tsx":"a689695deebaec88942a","resources_js_Pages_Profile_Sections_Account_BrowserSessions_tsx":"ed968815d7ca7a914e79","resources_js_Pages_Profile_Sections_Account_OneTimePassword_tsx":"29f7e346c738b4d566e4","resources_js_Pages_Profile_Sections_Account_Permissions_tsx":"dcb0c936f8de3016ea3a","resources_js_Pages_Profile_Sections_Account_Roles_tsx":"66ada25d307ccb5e11c0","resources_js_Pages_Profile_Sections_Account_TwoFactorAuthentication_tsx":"d31e15d10634988445d3","resources_js_Pages_Profile_Sections_Account_UpdatePassword_tsx":"88cca558c2748c43154f","resources_js_Pages_Profile_Sections_Information_Address_tsx":"25073841b8a435f485de","resources_js_Pages_Profile_Sections_Information_Company_tsx":"584b286d72435948a8b2","resources_js_Pages_Profile_Sections_Information_ContactInfo_tsx":"c30b7625f4db648b57db","resources_js_Pages_Profile_Sections_Information_Employment_tsx":"c2f04a5b0f7806f34215","resources_js_Pages_Profile_Sections_Information_Other_tsx":"fc6397795098e03b112e","resources_js_Pages_Profile_Sections_Information_Personal_tsx":"ca7f3394c2cf10fb89a2","resources_js_Pages_Profile_Sections_Information_Section_tsx":"4a0eeae4a13d6c0d0448","resources_js_Pages_Profile_Settings_tsx":"7cb55ec62e02ba4db455","resources_js_Pages_Role_Create_tsx":"34a261363f6b658ce7bf","resources_js_Pages_Role_Edit_tsx":"3f6c1ac2bca07429fe20","resources_js_Pages_Role_Index_tsx":"43832707e978660d7c88","resources_js_Pages_Role_Permission_tsx":"87c43724403e571a722b"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Create_tsx":"18b7cef2b7aeb34f1e69","modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Edit_tsx":"5b16f724495ee23a87c0","modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Index_tsx":"fa7c572e1aff73a3653f","modules_EmployeeManagement_Resources_assets_js_Pages_Dashboard_tsx":"0fed866de9d5fac7db57","modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Create_tsx":"3c1e9773e9eb9e563bf4","modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Edit_tsx":"8f8144ebea03d1cbe9a4","modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Index_tsx":"826e2613aaf665931ca4","modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Create_tsx":"8507709f5aa894fbad51","modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Edit_tsx":"bcfdd7f57590f650067b","modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Index_tsx":"18c2da8721334f39792d","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Account_tsx":"7d5ac942a173bbd63924","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Index_tsx":"0eabdccbf86fcf633563","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Password_tsx":"c432e0ce4e699c18a913","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Profile_tsx":"8d2e8584eb58ff2a7ff3","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_AccountInformat-df43fc":"41b7680335807cd66b4c","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_BrowserSessions_tsx":"54876db6e28a35b9e845","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_OneTimePassword_tsx":"21e39430265a8dbe68b4","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_Permissions_tsx":"2447b032ad59519a75cd","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_Roles_tsx":"6423b6dceb8ebecfd5c2","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_TwoFactorAuthen-b343b3":"4b0657981d81b5175ae2","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_UpdatePassword_tsx":"9ccf5ca9097fe3ce3ef6","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_AddContract-984597":"9d5f27e122375a745ef4","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Address_tsx":"f10182392e2b16b9b398","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_AddressInfo-066606":"833c8750fd3da3eedb1e","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Company_tsx":"95c87e2cd051e9d931e7","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_CompanyModal_tsx":"0705abd5683a2176b5f5","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_ContactInfo_tsx":"184e7bc1d049b1e23e9c","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_ContactInfo-bd4658":"8590c960024339301b5d","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Employment_tsx":"3b735b272af81eb01832","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_EmploymentC-6ecfeb":"8284d1b172707948bb4e","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_EmploymentM-ab17a8":"a161e39e3c0bd4a5cb09","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Modal_tsx":"93125df1d916cd6279b0","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Other_tsx":"dfda26144e51aeb737d3","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_OtherModal_tsx":"a11cfa4744e9a165b146","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Personal_tsx":"e633abc42f7f80672d82","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_PersonalInf-02d3c3":"5753cc59ea11c37d40cf","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Section_tsx":"9b84619c54fe3614407d","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_zones-and-shops_Shops_tsx":"99ae98531addf37fe80e","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_zones-and-shops_Zones_tsx":"a5cf4fa3e5bcd96b230d","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Settings_tsx":"2b96fb76f1429642115b","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_ZonesAndShops_tsx":"6242726bc4c3d85ce232","modules_StoreManagement_Resources_assets_js_Pages_Districts_Create_tsx":"cb7342cc54a23a3145a9","modules_StoreManagement_Resources_assets_js_Pages_Districts_Edit_tsx":"1ca5bbb8529faa5c903a","modules_StoreManagement_Resources_assets_js_Pages_Districts_Index_tsx":"c39a6a28c1607f1942c9","modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Create_tsx":"0680daf62de266740cb6","modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Edit_tsx":"30500cf6dd9a2e0c6b40","modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Index_tsx":"b372b32d455f3ca777ab","modules_StoreManagement_Resources_assets_js_Pages_Region_Create_tsx":"b6c2c7cc8c09b81ed398","modules_StoreManagement_Resources_assets_js_Pages_Region_Edit_tsx":"2cb59b2ca40ab425f0d9","modules_StoreManagement_Resources_assets_js_Pages_Region_Index_tsx":"e4d6028576e3df22709e","resources_js_Pages_Account_Create_tsx":"1585d0182beb2c013141","resources_js_Pages_Account_Edit_tsx":"c5f8786fdd0bb0322102","resources_js_Pages_Account_Index_tsx":"118b8ad91c4e34a17da7","resources_js_Pages_Auth_AuthFramework_tsx":"910dd5d64ca756b71242","resources_js_Pages_Auth_ForgotPassword_tsx":"ad2fb296fdff41880d94","resources_js_Pages_Auth_Login_tsx":"85082f57484f763734e6","resources_js_Pages_Auth_ResetPassword_tsx":"c49f0c297c03f2d881ea","resources_js_Pages_Auth_TwoFactorAuth_tsx":"18e1b81d70155de0f386","resources_js_Pages_Company_Create_tsx":"bb784e7b86102df033f2","resources_js_Pages_Company_Edit_tsx":"91fd491cdde635bc31eb","resources_js_Pages_Company_Index_tsx":"8d171e20e9e47cf5c527","resources_js_Pages_Dashboard_tsx":"e8dbf3ca575a42259d54","resources_js_Pages_Department_Create_tsx":"704fe641bd98defbef36","resources_js_Pages_Department_Edit_tsx":"078e5a4cc30fbe2d69c5","resources_js_Pages_Department_Index_tsx":"54bed59b3d84cfd751be","resources_js_Pages_OperationYear_Create_tsx":"c193753839453a17d022","resources_js_Pages_OperationYear_Edit_tsx":"0185092c6e6ca593e90c","resources_js_Pages_OperationYear_Index_tsx":"cfc176c8ae50f830b8bb","resources_js_Pages_Profile_Account_tsx":"a66603f9c12357a0bebb","resources_js_Pages_Profile_Index_tsx":"f982e3b29431dded9712","resources_js_Pages_Profile_Password_tsx":"c82b7034010ee8b13270","resources_js_Pages_Profile_Profile_tsx":"09f65ebfd07d578c960e","resources_js_Pages_Profile_Sections_Account_AccountInformation_tsx":"a689695deebaec88942a","resources_js_Pages_Profile_Sections_Account_BrowserSessions_tsx":"ed968815d7ca7a914e79","resources_js_Pages_Profile_Sections_Account_OneTimePassword_tsx":"29f7e346c738b4d566e4","resources_js_Pages_Profile_Sections_Account_Permissions_tsx":"dcb0c936f8de3016ea3a","resources_js_Pages_Profile_Sections_Account_Roles_tsx":"66ada25d307ccb5e11c0","resources_js_Pages_Profile_Sections_Account_TwoFactorAuthentication_tsx":"d31e15d10634988445d3","resources_js_Pages_Profile_Sections_Account_UpdatePassword_tsx":"88cca558c2748c43154f","resources_js_Pages_Profile_Sections_Information_Address_tsx":"25073841b8a435f485de","resources_js_Pages_Profile_Sections_Information_Company_tsx":"584b286d72435948a8b2","resources_js_Pages_Profile_Sections_Information_ContactInfo_tsx":"c30b7625f4db648b57db","resources_js_Pages_Profile_Sections_Information_Employment_tsx":"c2f04a5b0f7806f34215","resources_js_Pages_Profile_Sections_Information_Other_tsx":"fc6397795098e03b112e","resources_js_Pages_Profile_Sections_Information_Personal_tsx":"ca7f3394c2cf10fb89a2","resources_js_Pages_Profile_Sections_Information_Section_tsx":"4a0eeae4a13d6c0d0448","resources_js_Pages_Profile_Settings_tsx":"7cb55ec62e02ba4db455","resources_js_Pages_Role_Create_tsx":"34a261363f6b658ce7bf","resources_js_Pages_Role_Edit_tsx":"3f6c1ac2bca07429fe20","resources_js_Pages_Role_Index_tsx":"43832707e978660d7c88","resources_js_Pages_Role_Permission_tsx":"87c43724403e571a722b"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -37598,6 +37698,21 @@ module.exports = webpackAsyncContext;
 /******/ 				if (typeof window === 'object') return window;
 /******/ 			}
 /******/ 		})();
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/harmony module decorator */
+/******/ 	(() => {
+/******/ 		__webpack_require__.hmd = (module) => {
+/******/ 			module = Object.create(module);
+/******/ 			if (!module.children) module.children = [];
+/******/ 			Object.defineProperty(module, 'exports', {
+/******/ 				enumerable: true,
+/******/ 				set: () => {
+/******/ 					throw new Error('ES Modules may not assign module.exports or exports.*, Use ESM export syntax, instead: ' + module.id);
+/******/ 				}
+/******/ 			});
+/******/ 			return module;
+/******/ 		};
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
@@ -37801,7 +37916,13 @@ _inertiajs_progress__WEBPACK_IMPORTED_MODULE_3__.InertiaProgress.init({
     if (type == 'Module') {
       var _name = parts[2] + '/' + parts[3];
 
-      return __webpack_require__("./modules/EmployeeManagement/Resources/assets/js/Pages lazy recursive ^\\.\\/.*$")("./".concat(_name));
+      if (module_name == 'EmployeeManagement') {
+        return __webpack_require__("./modules/EmployeeManagement/Resources/assets/js/Pages lazy recursive ^\\.\\/.*$")("./".concat(_name));
+      }
+
+      if (module_name == 'StoreManagement') {
+        return __webpack_require__("./modules/StoreManagement/Resources/assets/js/Pages lazy recursive ^\\.\\/.*$")("./".concat(_name));
+      }
     }
 
     return __webpack_require__("./resources/js/Pages lazy recursive ^\\.\\/.*$")("./".concat(name));

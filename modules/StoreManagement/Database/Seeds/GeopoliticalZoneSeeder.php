@@ -1,10 +1,10 @@
 <?php
 
-namespace Database\Seeders;
+namespace Modules\StoreManagement\Database\Seeds;
 
-use App\Models\Region\Country;
-use App\Models\Region\GeopoliticalZone;
-use App\Models\Region\Region;
+use Modules\StoreManagement\Models\Country;
+use Modules\StoreManagement\Models\GeopoliticalZone;
+use Modules\StoreManagement\Models\Region;
 use Illuminate\Database\Seeder;
 
 class GeopoliticalZoneSeeder extends Seeder

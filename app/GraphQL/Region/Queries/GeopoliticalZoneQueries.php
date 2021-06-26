@@ -2,7 +2,7 @@
 
 namespace App\GraphQL\Region\Queries;
 
-use App\Models\Region\GeopoliticalZone;
+use Modules\StoreManagement\Models\GeopoliticalZone;
 use Illuminate\Support\Facades\Validator;
 
 class GeopoliticalZoneQueries

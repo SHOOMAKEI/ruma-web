@@ -2,7 +2,7 @@
 
 namespace App\GraphQL\Region\Queries;
 
-use App\Models\Region\Shop;
+use Modules\StoreManagement\Models\Shop;
 use Illuminate\Support\Facades\Validator;
 
 class ShopQueries

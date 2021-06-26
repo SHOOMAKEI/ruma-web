@@ -2,7 +2,7 @@
 
 namespace App\GraphQL\Region\Mutations;
 
-use App\Models\Region\SaleZone;
+use Modules\StoreManagement\Models\SaleZone;
 use Illuminate\Support\Facades\Validator;
 
 class SaleZoneMutation

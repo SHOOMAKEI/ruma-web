@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Factories;
+namespace Modules\StoreManagement\Database\Factories;
 
 
-use App\Models\Region\GeopoliticalZone;
+use Modules\StoreManagement\Models\GeopoliticalZone;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class GeopoliticalZoneFactory extends Factory

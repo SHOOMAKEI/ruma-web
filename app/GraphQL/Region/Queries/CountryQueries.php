@@ -2,7 +2,7 @@
 
 namespace App\GraphQL\Region\Queries;
 
-use App\Models\Region\Country;
+use Modules\StoreManagement\Models\Country;
 
 class CountryQueries
 {

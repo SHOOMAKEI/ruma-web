@@ -3,11 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Company;
-use App\Models\Region\District;
-use App\Models\Region\GeopoliticalZone;
-use App\Models\Region\SaleZone;
-use App\Models\Region\Shop;
-use Database\Factories\DistrictFactory;
+use Modules\StoreManagement\Models\District;
+use Modules\StoreManagement\Models\GeopoliticalZone;
+use Modules\StoreManagement\Models\SaleZone;
+use Modules\StoreManagement\Models\Shop;
+use Modules\StoreManagement\Database\Factories\DistrictFactory;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 

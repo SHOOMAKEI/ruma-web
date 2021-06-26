@@ -23,8 +23,8 @@ class CreateCountriesTable extends Migration
             $table->string('currency');
             $table->json('languages')->nullable();
             $table->string('nationality')->nullable();
-            $table->float('longitude')->nullable();
-            $table->float('latitude')->nullable();
+            $table->double('longitude')->nullable();
+            $table->double('latitude')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

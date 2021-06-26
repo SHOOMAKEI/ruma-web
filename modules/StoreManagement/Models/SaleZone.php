@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models\Region;
+namespace Modules\StoreManagement\Models;
 
 use App\Models\User;
-use Database\Factories\SaleZoneFactory;
+use Modules\StoreManagement\Database\Factories\SaleZoneFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;

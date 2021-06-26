@@ -253,7 +253,7 @@ function Create() {
                             >
                                 {
                                     roles && roles.map((role: {label:string, value: string}) =>(
-                                        <option value={role.value}>{role.label.replace('-', ' ')}</option>
+                                        <option key={Math.random()} value={role.value}>{role.label.replace('-', ' ')}</option>
                                     ))
                                 }
 

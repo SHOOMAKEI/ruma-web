@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Module EmployeeManagement  {{ env('APP_NAME', 'RUMA APP') }}</title>
+    <title>{{ env('APP_NAME', 'RUMA APP') }} | Employee Management </title>
     <link href="{{asset('assets/css/fonts.css')}}" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="{{asset('assets/images/brand/logo.png')}}">
     <link href="{{asset('assets/css/plugins.bundle.css|')}}" rel="stylesheet" type="text/css" />
@@ -24,11 +24,7 @@
     <script src="{{asset('assets/plugins/fslightbox/fslightbox.bundle.js')}}"></script>
     <script src="{{asset('assets/js/base.js')}}"></script>
     {{-- Laravel Mix - JS File --}}
-    <script src="{{ mix('js/employee-management.js') }}"></script>
-{{--    <script src="{{ mix('js/app.js') }}"></script>--}}
-
-    {{-- Laravel Mix - CSS File --}}
-    {{-- <link rel="stylesheet" href="{{ mix('css/employee-management.css') }}"> --}}
+    <script src="{{ mix('js/app.js') }}"></script>
 
 </head>
 <body>

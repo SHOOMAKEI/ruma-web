@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\EmployeeManagement\Listeners;
+namespace Modules\StoreManagement\Listeners;
 
 use App\Events\CreateSidebarMenus;
 use Illuminate\Queue\InteractsWithQueue;
@@ -26,7 +26,7 @@ class AddMenuToSidebarNav
      */
     public function handle(CreateSidebarMenus $event)
     {
-        if(user()->hasPermissionTo('store.read')){
+        if(user()->hasPermissionTo('employee.read')){
             $event->menu->addMenuBlock(
                 [
                     'id'=> "link-stores",
@@ -35,7 +35,7 @@ class AddMenuToSidebarNav
                     'type'=> "dropdown",
                     'subMenus' => [
                         ['id'=> "link-stores-sub-1", 'name'=> "Shops", 'link'=>  '#' ],
-                        ['id'=> "link-stores-sub-2", 'name'=> "States", 'link'=>  '#' ],
+                        ['id'=> "link-stores-sub-2", 'name'=> "States", 'link'=>  route('geopolitical-zones.index') ],
                         ['id'=> "link-stores-sub-3", 'name'=> "Region", 'link'=>  '#' ],
                     ]
                 ]

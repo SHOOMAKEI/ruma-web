@@ -1,12 +1,10 @@
 <?php
 
-namespace Database\Seeders;
+namespace Modules\StoreManagement\Database\Seeds;
 
-use App\Models\Region\Country;
+use Modules\StoreManagement\Models\Country;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
-use function Symfony\Component\String\s;
-
 class CountrySeeder extends Seeder
 {
     /**

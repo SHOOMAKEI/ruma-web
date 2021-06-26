@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Factories;
+namespace Modules\StoreManagement\Database\Factories;
 
-use App\Models\Region\District;
-use App\Models\Region\Shop;
+use Modules\StoreManagement\Models\District;
+use Modules\StoreManagement\Models\Shop;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ShopFactory extends Factory

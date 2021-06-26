@@ -22,8 +22,8 @@ class CreateShopsTable extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->foreignId('district_id')->constrained()->restrictOnDelete();
-            $table->float('longitude')->nullable();
-            $table->float('latitude')->nullable();
+            $table->double('longitude')->nullable();
+            $table->double('latitude')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

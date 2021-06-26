@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/store-management', function (Request $request) {
-    return $request->user();
-});
+Route::prefix('store-management')
+    ->middleware(['web', 'auth','auth:sanctum'])
+    ->namespace('Modules\StoreManagement\Http\Controllers')
+    ->group(function () {
+        Route::resource('geopolitical-zones', 'GeopoliticalZoneController');
+        Route::resource('regions', 'RegionController');
+        Route::resource('districts', 'DistrictController');
+        Route::resource('shops', 'DistrictController');
+        Route::resource('sale-zones', 'DistrictController');
+
+    });

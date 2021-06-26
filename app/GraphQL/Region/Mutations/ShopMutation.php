@@ -2,7 +2,7 @@
 
 namespace App\GraphQL\Region\Mutations;
 
-use App\Models\Region\Shop;
+use Modules\StoreManagement\Models\Shop;
 use Illuminate\Support\Facades\Validator;
 
 class ShopMutation

@@ -2,7 +2,7 @@
 
 namespace App\GraphQL\Region\Mutations;
 
-use App\Models\Region\Region;
+use Modules\StoreManagement\Models\Region;
 use Illuminate\Support\Facades\Validator;
 
 class RegionMutation
