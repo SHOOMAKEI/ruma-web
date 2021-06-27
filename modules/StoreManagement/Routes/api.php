@@ -20,7 +20,7 @@ Route::prefix('store-management')
         Route::resource('geopolitical-zones', 'GeopoliticalZoneController');
         Route::resource('regions', 'RegionController');
         Route::resource('districts', 'DistrictController');
-        Route::resource('shops', 'DistrictController');
-        Route::resource('sale-zones', 'DistrictController');
+        Route::resource('shops', 'ShopController');
+        Route::resource('sale-zones', 'SaleZoneController');
 
     });

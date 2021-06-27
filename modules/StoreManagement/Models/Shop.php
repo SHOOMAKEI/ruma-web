@@ -3,6 +3,7 @@
 namespace Modules\StoreManagement\Models;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\StoreManagement\Database\Factories\ShopFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -37,5 +38,10 @@ class Shop extends Model
     protected static function newFactory(): ShopFactory
     {
         return ShopFactory::new();
+    }
+
+    public function district(): BelongsTo
+    {
+        return $this->belongsTo(District::class);
     }
 }

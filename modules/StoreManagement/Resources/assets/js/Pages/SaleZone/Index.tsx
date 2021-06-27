@@ -2,7 +2,7 @@ import React from "react";
 import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 import Layout from "../../../../../../../resources/js/Shared/Layout";
 import route from "ziggy-js";
-import {Company, Country, GeopoliticalZone, User} from "../../../../../../../resources/js/Shared/Types";
+import {Company, Country, Region, User} from "../../../../../../../resources/js/Shared/Types";
 import CardWrapper from "../../../../../../../resources/js/Shared/CardWrapper";
 import {Dropdown} from "react-bootstrap";
 import {CustomDropdownMenuItem, CustomButtonDropdownToggle} from '../../../../../../../resources/js/Shared/ToggleDropdown'
@@ -22,11 +22,11 @@ interface geopoliticalZone {
     id: number
     name: string
     code_name: string
-    geopolitical_zone: GeopoliticalZone
+    region: Region
 }
 
 function Index()  {
-    const { regions, auth }:props = usePage().props
+    const { sale_zones, auth }:props = usePage().props
 
     //@ts-ignore
     $(document).ready(function() {
@@ -44,16 +44,16 @@ function Index()  {
             <tr className="fw-bolder fs-6 text-gray-800 px-7">
                 <th>Name</th>
                 <th>Code Name</th>
-                <th>Geopolitical Zone</th>
+                <th>State</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            {regions as props && (regions as props).map((group: geopoliticalZone)=>(
+            {sale_zones as props && (sale_zones as props).map((group: geopoliticalZone)=>(
                 <tr key={group.id}>
                     <td>{group.name}</td>
                     <td>{group.code_name}</td>
-                    <td>{group.geopolitical_zone?.name}</td>
+                    <td>{group.region?.name}</td>
                     <td>
                         <Dropdown>
                             <Dropdown.Toggle cssClass={"btn btn-sm btn-light btn-active-light-primary"} variant="success" id="dropdown-basic" as={CustomButtonDropdownToggle}>
@@ -63,13 +63,10 @@ function Index()  {
 
                             <Dropdown.Menu className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold py-4 fs-6 w-275px">
                                 <Dropdown.Item as={CustomDropdownMenuItem}>
-                                        <InertiaLink href={route('districts.index')} className="menu-link px-3" >Show District</InertiaLink>
+                                    <InertiaLink href={route('sale-zones.edit', group.id)} className="menu-link px-3" >Edit</InertiaLink>
                                 </Dropdown.Item>
                                 <Dropdown.Item as={CustomDropdownMenuItem}>
-                                    <InertiaLink href={route('regions.edit', group.id)} className="menu-link px-3" >Edit</InertiaLink>
-                                </Dropdown.Item>
-                                <Dropdown.Item as={CustomDropdownMenuItem}>
-                                    <InertiaLink href={route('regions.destroy', group.id)} method="delete" className="menu-link px-3" >Delete</InertiaLink>
+                                    <InertiaLink href={route('sale-zones.destroy', group.id)} method="delete" className="menu-link px-3" >Delete</InertiaLink>
                                 </Dropdown.Item>
 
                             </Dropdown.Menu>
@@ -85,7 +82,7 @@ function Index()  {
 }
 
 Index.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
-    children={page}  title="States"
-    toolBarLeftContent={ <InertiaLink href={route('regions.create')} className="btn btn-primary">Add State</InertiaLink>} />;
+    children={page}  title="Regions"
+    toolBarLeftContent={ <InertiaLink href={route('sale-zones.create')} className="btn btn-primary">Add Region</InertiaLink>} />;
 
 export default Index;

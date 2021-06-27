@@ -129,7 +129,7 @@ function Create() {
 }
 
 Create.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
-    children={page}  title="Create Region"
+    children={page}  title="Create State"
  />;
 
 export default Create;

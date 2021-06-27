@@ -19,7 +19,11 @@ interface geopoliticalZone {
     id: number
     name: string
     code_name: string
-    geopolitical_zone_id: number
+    phone: string
+    email: string
+    address: string
+    location: string
+    district_id: number
     latitude: number
     longitude: number
 }
@@ -27,18 +31,22 @@ interface geopoliticalZone {
 
 function Edit() {
     // @ts-ignore
-    const { region, geopolitical_zones } = usePage().props;
+    const { shop, districts } = usePage().props;
     const { data, setData, errors, put, processing } = useForm({
-        name: (region as geopoliticalZone).name  || '',
-        code_name: (region as geopoliticalZone).code_name ||'',
-        geopolitical_zone_id: (region as geopoliticalZone).geopolitical_zone_id || '',
-        longitude: (region as geopoliticalZone).longitude || '',
-        latitude: (region as geopoliticalZone).latitude || ''
+        name: (shop as geopoliticalZone).name  || '',
+        code_name: (shop as geopoliticalZone).code_name ||'',
+        district_id: (shop as geopoliticalZone).district_id || '',
+        email: (shop as geopoliticalZone).email || '',
+        phone: (shop as geopoliticalZone).phone || '',
+        address: (shop as geopoliticalZone).address || '',
+        location: (shop as geopoliticalZone).location || '',
+        longitude: (shop as geopoliticalZone).longitude || '',
+        latitude: (shop as geopoliticalZone).latitude || ''
     });
 
     const defaultPosition= {
-        lat: (region as geopoliticalZone).latitude ==0?9.081999:(region as geopoliticalZone).latitude,
-        lng: (region as geopoliticalZone).longitude==0?8.675277:(region as geopoliticalZone).longitude
+        lat: (shop as geopoliticalZone).latitude ==0?9.081999:(shop as geopoliticalZone).latitude,
+        lng: (shop as geopoliticalZone).longitude==0?8.675277:(shop as geopoliticalZone).longitude
     }
 
     // @ts-ignore
@@ -58,7 +66,7 @@ function Edit() {
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        put(route('regions.update', (region as geopoliticalZone).id));
+        put(route('shops.update', (shop as geopoliticalZone).id));
     }
 
     // @ts-ignore
@@ -93,25 +101,76 @@ function Edit() {
                 </div>
                 <div className="fv-row mb-5 row">
                     <SelectInput
-                        className="mt-10 col-md-12"
-                        label="Geopolitical Zone"
-                        placeholder="Geopolitical Zone"
-                        name="geopolitical_zone_id"
+                        className="mt-10 col-md-6"
+                        label="LAG"
+                        placeholder="LAG"
+                        name="district_id"
                         label_required={true}
                         required
-                        errors={errors.geopolitical_zone_id}
-                        value={data.geopolitical_zone_id}
-                        onChange={(e: { target: { value: string; }; }) => setData('geopolitical_zone_id', e.target.value)}
+                        errors={errors.district_id}
+                        value={data.district_id}
+                        onChange={(e: { target: { value: string; }; }) => setData('district_id', e.target.value)}
                     >
                         {
                             //@ts-ignore
-                            geopolitical_zones && geopolitical_zones.map((geopolitical_zone: {id:string, name: string}) =>(
-                                <option key={Math.random()} value={geopolitical_zone.id}>{geopolitical_zone.name}</option>
+                            districts && districts.map((district: {id:string, name: string}) =>(
+                                <option key={Math.random()} value={district.id}>{district.name}</option>
                             ))
                         }
 
                     </SelectInput>
-
+                    <TextInput
+                        className="mt-10 col-md-6"
+                        label="Location"
+                        placeholder="Location"
+                        name="location"
+                        type="text"
+                        label_required={true}
+                        required
+                        errors={errors.location}
+                        value={data.location}
+                        onChange={(e: { target: { value: string; }; }) => setData('location', e.target.value)}
+                    />
+                </div>
+                <div className="fv-row mb-5 row">
+                    <TextInput
+                        className="mt-10 col-md-6"
+                        label="Address"
+                        placeholder="Address"
+                        name="address"
+                        type="text"
+                        label_required={true}
+                        required
+                        errors={errors.address}
+                        value={data.address}
+                        onChange={(e: { target: { value: string; }; }) => setData('address', e.target.value)}
+                    />
+                </div>
+                <div className="fv-row mb-5 row">
+                    <TextInput
+                        className="mt-10 col-md-6"
+                        label="Phone"
+                        placeholder="Phone"
+                        name="phone"
+                        type="text"
+                        label_required={true}
+                        required
+                        errors={errors.phone}
+                        value={data.phone}
+                        onChange={(e: { target: { value: string; }; }) => setData('phone', e.target.value)}
+                    />
+                    <TextInput
+                        className="mt-10 col-md-6"
+                        label="Email"
+                        placeholder="Email"
+                        name="email"
+                        type="text"
+                        label_required={true}
+                        required
+                        errors={errors.email}
+                        value={data.email}
+                        onChange={(e: { target: { value: string; }; }) => setData('email', e.target.value)}
+                    />
                 </div>
                 <div className="fv-row row mb-5">
                     <label className="h4 mb-3 fw-light required form-label">Location</label>
@@ -136,7 +195,7 @@ function Edit() {
 }
 
 Edit.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
-    children={page}  title="Edit State"
+    children={page}  title="Edit Shop"
  />;
 
 export default Edit;

@@ -44,7 +44,7 @@ function Index()  {
             <tr className="fw-bolder fs-6 text-gray-800 px-7">
                 <th>Name</th>
                 <th>Code Name</th>
-                <th>Region</th>
+                <th>State</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -82,7 +82,7 @@ function Index()  {
 }
 
 Index.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
-    children={page}  title="Districts"
-    toolBarLeftContent={ <InertiaLink href={route('districts.create')} className="btn btn-primary">Add District</InertiaLink>} />;
+    children={page}  title="Local Area Government"
+    toolBarLeftContent={ <InertiaLink href={route('districts.create')} className="btn btn-primary">Add Local Area Government</InertiaLink>} />;
 
 export default Index;
