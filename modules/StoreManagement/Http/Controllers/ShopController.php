@@ -69,7 +69,7 @@ class ShopController extends Controller
         'errors' => "array"])]
     public function validateInput(array $args)
     {
-        $validator =  Validator::make($args['input'],[
+        $validator =  Validator::make($args,[
             'name' => ['required','string', 'max:255'],
             'code_name' => ['required','string', 'max:255'],
             'district_id' => ['required','numeric', 'exists:districts,id'],
@@ -91,15 +91,15 @@ class ShopController extends Controller
     public function getModelAttribute(array $args)
     {
         return [
-            'name' => $args['input']['name'],
-            'code_name' => $args['input']['code_name'],
-            'district_id' => $args['input']['district_id'],
-            'phone' =>  isset($args['input']['phone'])??null,
-            'address' => isset($args['input']['address'])??null,
-            'location' => isset($args['input']['location'])??null,
-            'email' =>  isset($args['input']['email'])??null,
-            'longitude' => isset($args['input']['longitude'])??null,
-            'latitude' => isset($args['input']['latitude'])??null
+            'name' => $args['name'],
+            'code_name' => $args['code_name'],
+            'district_id' => $args['district_id'],
+            'phone' =>  isset($args['phone'])??null,
+            'address' => isset($args['address'])??null,
+            'location' => isset($args['location'])??null,
+            'email' =>  isset($args['email'])??null,
+            'longitude' => isset($args['longitude'])??null,
+            'latitude' => isset($args['latitude'])??null
         ];
     }
 }
