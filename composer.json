@@ -9,6 +9,7 @@
         "akaunting/laravel-menu": "^1.0",
         "akaunting/laravel-module": "^2.0",
         "akaunting/laravel-setting": "^1.2",
+        "dingo/api": "^3.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -24,10 +25,10 @@
         "spatie/laravel-activitylog": "^4.0",
         "spatie/laravel-medialibrary": "^9.0.0",
         "spatie/laravel-permission": "^4.2",
-        "tightenco/ziggy": "^1.2",
-      "ext-http": "*"
+        "tightenco/ziggy": "^1.2"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.10",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.7",
