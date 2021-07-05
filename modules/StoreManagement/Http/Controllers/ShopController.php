@@ -13,8 +13,8 @@ class ShopController extends Controller
 {
     public function index()
     {
-        return inertia('Module/StoreManagement/Shops/Index',
-            ['shops' => Shop::all()]);
+        return inertia('Module/StoreManagement/Shop/Index',
+            ['shops' => Shop::with('district')->get()]);
     }
 
     public function create()
@@ -30,7 +30,7 @@ class ShopController extends Controller
             return $this->validateInput($request->toArray());
         }
 
-        $shop = Shop::create($this->getModelAttribute($request->toArray()));
+        Shop::create($this->getModelAttribute($request->toArray()));
 
         return redirect()->route('shops.index')->with(['status' => 'Operation Complete successful']);
     }
@@ -53,14 +53,14 @@ class ShopController extends Controller
         return redirect()->route('shops.index')->with(['status' => 'Operation Complete successful']);
     }
 
-    public function destroy(Shop $shop): array
+    public function destroy  (Shop $shop)
     {
 
         if(!is_null($shop)){
             $shop->delete();
         }
 
-        return respondWithSuccess('district', $district);
+        return redirect()->route('shops.index')->with(['status' => 'Operation Complete successful']);
     }
 
 

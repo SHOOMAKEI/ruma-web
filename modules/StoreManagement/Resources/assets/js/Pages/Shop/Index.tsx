@@ -2,7 +2,7 @@ import React from "react";
 import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 import Layout from "../../../../../../../resources/js/Shared/Layout";
 import route from "ziggy-js";
-import {Company, Country, GeopoliticalZone, User} from "../../../../../../../resources/js/Shared/Types";
+import {Company, Country, District, Region, User} from "../../../../../../../resources/js/Shared/Types";
 import CardWrapper from "../../../../../../../resources/js/Shared/CardWrapper";
 import {Dropdown} from "react-bootstrap";
 import {CustomDropdownMenuItem, CustomButtonDropdownToggle} from '../../../../../../../resources/js/Shared/ToggleDropdown'
@@ -22,11 +22,15 @@ interface geopoliticalZone {
     id: number
     name: string
     code_name: string
-    geopolitical_zone: GeopoliticalZone
+    district: District
+    phone: string
+    email: string
+    address: string
+    location: string
 }
 
 function Index()  {
-    const { regions, auth }:props = usePage().props
+    const { shops, auth }:props = usePage().props
 
     //@ts-ignore
     $(document).ready(function() {
@@ -41,19 +45,23 @@ function Index()  {
 <CardWrapper>
         <table id="contract-data-table" className="table table-row-bordered gy-5 gs-7 border rounded">
             <thead>
-            <tr className="fw-bolder fs-6 text-gray-800 px-7">
-                <th>Name</th>
-                <th>Code Name</th>
-                <th>Geopolitical Zone</th>
-                <th>Actions</th>
-            </tr>
+                <tr className="fw-bolder fs-6 text-gray-800 px-7">
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>LAG</th>
+                    <th>Actions</th>
+                </tr>
             </thead>
             <tbody>
-            {regions as props && (regions as props).map((group: geopoliticalZone)=>(
+            {shops as props && (shops as props).map((group: geopoliticalZone)=>(
                 <tr key={group.id}>
                     <td>{group.name}</td>
-                    <td>{group.code_name}</td>
-                    <td>{group.geopolitical_zone?.name}</td>
+                    <td>{group.phone}</td>
+                    <td>{group.email}</td>
+                    <td>{group.address}</td>
+                    <td>{group.district?.name}</td>
                     <td>
                         <Dropdown>
                             <Dropdown.Toggle cssClass={"btn btn-sm btn-light btn-active-light-primary"} variant="success" id="dropdown-basic" as={CustomButtonDropdownToggle}>
@@ -63,13 +71,10 @@ function Index()  {
 
                             <Dropdown.Menu className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold py-4 fs-6 w-275px">
                                 <Dropdown.Item as={CustomDropdownMenuItem}>
-                                        <InertiaLink href={route('districts.index')} className="menu-link px-3" >Show District</InertiaLink>
+                                    <InertiaLink href={route('shops.edit', group.id)} className="menu-link px-3" >Edit</InertiaLink>
                                 </Dropdown.Item>
                                 <Dropdown.Item as={CustomDropdownMenuItem}>
-                                    <InertiaLink href={route('regions.edit', group.id)} className="menu-link px-3" >Edit</InertiaLink>
-                                </Dropdown.Item>
-                                <Dropdown.Item as={CustomDropdownMenuItem}>
-                                    <InertiaLink href={route('regions.destroy', group.id)} method="delete" className="menu-link px-3" >Delete</InertiaLink>
+                                    <InertiaLink href={route('shops.destroy', group.id)} method="delete" className="menu-link px-3" >Delete</InertiaLink>
                                 </Dropdown.Item>
 
                             </Dropdown.Menu>
@@ -85,7 +90,7 @@ function Index()  {
 }
 
 Index.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
-    children={page}  title="States"
-    toolBarLeftContent={ <InertiaLink href={route('regions.create')} className="btn btn-primary">Add State</InertiaLink>} />;
+    children={page}  title="Shops"
+    toolBarLeftContent={ <InertiaLink href={route('shops.create')} className="btn btn-primary">Add Shop</InertiaLink>} />;
 
 export default Index;

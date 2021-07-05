@@ -15,42 +15,63 @@ import CheckBoxInput from "../../../../../../../resources/js/Shared/CheckBoxInpu
 import CardWrapper from "../../../../../../../resources/js/Shared/CardWrapper";
 import SelectInput from "../../../../../../../resources/js/Shared/SelectInput";
 import TextAreaInput from "../../../../../../../resources/js/Shared/TextAreaInput";
+import MultiSelectInput from "../../../../../../../resources/js/Shared/MultiSelectInput";
 
 
 
 function Create() {
 
     // @ts-ignore
-    const { regions } = usePage().props;
+    const { sale_zonables } = usePage().props;
     const { data, setData, errors, post, processing } = useForm({
         name: '',
         code_name: '',
-        region_id: '',
-        longitude: '',
-        latitude: ''
+        sale_zonables: [],
     });
 
-    const defaultPosition= {
-        lat: 9.081999,
-        lng: 8.675277
-    }
+    function handleSelectChange(newValue: any, actionMeta: any) {
 
-   // @ts-ignore
-    function handleLocationChange ({ position, address, places }) {
+        if(actionMeta.action === 'select-option'){
+            //@ts-ignore
+            let stateValue = data[actionMeta.name].find(role=> (role === newValue))
 
-        // @ts-ignore
-        setData(
-            data => ({
+            if(!stateValue) {
+                // @ts-ignore
+                setData(data => ({
+                    ...data,
+                    // @ts-ignore
+                    [actionMeta.name]: newValue,
+                }))
+            }
+        }
+
+        if(actionMeta.action === 'remove-value') {
+
+            // @ts-ignore
+            setData(data => ({
                 ...data,
-                ['longitude']: position.lng,
-                ['latitude']: position.lat,
-            })
-        );
+                // @ts-ignore
+                [actionMeta.name]: newValue,
+            }))
+        }
+
+        if(actionMeta.action === 'clear'){
+
+            // @ts-ignore
+            setData(data => ({
+                ...data,
+                // @ts-ignore
+                [actionMeta.name]: [],
+            }))
+
+        }
+
     }
+
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        post(route('districts.store'));
+        post(route('sale-zones.store'));
     }
 
 
@@ -85,36 +106,19 @@ function Create() {
                         />
                     </div>
                     <div className="fv-row mb-5 row">
-                        <SelectInput
+                        <MultiSelectInput
                             className="mt-10 col-md-12"
-                            label="State"
-                            placeholder="State"
-                            name="region_id"
+                            label="Location"
+                            name="sale_zonables"
+                            placeholder="Press enter to select new location"
                             label_required={true}
-                            required
-                            errors={errors.region_id}
-                            value={data.region_id}
-                            onChange={(e: { target: { value: string; }; }) => setData('region_id', e.target.value)}
-                        >
-                            {
-                                //@ts-ignore
-                                regions && regions.map((region: {id:string, name: string}) =>(
-                                    <option key={Math.random()} value={region.id}>{region.name}</option>
-                                ))
-                            }
-
-                        </SelectInput>
-
-                    </div>
-                    <div className="fv-row row mb-5">
-                        <label className="h4 mb-3 fw-light required form-label">Location</label>
-                        <LocationPicker
-                            containerElement={ <div style={ {height: '100%'} } /> }
-                            mapElement={ <div style={ {height: '400px'} } /> }
-                            defaultPosition={defaultPosition}
-                            onChange={handleLocationChange}
+                            errors={errors.sale_zonables}
+                            value={data.sale_zonables}
+                            options={sale_zonables}
+                            onChange={handleSelectChange}
                         />
                     </div>
+
 
                     <div className="fv-row">
                         <LoadingButton
@@ -129,7 +133,7 @@ function Create() {
 }
 
 Create.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
-    children={page}  title="Create Local Area Government"
+    children={page}  title="Create Region"
  />;
 
 export default Create;

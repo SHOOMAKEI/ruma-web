@@ -34,9 +34,9 @@ class AddMenuToSidebarNav
                     'Icon'=> ShopsIcon(),
                     'type'=> "dropdown",
                     'subMenus' => [
-                        ['id'=> "link-stores-sub-1", 'name'=> "Shops", 'link'=>  '#' ],
+                        ['id'=> "link-stores-sub-1", 'name'=> "Shops", 'link'=>  route('shops.index') ],
                         ['id'=> "link-stores-sub-2", 'name'=> "States", 'link'=>  route('geopolitical-zones.index') ],
-                        ['id'=> "link-stores-sub-3", 'name'=> "Region", 'link'=>  '#' ],
+                        ['id'=> "link-stores-sub-3", 'name'=> "Region", 'link'=>  route('sale-zones.index') ],
                     ]
                 ]
             );

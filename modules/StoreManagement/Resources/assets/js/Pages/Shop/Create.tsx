@@ -21,11 +21,15 @@ import TextAreaInput from "../../../../../../../resources/js/Shared/TextAreaInpu
 function Create() {
 
     // @ts-ignore
-    const { regions } = usePage().props;
+    const { districts } = usePage().props;
     const { data, setData, errors, post, processing } = useForm({
         name: '',
         code_name: '',
-        region_id: '',
+        district_id: '',
+        phone: '',
+        email: '',
+        location: '',
+        address: '',
         longitude: '',
         latitude: ''
     });
@@ -50,7 +54,7 @@ function Create() {
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        post(route('districts.store'));
+        post(route('shops.store'));
     }
 
 
@@ -86,25 +90,76 @@ function Create() {
                     </div>
                     <div className="fv-row mb-5 row">
                         <SelectInput
-                            className="mt-10 col-md-12"
-                            label="State"
-                            placeholder="State"
-                            name="region_id"
+                            className="mt-10 col-md-6"
+                            label="LAG"
+                            placeholder="LAG"
+                            name="district_id"
                             label_required={true}
                             required
-                            errors={errors.region_id}
-                            value={data.region_id}
-                            onChange={(e: { target: { value: string; }; }) => setData('region_id', e.target.value)}
+                            errors={errors.district_id}
+                            value={data.district_id}
+                            onChange={(e: { target: { value: string; }; }) => setData('district_id', e.target.value)}
                         >
                             {
                                 //@ts-ignore
-                                regions && regions.map((region: {id:string, name: string}) =>(
-                                    <option key={Math.random()} value={region.id}>{region.name}</option>
+                                districts && districts.map((district: {id:string, name: string}) =>(
+                                    <option key={Math.random()} value={district.id}>{district.name}</option>
                                 ))
                             }
 
                         </SelectInput>
-
+                        <TextInput
+                            className="mt-10 col-md-6"
+                            label="Location"
+                            placeholder="Location"
+                            name="location"
+                            type="text"
+                            label_required={true}
+                            required
+                            errors={errors.location}
+                            value={data.location}
+                            onChange={(e: { target: { value: string; }; }) => setData('location', e.target.value)}
+                        />
+                    </div>
+                    <div className="fv-row mb-5 row">
+                        <TextInput
+                            className="mt-10 col-md-6"
+                            label="Address"
+                            placeholder="Address"
+                            name="address"
+                            type="text"
+                            label_required={true}
+                            required
+                            errors={errors.address}
+                            value={data.address}
+                            onChange={(e: { target: { value: string; }; }) => setData('address', e.target.value)}
+                        />
+                    </div>
+                    <div className="fv-row mb-5 row">
+                        <TextInput
+                            className="mt-10 col-md-6"
+                            label="Phone"
+                            placeholder="Phone"
+                            name="phone"
+                            type="text"
+                            label_required={true}
+                            required
+                            errors={errors.phone}
+                            value={data.phone}
+                            onChange={(e: { target: { value: string; }; }) => setData('phone', e.target.value)}
+                        />
+                        <TextInput
+                            className="mt-10 col-md-6"
+                            label="Email"
+                            placeholder="Email"
+                            name="email"
+                            type="text"
+                            label_required={true}
+                            required
+                            errors={errors.email}
+                            value={data.email}
+                            onChange={(e: { target: { value: string; }; }) => setData('email', e.target.value)}
+                        />
                     </div>
                     <div className="fv-row row mb-5">
                         <label className="h4 mb-3 fw-light required form-label">Location</label>
@@ -129,7 +184,7 @@ function Create() {
 }
 
 Create.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
-    children={page}  title="Create Local Area Government"
+    children={page}  title="Create Shop"
  />;
 
 export default Create;

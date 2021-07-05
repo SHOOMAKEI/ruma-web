@@ -94,8 +94,8 @@ function Edit() {
                 <div className="fv-row mb-5 row">
                     <SelectInput
                         className="mt-10 col-md-12"
-                        label="Region"
-                        placeholder="Region"
+                        label="State"
+                        placeholder="State"
                         name="region_id"
                         label_required={true}
                         required
@@ -136,7 +136,7 @@ function Edit() {
 }
 
 Edit.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
-    children={page}  title="Edit District"
+    children={page}  title="Edit Local Area Government"
  />;
 
 export default Edit;

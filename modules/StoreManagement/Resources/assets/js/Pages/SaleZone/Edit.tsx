@@ -14,51 +14,67 @@ import TextAreaInput from "../../../../../../../resources/js/Shared/TextAreaInpu
 import {Country} from "../../../../../../../resources/js/Shared/Types";
 // @ts-ignore
 import LocationPicker from 'react-location-picker';
+import MultiSelectInput from "../../../../../../../resources/js/Shared/MultiSelectInput";
 
 interface geopoliticalZone {
     id: number
     name: string
     code_name: string
-    geopolitical_zone_id: number
-    latitude: number
-    longitude: number
+    sale_zonables: { label:string, value:number, type:string }
 }
 
 
 function Edit() {
     // @ts-ignore
-    const { region, geopolitical_zones } = usePage().props;
+    const { sale_zonables, sale_zone } = usePage().props;
     const { data, setData, errors, put, processing } = useForm({
-        name: (region as geopoliticalZone).name  || '',
-        code_name: (region as geopoliticalZone).code_name ||'',
-        geopolitical_zone_id: (region as geopoliticalZone).geopolitical_zone_id || '',
-        longitude: (region as geopoliticalZone).longitude || '',
-        latitude: (region as geopoliticalZone).latitude || ''
+        name: (sale_zone as geopoliticalZone).name  || '',
+        code_name: (sale_zone as geopoliticalZone).code_name ||'',
+        sale_zonables: (sale_zone as geopoliticalZone).sale_zonables || [],
     });
 
-    const defaultPosition= {
-        lat: (region as geopoliticalZone).latitude ==0?9.081999:(region as geopoliticalZone).latitude,
-        lng: (region as geopoliticalZone).longitude==0?8.675277:(region as geopoliticalZone).longitude
-    }
+    function handleSelectChange(newValue: any, actionMeta: any) {
 
-    // @ts-ignore
-    function handleLocationChange ({ position, address, places }) {
+        if(actionMeta.action === 'select-option'){
+            //@ts-ignore
+            let stateValue = data[actionMeta.name].find(role=> (role === newValue))
 
-        // @ts-ignore
-        setData(
-            data => ({
+            if(!stateValue) {
+                // @ts-ignore
+                setData(data => ({
+                    ...data,
+                    // @ts-ignore
+                    [actionMeta.name]: newValue,
+                }))
+            }
+        }
+
+        if(actionMeta.action === 'remove-value') {
+
+            // @ts-ignore
+            setData(data => ({
                 ...data,
-                ['longitude']: position.lng,
-                ['latitude']: position.lat,
-            })
-        );
+                // @ts-ignore
+                [actionMeta.name]: newValue,
+            }))
+        }
+
+        if(actionMeta.action === 'clear'){
+
+            // @ts-ignore
+            setData(data => ({
+                ...data,
+                // @ts-ignore
+                [actionMeta.name]: [],
+            }))
+
+        }
+
     }
-
-
 
     function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        put(route('regions.update', (region as geopoliticalZone).id));
+        put(route('sale-zones.update', (sale_zone as geopoliticalZone).id));
     }
 
     // @ts-ignore
@@ -92,35 +108,18 @@ function Edit() {
                     />
                 </div>
                 <div className="fv-row mb-5 row">
-                    <SelectInput
+                    <MultiSelectInput
                         className="mt-10 col-md-12"
-                        label="Geopolitical Zone"
-                        placeholder="Geopolitical Zone"
-                        name="geopolitical_zone_id"
+                        label="Location"
+                        name="sale_zonables"
+                        placeholder="Press enter to select new location"
                         label_required={true}
-                        required
-                        errors={errors.geopolitical_zone_id}
-                        value={data.geopolitical_zone_id}
-                        onChange={(e: { target: { value: string; }; }) => setData('geopolitical_zone_id', e.target.value)}
-                    >
-                        {
-                            //@ts-ignore
-                            geopolitical_zones && geopolitical_zones.map((geopolitical_zone: {id:string, name: string}) =>(
-                                <option key={Math.random()} value={geopolitical_zone.id}>{geopolitical_zone.name}</option>
-                            ))
-                        }
-
-                    </SelectInput>
-
-                </div>
-                <div className="fv-row row mb-5">
-                    <label className="h4 mb-3 fw-light required form-label">Location</label>
-                    <LocationPicker
-                        containerElement={ <div style={ {height: '100%'} } /> }
-                        mapElement={ <div style={ {height: '400px'} } /> }
-                        defaultPosition={defaultPosition}
-                        onChange={handleLocationChange}
+                        errors={errors.sale_zonables}
+                        value={data.sale_zonables}
+                        options={sale_zonables}
+                        onChange={handleSelectChange}
                     />
+
                 </div>
 
                 <div className="fv-row">
@@ -136,7 +135,7 @@ function Edit() {
 }
 
 Edit.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
-    children={page}  title="Edit State"
+    children={page}  title="Edit Region"
  />;
 
 export default Edit;
