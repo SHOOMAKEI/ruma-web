@@ -42,7 +42,7 @@ class AuthMobile extends APIBase
         }
 
         $user = Auth::User();
-        if($user->hasRole( "mobile-app") && $user->is_active === 1) {
+        if($user->hasRole( "mobile-app") && $user->is_active == 1) {
             $user->registerMobileDevice($validation['device_id'], $validation['device_name'],
                 $request->device_os_id, $request->device_os_name, $user->id);
 
