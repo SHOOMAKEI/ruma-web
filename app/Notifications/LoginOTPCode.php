@@ -2,23 +2,21 @@
 
 namespace App\Notifications;
 
-use http\Encoding\Stream\Inflate;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Lang;
 
-class OTPNotification extends Notification implements ShouldQueue
+class LoginOTPCode extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      *
-     * @param string $code
+     * @return void
      */
-    public function __construct(public string $code)
+    public function __construct()
     {
         //
     }
@@ -31,7 +29,7 @@ class OTPNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail','database'];
+        return ['mail'];
     }
 
     /**
@@ -42,14 +40,9 @@ class OTPNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-
-
         return (new MailMessage)
-                    ->subject(Lang::get('OTP Code Notification'))
-                    ->line('Please use the code below to login to your RUMA APP account.')
-                    ->line('')
-                    ->line('**'. $this->code .'**')
-                    ->line('')
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }
 
