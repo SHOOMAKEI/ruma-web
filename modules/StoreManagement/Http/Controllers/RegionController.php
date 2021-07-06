@@ -77,8 +77,8 @@ class RegionController extends Controller
             'name' => ['required','string', 'max:255'],
             'code_name' => ['required','string', 'max:255'],
             'geopolitical_zone_id' => ['required','numeric', 'exists:geopolitical_zones,id'],
-            'longitude' => ['sometimes', 'numeric'],
-            'latitude' => ['sometimes', 'numeric']
+            'longitude' => ['sometimes', 'required', 'numeric'],
+            'latitude' => ['sometimes', 'required', 'numeric']
         ]);
 
         if($validator->fails()) {
@@ -94,8 +94,8 @@ class RegionController extends Controller
             'name' => $args['name'],
             'code_name' => $args['code_name'],
             'geopolitical_zone_id' => $args['geopolitical_zone_id'],
-            'longitude' => isset($args['longitude'])??null,
-            'latitude' => isset($args['latitude'])??null
+            'longitude' => $args['longitude'],
+            'latitude' => $args['latitude']
         ];
     }
 

@@ -41,5 +41,11 @@ Route::prefix('employee-management')
             ->name('employee.role_info');
         Route::post('employees-permissions-info/{employee}', 'EmployeeController@permissionsInformation')
             ->name('employee.permission_info');
+        Route::get('import-employees-via-excel', 'EmployeeController@viewImportForm')
+            ->name('employee.import_employees');
+        Route::post('import-employees-file', 'EmployeeController@importEmployees')
+            ->name('employee.import_excel_file');
+        Route::get('employee-template-download/', 'EmployeeController@downloadTemplateFile')
+            ->name('employee.excel_template');
     });
 

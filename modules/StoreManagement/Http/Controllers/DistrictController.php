@@ -74,8 +74,8 @@ class DistrictController extends Controller
             'name' => ['required','string', 'max:255'],
             'code_name' => ['required','string', 'max:255'],
             'region_id' => ['required','numeric', 'exists:regions,id'],
-            'longitude' => ['sometimes', 'numeric'],
-            'latitude' => ['sometimes', 'numeric']
+            'longitude' => ['sometimes', 'required', 'numeric'],
+            'latitude' => ['sometimes', 'required', 'numeric']
         ]);
 
         if($validator->fails()) {
@@ -91,8 +91,8 @@ class DistrictController extends Controller
             'name' => $args['name'],
             'code_name' => $args['code_name'],
             'region_id' => $args['region_id'],
-            'longitude' => isset($args['longitude'])??null,
-            'latitude' => isset($args['latitude'])??null
+            'longitude' => $args['longitude'],
+            'latitude' => $args['latitude']
         ];
     }
 }

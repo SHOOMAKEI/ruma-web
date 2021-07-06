@@ -99,7 +99,7 @@ class AppServiceProvider extends ServiceProvider
             $allow = ['vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
             $format = str_replace(
                 [
-                    'data:@file/',
+                    'data:application/',
                     ';',
                     'base64',
                 ],

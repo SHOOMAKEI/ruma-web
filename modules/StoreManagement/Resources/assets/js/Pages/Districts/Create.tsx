@@ -26,8 +26,8 @@ function Create() {
         name: '',
         code_name: '',
         region_id: '',
-        longitude: '',
-        latitude: ''
+        longitude: 8.675277,
+        latitude: 9.081999
     });
 
     const defaultPosition= {
