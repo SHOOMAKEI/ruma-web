@@ -9,7 +9,12 @@ trait RegisterDevice {
     $deviceOSID,$deviceOSName,$userID){
         return UserDevice::updateOrCreate(
             ['user_id'=>$userID,'device_id'=>$deviceID,'device_name'=>$deviceName],
-            ['device_os'=>$deviceOSID,'device_os_id'=>$deviceOSID,'device_os_version'=>$deviceName]
+            ['device_os'=>$deviceOSID,'device_os_id'=>$deviceOSID,'device_os_version'=>$deviceName,
+                'auth_token']
         );
+    }
+
+    public function generateDeviceToken($deviceID){
+        return password_hash($deviceID);
     }
 }

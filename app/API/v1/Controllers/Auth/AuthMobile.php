@@ -29,7 +29,7 @@ class AuthMobile extends APIBase
 
     public function login(AuthAppUser $request){
         $validation = $request->validate([
-           "email"=>"required|string|email",
+           "username"=>"required|string",
            'password'=>"required|string",
            'device_id'=>"required|string",
            'device_name'=>"required|string",
@@ -37,14 +37,14 @@ class AuthMobile extends APIBase
             "device_os_name"=>"required"
         ]);
 
-        if(!Auth::attempt(['email'=>$validation['email'],'password'=>$validation['password']])){
+        if(!Auth::attempt(['username'=>$validation['username'],'password'=>$validation['password']])){
             return $this->error("Invalid Credentials Provided",401);
         }
 
         $user = Auth::User();
         if($user->hasRole( "mobile-app") && $user->is_active == 1) {
             $user->registerMobileDevice($validation['device_id'], $validation['device_name'],
-                $request->device_os_id, $request->device_os_name, $user->id);
+                $request->device_os_id, $request->device_os_name, $user->id,$user->generateDeviceToken($validation['device_id']));
 
             if ($user->has_enable_otp === 1) {
               // $user->notify(new OTPNotification($user->two_factor_secret));
@@ -60,12 +60,11 @@ class AuthMobile extends APIBase
 
     public function verifyOTPCode(Request $request){
         $validation = $request->validate([
-            "email"=>"required|string|email",
-            'password'=>"required|string",
+            "username"=>"required|string",
             "totp_code" => "required|string",
             'device_id' => "required|string"
         ]);
-       if(Auth::attempt(["email"=>$request->email,"password"=>$request->password])) {
+       if(Auth::attempt(["username"=>$request->email])) {
             $user = Auth::User();
            if($user->hasRole( "mobile-app") && $user->is_active === 1) {
                $googleEngine = new Google2FA();
