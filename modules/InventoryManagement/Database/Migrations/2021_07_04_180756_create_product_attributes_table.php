@@ -19,6 +19,7 @@ class CreateProductAttributesTable extends Migration
             $table->string('code_name')->unique();
             $table->text('description')->nullable();
             $table->foreignId('product_attribute_category_id')->nullable()->constrained()->restrictOnDelete();
+            $table->foreignId('product_type_id')->nullable()->constrained()->restrictOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

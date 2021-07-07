@@ -16,6 +16,7 @@ class CreateProductOptionsTable extends Migration
         Schema::create('product_options', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
+            $table->boolean('create_variance')->default(false);
             $table->foreignId('product_id')->constrained()->restrictOnDelete();
             $table->foreignId('product_attribute_id')->constrained()->restrictOnDelete();
             $table->timestamps();
