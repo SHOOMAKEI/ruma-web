@@ -11,17 +11,23 @@ use Modules\InventoryManagement\Models\ProductOption;
 use Modules\InventoryManagement\Models\ProductOptionValue;
 use Modules\InventoryManagement\Models\ProductSKU;
 use Modules\InventoryManagement\Models\ProductSKUValue;
+use Modules\InventoryManagement\Models\ProductType;
+use Modules\InventoryManagement\Models\ProductVendor;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        return inertia('Module/InventoryManagement/Product/Index');
+        return inertia('Module/InventoryManagement/Product/Index', ['products' => Product::all()]);
     }
 
     public function create()
     {
-        return inertia('Module/InventoryManagement/Product/Create');
+        return inertia('Module/InventoryManagement/Product/Create',[
+            'brands' => ProductBrand::all(),
+            'vendors' => ProductVendor::all(),
+            'product_types' => ProductType::all()
+        ]);
     }
 
 
@@ -31,43 +37,7 @@ class ProductController extends Controller
 
         $product = Product::create($request->only(['name', 'description', 'product_brand_id', 'product_type_id']));
 
-        $product->vendors()->attach($request['product_vendor_id']);
-
-        foreach ($request['product_variants'] as $variant_key => $variant_value)
-        {
-           $product_option[$variant_key] =  ProductOption::create([
-                'name' => $variant_value['option']['name'],
-                'product_id' => $product->id,
-                'product_attribute_id' => $variant_value['option']['id']
-            ]);
-
-           foreach ($variant_value['option']['values'] as $value_key => $value)
-           {
-               ProductOptionValue::create([
-                   'name' => $value['name'],
-                   'product_option_id' => $product_option[$variant_key]->id
-               ]);
-           }
-
-            foreach ($variant_value['variants'] as $key => $variant)
-            {
-                $sku[$key] = ProductSKU::create([
-                    'name' => $variant['sku_name'],
-                    'barcode' => $variant['barcode'],
-                    'product_id' => $product->id
-                ]);
-
-                ProductSKUValue::create([
-                    'product_s_k_u_id' => $sku[$key]->id,
-                    'product_option_id' => 1,
-                    'product_option_value_id' => 1
-                ]);
-            }
-        }
-
-        if(!empty($request['photo'])){
-            uploadBase64Image($product, 'product-photo', $request['photo'], false);
-        }
+        $this->saveProductOtherProperties($product, $request);
 
         return redirect()->route('product-attribute_categories.index')->with(['status' => 'Operation Complete successful']);
     }
@@ -81,7 +51,12 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        return inertia('Module/InventoryManagement/Product/Edit',['product'=> $product]);
+        return inertia('Module/InventoryManagement/Product/Edit',[
+            'product'=> $product,
+            'brands' => ProductBrand::all(),
+            'vendors' => ProductVendor::all(),
+            'product_types' => ProductType::all()
+        ]);
     }
 
 
@@ -93,7 +68,7 @@ class ProductController extends Controller
 
         $product->vendors()->sync($request['product_vendor_id']);
 
-        //TODO:: add logic to update option,values, sku, and sku values
+        $this->saveProductOtherProperties($product, $request);
 
         return redirect()->route('products.index')->with(['status' => 'Operation Complete successful']);
     }
@@ -120,6 +95,7 @@ class ProductController extends Controller
             'product_vendor_id'  => ['required', 'numeric', 'exists:product_vendors,id'],
             'product_variants.*.option.id' => ['required_if:has_variants,true', 'numeric', 'exists:product_attributes,id'],
             'product_variants.*.option.name' => ['required_if:has_variants,true', 'string', 'max:255'],
+            'product_variants.*.option.create_variance' => ['required_if:has_variants,true', 'boolean'],
             'product_variants.*.option.values.*.name' => ['required_if:has_variants,true', 'string', 'max:255'],
             'product_variants.*.variants.sku_name' => ['required_if:has_variants,true', 'string', 'max:255'],
             'product_variants.*.variants.barcode' => ['nullable', 'string', 'max:255'],
@@ -127,6 +103,62 @@ class ProductController extends Controller
             'photo' => ['nullable', 'base64Image'],
             'description' => ['nullable', 'string', 'max:500']
         ]);
+    }
+
+    public function saveProductOtherProperties(Product $product, Request $request)
+    {
+        $product->vendors()->sync($request['product_vendor_id']);
+
+        foreach ($request['product_variants'] as $variant_key => $variant_value)
+        {
+
+            $product_option[$variant_key] =  ProductOption::updateOrCreate([
+                'name' => $variant_value['option']['name'],
+                'product_id' => $product->id,
+                'product_attribute_id' => $variant_value['option']['id'],
+            ],[ 'create_variance' => $variant_value['option']['create_variance']]);
+
+            foreach ($variant_value['option']['values'] as $value_key => $value)
+            {
+                ProductOptionValue::updateOrCreate([
+                    'product_option_id' => $product_option[$variant_key]->id
+                ],['name' => $value['name']]);
+            }
+
+            foreach ($variant_value['variants'] as $key => $variant)
+            {
+                $sku[$key] = ProductSKU::updateOrCreate([
+                    'name' => $variant['sku_name'],
+                    'product_id' => $product->id
+                ],['barcode' => $variant['barcode']]);
+
+                $product_option_data = ProductOption::where([
+                    'product_id' => $product->id,
+                    'id' => $product_option[$variant_key]->id,
+                    'create_variance' => true])->with('product_option_values')->get();
+
+                if(!$product_option_data->isEmpty()) {
+
+                    foreach ($product_option_data as $variant_options)
+                    {
+                        foreach ($variant_options->product_option_values as $value)
+                        {
+                            ProductSKUValue::updateOrCreate([
+                                'product_s_k_u_id' => $sku[$key]->id,
+                                'product_option_id' => $product_option_data->id,
+                            ],['product_option_value_id' => $value->id]);
+                        }
+
+                    }
+
+                }
+
+            }
+        }
+
+        if(!empty($request['photo'])){
+            uploadBase64Image($product, 'product-photo', $request['photo'], false);
+        }
     }
 
 }
