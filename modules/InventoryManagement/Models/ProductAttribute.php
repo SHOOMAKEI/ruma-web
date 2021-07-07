@@ -4,6 +4,7 @@ namespace Modules\InventoryManagement\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductAttribute extends Model
 {
@@ -20,4 +21,16 @@ class ProductAttribute extends Model
     {
         return \Modules\InventoryManagement\Database\Factories\ProductAttribute::new();
     }
+
+    public function attributes_categories(): BelongsTo
+    {
+        return $this->belongsTo(ProductAttributeCategory::class);
+    }
+
+    public function product_type(): BelongsTo
+    {
+        return $this->belongsTo(ProductType::class);
+    }
+
+
 }

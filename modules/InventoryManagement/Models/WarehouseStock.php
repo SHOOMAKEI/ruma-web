@@ -12,7 +12,7 @@ class WarehouseStock extends Model
     protected $fillable = [];
 
     /**
-     * Create a new factory instance for the model.
+     * Create a new factory instance for  model.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */

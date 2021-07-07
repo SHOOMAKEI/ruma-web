@@ -4,6 +4,7 @@ namespace Modules\InventoryManagement\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProductAttributeCategory extends Model
 {
@@ -20,4 +21,10 @@ class ProductAttributeCategory extends Model
     {
         return \Modules\InventoryManagement\Database\Factories\ProductAttributeCategory::new();
     }
+
+    public function attributes(): HasMany
+    {
+        return $this->hasMany(ProductAttribute::class);
+    }
+
 }

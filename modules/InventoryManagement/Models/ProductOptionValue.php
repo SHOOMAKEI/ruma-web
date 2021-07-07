@@ -4,6 +4,7 @@ namespace Modules\InventoryManagement\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductOptionValue extends Model
 {
@@ -20,4 +21,11 @@ class ProductOptionValue extends Model
     {
         return \Modules\InventoryManagement\Database\Factories\ProductOptionValue::new();
     }
+
+    public function product_option(): BelongsTo
+    {
+        return $this->belongsTo(ProductOption::class);
+    }
+
+
 }
