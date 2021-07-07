@@ -3533,21 +3533,21 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var ToggleDropdown_1 = __webpack_require__(/*! ../../Shared/ToggleDropdown */ "./resources/js/Shared/ToggleDropdown.tsx");
 
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
-
-var Layout_1 = __importDefault(__webpack_require__(/*! ../../Shared/Layout */ "./resources/js/Shared/Layout.tsx"));
-
-var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 
 var CardWrapper_1 = __importDefault(__webpack_require__(/*! ../../Shared/CardWrapper */ "./resources/js/Shared/CardWrapper.tsx"));
 
 var react_bootstrap_1 = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
 
-var ToggleDropdown_1 = __webpack_require__(/*! ../../Shared/ToggleDropdown */ "./resources/js/Shared/ToggleDropdown.tsx");
-
 var svg_1 = __webpack_require__(/*! ../../Shared/Icons/svg */ "./resources/js/Shared/Icons/svg.tsx");
+
+var Layout_1 = __importDefault(__webpack_require__(/*! ../../Shared/Layout */ "./resources/js/Shared/Layout.tsx"));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 
 function Index() {
   var roles = inertia_react_1.usePage().props.roles; //@ts-ignore
@@ -3559,9 +3559,9 @@ function Index() {
 
   return react_1["default"].createElement(CardWrapper_1["default"], null, react_1["default"].createElement("table", {
     id: "role-data-table",
-    className: "table table-row-bordered gy-5 gs-7 border rounded"
+    className: "table align-middle table-row-dashed gy-2"
   }, react_1["default"].createElement("thead", null, react_1["default"].createElement("tr", {
-    className: "fw-bolder fs-6 text-gray-800 px-7"
+    className: "fw-bolder text-muted"
   }, react_1["default"].createElement("th", null, "Name"), react_1["default"].createElement("th", null, "Actions"))), react_1["default"].createElement("tbody", null, roles && roles.map(function (role) {
     return react_1["default"].createElement("tr", {
       key: role.id
@@ -3625,9 +3625,9 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 exports.default = function (_a) {
   var children = _a.children;
   return react_1["default"].createElement("div", {
-    className: "card pt-4 mb-6 mb-xl-9 h-100"
+    className: "card pt-4 mb-6 mb-xl-9"
   }, react_1["default"].createElement("div", {
-    className: "card-body pt-0 h-100"
+    className: "card-body pt-0 pb-5 h-100"
   }, children));
 };
 

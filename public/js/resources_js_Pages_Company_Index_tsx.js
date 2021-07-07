@@ -3634,9 +3634,9 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 exports.default = function (_a) {
   var children = _a.children;
   return react_1["default"].createElement("div", {
-    className: "card pt-4 mb-6 mb-xl-9 h-100"
+    className: "card pt-4 mb-6 mb-xl-9"
   }, react_1["default"].createElement("div", {
-    className: "card-body pt-0 h-100"
+    className: "card-body pt-0 pb-5 h-100"
   }, children));
 };
 
