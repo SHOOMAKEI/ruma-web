@@ -4,7 +4,7 @@ namespace App\API\v1\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AuthAppUser extends FormRequest
+class UserOTP extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,9 @@ class AuthAppUser extends FormRequest
     {
          return [
              "username"=>"required|string",
-             'password'=>"required|string",
+             'csrf_token'=>"required|string",
              'device_id'=>"required|string",
-             'device_name'=>"required|string",
-             "device_os_id"=>"required",
-             "device_os_name"=>"required"
-
+             "totp_code"=>"required"
         ];
     }
 }

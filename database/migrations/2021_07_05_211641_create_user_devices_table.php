@@ -21,6 +21,7 @@ class CreateUserDevicesTable extends Migration
             $table->string("device_os","355");
             $table->string('device_os_version',"244");
             $table->string("device_os_id","255");
+            $table->string("device_token","255")->nullable();
             $table->foreignId("user_id")->constrained("users")->onUpdate('cascade')->onDelete("cascade");
 
             $table->timestamps();

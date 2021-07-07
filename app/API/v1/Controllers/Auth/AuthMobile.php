@@ -4,10 +4,12 @@ namespace App\API\v1\Controllers\Auth;
 
 use App\API\v1\Controllers\APIBase;
 use App\API\v1\Requests\Auth\AuthAppUser;
+use App\API\v1\Requests\Auth\UserOTP;
 use App\API\v1\Traits\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\OTPNotification;
+use Dingo\Api\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -28,59 +30,70 @@ class AuthMobile extends APIBase
     }
 
     public function login(AuthAppUser $request){
-        $validation = $request->validate([
-           "username"=>"required|string",
-           'password'=>"required|string",
-           'device_id'=>"required|string",
-           'device_name'=>"required|string",
-            "device_os_id"=>"required",
-            "device_os_name"=>"required"
-        ]);
 
-        if(!Auth::attempt(['username'=>$validation['username'],'password'=>$validation['password']])){
-            return $this->error("Invalid Credentials Provided",401);
+        if(!Auth::attempt(['username'=>$request->username,'password'=>$request->password])){
+            return $this->error("Invalid Credentials Provided",401,null);
         }
 
         $user = Auth::User();
-        if($user->hasRole( "mobile-app") && $user->is_active == 1) {
-            $user->registerMobileDevice($validation['device_id'], $validation['device_name'],
-                $request->device_os_id, $request->device_os_name, $user->id,$user->generateDeviceToken($validation['device_id']));
 
-            if ($user->has_enable_otp === 1) {
+        if($user->hasRole( "mobile-app") && $user->is_active == 1) {
+
+            $deviceToken = $user->generateDeviceToken($user->id.$request->device_id);
+            $user->registerMobileDevice($request->device_id, $request->device_name,
+                $request->device_os_id, $request->device_os_name,
+                $user->id,$deviceToken);
+
+            if ( $user->has_enable_otp === 1 || $user->has_enable_otp === true ) {
               // $user->notify(new OTPNotification($user->two_factor_secret));
-               return $this->success(['has_totp_active' => true, 'must_validate_totp' => true], "Provide OTP Code From Authenticator App", 200);
+               return $this->success(
+                   ["csrf_token"=>$deviceToken,
+                    'has_totp_active' => true,
+                       'must_validate_totp' => true ],
+                   "Provide OTP Code From Authenticator App", 200);
             } else {
-                return $this->success(['token' => $user->createToken($validation['device_id']),
-                    'userData' => $user->getBasicDetail()], "User Successfully Authenticated", 200);
+                return $this->success(
+                    ['token' => $user->createToken($request->device_id),
+                    'userData' => $user->getBasicDetail(),
+                        "csrf_token"=>$deviceToken ],
+                    "User Successfully Authenticated", 200);
             }
         }else{
             return $this->error("Account is Not Authorized",401);
         }
     }
 
-    public function verifyOTPCode(Request $request){
-        $validation = $request->validate([
-            "username"=>"required|string",
-            "totp_code" => "required|string",
-            'device_id' => "required|string"
-        ]);
-       if(Auth::attempt(["username"=>$request->email])) {
-            $user = Auth::User();
-           if($user->hasRole( "mobile-app") && $user->is_active === 1) {
-               $googleEngine = new Google2FA();
-               if ($googleEngine->verifyKey(decrypt($user->two_factor_secret), $request->totp_code) == 1) {
-                   return $this->success(['token' => $user->createToken($validation['device_id']),
-                       'userData' => $user->getBasicDetail()], "User Successfully Authenticated", 200);
-               } else {
-                   return $this->error("Invalid 2FA Code, Retry", 401);
-               }
-           }else{
-               return $this->error("Invalid Credentials", 401);
-           }
+    public function verifyOTPCode(UserOTP $request){
+        $user = User::where("username",$request->username)->first();
 
+        if($user) {
+            $user = Auth::loginUsingId($user->id);
+
+            if ( $user->validDeviceToken($request->csrf_token, $request->device_id) === true) {
+
+                if ($user->hasRole("mobile-app")
+                    && ($user->is_active === 1 || $user->is_active === true)) {
+                    $googleEngine = new Google2FA();
+
+                    if ($googleEngine->verifyKey(decrypt($user->two_factor_secret), $request->totp_code) == 1) {
+                        return $this->success(
+                            ['token' => $user->createToken($request->device_id),
+                                'userData' => $user->getBasicDetail(),
+                                'device_token' => $request->csrf_token],
+                            "User Successfully Authenticated", 200);
+                    } else {
+                        return $this->error("Invalid 2FA Code, Retry", 401, null);
+                    }
+                } else {
+                    return $this->error("Invalid Credentials", 401, null);
+                }
+
+            } else {
+                return $this->error("Invalid Credentials", 401);
+            }
         }else{
-           return $this->error("Invalid Credentials",401);
-       }
+            return $this->error("Invalid Credentials", 401);
+        }
     }
 
     public function logout(){

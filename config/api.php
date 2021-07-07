@@ -140,6 +140,7 @@ return [
         'message' => ':message',
         'errors' => ':errors',
         'code' => ':code',
+        "data"=>null,
         'status_code' => ':status_code',
         'debug' => ':debug',
     ],

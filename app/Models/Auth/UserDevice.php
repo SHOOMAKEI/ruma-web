@@ -15,6 +15,7 @@ class UserDevice extends Model
         "device_os",
         "device_os_id",
         'device_name',
-        'device_os_version'
+        'device_os_version',
+        'device_token'
     ];
 }

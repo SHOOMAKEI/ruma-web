@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Exceptions\ApiExceptionHandler;
 use App\Utilities\Menu;
+use http\Client\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+     //   $this->registerExceptionHandler();
     }
 
     /**
@@ -121,6 +123,7 @@ class AppServiceProvider extends ServiceProvider
 
             return true;
         });
+
     }
 
     /**
