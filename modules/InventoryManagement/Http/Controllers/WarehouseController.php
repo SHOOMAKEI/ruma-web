@@ -12,7 +12,7 @@ class WarehouseController extends Controller
 {
     public function index()
     {
-        return inertia('Module/InventoryManagement/Warehouse/Index');
+        return inertia('Module/InventoryManagement/Warehouse/Index',['warehouses' => Warehouse::all()]);
     }
 
     public function create()
