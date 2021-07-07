@@ -3567,10 +3567,10 @@ function Index() {
     className: "table table-row-bordered gy-5 gs-7 border rounded"
   }, react_1["default"].createElement("thead", null, react_1["default"].createElement("tr", {
     className: "fw-bolder fs-6 text-gray-800 px-7"
-  }, react_1["default"].createElement("th", null, "Name"), react_1["default"].createElement("th", null, "phone"), react_1["default"].createElement("th", null, "email"), react_1["default"].createElement("th", null, "Is Active"), react_1["default"].createElement("th", null, "Actions"))), react_1["default"].createElement("tbody", null, companies && companies.map(function (company) {
+  }, react_1["default"].createElement("th", null, "Name"), react_1["default"].createElement("th", null, "Code Name"), react_1["default"].createElement("th", null, "phone"), react_1["default"].createElement("th", null, "email"), react_1["default"].createElement("th", null, "Is Active"), react_1["default"].createElement("th", null, "Actions"))), react_1["default"].createElement("tbody", null, companies && companies.map(function (company) {
     return react_1["default"].createElement("tr", {
       key: company.id
-    }, react_1["default"].createElement("td", null, company.name), react_1["default"].createElement("td", null, company.phone), react_1["default"].createElement("td", null, company.email), react_1["default"].createElement("td", null, company.is_active ? react_1["default"].createElement("span", {
+    }, react_1["default"].createElement("td", null, company.name), react_1["default"].createElement("td", null, company.code_name), react_1["default"].createElement("td", null, company.phone), react_1["default"].createElement("td", null, company.email), react_1["default"].createElement("td", null, company.is_active ? react_1["default"].createElement("span", {
       className: "badge badge-light-primary"
     }, "Active") : react_1["default"].createElement("span", {
       className: "badge badge-light-warning"

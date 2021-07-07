@@ -22,6 +22,10 @@ class GeopoliticalZone extends Model
 
     protected $guarded= [];
 
+    protected $casts = [
+        'longitude' => 'double',
+        'latitude' => 'double'
+    ];
 
     public function getActivitylogOptions(): LogOptions
     {

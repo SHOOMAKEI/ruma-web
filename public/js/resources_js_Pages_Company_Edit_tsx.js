@@ -3617,6 +3617,7 @@ function Edit() {
   var _b = react_1.useState({
     id: company.id || '',
     name: company.name || '',
+    code_name: company.code_name || '',
     email: company.email || '',
     phone: company.phone,
     currency: company.currency || '',
@@ -3678,14 +3679,14 @@ function Edit() {
     onChange: handleChange
   }), react_1["default"].createElement(TextInput_1["default"], {
     className: "mt-10 col-md-6",
-    label: "Email",
-    placeholder: "Email",
-    name: "email",
+    label: "Code Name",
+    placeholder: "Code Name",
+    name: "code_name",
     type: "text",
-    required: true,
     label_required: true,
-    errors: errors.email,
-    value: data.email,
+    required: true,
+    errors: errors.code_name,
+    value: data.code_name,
     onChange: handleChange
   })), react_1["default"].createElement("div", {
     className: "fv-row mb-5 row"
@@ -3721,6 +3722,17 @@ function Edit() {
     className: "fv-row mb-5 row"
   }, react_1["default"].createElement(TextInput_1["default"], {
     className: "mt-10 col-md-6",
+    label: "Email",
+    placeholder: "Email",
+    name: "email",
+    type: "text",
+    required: true,
+    label_required: true,
+    errors: errors.email,
+    value: data.email,
+    onChange: handleChange
+  }), react_1["default"].createElement(TextInput_1["default"], {
+    className: "mt-10 col-md-6",
     label: "Phone",
     placeholder: "Phone",
     name: "phone",
@@ -3730,8 +3742,10 @@ function Edit() {
     errors: errors.phone,
     value: data.phone,
     onChange: handleChange
-  }), react_1["default"].createElement(TextAreaInput_1["default"], {
-    className: "mt-10 col-md-6",
+  })), react_1["default"].createElement("div", {
+    className: "fv-row mb-5 row"
+  }, react_1["default"].createElement(TextAreaInput_1["default"], {
+    className: "mt-10 col-md-12",
     label: "Address",
     placeholder: "Address",
     name: "address",
