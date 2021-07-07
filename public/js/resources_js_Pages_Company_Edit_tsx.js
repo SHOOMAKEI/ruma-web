@@ -4645,14 +4645,7 @@ var __importDefault = this && this.__importDefault || function (mod) {
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
-}));
-
-var SideNav_1 = __importDefault(__webpack_require__(/*! ./SideNav */ "./resources/js/Shared/SideNav.tsx"));
-
-var TopNav_1 = __importDefault(__webpack_require__(/*! ./TopNav */ "./resources/js/Shared/TopNav.tsx"));
-
-var Footer_1 = __importDefault(__webpack_require__(/*! ./Footer */ "./resources/js/Shared/Footer.tsx")); // @ts-ignore
-
+})); // @ts-ignore
 
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
@@ -4660,9 +4653,15 @@ var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/reac
 
 var config_1 = __webpack_require__(/*! ../config */ "./resources/js/config.tsx");
 
-var ToolBar_1 = __importDefault(__webpack_require__(/*! ./ToolBar */ "./resources/js/Shared/ToolBar.tsx"));
+var Footer_1 = __importDefault(__webpack_require__(/*! ./Footer */ "./resources/js/Shared/Footer.tsx"));
+
+var SideNav_1 = __importDefault(__webpack_require__(/*! ./SideNav */ "./resources/js/Shared/SideNav.tsx"));
 
 var SuccessToast_1 = __importDefault(__webpack_require__(/*! ./SuccessToast */ "./resources/js/Shared/SuccessToast.tsx"));
+
+var ToolBar_1 = __importDefault(__webpack_require__(/*! ./ToolBar */ "./resources/js/Shared/ToolBar.tsx"));
+
+var TopNav_1 = __importDefault(__webpack_require__(/*! ./TopNav */ "./resources/js/Shared/TopNav.tsx"));
 
 function Framework(_a) {
   var children = _a.children,
@@ -4688,9 +4687,7 @@ function Framework(_a) {
   }), react_1["default"].createElement("meta", {
     name: "author",
     content: config_1.author
-  }), react_1["default"].createElement("title", null, config_1.siteTitle)), react_1["default"].createElement("main", {
-    className: "page d-flex flex-row flex-column-fluid"
-  }, react_1["default"].createElement(SuccessToast_1["default"], {
+  }), react_1["default"].createElement("title", null, config_1.siteTitle)), react_1["default"].createElement(SuccessToast_1["default"], {
     status: status
   }), react_1["default"].createElement(SideNav_1["default"], null), react_1["default"].createElement("div", {
     className: "wrapper d-flex flex-column flex-row-fluid flex-root",
@@ -4707,7 +4704,7 @@ function Framework(_a) {
   }, react_1["default"].createElement("div", {
     id: "kt_content_container",
     className: "container"
-  }, children))), react_1["default"].createElement(Footer_1["default"], null))));
+  }, children))), react_1["default"].createElement(Footer_1["default"], null)));
 }
 
 exports.default = Framework;

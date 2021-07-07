@@ -1,12 +1,13 @@
-import SideNav from "./SideNav";
-import TopNav from "./TopNav";
-import Footer from "./Footer";
 // @ts-ignore
 import {InertiaHead, usePage} from '@inertiajs/inertia-react'
 import React, {ReactNode, useEffect} from 'react';
 import {author, siteDescription, siteTitle} from '../config';
-import ToolBar from "./ToolBar";
+
+import Footer from "./Footer";
+import SideNav from "./SideNav";
 import SuccessToast from "./SuccessToast";
+import ToolBar from "./ToolBar";
+import TopNav from "./TopNav";
 
 interface Props {
     children?: ReactNode;
@@ -35,22 +36,20 @@ export default function Framework({children, title, toolBarLeftContent}: Props) 
                 <title>{siteTitle}</title>
                 {/* End meta content */}
             </InertiaHead>
-            <main className="page d-flex flex-row flex-column-fluid">
-                <SuccessToast status={status as string}/>
-                <SideNav />
-                <div className="wrapper d-flex flex-column flex-row-fluid flex-root" id="kt_wrapper">
-                    <TopNav />
-                    <div className="content d-flex flex-column flex-column-fluid" id="kt_content">
-                        <ToolBar title={title} leftContent={toolBarLeftContent}/>
-                        <div className="post d-flex flex-column-fluid" id="kt_post">
-                            <div id="kt_content_container" className="container">
-                                {children}
-                            </div>
+            <SuccessToast status={status as string}/>
+            <SideNav />
+            <div className="wrapper d-flex flex-column flex-row-fluid flex-root" id="kt_wrapper">
+                <TopNav />
+                <div className="content d-flex flex-column flex-column-fluid" id="kt_content">
+                    <ToolBar title={title} leftContent={toolBarLeftContent}/>
+                    <div className="post d-flex flex-column-fluid" id="kt_post">
+                        <div id="kt_content_container" className="container">
+                            {children}
                         </div>
                     </div>
-                    <Footer />
                 </div>
-            </main>
+                <Footer />
+            </div>
         </React.Fragment>
     )
 }
