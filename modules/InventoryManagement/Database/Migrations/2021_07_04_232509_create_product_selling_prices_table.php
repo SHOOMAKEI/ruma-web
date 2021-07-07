@@ -20,7 +20,7 @@ class CreateProductSellingPricesTable extends Migration
             $table->timestamp('start_at');
             $table->timestamp('end_at')->nullable();
             $table->boolean('is_current')->default(true);
-            $table->foreignId('product_s_k_u_value_id')->constrained()->restrictOnDelete();
+            $table->foreignId('product_s_k_u_id')->constrained()->restrictOnDelete();
             $table->foreignId('warehouse_stock_id')->constrained()->restrictOnDelete();
             $table->timestamps();
         });

@@ -15,7 +15,7 @@ class CreateWarehouseStockProductItemsTable extends Migration
     {
         Schema::create('warehouse_stock_product_items', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('product_s_k_u_value_id')->constrained()->restrictOnDelete();
+            $table->foreignId('product_s_k_u_id')->constrained()->restrictOnDelete();
             $table->foreignId('warehouse_stock_id')->constrained()->restrictOnDelete();
             $table->timestamps();
         });

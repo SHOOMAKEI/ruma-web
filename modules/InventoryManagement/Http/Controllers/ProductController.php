@@ -25,7 +25,7 @@ class ProductController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request, $product_option)
     {
         $this->validateRequest($request);
 
@@ -35,17 +35,17 @@ class ProductController extends Controller
 
         foreach ($request['product_variants'] as $variant_key => $variant_value)
         {
-           $produt_option[$variant_key] =  ProductOption::create([
+           $product_option[$variant_key] =  ProductOption::create([
                 'name' => $variant_value['option']['name'],
                 'product_id' => $product->id,
-                'product_id' => $variant_value['option']['id']
+                'product_attribute_id' => $variant_value['option']['id']
             ]);
 
            foreach ($variant_value['option']['values'] as $value_key => $value)
            {
                ProductOptionValue::create([
                    'name' => $value['name'],
-                   'product_option_id' => $produt_option[$variant_key]->id
+                   'product_option_id' => $product_option[$variant_key]->id
                ]);
            }
 

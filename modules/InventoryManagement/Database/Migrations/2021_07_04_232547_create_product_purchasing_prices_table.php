@@ -16,7 +16,7 @@ class CreateProductPurchasingPricesTable extends Migration
         Schema::create('product_purchasing_prices', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->double('amount');
-            $table->foreignId('product_s_k_u_value_id')->constrained()->restrictOnDelete();
+            $table->foreignId('product_s_k_u_id')->constrained()->restrictOnDelete();
             $table->foreignId('warehouse_stock_id')->constrained()->restrictOnDelete();
             $table->timestamps();
         });
