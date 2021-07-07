@@ -47,7 +47,6 @@ class AuthMobile extends APIBase
                 $request->device_os_id, $request->device_os_name, $user->id);
 
             if ($user->has_enable_otp === 1) {
-
               // $user->notify(new OTPNotification($user->two_factor_secret));
                return $this->success(['has_totp_active' => true, 'must_validate_totp' => true], "Provide OTP Code From Authenticator App", 200);
             } else {

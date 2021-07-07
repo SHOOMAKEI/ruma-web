@@ -12,10 +12,28 @@ $api->version("v1",function($api){
 });
 
 
+$api->version("v1",['middleware'=>"api"],function($api){
+    $api->group(["as"=>"api","namespace"=>"App\API\\v1\Controllers"],function($api){
+        // Current User Data Listing
+        $api->get("/user/companies","User\AppUser@getUserCompanies");
+        $api->get("/user/dashboard","User\AppUserDashboard@getDashboard");
+        $api->get("/user/profile","User\AppUser@getProfileInfo");
+        //
+        $api->get("/store/promoterProducts","Store\Promoter@");
+        $api->resource("/store","Store\Shop");
+        $api->get("/product/{productID}","Product\StoreProduct@index");
+        $api->put("/product/checkout/{productID}","Product\StoreProduct@Checkout");
+        $api->put("/product/verify/{productID}","Product\StoreProduct@Verification");
+        $api->put("/product/checkout/{productID}","Product\StoreProduct@Checkout");
 
+        // Attendance tracking from mobile
+        $api->put("/attendance/checking/in","Attendance\PromoterAttendance@checkIn");
+        $api->put("/attendance/checking/out","Attendance\PromoterAttendance@checkOut");
+        $api->get("/attendance/list","Attendance\PromoterAttendance@attendanceList");
+        $api->put("/attendance/UserTelemetry","Attendance/PromoterAttendance@deviceTelemetry");
 
-$api->version("v1",['middleware'=>"api.auth"],function($api){
-    $api->get("/user/profile",function(){
-        return Auth::user();
+        // Facial Recognition tracking and updating
+
     });
+
 });
