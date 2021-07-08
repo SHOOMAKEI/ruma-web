@@ -24,8 +24,8 @@
         "spatie/laravel-activitylog": "^4.0",
         "spatie/laravel-medialibrary": "^9.0.0",
         "spatie/laravel-permission": "^4.2",
-        "tightenco/ziggy": "^1.2",
-      "ext-http": "*"
+        "tightenco/ziggy": "^1.2"
+
     },
     "require-dev": {
         "facade/ignition": "^2.5",

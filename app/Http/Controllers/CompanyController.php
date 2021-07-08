@@ -121,6 +121,7 @@ class CompanyController extends Controller
         $validator =  Validator::make($args,[
             'email' => ['required', 'email', 'string', 'max:255'],
             'name' => ['required','string', 'max:255'],
+            'code_name' => ['required','string', 'max:255', 'unique:companies,code_name'],
             'phone' => ['required','string', 'max:255'],
             'currency' => ['required','string', 'max:3'],
             'tax_number' => ['required', 'string', 'max:255'],
@@ -150,6 +151,7 @@ class CompanyController extends Controller
         return [
             'email' => $args['email'],
             'name' => $args['name'],
+            'code_name' => $args['code_name'],
             'phone' => $args['phone'],
             'currency' => $args['currency'],
             'tax_number' => $args['tax_number'],

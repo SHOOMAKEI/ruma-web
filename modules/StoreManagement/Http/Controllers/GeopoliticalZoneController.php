@@ -28,6 +28,7 @@ class GeopoliticalZoneController extends Controller
 
     public function store(Request $request)
     {
+//        dd($request->toArray());
         if(!is_null($this->validateInput($request->toArray())))
         {
             return $this->validateInput($request->toArray());
@@ -77,8 +78,8 @@ class GeopoliticalZoneController extends Controller
             'name' => ['required','string', 'max:255'],
             'code_name' => ['required','string', 'max:255'],
             'country_id' => ['required','numeric', 'exists:countries,id'],
-            'longitude' => ['sometimes', 'numeric'],
-            'latitude' => ['sometimes', 'numeric']
+            'longitude' => ['sometimes', 'required', 'numeric'],
+            'latitude' => ['sometimes', 'required', 'numeric']
         ]);
 
         if($validator->fails()) {
@@ -94,8 +95,8 @@ class GeopoliticalZoneController extends Controller
             'name' => $args['name'],
             'code_name' => $args['code_name'],
             'country_id' => $args['country_id'],
-            'longitude' => isset($args['longitude'])??null,
-            'latitude' => isset($args['latitude'])??null
+            'longitude' => $args['longitude'],
+            'latitude' => $args['latitude']
         ];
     }
 

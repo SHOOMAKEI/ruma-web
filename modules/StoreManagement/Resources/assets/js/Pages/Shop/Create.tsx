@@ -30,8 +30,8 @@ function Create() {
         email: '',
         location: '',
         address: '',
-        longitude: '',
-        latitude: ''
+        longitude: 8.675277,
+        latitude: 9.081999
     });
 
     const defaultPosition= {

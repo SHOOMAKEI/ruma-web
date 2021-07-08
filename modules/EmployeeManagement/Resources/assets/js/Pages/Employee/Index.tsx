@@ -99,6 +99,8 @@ function Index()  {
 
 Index.layout = (page: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined) => <Layout
     children={page}  title="Employees"
-    toolBarLeftContent={ <InertiaLink href={route('employees.create')} className="btn btn-primary">Add Employee</InertiaLink>} />;
+    toolBarLeftContent={<><InertiaLink href={route('employee.import_employees')} className="btn btn-secondary mx-3">Import
+        Employee</InertiaLink><InertiaLink href={route('employees.create')} className="btn btn-primary">Add
+        Employee</InertiaLink></>} />;
 
 export default Index;

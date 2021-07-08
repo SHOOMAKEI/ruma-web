@@ -87,6 +87,7 @@ export type Permission = {
 export type Company = {
     id: number
     name?: string
+    code_name?: string
     email?: string
     tax_number?: string
     phone?: string

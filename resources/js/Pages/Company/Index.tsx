@@ -37,6 +37,7 @@ function Index()  {
             <thead>
             <tr className="fw-bolder fs-6 text-gray-800 px-7">
                 <th>Name</th>
+                <th>Code Name</th>
                 <th>phone</th>
                 <th>email</th>
                 <th>Is Active</th>
@@ -47,6 +48,7 @@ function Index()  {
             {companies as props && companies.map((company: Company)=>(
                 <tr key={company.id}>
                     <td>{company.name}</td>
+                    <td>{company.code_name}</td>
                     <td>{company.phone}</td>
                     <td>{company.email}</td>
                     <td>{company.is_active? <span className="badge badge-light-primary">Active</span>:
