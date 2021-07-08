@@ -1,24 +1,7 @@
-export function initializeDataTable() {
-    $("#kt_datatable_example_1").DataTable({
-        bSort: false,
-        bDestroy : true,
-        // "aaSorting": [],
-        language: {
-            paginate: {
-                previous: "<i class='uil uil-angle-left'>",
-                next: "<i class='uil uil-angle-right'>",
-            },
-        },
-
-        drawCallback: function () {
-            $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
-        },
-        pageLength: 10,
-        filter: true,
-        deferRender: true,
-        scrollY: 200,
-        scrollCollapse: true,
-        scroller: true,
-        "searching": true,
-    });
-}
+/**
+ * Whenever the page loads add these classes to the div with the id _next
+ * because it will be the root div, the only child of the body, these classes will make
+ * the pages take the full height of the screen even with no content instead of hanging
+ * half screen with fewer content */
+document.querySelector("#app").className =
+    "page d-flex flex-row flex-column-fluid";

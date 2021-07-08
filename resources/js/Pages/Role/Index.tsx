@@ -1,13 +1,13 @@
-import React from "react";
-import {InertiaLink, usePage} from "@inertiajs/inertia-react";
-import Layout from "../../Shared/Layout";
-import route from "ziggy-js";
 import {Company, Role} from "../../Shared/Types";
+import {CustomButtonDropdownToggle, CustomDropdownMenuItem} from '../../Shared/ToggleDropdown'
+import {InertiaLink, usePage} from "@inertiajs/inertia-react";
+
 import CardWrapper from "../../Shared/CardWrapper";
 import {Dropdown} from "react-bootstrap";
-import {CustomDropdownMenuItem, CustomButtonDropdownToggle} from '../../Shared/ToggleDropdown'
 import { DropdownIcon } from "../../Shared/Icons/svg";
-
+import Layout from "../../Shared/Layout";
+import React from "react";
+import route from "ziggy-js";
 
 interface props {
     roles?: Role []
@@ -29,9 +29,9 @@ function Index()  {
     return (
 
 <CardWrapper>
-        <table id="role-data-table" className="table table-row-bordered gy-5 gs-7 border rounded">
+        <table id="role-data-table" className="table align-middle table-row-dashed gy-2">
             <thead>
-            <tr className="fw-bolder fs-6 text-gray-800 px-7">
+            <tr className="fw-bolder text-muted">
                 <th>Name</th>
                 <th>Actions</th>
             </tr>
