@@ -16,4 +16,14 @@ mix.alias({
 });
 
 mix.ts('resources/js/app.js', 'public/js')
-    .webpackConfig(require('./webpack.config'));
+    .webpackConfig({
+        resolve: {
+            alias: {
+                '@': path.resolve('resources/js'),
+                '~': path.resolve('Modules'),
+            },
+        },
+        output: {
+            chunkFilename: 'js/[name].js?id=[chunkhash]',
+        }
+    });

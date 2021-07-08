@@ -1,6 +1,510 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./modules/EmployeeManagement/Resources/assets/js/Pages lazy recursive ^\\.\\/.*$":
+/*!**********************************************************************************************!*\
+  !*** ./modules/EmployeeManagement/Resources/assets/js/Pages/ lazy ^\.\/.*$ namespace object ***!
+  \**********************************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var map = {
+	"./ContractDefinition/Create": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/ContractDefinition/Create.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Create_tsx"
+	],
+	"./ContractDefinition/Create.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/ContractDefinition/Create.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Create_tsx"
+	],
+	"./ContractDefinition/Edit": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/ContractDefinition/Edit.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Edit_tsx"
+	],
+	"./ContractDefinition/Edit.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/ContractDefinition/Edit.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Edit_tsx"
+	],
+	"./ContractDefinition/Index": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/ContractDefinition/Index.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Index_tsx"
+	],
+	"./ContractDefinition/Index.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/ContractDefinition/Index.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Index_tsx"
+	],
+	"./Dashboard": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Dashboard.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Dashboard_tsx"
+	],
+	"./Dashboard.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Dashboard.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Dashboard_tsx"
+	],
+	"./Employee/Create": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Employee/Create.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Create_tsx"
+	],
+	"./Employee/Create.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Employee/Create.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Create_tsx"
+	],
+	"./Employee/Edit": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Employee/Edit.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Edit_tsx"
+	],
+	"./Employee/Edit.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Employee/Edit.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Edit_tsx"
+	],
+	"./Employee/Index": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Employee/Index.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Index_tsx"
+	],
+	"./Employee/Index.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Employee/Index.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Index_tsx"
+	],
+	"./LeaveGroup/Create": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/LeaveGroup/Create.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Create_tsx"
+	],
+	"./LeaveGroup/Create.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/LeaveGroup/Create.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Create_tsx"
+	],
+	"./LeaveGroup/Edit": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/LeaveGroup/Edit.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Edit_tsx"
+	],
+	"./LeaveGroup/Edit.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/LeaveGroup/Edit.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Edit_tsx"
+	],
+	"./LeaveGroup/Index": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/LeaveGroup/Index.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Index_tsx"
+	],
+	"./LeaveGroup/Index.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/LeaveGroup/Index.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Index_tsx"
+	],
+	"./Profile/Account": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Account.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Account_tsx"
+	],
+	"./Profile/Account.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Account.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Account_tsx"
+	],
+	"./Profile/Index": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Index.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Index_tsx"
+	],
+	"./Profile/Index.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Index.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Index_tsx"
+	],
+	"./Profile/Password": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Password.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Password_tsx"
+	],
+	"./Profile/Password.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Password.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Password_tsx"
+	],
+	"./Profile/Profile": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Profile.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Profile_tsx"
+	],
+	"./Profile/Profile.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Profile.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Profile_tsx"
+	],
+	"./Profile/Sections/Account/AccountInformation": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Account/AccountInformation.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_AccountInformat-df43fc"
+	],
+	"./Profile/Sections/Account/AccountInformation.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Account/AccountInformation.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_AccountInformat-df43fc"
+	],
+	"./Profile/Sections/Account/BrowserSessions": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Account/BrowserSessions.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_BrowserSessions_tsx"
+	],
+	"./Profile/Sections/Account/BrowserSessions.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Account/BrowserSessions.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_BrowserSessions_tsx"
+	],
+	"./Profile/Sections/Account/OneTimePassword": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Account/OneTimePassword.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_OneTimePassword_tsx"
+	],
+	"./Profile/Sections/Account/OneTimePassword.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Account/OneTimePassword.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_OneTimePassword_tsx"
+	],
+	"./Profile/Sections/Account/Permissions": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Account/Permissions.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_Permissions_tsx"
+	],
+	"./Profile/Sections/Account/Permissions.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Account/Permissions.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_Permissions_tsx"
+	],
+	"./Profile/Sections/Account/Roles": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Account/Roles.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_Roles_tsx"
+	],
+	"./Profile/Sections/Account/Roles.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Account/Roles.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_Roles_tsx"
+	],
+	"./Profile/Sections/Account/TwoFactorAuthentication": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Account/TwoFactorAuthentication.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_TwoFactorAuthen-b343b3"
+	],
+	"./Profile/Sections/Account/TwoFactorAuthentication.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Account/TwoFactorAuthentication.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_TwoFactorAuthen-b343b3"
+	],
+	"./Profile/Sections/Account/UpdatePassword": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Account/UpdatePassword.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_UpdatePassword_tsx"
+	],
+	"./Profile/Sections/Account/UpdatePassword.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Account/UpdatePassword.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_UpdatePassword_tsx"
+	],
+	"./Profile/Sections/Information/AddContractModal": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/AddContractModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_AddContract-984597"
+	],
+	"./Profile/Sections/Information/AddContractModal.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/AddContractModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_AddContract-984597"
+	],
+	"./Profile/Sections/Information/Address": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/Address.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Address_tsx"
+	],
+	"./Profile/Sections/Information/Address.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/Address.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Address_tsx"
+	],
+	"./Profile/Sections/Information/AddressInfoModal": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/AddressInfoModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_AddressInfo-066606"
+	],
+	"./Profile/Sections/Information/AddressInfoModal.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/AddressInfoModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_AddressInfo-066606"
+	],
+	"./Profile/Sections/Information/Company": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/Company.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Company_tsx"
+	],
+	"./Profile/Sections/Information/Company.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/Company.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Company_tsx"
+	],
+	"./Profile/Sections/Information/CompanyModal": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/CompanyModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_CompanyModal_tsx"
+	],
+	"./Profile/Sections/Information/CompanyModal.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/CompanyModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_CompanyModal_tsx"
+	],
+	"./Profile/Sections/Information/ContactInfo": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/ContactInfo.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_ContactInfo_tsx"
+	],
+	"./Profile/Sections/Information/ContactInfo.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/ContactInfo.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_ContactInfo_tsx"
+	],
+	"./Profile/Sections/Information/ContactInfoModal": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/ContactInfoModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_ContactInfo-bd4658"
+	],
+	"./Profile/Sections/Information/ContactInfoModal.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/ContactInfoModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_ContactInfo-bd4658"
+	],
+	"./Profile/Sections/Information/Employment": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/Employment.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Employment_tsx"
+	],
+	"./Profile/Sections/Information/Employment.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/Employment.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Employment_tsx"
+	],
+	"./Profile/Sections/Information/EmploymentContractModal": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/EmploymentContractModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_EmploymentC-6ecfeb"
+	],
+	"./Profile/Sections/Information/EmploymentContractModal.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/EmploymentContractModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_EmploymentC-6ecfeb"
+	],
+	"./Profile/Sections/Information/EmploymentModal": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/EmploymentModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_EmploymentM-ab17a8"
+	],
+	"./Profile/Sections/Information/EmploymentModal.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/EmploymentModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_EmploymentM-ab17a8"
+	],
+	"./Profile/Sections/Information/Modal": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/Modal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Modal_tsx"
+	],
+	"./Profile/Sections/Information/Modal.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/Modal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Modal_tsx"
+	],
+	"./Profile/Sections/Information/Other": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/Other.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Other_tsx"
+	],
+	"./Profile/Sections/Information/Other.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/Other.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Other_tsx"
+	],
+	"./Profile/Sections/Information/OtherModal": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/OtherModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_OtherModal_tsx"
+	],
+	"./Profile/Sections/Information/OtherModal.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/OtherModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_OtherModal_tsx"
+	],
+	"./Profile/Sections/Information/Personal": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/Personal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Personal_tsx"
+	],
+	"./Profile/Sections/Information/Personal.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/Personal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Personal_tsx"
+	],
+	"./Profile/Sections/Information/PersonalInfoModal": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/PersonalInfoModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_PersonalInf-02d3c3"
+	],
+	"./Profile/Sections/Information/PersonalInfoModal.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/PersonalInfoModal.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_PersonalInf-02d3c3"
+	],
+	"./Profile/Sections/Information/Section": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/Section.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Section_tsx"
+	],
+	"./Profile/Sections/Information/Section.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/Information/Section.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Section_tsx"
+	],
+	"./Profile/Sections/zones-and-shops/Shops": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/zones-and-shops/Shops.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_zones-and-shops_Shops_tsx"
+	],
+	"./Profile/Sections/zones-and-shops/Shops.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/zones-and-shops/Shops.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_zones-and-shops_Shops_tsx"
+	],
+	"./Profile/Sections/zones-and-shops/Zones": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/zones-and-shops/Zones.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_zones-and-shops_Zones_tsx"
+	],
+	"./Profile/Sections/zones-and-shops/Zones.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Sections/zones-and-shops/Zones.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_zones-and-shops_Zones_tsx"
+	],
+	"./Profile/Settings": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Settings.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Settings_tsx"
+	],
+	"./Profile/Settings.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/Settings.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Settings_tsx"
+	],
+	"./Profile/ZonesAndShops": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/ZonesAndShops.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_ZonesAndShops_tsx"
+	],
+	"./Profile/ZonesAndShops.tsx": [
+		"./modules/EmployeeManagement/Resources/assets/js/Pages/Profile/ZonesAndShops.tsx",
+		"modules_EmployeeManagement_Resources_assets_js_Pages_Profile_ZonesAndShops_tsx"
+	]
+};
+function webpackAsyncContext(req) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(() => {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+
+	var ids = map[req], id = ids[0];
+	return __webpack_require__.e(ids[1]).then(() => {
+		return __webpack_require__.t(id, 7 | 16);
+	});
+}
+webpackAsyncContext.keys = () => (Object.keys(map));
+webpackAsyncContext.id = "./modules/EmployeeManagement/Resources/assets/js/Pages lazy recursive ^\\.\\/.*$";
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
+/***/ "./modules/StoreManagement/Resources/assets/js/Pages lazy recursive ^\\.\\/.*$":
+/*!*******************************************************************************************!*\
+  !*** ./modules/StoreManagement/Resources/assets/js/Pages/ lazy ^\.\/.*$ namespace object ***!
+  \*******************************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var map = {
+	"./Districts/Create": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Districts/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Districts_Create_tsx"
+	],
+	"./Districts/Create.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Districts/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Districts_Create_tsx"
+	],
+	"./Districts/Edit": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Districts/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Districts_Edit_tsx"
+	],
+	"./Districts/Edit.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Districts/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Districts_Edit_tsx"
+	],
+	"./Districts/Index": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Districts/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Districts_Index_tsx"
+	],
+	"./Districts/Index.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Districts/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Districts_Index_tsx"
+	],
+	"./GeopoliticalZone/Create": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/GeopoliticalZone/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Create_tsx"
+	],
+	"./GeopoliticalZone/Create.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/GeopoliticalZone/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Create_tsx"
+	],
+	"./GeopoliticalZone/Edit": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/GeopoliticalZone/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Edit_tsx"
+	],
+	"./GeopoliticalZone/Edit.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/GeopoliticalZone/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Edit_tsx"
+	],
+	"./GeopoliticalZone/Index": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/GeopoliticalZone/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Index_tsx"
+	],
+	"./GeopoliticalZone/Index.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/GeopoliticalZone/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Index_tsx"
+	],
+	"./Region/Create": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Region/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Region_Create_tsx"
+	],
+	"./Region/Create.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Region/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Region_Create_tsx"
+	],
+	"./Region/Edit": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Region/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Region_Edit_tsx"
+	],
+	"./Region/Edit.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Region/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Region_Edit_tsx"
+	],
+	"./Region/Index": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Region/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Region_Index_tsx"
+	],
+	"./Region/Index.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Region/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Region_Index_tsx"
+	],
+	"./SaleZone/Create": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/SaleZone/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_SaleZone_Create_tsx"
+	],
+	"./SaleZone/Create.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/SaleZone/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_SaleZone_Create_tsx"
+	],
+	"./SaleZone/Edit": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/SaleZone/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_SaleZone_Edit_tsx"
+	],
+	"./SaleZone/Edit.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/SaleZone/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_SaleZone_Edit_tsx"
+	],
+	"./SaleZone/Index": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/SaleZone/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_SaleZone_Index_tsx"
+	],
+	"./SaleZone/Index.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/SaleZone/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_SaleZone_Index_tsx"
+	],
+	"./Shop/Create": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Shop/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Shop_Create_tsx"
+	],
+	"./Shop/Create.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Shop/Create.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Shop_Create_tsx"
+	],
+	"./Shop/Edit": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Shop/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Shop_Edit_tsx"
+	],
+	"./Shop/Edit.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Shop/Edit.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Shop_Edit_tsx"
+	],
+	"./Shop/Index": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Shop/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Shop_Index_tsx"
+	],
+	"./Shop/Index.tsx": [
+		"./modules/StoreManagement/Resources/assets/js/Pages/Shop/Index.tsx",
+		"modules_StoreManagement_Resources_assets_js_Pages_Shop_Index_tsx"
+	]
+};
+function webpackAsyncContext(req) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(() => {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+
+	var ids = map[req], id = ids[0];
+	return __webpack_require__.e(ids[1]).then(() => {
+		return __webpack_require__.t(id, 7 | 16);
+	});
+}
+webpackAsyncContext.keys = () => (Object.keys(map));
+webpackAsyncContext.id = "./modules/StoreManagement/Resources/assets/js/Pages lazy recursive ^\\.\\/.*$";
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
 /***/ "./node_modules/@inertiajs/inertia-react/dist/index.js":
 /*!*************************************************************!*\
   !*** ./node_modules/@inertiajs/inertia-react/dist/index.js ***!
@@ -37095,7 +37599,7 @@ function webpackAsyncContext(req) {
 
 	var ids = map[req], id = ids[0];
 	return __webpack_require__.e(ids[1]).then(() => {
-		return __webpack_require__.t(id, 7);
+		return __webpack_require__.t(id, 7 | 16);
 	});
 }
 webpackAsyncContext.keys = () => (Object.keys(map));
@@ -37219,7 +37723,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Account_Create_tsx":"3c1a1d2de377da9c111d","resources_js_Pages_Account_Edit_tsx":"ef2dc18d14765058d52f","resources_js_Pages_Account_Index_tsx":"66e6968bfe5787bc243c","resources_js_Pages_Auth_AuthFramework_tsx":"c3f5e2da7eeae995003a","resources_js_Pages_Auth_ForgotPassword_tsx":"9074874cd91775ddb030","resources_js_Pages_Auth_Login_tsx":"88b5bd4105b6ed9a42c7","resources_js_Pages_Auth_ResetPassword_tsx":"31fa8e68513fa669afeb","resources_js_Pages_Auth_TwoFactorAuth_tsx":"37902d1185eb5e236386","resources_js_Pages_Company_Create_tsx":"b9800b4055e59995e5c6","resources_js_Pages_Company_Edit_tsx":"c5890402990e8f6ec763","resources_js_Pages_Company_Index_tsx":"f16a7a255f7daaac91a0","resources_js_Pages_Dashboard_tsx":"eec3b4a39b1992cdad48","resources_js_Pages_Department_Create_tsx":"93ff959d97da7e9dbdd9","resources_js_Pages_Department_Edit_tsx":"24c1496c94459c4d7956","resources_js_Pages_Department_Index_tsx":"3048e8b9b48e94a57b4d","resources_js_Pages_OperationYear_Create_tsx":"66f58cfa495060cd468d","resources_js_Pages_OperationYear_Edit_tsx":"7607b42f575c5efd34ad","resources_js_Pages_OperationYear_Index_tsx":"c8595a8baa1e97d4f3a6","resources_js_Pages_Profile_Account_tsx":"285aad974a687659dc11","resources_js_Pages_Profile_Index_tsx":"dbbd21be68831b874d46","resources_js_Pages_Profile_Password_tsx":"4bdcfcc2e6029179ab0d","resources_js_Pages_Profile_Profile_tsx":"67d303945303f5e3ab69","resources_js_Pages_Profile_Sections_Account_AccountInformation_tsx":"327eb0bc00f241475be3","resources_js_Pages_Profile_Sections_Account_BrowserSessions_tsx":"ba82817e21c40864fcca","resources_js_Pages_Profile_Sections_Account_OneTimePassword_tsx":"fd8f4813218e589e8441","resources_js_Pages_Profile_Sections_Account_Permissions_tsx":"22057eb4d6df92a6a855","resources_js_Pages_Profile_Sections_Account_Roles_tsx":"f37bac57455f68c71a0c","resources_js_Pages_Profile_Sections_Account_TwoFactorAuthentication_tsx":"bcca31f0bb0635ddaa8c","resources_js_Pages_Profile_Sections_Account_UpdatePassword_tsx":"7a3794d14498fc030399","resources_js_Pages_Profile_Sections_Information_Address_tsx":"77d44169b4659a526250","resources_js_Pages_Profile_Sections_Information_Company_tsx":"14fad3b08729d61f183c","resources_js_Pages_Profile_Sections_Information_ContactInfo_tsx":"1ce55a95d5011b35ca22","resources_js_Pages_Profile_Sections_Information_Employment_tsx":"51dba3228fd1d0958650","resources_js_Pages_Profile_Sections_Information_Other_tsx":"5ab4ff0947bbe1ece101","resources_js_Pages_Profile_Sections_Information_Personal_tsx":"5e571f25421d3b3588b8","resources_js_Pages_Profile_Sections_Information_Section_tsx":"c6ffa5cd4370195039a7","resources_js_Pages_Profile_Settings_tsx":"e524218dc5ca1749a88f","resources_js_Pages_Role_Create_tsx":"19c884762628c4ceca02","resources_js_Pages_Role_Edit_tsx":"6c67e0f94181d16d5c82","resources_js_Pages_Role_Index_tsx":"dbf00bae147fea8dddfd","resources_js_Pages_Role_Permission_tsx":"2ce8de5f185e33bbb742"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Create_tsx":"87a3b7edf56a259a01c1","modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Edit_tsx":"59f6d86557d6e2a0374a","modules_EmployeeManagement_Resources_assets_js_Pages_ContractDefinition_Index_tsx":"d821a7056fbe94184fe6","modules_EmployeeManagement_Resources_assets_js_Pages_Dashboard_tsx":"60322652c131d8903358","modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Create_tsx":"ae54245070a81d1c0ad7","modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Edit_tsx":"925415b501e6434a0a05","modules_EmployeeManagement_Resources_assets_js_Pages_Employee_Index_tsx":"9890489cb5a79ecd7ebf","modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Create_tsx":"153474a4630f9e07f7b9","modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Edit_tsx":"c08fed95d42411141ced","modules_EmployeeManagement_Resources_assets_js_Pages_LeaveGroup_Index_tsx":"ff7cf9827adf9532ba23","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Account_tsx":"403877938730e3cceaf1","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Index_tsx":"2bce7abefcd793ec3ae0","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Password_tsx":"ac77c3cc549c3fedfa9f","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Profile_tsx":"7389fd281d326fb13259","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_AccountInformat-df43fc":"07f42e51e06c8561b0c3","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_BrowserSessions_tsx":"cdaf6965d9a67a8d98ef","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_OneTimePassword_tsx":"639c553525519c07ef39","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_Permissions_tsx":"8aacbffd07048e8960a2","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_Roles_tsx":"6cd7657559b44cfaa50e","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_TwoFactorAuthen-b343b3":"d0ea32925584e3873e45","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Account_UpdatePassword_tsx":"262a73d4b47f23bf2e23","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_AddContract-984597":"7b25e471ecca9b041edc","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Address_tsx":"7c23366aa7f9e43654b9","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_AddressInfo-066606":"58d8c952bcfaaaa08f2e","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Company_tsx":"85f2d3884b6fe628ca1a","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_CompanyModal_tsx":"f491e7c2074432e2fb81","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_ContactInfo_tsx":"e4e836de6a2ffba0e457","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_ContactInfo-bd4658":"ff5e213e7f56cebb52c3","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Employment_tsx":"8da6ec101669065f1b39","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_EmploymentC-6ecfeb":"4aa4e2b8b62842ecf45c","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_EmploymentM-ab17a8":"b842f93eb37afbe6836d","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Modal_tsx":"47a5bd2e3e6934b2dac5","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Other_tsx":"6f4ce9e0baffb08e3aca","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_OtherModal_tsx":"45d7593c5b68b1c0e84b","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Personal_tsx":"dc5b9f26c7a376c3a8f0","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_PersonalInf-02d3c3":"e54c5d563ddddc07abf2","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_Information_Section_tsx":"8aa87dc4c31776ea96e3","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_zones-and-shops_Shops_tsx":"b686a93c641e393f7b26","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Sections_zones-and-shops_Zones_tsx":"bd4c5b26bebc91dd0a7d","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_Settings_tsx":"4af5e968998808968e41","modules_EmployeeManagement_Resources_assets_js_Pages_Profile_ZonesAndShops_tsx":"8fe2c5ac8be3ec769887","modules_StoreManagement_Resources_assets_js_Pages_Districts_Create_tsx":"27a9badc3e5173a903bf","modules_StoreManagement_Resources_assets_js_Pages_Districts_Edit_tsx":"bd9f54472785c987f497","modules_StoreManagement_Resources_assets_js_Pages_Districts_Index_tsx":"893f2ce1a2f50a225bb1","modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Create_tsx":"3f94b7290f757c4a40a0","modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Edit_tsx":"d9bbec99bfdffb77b0e4","modules_StoreManagement_Resources_assets_js_Pages_GeopoliticalZone_Index_tsx":"f9a9cda717c62ef5977b","modules_StoreManagement_Resources_assets_js_Pages_Region_Create_tsx":"178baab4d413e033481c","modules_StoreManagement_Resources_assets_js_Pages_Region_Edit_tsx":"a42a84cddfaaf593f873","modules_StoreManagement_Resources_assets_js_Pages_Region_Index_tsx":"d823895de0320b93e498","modules_StoreManagement_Resources_assets_js_Pages_SaleZone_Create_tsx":"6520547256264225326f","modules_StoreManagement_Resources_assets_js_Pages_SaleZone_Edit_tsx":"c736e6c62a59ecb4b011","modules_StoreManagement_Resources_assets_js_Pages_SaleZone_Index_tsx":"6b94c42b0c42a1677303","modules_StoreManagement_Resources_assets_js_Pages_Shop_Create_tsx":"3d3564ba65908b8c3253","modules_StoreManagement_Resources_assets_js_Pages_Shop_Edit_tsx":"204f80eb703d159793a3","modules_StoreManagement_Resources_assets_js_Pages_Shop_Index_tsx":"727a990a7d1870b69975","resources_js_Pages_Account_Create_tsx":"4f74c60b51cff60656d4","resources_js_Pages_Account_Edit_tsx":"56654cf8ed8bec2f1b48","resources_js_Pages_Account_Index_tsx":"64cb7ca5a1e5bf8e5f16","resources_js_Pages_Auth_AuthFramework_tsx":"e26a8eddf5d90fd62b82","resources_js_Pages_Auth_ForgotPassword_tsx":"7c36bb82e7ba60056c9a","resources_js_Pages_Auth_Login_tsx":"e6d3c90e436b1a7b6177","resources_js_Pages_Auth_ResetPassword_tsx":"6ec3d99e2af7a13a8552","resources_js_Pages_Auth_TwoFactorAuth_tsx":"b866a8c20fff5ddf6b1a","resources_js_Pages_Company_Create_tsx":"04f4f3e2fbf8260d66b0","resources_js_Pages_Company_Edit_tsx":"adca804eff12b316782b","resources_js_Pages_Company_Index_tsx":"8f43416f06c0197c28f9","resources_js_Pages_Dashboard_tsx":"2b964b7194d9531c3df9","resources_js_Pages_Department_Create_tsx":"54a732a43360e38a38a2","resources_js_Pages_Department_Edit_tsx":"a3e99ff10e625a6ffb82","resources_js_Pages_Department_Index_tsx":"8d682ccc1f17a822e178","resources_js_Pages_OperationYear_Create_tsx":"18c7f83962e59311d504","resources_js_Pages_OperationYear_Edit_tsx":"1523b11b39fe812bdef9","resources_js_Pages_OperationYear_Index_tsx":"04571c10fd8332d08bf4","resources_js_Pages_Profile_Account_tsx":"e23723e9e6a52aaa03ab","resources_js_Pages_Profile_Index_tsx":"a47c757c5da18b89550d","resources_js_Pages_Profile_Password_tsx":"acfc3bfb46fb7f09192a","resources_js_Pages_Profile_Profile_tsx":"382fdf246b13648b5406","resources_js_Pages_Profile_Sections_Account_AccountInformation_tsx":"a80d718ecfa0e1666249","resources_js_Pages_Profile_Sections_Account_BrowserSessions_tsx":"fd80858cf88542e53f9c","resources_js_Pages_Profile_Sections_Account_OneTimePassword_tsx":"1b2c294772364bd32b58","resources_js_Pages_Profile_Sections_Account_Permissions_tsx":"905ef4b2e73a6a150bc5","resources_js_Pages_Profile_Sections_Account_Roles_tsx":"d7a5f3c8c09779f9fd31","resources_js_Pages_Profile_Sections_Account_TwoFactorAuthentication_tsx":"2c0204edc7305c4a2f84","resources_js_Pages_Profile_Sections_Account_UpdatePassword_tsx":"caab0dbcc5192a4347b2","resources_js_Pages_Profile_Sections_Information_Address_tsx":"785d18e5ba9e32132fe8","resources_js_Pages_Profile_Sections_Information_Company_tsx":"df834b41344f8c8a4c91","resources_js_Pages_Profile_Sections_Information_ContactInfo_tsx":"8f1c43572cf04a234036","resources_js_Pages_Profile_Sections_Information_Employment_tsx":"3cb7d80362239cec1310","resources_js_Pages_Profile_Sections_Information_Other_tsx":"c5744044c493a632809a","resources_js_Pages_Profile_Sections_Information_Personal_tsx":"98c07db0881fd865ede7","resources_js_Pages_Profile_Sections_Information_Section_tsx":"60d04c831f07849b253a","resources_js_Pages_Profile_Settings_tsx":"87cd8d79ff6fcc3d3b05","resources_js_Pages_Role_Create_tsx":"725ebac1eb1044737379","resources_js_Pages_Role_Edit_tsx":"7d78824378ec86e6c20f","resources_js_Pages_Role_Index_tsx":"bd4ae28af6da52e4e631","resources_js_Pages_Role_Permission_tsx":"8634b0166fcbc3debc38"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -37242,6 +37746,21 @@ module.exports = webpackAsyncContext;
 /******/ 				if (typeof window === 'object') return window;
 /******/ 			}
 /******/ 		})();
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/harmony module decorator */
+/******/ 	(() => {
+/******/ 		__webpack_require__.hmd = (module) => {
+/******/ 			module = Object.create(module);
+/******/ 			if (!module.children) module.children = [];
+/******/ 			Object.defineProperty(module, 'exports', {
+/******/ 				enumerable: true,
+/******/ 				set: () => {
+/******/ 					throw new Error('ES Modules may not assign module.exports or exports.*, Use ESM export syntax, instead: ' + module.id);
+/******/ 				}
+/******/ 			});
+/******/ 			return module;
+/******/ 		};
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
@@ -37438,6 +37957,22 @@ _inertiajs_progress__WEBPACK_IMPORTED_MODULE_3__.InertiaProgress.init({
 });
 (0,_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__.createInertiaApp)({
   resolve: function resolve(name) {
+    var parts = name.split('/');
+    var type = parts[0];
+    var module_name = parts[1];
+
+    if (type == 'Module') {
+      var _name = parts[2] + '/' + parts[3];
+
+      if (module_name == 'EmployeeManagement') {
+        return __webpack_require__("./modules/EmployeeManagement/Resources/assets/js/Pages lazy recursive ^\\.\\/.*$")("./".concat(_name));
+      }
+
+      if (module_name == 'StoreManagement') {
+        return __webpack_require__("./modules/StoreManagement/Resources/assets/js/Pages lazy recursive ^\\.\\/.*$")("./".concat(_name));
+      }
+    }
+
     return __webpack_require__("./resources/js/Pages lazy recursive ^\\.\\/.*$")("./".concat(name));
   },
   setup: function setup(_ref) {

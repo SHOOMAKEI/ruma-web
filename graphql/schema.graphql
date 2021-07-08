@@ -5,14 +5,298 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 type Query {
-    users: [User!]! @paginate(defaultCount: 10)
-    user(id: ID @eq): User @find
+    users: UsersResponse @guard  @hasPermission(permission: "user.read")
+    @field(resolver: "App\\GraphQL\\Queries\\UserQueries@users")
+    user(id: ID @eq):UserResponse @guard @hasPermission(permission: "user.read")
+    @field(resolver: "App\\GraphQL\\Queries\\UserQueries@findUser")
+    company(id: ID @eq): CompanyResponse @guard @hasPermission(permission:"company.read")
+    @field(resolver: "App\\GraphQL\\Queries\\CompanyQueries@findCompany")
+    companies: CompaniesResponse  @guard @hasPermission( permission:"company.read")
+    @field(resolver: "App\\GraphQL\\Queries\\CompanyQueries@companies")
+    role(id: ID ): RoleResponse @guard @hasPermission(permission: "role.read")
+    @field(resolver: "App\\GraphQL\\Queries\\RoleAndPermissionQueries@findRole")
+    roles: RolesResponse  @guard @hasPermission(permission: "role.read")
+    @field(resolver: "App\\GraphQL\\Queries\\RoleAndPermissionQueries@allRoles")
+    me:UserResponse @guard
+    @field(resolver: "App\\GraphQL\\Mutations\\AuthMutation@me")
+    getRecoveryCodes: TwoFactorResponse @guard
+    @field(resolver: "App\\GraphQL\\Mutations\\AccountSettingsMutation@getRecoveryCodes")
+    permission(id: ID): PermissionResponse @guard @hasPermission(permission: "permission.read")
+    @field(resolver: "App\\GraphQL\\Queries\\RoleAndPermissionQueries@findPermission")
+    permissions: PermissionsResponse  @guard @hasPermission(permission: "permission.read")
+    @field(resolver: "App\\GraphQL\\Queries\\RoleAndPermissionQueries@allPermissions")
+    myPermissions: PermissionsResponse  @guard
+    @field(resolver: "App\\GraphQL\\Queries\\UtilitiesQueries@myPermissions")
+    myRoles: RolesResponse  @guard
+    @field(resolver: "App\\GraphQL\\Queries\\UtilitiesQueries@myRoles")
+    myCompanies: CompaniesResponse  @guard
+    @field(resolver: "App\\GraphQL\\Queries\\UtilitiesQueries@myCompanies")
+    userRoles(id: Int): RolesResponse  @guard
+    @field(resolver: "App\\GraphQL\\Queries\\UtilitiesQueries@userRoles")
 }
+
+type Mutation {
+    login(input: loginInput):loginResponse @throttle(name:"login")
+    @field(resolver: "App\\GraphQL\\Mutations\\AuthMutation@login")
+    verify2FACode(input: verify2FACodeInput): loginResponse
+    @field(resolver: "App\\GraphQL\\Mutations\\AuthMutation@verify2FACode")
+    verifyOtpCode(input: verifyOtpCodeInput!): loginResponse
+    @field(resolver: "App\\GraphQL\\Mutations\\AuthMutation@verifyOtpCode")
+    refreshToken:loginResponse @guard @throttle(name:"login")
+    @field(resolver: "App\\GraphQL\\Mutations\\AuthMutation@refresh")
+    verifyEmail(input: verifyEmailInput):GeneralResponse
+    @field(resolver: "App\\GraphQL\\Mutations\\AuthMutation@verifyEmail")
+    resendEmailVerification(username: String):GeneralResponse @throttle(name:"login")
+    @field(resolver: "App\\GraphQL\\Mutations\\AuthMutation@resendEmailVerification")
+    resendOtpCode(username: String):GeneralResponse @throttle(name:"login")
+    @field(resolver: "App\\GraphQL\\Mutations\\AuthMutation@resendOtpCode")
+    forgotPassword(username: String):GeneralResponse @throttle(name:"login")
+    @field(resolver: "App\\GraphQL\\Mutations\\PasswordResetMutation@forgotPassword")
+    resetPassword(input: resetPasswordInput):GeneralResponse
+    @field(resolver: "App\\GraphQL\\Mutations\\PasswordResetMutation@resetPassword")
+    toggleOTP:UserResponse @guard
+    @field(resolver: "App\\GraphQL\\Mutations\\AccountSettingsMutation@toggleOTP")
+    enableTwoFactorAuthentication: TwoFactorResponse @guard
+    @field(resolver: "App\\GraphQL\\Mutations\\AccountSettingsMutation@enableTwoFactorAuthentication")
+    disableTwoFactorAuthentication: TwoFactorResponse @guard
+    @field(resolver: "App\\GraphQL\\Mutations\\AccountSettingsMutation@disableTwoFactorAuthentication")
+    regenerate2FARecoveryCodes: TwoFactorResponse @guard
+    @field(resolver: "App\\GraphQL\\Mutations\\AccountSettingsMutation@regenerate2FARecoveryCodes")
+    updatePassword(input: updatePasswordInput):UserResponse @guard
+    @field(resolver: "App\\GraphQL\\Mutations\\AccountSettingsMutation@updatePassword")
+    updateAccountInformation(input: updateAccountInformationInput):UserResponse @guard
+    @field(resolver: "App\\GraphQL\\Mutations\\AccountSettingsMutation@updateAccountInformation")
+    logout:loginResponse @guard
+    @field(resolver: "App\\GraphQL\\Mutations\\AuthMutation@logout")
+
+    #company mutations
+    createCompany(input: CreateCompanyInput): CompanyResponse @guard @hasPermission( permission:"company.create")
+    @field(resolver: "App\\GraphQL\\Mutations\\CompanyRegistrationMutation@store")
+    updateCompany(input: updateCompanyInput): CompanyResponse @guard @hasPermission(permission:"company.update")
+    @field(resolver: "App\\GraphQL\\Mutations\\CompanyRegistrationMutation@update")
+    deleteCompany(id: ID): CompanyResponse @guard @hasPermission(permission:"company.delete")
+    @field(resolver: "App\\GraphQL\\Mutations\\CompanyRegistrationMutation@delete")
+
+
+    #roles and permission
+    createRole(input: roleInput): RoleResponse
+    @field(resolver: "App\\GraphQL\\Mutations\\RoleMutation@create") @hasPermission(permission: "role.create")
+
+
+}
+
+type GeneralResponse implements Response{
+    status: String
+    success:Boolean
+    errors: [Errors]
+}
+
+input verifyOtpCodeInput {
+    username: String!
+    otp_code: Int!
+}
+
+input verify2FACodeInput {
+    username: String!
+    code: String
+    recovery_code: String
+}
+
+input verifyEmailInput {
+    id: ID
+    hash: String
+    signature: String
+    expires: Int
+}
+
+input roleInput {
+    name: String
+    permissions: [rolePermissionInput]
+}
+
+input rolePermissionInput {
+    id: Int
+}
+
 
 type User {
     id: ID!
-    name: String!
     email: String!
+    username: String!
+    mobile_number: String!
+    is_active: Boolean!
+    settings: Settings
+    profile_photo_url: String
+    account_roles: [Role]
+    account_permissions: [Permission]
+    employee: Employee
+    companies: [Company] @belongsToMany
     created_at: DateTime!
     updated_at: DateTime!
 }
+
+type Settings {
+    has_verify_email: Boolean!
+    has_verify_mobile_number: Boolean! @deprecated(reason: "mobile number in this system are not verified so please relay on it.")
+    has_enable_otp: Boolean!
+    has_enable_two_factory_auth: Boolean!
+}
+
+type Role {
+    id: ID
+    name: String
+    permissions: [Permission] @belongsToMany
+}
+
+type Permission {
+    id: ID
+    name: String
+}
+
+type Company {
+    id: ID!
+    name: String
+    email: String
+    tax_number: String
+    phone: String
+    address: String
+    is_active: Boolean
+    currency: String
+    locale: String
+    logo: String
+    settings: [CompanySettings]
+    users: [User] @belongsToMany
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+type CompanySettings {
+    key: String
+    value: String
+}
+
+input updateCompanyInput {
+    id: ID !
+    name: String !
+    email: String !
+    tax_number: String !
+    phone: String !
+    address: String !
+    currency: String !
+    is_active: Boolean!
+    logo: String !
+}
+
+input CreateCompanyInput {
+    name: String !
+    email: String !
+    tax_number: String !
+    phone: String !
+    address: String !
+    currency: String !
+    is_active: Boolean!
+    logo: String !
+}
+
+
+input loginInput {
+    username: String!
+    password: String!
+}
+
+input forgetPasswordInput {
+    username: String!
+}
+
+input updateAccountInformationInput {
+    username: String !
+    email: String !
+    mobile_number: String !
+}
+
+input updatePasswordInput {
+    current_password: String !
+    password: String !
+    password_confirmation: String!
+}
+
+input resetPasswordInput {
+    username: String!
+    token: String!
+    password: String !
+    password_confirmation: String!
+}
+
+type UserResponse implements Response {
+    user: User
+    success:Boolean
+    errors: [Errors]
+}
+
+type CompanyResponse implements Response {
+    company: Company
+    success:Boolean
+    errors: [Errors]
+}
+
+type RoleResponse implements Response {
+    role: Role
+    success:Boolean
+    errors: [Errors]
+}
+
+type loginResponse {
+    user: User
+    success:Boolean
+    errors: [Errors]
+    access_token: String
+    token_type: String
+    expires_in: Int
+}
+
+type Errors {
+   message: String
+}
+
+type TwoFactorResponse implements Response{
+    two_factor_recovery_codes: [RecoveryCode]
+    qrcode_svg:String
+    success:Boolean
+    errors: [Errors]
+}
+
+type RecoveryCode {
+    code:String
+}
+
+type CompaniesResponse implements Response{
+    companies: [Company]
+    success:Boolean
+    errors: [Errors]
+}
+
+type RolesResponse implements Response{
+    roles: [Role]
+    success:Boolean
+    errors: [Errors]
+}
+type PermissionsResponse implements Response{
+    permissions: [Permission]
+    success:Boolean
+    errors: [Errors]
+}
+
+type PermissionResponse implements Response{
+    permission: Permission
+    success:Boolean
+    errors: [Errors]
+}
+
+type UsersResponse implements Response {
+    users: [User]
+    success:Boolean
+    errors: [Errors]
+}
+
+#import regions-management.graphql
+#import employees-management.graphql

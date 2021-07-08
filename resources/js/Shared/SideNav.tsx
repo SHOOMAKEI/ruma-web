@@ -1,15 +1,20 @@
-import Menu from "./Menu";
+import Menu, {MenuType} from "./Menu";
 import {dropdownMenus} from "./SidebarLink";
 import {DropdownIcon, SideNavCollapse} from "./Icons/svg";
-import React from "react";
+import React, {useState} from "react";
 import SelectInput from "./SelectInput";
 import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 import {Dropdown} from "react-bootstrap";
 import {CustomButtonDropdownToggle, CustomDropdownMenuItem} from "./ToggleDropdown";
 import route from "ziggy-js";
 import {comment} from "postcss";
+
+interface mainMenu {
+    menu: MenuType []
+}
 export default () => {
-    const { auth } = usePage().props
+    const { auth, main_menu } = usePage().props
+    const [toggle, setToggle] = useState(false)
 
     return (
         <div id="kt_aside" className="aside aside-dark aside-hoverable" data-kt-drawer="true"
@@ -19,11 +24,11 @@ export default () => {
             <div className="aside-logo flex-column-auto" id="kt_aside_logo">
                 <a href={route('home')}>
                     <img alt="Logo" src="/assets/images/brand/logoicon.png" className="h-55px logo"/>
-                    <span className="text-white h1 mx-20">RUMA</span>
+                    <span className="text-white h1 mx-5">RUMA</span>
                 </a>
 
-                <div id="kt_aside_toggle"
-                     className="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
+                <div id="kt_aside_toggle" onChange={event => setToggle(!toggle)}
+                     className={`btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle ${toggle?'active': ''}`}
                      data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
                      data-kt-toggle-name="aside-minimize">
                     <SideNavCollapse />
@@ -40,13 +45,15 @@ export default () => {
                         id="#kt_aside_menu"
                         data-kt-menu="true">
                         {
-                            dropdownMenus.map((menu: any, ) => (
+                            //@ts-ignore
+                          main_menu && (main_menu).map((menu: any, ) => (
                                 <Menu key={Math.random()} menu={menu}/>
                             ))
                         }
                     </div>
                 </div>
             </div>
+
             <div className="aside-footer flex-column-auto" id="kt_aside_footer">
             <Dropdown>
                     <Dropdown.Toggle cssClass={"btn btn-sm btn-light btn-primary w-100"} variant="success" id="dropdown-basic" as={CustomButtonDropdownToggle}>

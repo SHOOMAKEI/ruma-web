@@ -1,0 +1,19 @@
+{
+    "alias": "store-management",
+    "description": "Store Management Subsystem",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\StoreManagement\\Providers\\Main",
+        "Modules\\StoreManagement\\Providers\\Event"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "name": "Store Management",
+    "minimumCoreVersion": "1.0",
+    "title": "Store Management",
+    "version": 1.0,
+    "author": "Michael Omakei"
+}

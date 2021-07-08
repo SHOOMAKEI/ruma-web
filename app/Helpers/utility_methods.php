@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Utilities\Menu;
 use Carbon\Traits\Creator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -44,6 +45,30 @@ if (!function_exists('respondWithErrors')) {
     }
 }
 
+if (!function_exists('mainMenu')) {
+
+    function mainMenu()
+    {
+        return app('mainMenu');
+
+    }
+}
+
+if (!function_exists('user')) {
+
+    function user()
+    {
+        return User::find(auth()->user()->id);
+    }
+}
+if (!function_exists('getLastIdNumberCount')) {
+
+    function getLastIdNumberCount()
+    {
+        return User::find(auth()->user()->id);
+    }
+}
+
 if (!function_exists('respondWithSuccess')) {
 
     function respondWithSuccess(string $type, mixed $data):array
@@ -80,9 +105,9 @@ if(!function_exists('getJobStatuses')) {
     }
 }
 
-if(!function_exists('getEmploymentStatuses')) {
+if(!function_exists('getContractType')) {
 
-    function getEmploymentStatuses(): array
+    function getContractType(): array
     {
         return [
             ['name' => EMPLOYMENT_STATUS_FULL_TIME],

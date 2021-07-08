@@ -13,8 +13,27 @@ InertiaProgress.init({
     includeCSS: true,
     showSpinner: true,
 })
+
 createInertiaApp({
-    resolve: name => import(`./Pages/${name}`),
+    resolve:  name => {
+        let parts = name.split('/')
+        let type = parts[0]
+        let  module_name = parts[1]
+        if(type == 'Module'){
+            let  name = parts[2] + '/' + parts[3]
+            if(module_name == 'EmployeeManagement') {
+
+                return  import(`@/../../modules/EmployeeManagement/Resources/assets/js/Pages/${name}`)
+            }
+
+            if(module_name == 'StoreManagement') {
+
+                return  import(`@/../../modules/StoreManagement/Resources/assets/js/Pages/${name}`)
+            }
+        }
+        return import(`./Pages/${name}`)
+
+    },
     setup({ el, App, props }) {
         render(<App {...props} />, el)
     },
