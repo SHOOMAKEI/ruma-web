@@ -15,8 +15,8 @@ class CreateContractsTable extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamp('started_at');
-            $table->timestamp('ended_at');
+            $table->timestamp('started_at')->nullable();
+            $table->timestamp('ended_at')->nullable();
             $table->foreignId('employee_id')->constrained()->restrictOnDelete();
             $table->foreignId('contract_definition_id')->constrained()->restrictOnDelete();
             $table->enum('status',['ON-LEAVE', 'TERMINATED', 'IN-ACTIVE', 'ACTIVE', 'SUSPENDED'])->default('ACTIVE');

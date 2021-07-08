@@ -8,15 +8,21 @@ use Nuwave\Lighthouse\Exceptions\RendersErrorsExtensions;
 
 class ValidationException extends Exception implements RendersErrorsExtensions
 {
-
-
-
-
     public function __construct( string $message,public string | array $reason)
     {
         parent::__construct($message);
-
+    public function isClientSafe()
+    {
+        // TODO: Implement isClientSafe() method.
     }
+        public function getCategory()
+    {
+        // TODO: Implement getCategory() method.
+    }public function extensionsContent(): array
+
+    {
+        // TODO: Implement extensionsContent() method.
+    }}
 
 
     public function isClientSafe(): bool
