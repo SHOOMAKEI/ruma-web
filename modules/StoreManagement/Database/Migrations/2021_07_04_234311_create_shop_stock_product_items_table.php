@@ -15,7 +15,7 @@ class CreateShopStockProductItemsTable extends Migration
     {
         Schema::create('shop_stock_product_items', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('product_s_k_u_value_id')->constrained()->restrictOnDelete();
+            $table->foreignId('product_s_k_u_id')->constrained()->restrictOnDelete();
             $table->foreignId('shop_stock_id')->constrained()->restrictOnDelete();
             $table->enum('current_status', ['ALIVE', 'DOA', 'DAP'])->default('ALIVE');
             $table->integer('incentive_percent')->nullable();
