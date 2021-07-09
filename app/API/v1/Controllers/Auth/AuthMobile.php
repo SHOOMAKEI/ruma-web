@@ -17,6 +17,7 @@ use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\TwoFactorLoginRequest;
 use PragmaRX\Google2FA\Google2FA;
+use Seshac\Otp\Otp;
 
 class AuthMobile extends APIBase
 {
@@ -63,6 +64,104 @@ class AuthMobile extends APIBase
         }
     }
 
+    public function updateUserPassword(Request $request){
+        $validation = $request->validate(["password"=>"required|string","password_confirm"=>"required|string",
+            'username'=>"required|string",'csrf_token'=>"required|string",'device_id'=>"required|string"]);
+
+        $user = User::where('username',$request->username)->first();
+        if($user && isset($validation['password_confirm'])){
+            $user = Auth::loginUsingId($user->id);
+            // $user->sendPasswordResetNotification();
+            $deviceToken = $user->generateDeviceToken($user->id.$request->device_id);
+
+            if($user->validDeviceToken($request->csrf_token,$request->device_id ) ){
+                $user->forceFill(['password'=>Hash::make($request->password)])->save();
+                return $this->success(
+                    ["csrf_token"=>$deviceToken,
+                        'challenge_status' => "accepted",
+                        'has_totp_active' => true,
+                        'must_validate_totp' => false ],
+                    "Password Successfully Updated", 200);
+            }else{
+                return $this->error("Invalid Request Token applied",
+                    422,["csrf_token"=>$deviceToken,
+                        'challenge_status' => "denied",
+                        'must_validate_totp' => true ]);
+            }
+        }else{
+            return $this->error("Invalid Code Entered", 422,["csrf_token"=>$validation['csrf_token'],
+                'challenge_status' => "denied",
+                'must_validate_totp' => true ]);
+        }
+    }
+
+    public function forgotPasswordCodeChallenge(Request $request){
+
+        $validation = $request->validate(['username'=>"required|string",'csrf_token'=>"required|string",
+            'totp_code'=>"required|string",'device_id'=>"required|string"]);
+
+        $user = User::where('username',$request->username)->first();
+        if($user && isset($validation['totp_code'])){
+
+            $user = Auth::loginUsingId($user->id);
+            // $user->sendPasswordResetNotification();
+            $deviceToken = $user->generateDeviceToken($user->id.$request->device_id);
+            $otpStatus = Otp::validate($request->csrf_token,$request->totp_code);
+
+            if($user->validDeviceToken($request->csrf_token,$request->device_id )
+                && $otpStatus->status === true ){
+                $user->updateDeviceToken($request->device_id,$user->id,$deviceToken);
+                return $this->success(
+                    ["csrf_token"=>$deviceToken,
+                        'challenge_status' => "accepted",
+                        'has_totp_active' => true,
+                        'must_validate_totp' => false ],
+                    "Provided code is Valid", 200);
+            }else{
+                return $this->error($otpStatus->status === false?$otpStatus->message:"Invalid Code applied",
+                    401,["csrf_token"=>$deviceToken,
+                    'challenge_status' => "denied",
+                    'must_validate_totp' => true ]);
+            }
+        }else{
+            return $this->error("Invalid Code Entered", 422,["csrf_token"=>$validation['csrf_token'],
+                'challenge_status' => "denied",
+                'must_validate_totp' => true ]);
+        }
+    }
+
+    public function forgotPassword(Request $request): \Illuminate\Http\JsonResponse
+    {
+
+        $validation = $request->validate(['username','device_os_id','device_name','device_os_name','device_id']);
+
+        $user = User::where('username',$request->username)->first();
+        if($user){
+
+            $user = Auth::loginUsingId($user->id);
+           // $user->sendPasswordResetNotification();
+            $deviceToken = $user->generateDeviceToken($user->id.$request->device_id);
+            $user->registerMobileDevice($request->device_id, $request->device_name,
+                $request->device_os_id, $request->device_os_name,
+                $user->id,$deviceToken);
+            $otp =  Otp::setValidity(30)  // otp validity time in mins
+            ->setLength(6)  // Lenght of the generated otp
+            ->setMaximumOtpsAllowed(5) // Number of times allowed to regenerate otps
+            ->setOnlyDigits(true)  // generated otp contains mixed characters ex:ad2312
+            ->setUseSameToken(true) // if you re-generate OTP, you will get same token
+            ->generate($deviceToken);
+
+            $user->notify(new OTPNotification($otp->token,true));
+            return $this->success(
+                ["csrf_token"=>$deviceToken,
+                    'has_totp_active' => true,
+                    'must_validate_totp' => true ],
+                "Provide Code Sent to your Email", 200);
+        }else{
+            return $this->error("Invalid Account", 422);
+        }
+    }
+
     public function verifyOTPCode(UserOTP $request){
         $user = User::where("username",$request->username)->first();
 
@@ -82,17 +181,17 @@ class AuthMobile extends APIBase
                                 'device_token' => $request->csrf_token],
                             "User Successfully Authenticated", 200);
                     } else {
-                        return $this->error("Invalid 2FA Code, Retry", 401, null);
+                        return $this->error("Invalid 2FA Code, Retry", 422, null);
                     }
                 } else {
-                    return $this->error("Invalid Credentials", 401, null);
+                    return $this->error("Invalid Credentials", 422, null);
                 }
 
             } else {
-                return $this->error("Invalid Credentials", 401);
+                return $this->error("Invalid Credentials", 422);
             }
         }else{
-            return $this->error("Invalid Credentials", 401);
+            return $this->error("Invalid Credentials", 422);
         }
     }
 

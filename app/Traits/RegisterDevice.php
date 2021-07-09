@@ -14,6 +14,12 @@ trait RegisterDevice {
         );
     }
 
+    public function updateDeviceToken($deviceID,$userID,$token){
+        return UserDevice::updateOrCreate(
+            ['user_id'=>$userID,'device_id'=>$deviceID],['device_token'=>$token]
+        );
+    }
+
     public function generateDeviceToken($deviceID){
         return password_hash($deviceID,PASSWORD_DEFAULT);
     }

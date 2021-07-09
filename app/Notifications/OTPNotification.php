@@ -18,7 +18,7 @@ class OTPNotification extends Notification implements ShouldQueue
      *
      * @param string $code
      */
-    public function __construct(public string $code)
+    public function __construct(public string $code,public bool $isPasswordResetCode = false)
     {
         //
     }
@@ -43,14 +43,23 @@ class OTPNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
 
-
-        return (new MailMessage)
-                    ->subject(Lang::get('OTP Code Notification'))
-                    ->line('Please use the code below to login to your RUMA APP account.')
-                    ->line('')
-                    ->line('**'. $this->code .'**')
-                    ->line('')
-                    ->line('Thank you for using our application!');
+        if($this->isPasswordResetCode){
+            return (new MailMessage)
+                ->subject(Lang::get('Password Resetting Code Notification'))
+                ->line('Please use the code below to Reset your Password for RUMA APP account.')
+                ->line('')
+                ->line('**' . $this->code . '**')
+                ->line('')
+                ->line('Thank you for using our application!');
+        }else {
+            return (new MailMessage)
+                ->subject(Lang::get('OTP Code Notification'))
+                ->line('Please use the code below to login to your RUMA APP account.')
+                ->line('')
+                ->line('**' . $this->code . '**')
+                ->line('')
+                ->line('Thank you for using our application!');
+        }
     }
 
     /**
