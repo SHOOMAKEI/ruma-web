@@ -14,7 +14,6 @@ class CreateProductSKUValuesTable extends Migration
     public function up()
     {
         Schema::create('product_s_k_u_values', function (Blueprint $table) {
-            $table->bigIncrements('id');
             $table->foreignId('product_s_k_u_id')->constrained()->restrictOnDelete();
             $table->foreignId('product_option_id')->constrained()->restrictOnDelete();
             $table->foreignId('product_option_value_id')->constrained()->restrictOnDelete();
