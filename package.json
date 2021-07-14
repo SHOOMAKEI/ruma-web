@@ -12,7 +12,7 @@
     "devDependencies": {
         "@babel/preset-react": "^7.13.13",
         "axios": "^0.21",
-        "laravel-mix": "^6.0.6",
+        "laravel-mix": "^6.0.25",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "react-tag-input": "^6.6.1",
@@ -28,10 +28,11 @@
         "@types/ziggy-js": "^1.0.1",
         "react": "^17.0.2",
         "react-bootstrap": "^1.6.1",
+        "react-dnd": "^5.0.0",
+        "react-dnd-html5-backend": "^3.0.2",
         "react-dom": "^17.0.2",
         "react-dropzone": "^11.3.2",
-        "react-select": "^4.3.1",
-        "react-dnd": "^5.0.0",
-        "react-dnd-html5-backend": "^3.0.2"
+        "react-location-picker": "^1.5.0",
+        "react-select": "^4.3.1"
     }
 }

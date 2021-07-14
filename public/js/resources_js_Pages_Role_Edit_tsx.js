@@ -3523,6 +3523,22 @@ function useWillUnmount(fn) {
 "use strict";
 
 
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -3561,12 +3577,21 @@ function Edit() {
       data = _b.data,
       setData = _b.setData,
       errors = _b.errors,
-      post = _b.post,
+      put = _b.put,
       processing = _b.processing;
 
   function handleSubmit(e) {
     e.preventDefault();
-    post(ziggy_js_1["default"]('roles.store'));
+    put(ziggy_js_1["default"]('roles.update', role.id));
+  } //@ts-ignore
+
+
+  function setPermission(permissions) {
+    setData(function (data) {
+      var _a;
+
+      return __assign(__assign({}, data), (_a = {}, _a['permissions'] = permissions, _a));
+    });
   }
 
   return react_1["default"].createElement(CardWrapper_1["default"], null, react_1["default"].createElement("form", {
@@ -3590,7 +3615,8 @@ function Edit() {
   })), react_1["default"].createElement("div", {
     className: "fv-row mb-5 row"
   }, react_1["default"].createElement(Permission_1["default"], {
-    permissions: permissions
+    permissions: permissions,
+    callback: setPermission
   })), react_1["default"].createElement("div", {
     className: "fv-row"
   }, react_1["default"].createElement(LoadingButton_1["default"], {
@@ -3735,7 +3761,7 @@ exports.default = function (_a) {
 
     setSelectedPermission(newPer); // @ts-ignore
 
-    var newTags = shownPermissions.filter(function (tag, index) {
+    var newTags = shownPermissions.filter(function (permission, index) {
       return index !== i;
     });
     newTags[i] = newPer; // @ts-ignore
@@ -3772,9 +3798,9 @@ exports.default = function (_a) {
     if ((_a = permission.name) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase().includes(activeFilter.name.toLocaleLowerCase())) {
       return react_1["default"].createElement("div", {
         className: "col-md-4",
-        key: permission.id
+        key: Math.random()
       }, react_1["default"].createElement(CheckBoxInput_1["default"], {
-        key: permission.id,
+        key: Math.random(),
         label: "can " + ((_b = permission.name) === null || _b === void 0 ? void 0 : _b.split('.')[1].replace('_', ' ')) + " " + ((_c = permission.name) === null || _c === void 0 ? void 0 : _c.split('.')[0].replace('_', ' ')),
         type: "checkbox",
         name: "permission",
@@ -3815,9 +3841,9 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 exports.default = function (_a) {
   var children = _a.children;
   return react_1["default"].createElement("div", {
-    className: "card pt-4 mb-6 mb-xl-9"
+    className: "card pt-4 mb-6 mb-xl-9 h-100"
   }, react_1["default"].createElement("div", {
-    className: "card-body pt-0"
+    className: "card-body pt-0 h-100"
   }, children));
 };
 
@@ -4638,14 +4664,13 @@ var config_1 = __webpack_require__(/*! ../config */ "./resources/js/config.tsx")
 
 var ToolBar_1 = __importDefault(__webpack_require__(/*! ./ToolBar */ "./resources/js/Shared/ToolBar.tsx"));
 
+var SuccessToast_1 = __importDefault(__webpack_require__(/*! ./SuccessToast */ "./resources/js/Shared/SuccessToast.tsx"));
+
 function Framework(_a) {
   var children = _a.children,
       title = _a.title,
       toolBarLeftContent = _a.toolBarLeftContent;
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(inertia_react_1.InertiaHead, null, react_1["default"].createElement("link", {
-    rel: "icon",
-    href: "/favicon.ico"
-  }), react_1["default"].createElement("meta", {
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(inertia_react_1.InertiaHead, null, react_1["default"].createElement("meta", {
     charSet: "utf-8"
   }), react_1["default"].createElement("meta", {
     name: "viewport",
@@ -4661,8 +4686,8 @@ function Framework(_a) {
     content: config_1.author
   }), react_1["default"].createElement("title", null, config_1.siteTitle)), react_1["default"].createElement("main", {
     className: "page d-flex flex-row flex-column-fluid"
-  }, react_1["default"].createElement(SideNav_1["default"], null), react_1["default"].createElement("div", {
-    className: "wrapper d-flex flex-column flex-row-fluid",
+  }, react_1["default"].createElement(SuccessToast_1["default"], null), react_1["default"].createElement(SideNav_1["default"], null), react_1["default"].createElement("div", {
+    className: "wrapper d-flex flex-column flex-row-fluid flex-root",
     id: "kt_wrapper"
   }, react_1["default"].createElement(TopNav_1["default"], null), react_1["default"].createElement("div", {
     className: "content d-flex flex-column flex-column-fluid",
@@ -4825,8 +4850,13 @@ function Menu(_a) {
       show = _b[0],
       setShow = _b[1];
 
+  var auth = inertia_react_1.usePage().props.auth;
+
   function checkActiveLink(link) {
-    if (ziggy_js_1["default"]().current(link + '*')) return 'active';
+    if (ziggy_js_1["default"]().current(link + '*')) {
+      return 'here show';
+    }
+
     return '';
   }
 
@@ -4835,7 +4865,10 @@ function Menu(_a) {
      * This is for sidebar dropdown menus, it determines which
      * sidebar dropdown menu is active
      * */
-    if (ziggy_js_1["default"]().current(link + '*')) return 'here show';
+    if (ziggy_js_1["default"]().current(link + '*')) {
+      return 'active';
+    }
+
     return '';
   }
 
@@ -4847,8 +4880,11 @@ function Menu(_a) {
       className: "menu-link " + checkActiveLink(menu.link),
       href: menu.link
     }, react_1["default"].createElement("span", {
-      className: "menu-icon"
-    }, react_1["default"].createElement(Icon, null)), react_1["default"].createElement("span", {
+      className: "menu-icon",
+      dangerouslySetInnerHTML: {
+        __html: menu.Icon
+      }
+    }), react_1["default"].createElement("span", {
       className: "menu-title"
     }, menu.name)));
   }
@@ -4862,20 +4898,24 @@ function Menu(_a) {
     }, react_1["default"].createElement("span", {
       className: "menu-section text-muted text-uppercase fs-8 ls-1"
     }, menu.name)));
-  }
+  } //@ts-ignore
+
 
   return react_1["default"].createElement("div", {
     "data-kt-menu-trigger": "click",
     onClick: function onClick(e) {
       return setShow(!show);
     },
-    className: "menu-item menu-accordion " + checkActiveMenuParent(menu.link) + "  " + (show ? 'show' : '') + " ",
+    className: "menu-item menu-accordion " + checkActiveMenuParent(menu.link) + "  " + (show ? 'hover show' : '') + " ",
     key: menu.id
   }, react_1["default"].createElement("span", {
     className: "menu-link"
   }, react_1["default"].createElement("span", {
-    className: "menu-icon"
-  }, react_1["default"].createElement(Icon, null)), react_1["default"].createElement("span", {
+    className: "menu-icon",
+    dangerouslySetInnerHTML: {
+      __html: menu.Icon
+    }
+  }), react_1["default"].createElement("span", {
     className: "menu-title"
   }, menu.name), react_1["default"].createElement("span", {
     className: "menu-arrow"
@@ -4959,6 +4999,40 @@ exports.default = SearchBar;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -4971,13 +5045,27 @@ Object.defineProperty(exports, "__esModule", ({
 
 var Menu_1 = __importDefault(__webpack_require__(/*! ./Menu */ "./resources/js/Shared/Menu.tsx"));
 
-var SidebarLink_1 = __webpack_require__(/*! ./SidebarLink */ "./resources/js/Shared/SidebarLink.ts");
-
 var svg_1 = __webpack_require__(/*! ./Icons/svg */ "./resources/js/Shared/Icons/svg.tsx");
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+
+var react_bootstrap_1 = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+
+var ToggleDropdown_1 = __webpack_require__(/*! ./ToggleDropdown */ "./resources/js/Shared/ToggleDropdown.tsx");
+
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 
 exports.default = function () {
+  var _a = inertia_react_1.usePage().props,
+      auth = _a.auth,
+      main_menu = _a.main_menu;
+
+  var _b = react_1.useState(false),
+      toggle = _b[0],
+      setToggle = _b[1];
+
   return react_1["default"].createElement("div", {
     id: "kt_aside",
     className: "aside aside-dark aside-hoverable",
@@ -4992,12 +5080,19 @@ exports.default = function () {
     className: "aside-logo flex-column-auto",
     id: "kt_aside_logo"
   }, react_1["default"].createElement("a", {
-    href: ""
-  }, react_1["default"].createElement("span", {
-    className: "text-white h1"
+    href: ziggy_js_1["default"]('home')
+  }, react_1["default"].createElement("img", {
+    alt: "Logo",
+    src: "/assets/images/brand/logoicon.png",
+    className: "h-55px logo"
+  }), react_1["default"].createElement("span", {
+    className: "text-white h1 mx-5"
   }, "RUMA")), react_1["default"].createElement("div", {
     id: "kt_aside_toggle",
-    className: "btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle",
+    onChange: function onChange(event) {
+      return setToggle(!toggle);
+    },
+    className: "btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle " + (toggle ? 'active' : ''),
     "data-kt-toggle": "true",
     "data-kt-toggle-state": "active",
     "data-kt-toggle-target": "body",
@@ -5014,10 +5109,11 @@ exports.default = function () {
     "data-kt-scroll-wrappers": "#kt_aside_menu",
     "data-kt-scroll-offset": "0"
   }, react_1["default"].createElement("div", {
-    className: "menu menu-column menu-title-gray-800 menu-state-title-primary\n                    menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500",
+    className: "menu menu-column menu-title-gray-800 menu-state-title-primary\r\n                    menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500",
     id: "#kt_aside_menu",
     "data-kt-menu": "true"
-  }, SidebarLink_1.dropdownMenus.map(function (menu) {
+  }, //@ts-ignore
+  main_menu && main_menu.map(function (menu) {
     return react_1["default"].createElement(Menu_1["default"], {
       key: Math.random(),
       menu: menu
@@ -5025,219 +5121,129 @@ exports.default = function () {
   })))), react_1["default"].createElement("div", {
     className: "aside-footer flex-column-auto",
     id: "kt_aside_footer"
-  }));
+  }, react_1["default"].createElement(react_bootstrap_1.Dropdown, null, react_1["default"].createElement(react_bootstrap_1.Dropdown.Toggle, {
+    cssClass: "btn btn-sm btn-light btn-primary w-100",
+    variant: "success",
+    id: "dropdown-basic",
+    as: ToggleDropdown_1.CustomButtonDropdownToggle
+  }, //@ts-ignore
+  auth.current_company.substring(0, 20), react_1["default"].createElement(svg_1.DropdownIcon, null)), react_1["default"].createElement(react_bootstrap_1.Dropdown.Menu, {
+    className: "menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-900   fw-bold py-1 px-1 mr-3 fs-6 w-100"
+  }, //@ts-ignore
+  auth.companies && auth.companies.map(function (company) {
+    return react_1["default"].createElement(react_bootstrap_1.Dropdown.Item, {
+      as: ToggleDropdown_1.CustomDropdownMenuItem,
+      key: Math.random()
+    }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
+      href: ziggy_js_1["default"]('company.default_dashboard', company.id),
+      className: "menu-link px-1 text-primary text-hover-white"
+    }, company.name));
+  })))));
 };
 
 /***/ }),
 
-/***/ "./resources/js/Shared/SidebarLink.ts":
-/*!********************************************!*\
-  !*** ./resources/js/Shared/SidebarLink.ts ***!
-  \********************************************/
+/***/ "./resources/js/Shared/SuccessToast.tsx":
+/*!**********************************************!*\
+  !*** ./resources/js/Shared/SuccessToast.tsx ***!
+  \**********************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
 };
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.dropdownMenus = exports.PRODUCTS = exports.USERS = exports.DASHBOARD = void 0;
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
 var svg_1 = __webpack_require__(/*! ./Icons/svg */ "./resources/js/Shared/Icons/svg.tsx");
 
-var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
-/**
- * Sidebar links urls are defined here, that's because we want to track
- * active link to determine which element to set active on the sidebar during
- * page navigation
- * */
+exports.default = function () {
+  var _a = react_1.useState(false),
+      visible = _a[0],
+      setVisible = _a[1];
 
+  var _b = inertia_react_1.usePage().props,
+      status = _b.status,
+      errors = _b.errors;
+  react_1.useEffect(function () {
+    if (status !== null) {
+      setVisible(true);
+    }
 
-exports.DASHBOARD = {
-  parent: "/dashboard",
-  submenus: {}
+    if (!(JSON.stringify(errors) === JSON.stringify({}))) {
+      setVisible(true);
+    }
+  }, [status, errors]);
+  return react_1["default"].createElement("div", {
+    style: {
+      position: "absolute",
+      top: 64,
+      right: 10,
+      zIndex: 99999,
+      display: visible ? 'block' : 'none'
+    }
+  }, react_1["default"].createElement("div", {
+    className: "toast fade " + (status ? 'bg-success' : 'bg-danger') + " " + (visible ? 'show' : ''),
+    role: "alert",
+    "aria-live": "assertive",
+    "aria-atomic": "true",
+    "data-autohide": true
+  }, react_1["default"].createElement("div", {
+    className: "toast-header"
+  }, react_1["default"].createElement("strong", {
+    className: "w-150px text-dark"
+  }, status ? 'Success' : 'Error'), react_1["default"].createElement("small", {
+    className: "mx-3 text-muted text-white"
+  }, "just now"), react_1["default"].createElement("div", {
+    onClick: function onClick() {
+      return setVisible(false);
+    },
+    className: "close btn btn-icon btn-sm btn-active-light-primary ms-2 mx-2",
+    "data-dismiss": "toast",
+    "aria-label": "Close"
+  }, react_1["default"].createElement(svg_1.CloseIcon, null))), react_1["default"].createElement("div", {
+    className: "toast-body " + (status ? 'bg-success' : 'bg-danger') + " text-white"
+  }, status ? status : '', JSON.stringify(errors) === JSON.stringify({}) ? '' : JSON.stringify(errors))));
 };
-exports.USERS = {
-  parent: "/users",
-  submenus: {
-    employees: "/employees",
-    probation: '/probation'
-  }
-};
-exports.PRODUCTS = {
-  parent: "/products",
-  submenus: {
-    management: "/management"
-  }
-};
-/**
- * If a section is a navigation link, it's id should start with a link-
- * if it is a separator, or heading it should start with a heading-
- *
- * Add pound(#) to any link attribute in case you want to add an item without
- * a link, eg adding a separator, this will help to avoid multiple active items
- * bug on the side navigation bar.
- * */
-
-exports.dropdownMenus = [{
-  id: "link-dashboard",
-  name: "Dashboard",
-  Icon: svg_1.DashboardIcon,
-  type: "solo",
-  subMenus: [],
-  link: exports.DASHBOARD.parent
-}, {
-  id: "heading-apps",
-  name: "Apps",
-  Icon: svg_1.ShopsIcon,
-  type: "separator",
-  subMenus: [],
-  link: "#"
-}, {
-  id: "link-users",
-  name: "Users",
-  Icon: svg_1.UsersIcon,
-  type: "dropdown",
-  subMenus: [{
-    id: "1",
-    name: "Users",
-    link: ziggy_js_1["default"]('users.index')
-  }, {
-    id: "2",
-    name: "Roles",
-    link: ziggy_js_1["default"]('roles.index')
-  }, {
-    id: "3",
-    name: "Companies",
-    link: ziggy_js_1["default"]('companies.index')
-  }],
-  link: exports.USERS.parent
-}, {
-  id: "link-employees",
-  name: "Employees",
-  Icon: svg_1.BriefcaseIcon,
-  type: "dropdown",
-  subMenus: [{
-    id: "1",
-    name: "Employees",
-    link: exports.USERS.parent + exports.USERS.submenus.employees
-  }, {
-    id: "2",
-    name: "Attendance",
-    link: "#"
-  }, {
-    id: "3",
-    name: "Leave Management",
-    link: "#"
-  }, {
-    id: "4",
-    name: "Contracts",
-    link: "#"
-  }],
-  link: exports.USERS.parent
-}, {
-  id: "link-sales",
-  name: "Sales",
-  Icon: svg_1.SalesIcon,
-  type: "dropdown",
-  subMenus: [{
-    id: "2",
-    name: "Reports",
-    link: "#"
-  }, {
-    id: "3",
-    name: "Incentives",
-    link: "#"
-  }, {
-    id: "4",
-    name: "Gift Items",
-    link: "#"
-  }],
-  link: "#"
-}, {
-  id: "link-stores",
-  name: "Stores",
-  Icon: svg_1.ShopsIcon,
-  type: "dropdown",
-  subMenus: [{
-    id: "2",
-    name: "Shops",
-    link: "#"
-  }, {
-    id: "3",
-    name: "States",
-    link: "#"
-  }, {
-    id: "4",
-    name: "Regions",
-    link: "#"
-  }],
-  link: "#"
-}, {
-  id: "link-products",
-  name: "Inventory",
-  Icon: svg_1.ProductsIcon,
-  type: "dropdown",
-  subMenus: [{
-    id: "1",
-    name: "products",
-    link: exports.PRODUCTS.parent + exports.PRODUCTS.submenus.management
-  }, {
-    id: "2",
-    name: "Catalogue",
-    link: "#"
-  }, {
-    id: "3",
-    name: "Vendors",
-    link: "#"
-  }, {
-    id: "4",
-    name: "Warehouses",
-    link: "#"
-  }],
-  link: exports.PRODUCTS.parent
-}, {
-  id: "link-e-learning",
-  name: "E-Learning",
-  Icon: svg_1.YoutubeIcon,
-  type: "dropdown",
-  subMenus: [{
-    id: "2",
-    name: "Resources",
-    link: "#"
-  }, {
-    id: "3",
-    name: "Assessments",
-    link: "#"
-  }, {
-    id: "4",
-    name: "Reports",
-    link: "#"
-  }],
-  link: "#"
-}, {
-  id: "link-account",
-  name: "Account",
-  Icon: svg_1.AccountsIcon,
-  type: "dropdown",
-  subMenus: [{
-    id: "2",
-    name: "Profile",
-    link: "#"
-  }, {
-    id: "3",
-    name: "Security",
-    link: "#"
-  }],
-  link: "#"
-}];
 
 /***/ }),
 

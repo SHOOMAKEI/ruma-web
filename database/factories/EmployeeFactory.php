@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Employee\Employee;
-use App\Models\Region\Region;
+use Modules\StoreManagement\Models\Region;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Spatie\Permission\Models\Role;
 

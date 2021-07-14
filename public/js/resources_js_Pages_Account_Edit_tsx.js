@@ -1082,7 +1082,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _emotion_element_a8309070_browser_esm_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./emotion-element-a8309070.browser.esm.js */ "./node_modules/@emotion/react/dist/emotion-element-a8309070.browser.esm.js");
 /* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
 /* harmony import */ var _emotion_weak_memoize__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @emotion/weak-memoize */ "./node_modules/@emotion/weak-memoize/dist/weak-memoize.browser.esm.js");
-/* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! hoist-non-react-statics */ "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js");
+/* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! hoist-non-react-statics */ "./node_modules/@emotion/react/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js");
 /* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _emotion_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @emotion/utils */ "./node_modules/@emotion/utils/dist/emotion-utils.browser.esm.js");
 /* harmony import */ var _emotion_serialize__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @emotion/serialize */ "./node_modules/@emotion/serialize/dist/emotion-serialize.browser.esm.js");
@@ -1442,7 +1442,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! hoist-non-react-statics */ "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js");
+/* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! hoist-non-react-statics */ "./node_modules/@emotion/react/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js");
 /* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_0__);
 
 
@@ -1455,6 +1455,120 @@ var hoistNonReactStatics = (function (targetComponent, sourceComponent) {
 });
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (hoistNonReactStatics);
+
+
+/***/ }),
+
+/***/ "./node_modules/@emotion/react/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js":
+/*!**************************************************************************************************************!*\
+  !*** ./node_modules/@emotion/react/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js ***!
+  \**************************************************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var reactIs = __webpack_require__(/*! react-is */ "./node_modules/react-is/index.js");
+
+/**
+ * Copyright 2015, Yahoo! Inc.
+ * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+var REACT_STATICS = {
+  childContextTypes: true,
+  contextType: true,
+  contextTypes: true,
+  defaultProps: true,
+  displayName: true,
+  getDefaultProps: true,
+  getDerivedStateFromError: true,
+  getDerivedStateFromProps: true,
+  mixins: true,
+  propTypes: true,
+  type: true
+};
+var KNOWN_STATICS = {
+  name: true,
+  length: true,
+  prototype: true,
+  caller: true,
+  callee: true,
+  arguments: true,
+  arity: true
+};
+var FORWARD_REF_STATICS = {
+  '$$typeof': true,
+  render: true,
+  defaultProps: true,
+  displayName: true,
+  propTypes: true
+};
+var MEMO_STATICS = {
+  '$$typeof': true,
+  compare: true,
+  defaultProps: true,
+  displayName: true,
+  propTypes: true,
+  type: true
+};
+var TYPE_STATICS = {};
+TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
+TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
+
+function getStatics(component) {
+  // React v16.11 and below
+  if (reactIs.isMemo(component)) {
+    return MEMO_STATICS;
+  } // React v16.12 and above
+
+
+  return TYPE_STATICS[component['$$typeof']] || REACT_STATICS;
+}
+
+var defineProperty = Object.defineProperty;
+var getOwnPropertyNames = Object.getOwnPropertyNames;
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+var getPrototypeOf = Object.getPrototypeOf;
+var objectPrototype = Object.prototype;
+function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
+  if (typeof sourceComponent !== 'string') {
+    // don't hoist over string (html) components
+    if (objectPrototype) {
+      var inheritedComponent = getPrototypeOf(sourceComponent);
+
+      if (inheritedComponent && inheritedComponent !== objectPrototype) {
+        hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
+      }
+    }
+
+    var keys = getOwnPropertyNames(sourceComponent);
+
+    if (getOwnPropertySymbols) {
+      keys = keys.concat(getOwnPropertySymbols(sourceComponent));
+    }
+
+    var targetStatics = getStatics(targetComponent);
+    var sourceStatics = getStatics(sourceComponent);
+
+    for (var i = 0; i < keys.length; ++i) {
+      var key = keys[i];
+
+      if (!KNOWN_STATICS[key] && !(blacklist && blacklist[key]) && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
+        var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
+
+        try {
+          // Avoid failures from read-only properties
+          defineProperty(targetComponent, key, descriptor);
+        } catch (e) {}
+      }
+    }
+  }
+
+  return targetComponent;
+}
+
+module.exports = hoistNonReactStatics;
 
 
 /***/ }),
@@ -5608,11 +5722,14 @@ var inertia_1 = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@i
 
 var MultiSelectInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/MultiSelectInput */ "./resources/js/Shared/MultiSelectInput.tsx"));
 
+var Permission_1 = __importDefault(__webpack_require__(/*! ../Role/Permission */ "./resources/js/Pages/Role/Permission.tsx"));
+
 function Edit() {
   var _a = inertia_react_1.usePage().props,
       companies = _a.companies,
       user = _a.user,
       roles = _a.roles,
+      permissions = _a.permissions,
       errors = _a.errors;
 
   var _b = react_1.useState({
@@ -5624,6 +5741,7 @@ function Edit() {
     companies: user.companies || [],
     is_active: user.is_active || '',
     photo: '',
+    permissions: [],
     send_reset_password_notification: false
   }),
       data = _b[0],
@@ -5694,6 +5812,15 @@ function Edit() {
       var _a;
 
       return __assign(__assign({}, data), (_a = {}, _a['photo'] = photo, _a));
+    });
+  } //@ts-ignore
+
+
+  function setPermission(permissions) {
+    setData(function (data) {
+      var _a;
+
+      return __assign(__assign({}, data), (_a = {}, _a['permissions'] = permissions, _a));
     });
   } // @ts-ignore
   // @ts-ignore
@@ -5802,6 +5929,13 @@ function Edit() {
     value: data.send_reset_password_notification,
     onChange: handleChange
   })), react_1["default"].createElement("div", {
+    className: "fv-row mb-5 row"
+  }, react_1["default"].createElement("h4", {
+    className: "py-4"
+  }, "Direct Permissions"), react_1["default"].createElement(Permission_1["default"], {
+    permissions: user.permissions,
+    callback: setPermission
+  })), react_1["default"].createElement("div", {
     className: "fv-row"
   }, react_1["default"].createElement(LoadingButton_1["default"], {
     type: "submit",
@@ -5812,11 +5946,192 @@ function Edit() {
 Edit.layout = function (page) {
   return react_1["default"].createElement(Layout_1["default"], {
     children: page,
-    title: "Create Company"
+    title: "Edit User Account"
   });
 };
 
 exports.default = Edit;
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Role/Permission.tsx":
+/*!************************************************!*\
+  !*** ./resources/js/Pages/Role/Permission.tsx ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var SearchBar_1 = __importDefault(__webpack_require__(/*! ../../Shared/SearchBar */ "./resources/js/Shared/SearchBar.tsx"));
+
+var CheckBoxInput_1 = __importDefault(__webpack_require__(/*! ../../Shared/CheckBoxInput */ "./resources/js/Shared/CheckBoxInput.tsx"));
+
+var FILTERS = [{
+  id: '1',
+  name: 'Read'
+}, {
+  id: '2',
+  name: 'Create'
+}, {
+  id: '3',
+  name: 'Update'
+}, {
+  id: '4',
+  name: 'Delete'
+}];
+
+exports.default = function (_a) {
+  var user = _a.user,
+      permissions = _a.permissions,
+      callback = _a.callback;
+
+  var _b = react_1.useState(),
+      selectedPermissions = _b[0],
+      setSelectedPermissions = _b[1];
+
+  var _c = react_1.useState(),
+      selectedPermission = _c[0],
+      setSelectedPermission = _c[1];
+
+  var _d = react_1.useState(),
+      shownPermissions = _d[0],
+      setShownPermissions = _d[1];
+
+  var _e = react_1.useState(FILTERS[0]),
+      activeFilter = _e[0],
+      setActiveFilter = _e[1];
+
+  react_1.useEffect(function () {
+    setShownPermissions(permissions);
+  }, [permissions]);
+
+  function searchPermissions(text) {
+    if (text.length === 0) {
+      setShownPermissions(permissions);
+      return;
+    }
+
+    setShownPermissions(permissions === null || permissions === void 0 ? void 0 : permissions.filter(function (permission) {
+      var _a;
+
+      if ((_a = permission.name) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase().includes(text.toLocaleLowerCase())) {
+        return permission;
+      }
+    }));
+  }
+
+  function handleChange(e, permission, i) {
+    var key = e.target.id; // @ts-ignore
+
+    var value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    var newPer = {
+      id: permission.id,
+      name: permission.name,
+      checked: !permission.checked
+    }; // @ts-ignore
+
+    setSelectedPermission(newPer); // @ts-ignore
+
+    var newTags = shownPermissions.filter(function (permission, index) {
+      return index !== i;
+    });
+    newTags[i] = newPer; // @ts-ignore
+
+    var inserted = newTags;
+    setShownPermissions(inserted);
+    callback(shownPermissions);
+  }
+
+  return react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
+    className: "row mb-5"
+  }, react_1["default"].createElement("div", {
+    className: "col"
+  }, react_1["default"].createElement(SearchBar_1["default"], {
+    onSearch: searchPermissions,
+    placeHolder: "Search permissions"
+  }))), react_1["default"].createElement("div", {
+    className: "row mb-8"
+  }, react_1["default"].createElement("div", {
+    className: "col d-flex"
+  }, FILTERS.map(function (filter) {
+    return react_1["default"].createElement("button", {
+      type: "button",
+      onClick: function onClick() {
+        return setActiveFilter(filter);
+      },
+      className: "btn btn-sm btn-flex " + (filter.id === activeFilter.id ? 'btn-primary' : 'btn-light-primary') + " me-3"
+    }, filter.name);
+  }))), react_1["default"].createElement("div", {
+    className: "row"
+  }, shownPermissions === null || shownPermissions === void 0 ? void 0 : shownPermissions.map(function (permission, index) {
+    var _a, _b, _c;
+
+    if ((_a = permission.name) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase().includes(activeFilter.name.toLocaleLowerCase())) {
+      return react_1["default"].createElement("div", {
+        className: "col-md-4",
+        key: Math.random()
+      }, react_1["default"].createElement(CheckBoxInput_1["default"], {
+        key: Math.random(),
+        label: "can " + ((_b = permission.name) === null || _b === void 0 ? void 0 : _b.split('.')[1].replace('_', ' ')) + " " + ((_c = permission.name) === null || _c === void 0 ? void 0 : _c.split('.')[0].replace('_', ' ')),
+        type: "checkbox",
+        name: "permission",
+        checked: permission.checked,
+        value: permission.checked,
+        errors: '',
+        onChange: function onChange(e) {
+          return handleChange(e, permission, index);
+        }
+      }));
+    }
+  })));
+};
 
 /***/ }),
 
@@ -5844,9 +6159,9 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 exports.default = function (_a) {
   var children = _a.children;
   return react_1["default"].createElement("div", {
-    className: "card pt-4 mb-6 mb-xl-9"
+    className: "card pt-4 mb-6 mb-xl-9 h-100"
   }, react_1["default"].createElement("div", {
-    className: "card-body pt-0"
+    className: "card-body pt-0 h-100"
   }, children));
 };
 
@@ -6667,14 +6982,13 @@ var config_1 = __webpack_require__(/*! ../config */ "./resources/js/config.tsx")
 
 var ToolBar_1 = __importDefault(__webpack_require__(/*! ./ToolBar */ "./resources/js/Shared/ToolBar.tsx"));
 
+var SuccessToast_1 = __importDefault(__webpack_require__(/*! ./SuccessToast */ "./resources/js/Shared/SuccessToast.tsx"));
+
 function Framework(_a) {
   var children = _a.children,
       title = _a.title,
       toolBarLeftContent = _a.toolBarLeftContent;
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(inertia_react_1.InertiaHead, null, react_1["default"].createElement("link", {
-    rel: "icon",
-    href: "/favicon.ico"
-  }), react_1["default"].createElement("meta", {
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(inertia_react_1.InertiaHead, null, react_1["default"].createElement("meta", {
     charSet: "utf-8"
   }), react_1["default"].createElement("meta", {
     name: "viewport",
@@ -6690,8 +7004,8 @@ function Framework(_a) {
     content: config_1.author
   }), react_1["default"].createElement("title", null, config_1.siteTitle)), react_1["default"].createElement("main", {
     className: "page d-flex flex-row flex-column-fluid"
-  }, react_1["default"].createElement(SideNav_1["default"], null), react_1["default"].createElement("div", {
-    className: "wrapper d-flex flex-column flex-row-fluid",
+  }, react_1["default"].createElement(SuccessToast_1["default"], null), react_1["default"].createElement(SideNav_1["default"], null), react_1["default"].createElement("div", {
+    className: "wrapper d-flex flex-column flex-row-fluid flex-root",
     id: "kt_wrapper"
   }, react_1["default"].createElement(TopNav_1["default"], null), react_1["default"].createElement("div", {
     className: "content d-flex flex-column flex-column-fluid",
@@ -6854,8 +7168,13 @@ function Menu(_a) {
       show = _b[0],
       setShow = _b[1];
 
+  var auth = inertia_react_1.usePage().props.auth;
+
   function checkActiveLink(link) {
-    if (ziggy_js_1["default"]().current(link + '*')) return 'active';
+    if (ziggy_js_1["default"]().current(link + '*')) {
+      return 'here show';
+    }
+
     return '';
   }
 
@@ -6864,7 +7183,10 @@ function Menu(_a) {
      * This is for sidebar dropdown menus, it determines which
      * sidebar dropdown menu is active
      * */
-    if (ziggy_js_1["default"]().current(link + '*')) return 'here show';
+    if (ziggy_js_1["default"]().current(link + '*')) {
+      return 'active';
+    }
+
     return '';
   }
 
@@ -6876,8 +7198,11 @@ function Menu(_a) {
       className: "menu-link " + checkActiveLink(menu.link),
       href: menu.link
     }, react_1["default"].createElement("span", {
-      className: "menu-icon"
-    }, react_1["default"].createElement(Icon, null)), react_1["default"].createElement("span", {
+      className: "menu-icon",
+      dangerouslySetInnerHTML: {
+        __html: menu.Icon
+      }
+    }), react_1["default"].createElement("span", {
       className: "menu-title"
     }, menu.name)));
   }
@@ -6891,20 +7216,24 @@ function Menu(_a) {
     }, react_1["default"].createElement("span", {
       className: "menu-section text-muted text-uppercase fs-8 ls-1"
     }, menu.name)));
-  }
+  } //@ts-ignore
+
 
   return react_1["default"].createElement("div", {
     "data-kt-menu-trigger": "click",
     onClick: function onClick(e) {
       return setShow(!show);
     },
-    className: "menu-item menu-accordion " + checkActiveMenuParent(menu.link) + "  " + (show ? 'show' : '') + " ",
+    className: "menu-item menu-accordion " + checkActiveMenuParent(menu.link) + "  " + (show ? 'hover show' : '') + " ",
     key: menu.id
   }, react_1["default"].createElement("span", {
     className: "menu-link"
   }, react_1["default"].createElement("span", {
-    className: "menu-icon"
-  }, react_1["default"].createElement(Icon, null)), react_1["default"].createElement("span", {
+    className: "menu-icon",
+    dangerouslySetInnerHTML: {
+      __html: menu.Icon
+    }
+  }), react_1["default"].createElement("span", {
     className: "menu-title"
   }, menu.name), react_1["default"].createElement("span", {
     className: "menu-arrow"
@@ -7013,10 +7342,10 @@ exports.default = function (_a) {
 
 /***/ }),
 
-/***/ "./resources/js/Shared/SideNav.tsx":
-/*!*****************************************!*\
-  !*** ./resources/js/Shared/SideNav.tsx ***!
-  \*****************************************/
+/***/ "./resources/js/Shared/SearchBar.tsx":
+/*!*******************************************!*\
+  !*** ./resources/js/Shared/SearchBar.tsx ***!
+  \*******************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -7032,15 +7361,111 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var Menu_1 = __importDefault(__webpack_require__(/*! ./Menu */ "./resources/js/Shared/Menu.tsx"));
-
-var SidebarLink_1 = __webpack_require__(/*! ./SidebarLink */ "./resources/js/Shared/SidebarLink.ts");
-
 var svg_1 = __webpack_require__(/*! ./Icons/svg */ "./resources/js/Shared/Icons/svg.tsx");
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+function SearchBar(_a) {
+  var onSearch = _a.onSearch,
+      placeHolder = _a.placeHolder;
+
+  function _onSearch(event) {
+    onSearch(event.target.value);
+  }
+
+  return react_1["default"].createElement("div", {
+    className: "d-flex align-items-center position-relative my-1"
+  }, react_1["default"].createElement(svg_1.SearchIcon, {
+    extraClasses: 'position-absolute ms-3'
+  }), react_1["default"].createElement("input", {
+    type: "text",
+    "data-kt-customer-table-filter": "search",
+    className: "form-control form-control-sm form-control-solid w-250px ps-11",
+    placeholder: placeHolder,
+    onChange: _onSearch
+  }));
+}
+
+exports.default = SearchBar;
+
+/***/ }),
+
+/***/ "./resources/js/Shared/SideNav.tsx":
+/*!*****************************************!*\
+  !*** ./resources/js/Shared/SideNav.tsx ***!
+  \*****************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var Menu_1 = __importDefault(__webpack_require__(/*! ./Menu */ "./resources/js/Shared/Menu.tsx"));
+
+var svg_1 = __webpack_require__(/*! ./Icons/svg */ "./resources/js/Shared/Icons/svg.tsx");
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+
+var react_bootstrap_1 = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+
+var ToggleDropdown_1 = __webpack_require__(/*! ./ToggleDropdown */ "./resources/js/Shared/ToggleDropdown.tsx");
+
+var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
+
 exports.default = function () {
+  var _a = inertia_react_1.usePage().props,
+      auth = _a.auth,
+      main_menu = _a.main_menu;
+
+  var _b = react_1.useState(false),
+      toggle = _b[0],
+      setToggle = _b[1];
+
   return react_1["default"].createElement("div", {
     id: "kt_aside",
     className: "aside aside-dark aside-hoverable",
@@ -7055,12 +7480,19 @@ exports.default = function () {
     className: "aside-logo flex-column-auto",
     id: "kt_aside_logo"
   }, react_1["default"].createElement("a", {
-    href: ""
-  }, react_1["default"].createElement("span", {
-    className: "text-white h1"
+    href: ziggy_js_1["default"]('home')
+  }, react_1["default"].createElement("img", {
+    alt: "Logo",
+    src: "/assets/images/brand/logoicon.png",
+    className: "h-55px logo"
+  }), react_1["default"].createElement("span", {
+    className: "text-white h1 mx-5"
   }, "RUMA")), react_1["default"].createElement("div", {
     id: "kt_aside_toggle",
-    className: "btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle",
+    onChange: function onChange(event) {
+      return setToggle(!toggle);
+    },
+    className: "btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle " + (toggle ? 'active' : ''),
     "data-kt-toggle": "true",
     "data-kt-toggle-state": "active",
     "data-kt-toggle-target": "body",
@@ -7077,10 +7509,11 @@ exports.default = function () {
     "data-kt-scroll-wrappers": "#kt_aside_menu",
     "data-kt-scroll-offset": "0"
   }, react_1["default"].createElement("div", {
-    className: "menu menu-column menu-title-gray-800 menu-state-title-primary\n                    menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500",
+    className: "menu menu-column menu-title-gray-800 menu-state-title-primary\r\n                    menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500",
     id: "#kt_aside_menu",
     "data-kt-menu": "true"
-  }, SidebarLink_1.dropdownMenus.map(function (menu) {
+  }, //@ts-ignore
+  main_menu && main_menu.map(function (menu) {
     return react_1["default"].createElement(Menu_1["default"], {
       key: Math.random(),
       menu: menu
@@ -7088,219 +7521,129 @@ exports.default = function () {
   })))), react_1["default"].createElement("div", {
     className: "aside-footer flex-column-auto",
     id: "kt_aside_footer"
-  }));
+  }, react_1["default"].createElement(react_bootstrap_1.Dropdown, null, react_1["default"].createElement(react_bootstrap_1.Dropdown.Toggle, {
+    cssClass: "btn btn-sm btn-light btn-primary w-100",
+    variant: "success",
+    id: "dropdown-basic",
+    as: ToggleDropdown_1.CustomButtonDropdownToggle
+  }, //@ts-ignore
+  auth.current_company.substring(0, 20), react_1["default"].createElement(svg_1.DropdownIcon, null)), react_1["default"].createElement(react_bootstrap_1.Dropdown.Menu, {
+    className: "menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-900   fw-bold py-1 px-1 mr-3 fs-6 w-100"
+  }, //@ts-ignore
+  auth.companies && auth.companies.map(function (company) {
+    return react_1["default"].createElement(react_bootstrap_1.Dropdown.Item, {
+      as: ToggleDropdown_1.CustomDropdownMenuItem,
+      key: Math.random()
+    }, react_1["default"].createElement(inertia_react_1.InertiaLink, {
+      href: ziggy_js_1["default"]('company.default_dashboard', company.id),
+      className: "menu-link px-1 text-primary text-hover-white"
+    }, company.name));
+  })))));
 };
 
 /***/ }),
 
-/***/ "./resources/js/Shared/SidebarLink.ts":
-/*!********************************************!*\
-  !*** ./resources/js/Shared/SidebarLink.ts ***!
-  \********************************************/
+/***/ "./resources/js/Shared/SuccessToast.tsx":
+/*!**********************************************!*\
+  !*** ./resources/js/Shared/SuccessToast.tsx ***!
+  \**********************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
 };
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.dropdownMenus = exports.PRODUCTS = exports.USERS = exports.DASHBOARD = void 0;
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
 var svg_1 = __webpack_require__(/*! ./Icons/svg */ "./resources/js/Shared/Icons/svg.tsx");
 
-var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
-/**
- * Sidebar links urls are defined here, that's because we want to track
- * active link to determine which element to set active on the sidebar during
- * page navigation
- * */
+exports.default = function () {
+  var _a = react_1.useState(false),
+      visible = _a[0],
+      setVisible = _a[1];
 
+  var _b = inertia_react_1.usePage().props,
+      status = _b.status,
+      errors = _b.errors;
+  react_1.useEffect(function () {
+    if (status !== null) {
+      setVisible(true);
+    }
 
-exports.DASHBOARD = {
-  parent: "/dashboard",
-  submenus: {}
+    if (!(JSON.stringify(errors) === JSON.stringify({}))) {
+      setVisible(true);
+    }
+  }, [status, errors]);
+  return react_1["default"].createElement("div", {
+    style: {
+      position: "absolute",
+      top: 64,
+      right: 10,
+      zIndex: 99999,
+      display: visible ? 'block' : 'none'
+    }
+  }, react_1["default"].createElement("div", {
+    className: "toast fade " + (status ? 'bg-success' : 'bg-danger') + " " + (visible ? 'show' : ''),
+    role: "alert",
+    "aria-live": "assertive",
+    "aria-atomic": "true",
+    "data-autohide": true
+  }, react_1["default"].createElement("div", {
+    className: "toast-header"
+  }, react_1["default"].createElement("strong", {
+    className: "w-150px text-dark"
+  }, status ? 'Success' : 'Error'), react_1["default"].createElement("small", {
+    className: "mx-3 text-muted text-white"
+  }, "just now"), react_1["default"].createElement("div", {
+    onClick: function onClick() {
+      return setVisible(false);
+    },
+    className: "close btn btn-icon btn-sm btn-active-light-primary ms-2 mx-2",
+    "data-dismiss": "toast",
+    "aria-label": "Close"
+  }, react_1["default"].createElement(svg_1.CloseIcon, null))), react_1["default"].createElement("div", {
+    className: "toast-body " + (status ? 'bg-success' : 'bg-danger') + " text-white"
+  }, status ? status : '', JSON.stringify(errors) === JSON.stringify({}) ? '' : JSON.stringify(errors))));
 };
-exports.USERS = {
-  parent: "/users",
-  submenus: {
-    employees: "/employees",
-    probation: '/probation'
-  }
-};
-exports.PRODUCTS = {
-  parent: "/products",
-  submenus: {
-    management: "/management"
-  }
-};
-/**
- * If a section is a navigation link, it's id should start with a link-
- * if it is a separator, or heading it should start with a heading-
- *
- * Add pound(#) to any link attribute in case you want to add an item without
- * a link, eg adding a separator, this will help to avoid multiple active items
- * bug on the side navigation bar.
- * */
-
-exports.dropdownMenus = [{
-  id: "link-dashboard",
-  name: "Dashboard",
-  Icon: svg_1.DashboardIcon,
-  type: "solo",
-  subMenus: [],
-  link: exports.DASHBOARD.parent
-}, {
-  id: "heading-apps",
-  name: "Apps",
-  Icon: svg_1.ShopsIcon,
-  type: "separator",
-  subMenus: [],
-  link: "#"
-}, {
-  id: "link-users",
-  name: "Users",
-  Icon: svg_1.UsersIcon,
-  type: "dropdown",
-  subMenus: [{
-    id: "1",
-    name: "Users",
-    link: ziggy_js_1["default"]('users.index')
-  }, {
-    id: "2",
-    name: "Roles",
-    link: ziggy_js_1["default"]('roles.index')
-  }, {
-    id: "3",
-    name: "Companies",
-    link: ziggy_js_1["default"]('companies.index')
-  }],
-  link: exports.USERS.parent
-}, {
-  id: "link-employees",
-  name: "Employees",
-  Icon: svg_1.BriefcaseIcon,
-  type: "dropdown",
-  subMenus: [{
-    id: "1",
-    name: "Employees",
-    link: exports.USERS.parent + exports.USERS.submenus.employees
-  }, {
-    id: "2",
-    name: "Attendance",
-    link: "#"
-  }, {
-    id: "3",
-    name: "Leave Management",
-    link: "#"
-  }, {
-    id: "4",
-    name: "Contracts",
-    link: "#"
-  }],
-  link: exports.USERS.parent
-}, {
-  id: "link-sales",
-  name: "Sales",
-  Icon: svg_1.SalesIcon,
-  type: "dropdown",
-  subMenus: [{
-    id: "2",
-    name: "Reports",
-    link: "#"
-  }, {
-    id: "3",
-    name: "Incentives",
-    link: "#"
-  }, {
-    id: "4",
-    name: "Gift Items",
-    link: "#"
-  }],
-  link: "#"
-}, {
-  id: "link-stores",
-  name: "Stores",
-  Icon: svg_1.ShopsIcon,
-  type: "dropdown",
-  subMenus: [{
-    id: "2",
-    name: "Shops",
-    link: "#"
-  }, {
-    id: "3",
-    name: "States",
-    link: "#"
-  }, {
-    id: "4",
-    name: "Regions",
-    link: "#"
-  }],
-  link: "#"
-}, {
-  id: "link-products",
-  name: "Inventory",
-  Icon: svg_1.ProductsIcon,
-  type: "dropdown",
-  subMenus: [{
-    id: "1",
-    name: "products",
-    link: exports.PRODUCTS.parent + exports.PRODUCTS.submenus.management
-  }, {
-    id: "2",
-    name: "Catalogue",
-    link: "#"
-  }, {
-    id: "3",
-    name: "Vendors",
-    link: "#"
-  }, {
-    id: "4",
-    name: "Warehouses",
-    link: "#"
-  }],
-  link: exports.PRODUCTS.parent
-}, {
-  id: "link-e-learning",
-  name: "E-Learning",
-  Icon: svg_1.YoutubeIcon,
-  type: "dropdown",
-  subMenus: [{
-    id: "2",
-    name: "Resources",
-    link: "#"
-  }, {
-    id: "3",
-    name: "Assessments",
-    link: "#"
-  }, {
-    id: "4",
-    name: "Reports",
-    link: "#"
-  }],
-  link: "#"
-}, {
-  id: "link-account",
-  name: "Account",
-  Icon: svg_1.AccountsIcon,
-  type: "dropdown",
-  subMenus: [{
-    id: "2",
-    name: "Profile",
-    link: "#"
-  }, {
-    id: "3",
-    name: "Security",
-    link: "#"
-  }],
-  link: "#"
-}];
 
 /***/ }),
 
@@ -7670,7 +8013,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -8540,120 +8883,6 @@ function triggerEvent(node, eventName, bubbles, cancelable) {
     node.dispatchEvent(event);
   }
 }
-
-/***/ }),
-
-/***/ "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js ***!
-  \**********************************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var reactIs = __webpack_require__(/*! react-is */ "./node_modules/react-is/index.js");
-
-/**
- * Copyright 2015, Yahoo! Inc.
- * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
- */
-var REACT_STATICS = {
-  childContextTypes: true,
-  contextType: true,
-  contextTypes: true,
-  defaultProps: true,
-  displayName: true,
-  getDefaultProps: true,
-  getDerivedStateFromError: true,
-  getDerivedStateFromProps: true,
-  mixins: true,
-  propTypes: true,
-  type: true
-};
-var KNOWN_STATICS = {
-  name: true,
-  length: true,
-  prototype: true,
-  caller: true,
-  callee: true,
-  arguments: true,
-  arity: true
-};
-var FORWARD_REF_STATICS = {
-  '$$typeof': true,
-  render: true,
-  defaultProps: true,
-  displayName: true,
-  propTypes: true
-};
-var MEMO_STATICS = {
-  '$$typeof': true,
-  compare: true,
-  defaultProps: true,
-  displayName: true,
-  propTypes: true,
-  type: true
-};
-var TYPE_STATICS = {};
-TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
-TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
-
-function getStatics(component) {
-  // React v16.11 and below
-  if (reactIs.isMemo(component)) {
-    return MEMO_STATICS;
-  } // React v16.12 and above
-
-
-  return TYPE_STATICS[component['$$typeof']] || REACT_STATICS;
-}
-
-var defineProperty = Object.defineProperty;
-var getOwnPropertyNames = Object.getOwnPropertyNames;
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-var getPrototypeOf = Object.getPrototypeOf;
-var objectPrototype = Object.prototype;
-function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
-  if (typeof sourceComponent !== 'string') {
-    // don't hoist over string (html) components
-    if (objectPrototype) {
-      var inheritedComponent = getPrototypeOf(sourceComponent);
-
-      if (inheritedComponent && inheritedComponent !== objectPrototype) {
-        hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
-      }
-    }
-
-    var keys = getOwnPropertyNames(sourceComponent);
-
-    if (getOwnPropertySymbols) {
-      keys = keys.concat(getOwnPropertySymbols(sourceComponent));
-    }
-
-    var targetStatics = getStatics(targetComponent);
-    var sourceStatics = getStatics(sourceComponent);
-
-    for (var i = 0; i < keys.length; ++i) {
-      var key = keys[i];
-
-      if (!KNOWN_STATICS[key] && !(blacklist && blacklist[key]) && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
-        var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
-
-        try {
-          // Avoid failures from read-only properties
-          defineProperty(targetComponent, key, descriptor);
-        } catch (e) {}
-      }
-    }
-  }
-
-  return targetComponent;
-}
-
-module.exports = hoistNonReactStatics;
-
 
 /***/ }),
 

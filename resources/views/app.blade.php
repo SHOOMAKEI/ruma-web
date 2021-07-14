@@ -22,7 +22,8 @@
         <script src="{{asset('assets/js/custom/api-keys/api-keys.js')}}"></script>
         <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
         <script src="{{asset('assets/plugins/fslightbox/fslightbox.bundle.js')}}"></script>
-        <script src="{{asset('assets/js/base.js')}}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHs7E92TOd8I6m0Y2r8sTRWF5gehBktN0&v=3.exp&libraries=geometry,drawing,places"></script>
+{{--        <script src="{{asset('assets/js/base.js')}}"></script>--}}
         <script src="{{ mix('/js/app.js') }}" defer></script>
 
 

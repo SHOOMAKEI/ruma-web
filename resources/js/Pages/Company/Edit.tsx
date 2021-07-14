@@ -23,6 +23,7 @@ function Edit() {
     const [data, setData] = useState({
         id: (company as Company).id || '',
         name: (company as Company).name || '',
+        code_name: (company as Company).code_name || '',
         email: (company as Company).email || '',
         phone: (company as Company).phone,
         currency: (company as Company).currency || '',
@@ -77,14 +78,14 @@ function Edit() {
                     />
                     <TextInput
                         className="mt-10 col-md-6"
-                        label="Email"
-                        placeholder="Email"
-                        name="email"
+                        label="Code Name"
+                        placeholder="Code Name"
+                        name="code_name"
                         type="text"
-                        required
                         label_required={true}
-                        errors={errors.email}
-                        value={data.email}
+                        required
+                        errors={errors.code_name}
+                        value={data.code_name}
                         onChange={handleChange}
                     />
                 </div>
@@ -121,6 +122,18 @@ function Edit() {
                 <div className="fv-row mb-5 row">
                     <TextInput
                         className="mt-10 col-md-6"
+                        label="Email"
+                        placeholder="Email"
+                        name="email"
+                        type="text"
+                        required
+                        label_required={true}
+                        errors={errors.email}
+                        value={data.email}
+                        onChange={handleChange}
+                    />
+                    <TextInput
+                        className="mt-10 col-md-6"
                         label="Phone"
                         placeholder="Phone"
                         name="phone"
@@ -131,8 +144,10 @@ function Edit() {
                         value={data.phone}
                         onChange={handleChange}
                     />
+                </div>
+                <div className="fv-row mb-5 row">
                     <TextAreaInput
-                        className="mt-10 col-md-6"
+                        className="mt-10 col-md-12"
                         label="Address"
                         placeholder="Address"
                         name="address"

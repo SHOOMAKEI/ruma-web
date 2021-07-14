@@ -1,5 +1,6 @@
 import React, {ReactNode} from "react";
 import {InertiaLink} from "@inertiajs/inertia-react";
+import route from "ziggy-js";
 
 interface Props {
     title: string;
@@ -22,7 +23,7 @@ export default ({title, leftContent}: Props) => {
                     {/*    <li className="breadcrumb-item">*/}
                     {/*        <span className="bullet bg-gray-200 w-5px h-2px"/>*/}
                     {/*    </li>*/}
-                    {/*    <li className="breadcrumb-item text-muted">Customers</li>*/}
+                    {/*    <li className="breadcrumb-item text-muted">Create</li>*/}
                     {/*    <li className="breadcrumb-item">*/}
                     {/*        <span className="bullet bg-gray-200 w-5px h-2px"/>*/}
                     {/*    </li>*/}

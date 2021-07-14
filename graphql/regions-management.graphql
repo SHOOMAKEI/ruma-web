@@ -1,0 +1,335 @@
+extend type Query {
+    countries: CountriesResponse @guard
+    @field(resolver: "App\\GraphQL\\Region\\Queries\\CountryQueries@all")
+
+    #geopolitical zone
+    geopoliticalZones: GeopoliticalZonesResponse @guard @hasPermission(permission: "geopolitical_zone.read")
+    @field(resolver: "App\\GraphQL\\Region\\Queries\\GeopoliticalZoneQueries@all")
+    geopoliticalZone(id: Int): GeopoliticalZoneResponse @guard @hasPermission(permission: "geopolitical_zone.read")
+    @field(resolver: "App\\GraphQL\\Region\\Queries\\GeopoliticalZoneQueries@show")
+
+    #regions
+    regions: RegionsResponse @guard @hasPermission(permission: "region.read")
+    @field(resolver: "App\\GraphQL\\Region\\Queries\\RegionQueries@all")
+    region(id: Int): RegionResponse @guard @hasPermission(permission: "region.read")
+    @field(resolver: "App\\GraphQL\\Region\\Queries\\RegionQueries@show")
+
+    #districts
+    districts: DistrictsResponse @guard @hasPermission(permission: "district.read")
+    @field(resolver: "App\\GraphQL\\Region\\Queries\\DistrictQueries@all")
+    district(id: Int): DistrictResponse @guard @hasPermission(permission: "district.read")
+    @field(resolver: "App\\GraphQL\\Region\\Queries\\DistrictQueries@show")
+
+    #shops
+    shops: ShopsResponse @guard @hasPermission(permission: "shop.read")
+    @field(resolver: "App\\GraphQL\\Region\\Queries\\ShopQueries@all")
+    shop(id: Int): ShopResponse @guard @hasPermission(permission: "shop.read")
+    @field(resolver: "App\\GraphQL\\Region\\Queries\\ShopQueries@show")
+
+    #sale zones
+    saleZones: SaleZonesResponse @guard @hasPermission(permission: "sale_zone.read")
+    @field(resolver: "App\\GraphQL\\Region\\Queries\\SaleZoneQueries@all")
+    saleZone(id: Int): SaleZoneResponse @guard @hasPermission(permission: "sale_zone.read")
+    @field(resolver: "App\\GraphQL\\Region\\Queries\\SaleZoneQueries@show")
+}
+
+extend type Mutation {
+    #Geopolitical Zone
+    createGeopoliticalZone(input: CreateGeopoliticalZoneInput): GeopoliticalZoneResponse @guard @hasPermission(permission: "geopolitical_zone.create")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\GeopoliticalZoneMutation@create")
+    updateGeopoliticalZone(input: UpdateGeopoliticalZoneInput): GeopoliticalZoneResponse @guard @hasPermission(permission: "geopolitical_zone.update")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\GeopoliticalZoneMutation@update")
+    deleteGeopoliticalZone(id: Int): GeopoliticalZoneResponse @guard @hasPermission(permission: "geopolitical_zone.delete")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\GeopoliticalZoneMutation@delete")
+
+    #Regions
+    createRegion(input: CreateRegionInput): RegionResponse @guard @hasPermission(permission: "region.create")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\RegionMutation@create")
+    updateRegion(input: UpdateRegionInput): RegionResponse @guard @hasPermission(permission: "region.update")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\RegionMutation@update")
+    deleteRegion(id: Int): RegionResponse @guard @hasPermission(permission: "region.delete")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\RegionMutation@delete")
+
+    #Districts
+    createDistrict(input: CreateDistrictInput): DistrictResponse @guard @hasPermission(permission: "district.create")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\DistrictMutation@create")
+    updateDistrict(input: UpdateDistrictInput): DistrictResponse @guard @hasPermission(permission: "district.update")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\DistrictMutation@update")
+    deleteDistrict(id: Int): DistrictResponse @guard @hasPermission(permission: "district.delete")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\DistrictMutation@delete")
+
+    #Shops
+    createShop(input: CreateShopInput): ShopResponse @guard @hasPermission(permission: "shop.create")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\ShopMutation@create")
+    updateShop(input: UpdateShopInput): ShopResponse @guard @hasPermission(permission: "shop.update")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\ShopMutation@update")
+    deleteShop(id: Int): ShopResponse @guard @hasPermission(permission: "shop.delete")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\ShopMutation@delete")
+
+    #Sale Zone
+    createSaleZone(input: CreateSaleZoneInput): SaleZoneResponse @guard @hasPermission(permission: "sale_zone.create")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\SaleZoneMutation@create")
+    updateSaleZone(input: UpdateSaleZoneInput): SaleZoneResponse @guard @hasPermission(permission: "sale_zone.update")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\SaleZoneMutation@update")
+    deleteSaleZone(id: Int): SaleZoneResponse @guard @hasPermission(permission: "sale_zone.delete")
+    @field(resolver: "App\\GraphQL\\Region\\Mutations\\SaleZoneMutation@delete")
+}
+
+type CountryResponse implements Response{
+  country: Country
+  success: Boolean
+  errors: [Errors]
+}
+
+type CountriesResponse implements Response{
+    countries: [Country]
+    success: Boolean
+    errors: [Errors]
+}
+
+type GeopoliticalZoneResponse implements Response{
+    geopolitical_zone: GeopoliticalZone
+    success: Boolean
+    errors: [Errors]
+}
+
+type GeopoliticalZonesResponse implements Response{
+    geopolitical_zones: [GeopoliticalZone]
+    success: Boolean
+    errors: [Errors]
+}
+
+type RegionResponse implements Response{
+    region: Region
+    success: Boolean
+    errors: [Errors]
+}
+
+type RegionsResponse implements Response{
+    regions: [Region]
+    success: Boolean
+    errors: [Errors]
+}
+
+type DistrictResponse implements Response{
+    district: District
+    success: Boolean
+    errors: [Errors]
+}
+
+type DistrictsResponse implements Response{
+    districts: [District]
+    success: Boolean
+    errors: [Errors]
+}
+
+type ShopResponse implements Response{
+    shop: Shop
+    success: Boolean
+    errors: [Errors]
+}
+
+type ShopsResponse implements Response{
+    shops: [Shop]
+    success: Boolean
+    errors: [Errors]
+}
+
+type SaleZoneResponse implements Response{
+    sale_zone: SaleZone
+    success: Boolean
+    errors: [Errors]
+}
+
+type SaleZonesResponse implements Response{
+    sale_zones: [SaleZone]
+    success: Boolean
+    errors: [Errors]
+}
+
+interface Response {
+    success: Boolean
+    errors: [Errors]
+}
+
+
+type Country {
+  id: ID
+  name: String
+  native: String
+  phone: String
+  continent: String
+  capital: String
+  currency: String
+  language: [Language]
+  nationality: String
+  sale_zone: SaleZone @morphOne
+  longitude: Float
+  latitude: Float
+  updated_at: DateTime
+  created_at: DateTime
+}
+
+type Language {
+  name: String
+}
+
+type GeopoliticalZone {
+  id: ID
+  name: String
+  code_name: String
+  country: Country
+  regions: [Region]
+  sale_zone: SaleZone @morphOne
+  longitude: Float
+  latitude: Float
+  updated_at: DateTime
+  created_at: DateTime
+}
+
+type Region {
+  id: ID
+  name: String
+  code_name: String
+  geopolitical_zone: GeopoliticalZone
+  districts: [District]
+  longitude: Float
+  latitude: Float
+  updated_at: DateTime
+  created_at: DateTime
+}
+
+type District {
+  id: ID
+  name: String
+  code_name: String
+  region: Region
+  shops: [Shop]
+  sale_zone: SaleZone @morphOne
+  longitude: Float
+  latitude: Float
+  updated_at: DateTime
+  created_at: DateTime
+}
+
+type Shop {
+  id: ID
+  name: String
+  code_name: String
+  phone: String
+  address: String
+  location: String
+  email: String
+  district: District
+  longitude: Float
+  latitude: Float
+  updated_at: DateTime
+  created_at: DateTime
+}
+
+type SaleZone {
+  id: ID
+  name: String
+  code_name: String
+  regions: [Region]
+  shops: [Shop]
+  sale_zoneable: [SaleZoneable] @morphTo
+  updated_at: DateTime
+  created_at: DateTime
+}
+
+union SaleZoneable = Country | GeopoliticalZone | Region | District
+
+input CreateGeopoliticalZoneInput {
+  name: String
+  code_name: String
+  country_id: Int
+  longitude: Float
+  latitude: Float
+}
+
+input UpdateGeopoliticalZoneInput  {
+  id: Int
+  name: String
+  code_name: String
+  country_id: Int
+  longitude: Float
+  latitude: Float
+}
+
+input CreateRegionInput {
+  name: String
+  code_name: String
+  geopolitical_zone_id: Int
+  longitude: Float
+  latitude: Float
+}
+
+input UpdateRegionInput  {
+  id: Int
+  name: String
+  code_name: String
+  geopolitical_zone_id: Int
+  longitude: Float
+  latitude: Float
+}
+
+input CreateDistrictInput {
+  name: String
+  code_name: String
+  region_id: Int
+  longitude: Float
+  latitude: Float
+}
+
+input UpdateDistrictInput {
+  id: Int
+  name: String
+  code_name: String
+  region_id: Int
+  longitude: Float
+  latitude: Float
+}
+
+input CreateShopInput {
+  name: String
+  code_name: String
+  phone: String
+  address: String
+  location: String
+  email: String
+  district_id: Int
+  longitude: Float
+  latitude: Float
+}
+
+input UpdateShopInput {
+  id: Int
+  name: String
+  code_name: String
+  phone: String
+  address: String
+  location: String
+  email: String
+  district_id: Int
+  longitude: Float
+  latitude: Float
+}
+
+input CreateSaleZoneInput {
+  name: String
+  code_name: String
+  sale_zoneable: [SaleZoneableInput]
+}
+
+input UpdateSaleZoneInput {
+  id: Int
+  name: String
+  code_name: String
+  sale_zoneable: [SaleZoneableInput]
+}
+
+input SaleZoneableInput {
+  id: Int
+  type: String
+}

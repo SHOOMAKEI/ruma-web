@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Utilities\Menu;
 use Carbon\Traits\Creator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -44,6 +45,30 @@ if (!function_exists('respondWithErrors')) {
     }
 }
 
+if (!function_exists('mainMenu')) {
+
+    function mainMenu()
+    {
+        return app('mainMenu');
+
+    }
+}
+
+if (!function_exists('user')) {
+
+    function user()
+    {
+        return User::find(auth()->user()->id);
+    }
+}
+if (!function_exists('getLastIdNumberCount')) {
+
+    function getLastIdNumberCount()
+    {
+        return User::find(auth()->user()->id);
+    }
+}
+
 if (!function_exists('respondWithSuccess')) {
 
     function respondWithSuccess(string $type, mixed $data):array
@@ -80,9 +105,9 @@ if(!function_exists('getJobStatuses')) {
     }
 }
 
-if(!function_exists('getEmploymentStatuses')) {
+if(!function_exists('getContractType')) {
 
-    function getEmploymentStatuses(): array
+    function getContractType(): array
     {
         return [
             ['name' => EMPLOYMENT_STATUS_FULL_TIME],
@@ -167,4 +192,51 @@ if(!function_exists('uploadBase64Image')) {
 
 }
 
+if(!function_exists('uploadBase64FileOtherThanImage')) {
+
+
+    function uploadBase64FileOtherThanImage(Model | HasMedia $model, string $collection_name, string $file, bool $delete_previous_collection = false)
+    {
+        $file_format = 'pdf';
+        $explode = explode(',', $file);
+        $format = str_replace(
+            [
+                'data:application/',
+                ';',
+                'base64',
+            ],
+            [
+                '', '', '',
+            ],
+            $explode[0]
+        );
+
+        if($delete_previous_collection){
+
+            $model->clearMediaCollection($collection_name);
+
+        }
+
+        try {
+
+            if(!str_contains('pdf',$format))
+            {
+                $file_format = 'xlsx';
+            }
+
+            $model->addMediaFromBase64($file, 'application/' . $format)
+                ->usingFileName(str_replace(
+                    ' ',
+                    '-',
+                    sha1(rand(111111, 999999)) . '-' . Carbon::now()->timestamp. '.' . $file_format
+                ))
+                ->toMediaCollection($collection_name);
+        } catch (FileDoesNotExist | FileIsTooBig | InvalidBase64Data | FileCannotBeAdded $e) {
+            return $e;
+        }
+
+        return null;
+    }
+
+}
 

@@ -46,7 +46,7 @@ Route::middleware([ 'auth','auth:sanctum'])
     });
 
 
-Route::middleware([ 'auth','auth:sanctum', 'role:system-administrator'])
+Route::middleware(['web', 'auth','auth:sanctum', 'role:system-administrator'])
     ->group(function () {
         Route::resource('companies', CompanyController::class);
         Route::resource('users', AccountController::class);

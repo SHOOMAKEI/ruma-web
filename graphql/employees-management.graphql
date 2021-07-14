@@ -1,0 +1,209 @@
+extend type Query {
+    #employees
+    employees: EmployeesResponse @guard @hasPermission(permission: "employee.read")
+    @field(resolver: "App\\GraphQL\\Employee\\Queries\\EmployeeQueries@all")
+    employee(id: Int): EmployeeResponse @guard @hasPermission(permission: "employee.read")
+    @field(resolver: "App\\GraphQL\\Employee\\Queries\\EmployeeQueries@show")
+    jobStatuses: JobStatusesResponse @guard @hasPermission(permission: "employee.read")
+    @field(resolver: "App\\GraphQL\\Employee\\Queries\\EmployeeQueries@jobStatuses")
+    employementStatuses: EmploymentStatusesResponse @guard @hasPermission(permission: "employee.read")
+    @field(resolver: "App\\GraphQL\\Employee\\Queries\\EmployeeQueries@employmentStatuses")
+}
+
+extend type Mutation {
+    #Employees
+    createEmployee(input: CreateEmployeeInput): EmployeeResponse @guard @hasPermission(permission: "employee.create")
+    @field(resolver: "App\\GraphQL\\Employee\\Mutations\\EmployeeMutation@create")
+    updateEmployeePersonalInformation(input: UpdateEmployeePersonalInformationInput): EmployeeResponse @guard @hasPermission(permission: "employee.update")
+    @field(resolver: "App\\GraphQL\\Employee\\Mutations\\EmployeeMutation@updateEmployeePersonalInformation")
+    updateEmployeeContactInformation(input: UpdateEmployeeContactInformationInput): EmployeeResponse @guard @hasPermission(permission: "employee.update")
+    @field(resolver: "App\\GraphQL\\Employee\\Mutations\\EmployeeMutation@updateEmployeeContactInformation")
+    updateEmployeeAddressInformation(input: UpdateEmployeeAddressInformationInput): EmployeeResponse @guard @hasPermission(permission: "employee.update")
+    @field(resolver: "App\\GraphQL\\Employee\\Mutations\\EmployeeMutation@updateEmployeeAddressInformation")
+    updateEmployeeOtherInformation(input: UpdateEmployeeOtherInformationInput): EmployeeResponse @guard @hasPermission(permission: "employee.update")
+    @field(resolver: "App\\GraphQL\\Employee\\Mutations\\EmployeeMutation@updateEmployeeOtherInformation")
+    updateEmployeeProfilePhoto(id: Int, profile_photo: String): EmployeeResponse @guard @hasPermission(permission: "employee.update")
+    @field(resolver: "App\\GraphQL\\Employee\\Mutations\\EmployeeMutation@updateEmployeeProfilePhoto")
+    deleteEmployee(id: Int): EmployeeResponse @guard @hasPermission(permission: "employee.delete")
+    @field(resolver: "App\\GraphQL\\Employee\\Mutations\\EmployeeMutation@delete")
+    updateEmploymentStatus(id: Int, status: String): EmployeeResponse @guard @hasPermission(permission: "employee.update")
+    @field(resolver: "App\\GraphQL\\Employee\\Mutations\\EmployeeMutation@updateEmploymentStatus")
+    updateEmployeeJobStatus(input: UpdateEmployeeJobStatusInput): EmployeeResponse @guard @hasPermission(permission: "employee.update")
+    @field(resolver: "App\\GraphQL\\Employee\\Mutations\\EmployeeMutation@updateEmployeeJobStatus")
+    updateEmployeePosition(id: Int, position: String): EmployeeResponse @guard @hasPermission(permission: "employee.update")
+    @field(resolver: "App\\GraphQL\\Employee\\Mutations\\EmployeeMutation@updateEmployeePosition")
+    updateEmployeePermissions(id: Int, permissions: [rolePermissionInput]): EmployeeResponse @guard @hasPermission(permission: "employee.update")
+    @field(resolver: "App\\GraphQL\\Employee\\Mutations\\EmployeeMutation@updateEmployeePermissions")
+    updateEmployeeCompanies(id: Int, companies: [EmployeeCompanyInput]): EmployeeResponse @guard @hasPermission(permission: "employee.update")
+    @field(resolver: "App\\GraphQL\\Employee\\Mutations\\EmployeeMutation@updateEmployeeCompanies")
+
+}
+
+input UpdateEmployeePersonalInformationInput {
+    id: Int
+    id_number: String
+    surname: String
+    other_name: String
+    gender: String
+    date_of_birth: Date
+}
+
+input UpdateEmployeeContactInformationInput {
+    id: Int
+    email: String!
+    mobile_number: String!
+    alternative_email: String
+    alternative_mobile_number: String
+}
+
+input UpdateEmployeeAddressInformationInput {
+    id:Int
+    region_id: Int
+    location: String
+    address: String
+}
+
+input UpdateEmployeeOtherInformationInput {
+    id: Int
+    resumption_date: Date
+    due_date: Date
+}
+
+input EmployeeCompanyInput {
+    id: Int
+    role: String
+}
+
+type EmployeeResponse implements Response{
+    employee: Employee
+    errors: [Errors]
+    success: Boolean
+}
+
+type EmployeesResponse implements Response{
+    employees: [Employee]
+    errors: [Errors]
+    success: Boolean
+}
+
+type JobStatusesResponse implements Response{
+    job_statuses: [JobStatusType]
+    errors: [Errors]
+    success: Boolean
+}
+
+type JobStatusType {
+    name: String
+}
+
+type EmploymentStatusesResponse implements Response{
+    employment_statuses: [EmploymentStatusType]
+    errors: [Errors]
+    success: Boolean
+}
+
+type EmploymentStatusType {
+    name: String
+}
+
+type Employee {
+    id: ID
+    id_number: String
+    surname: String
+    other_name: String
+    gender: Gender
+    email: String
+    mobile_number: String
+    alternative_email: String
+    alternative_mobile_number: String
+    profile_photo: String
+    region: Region
+    account: User
+    location: String
+    position: String
+    companies: [Company]
+    address: String
+    resumption_date: Date
+    due_date: Date
+    date_of_birth: Date
+    employment_status: EmploymentStatus
+    job_statuses: EmployeeJobStatus
+    job_status_description: JobStatus
+    updated_at: DateTime
+    created_at: DateTime
+}
+
+type  EmployeeJobStatus{
+    employee: Employee
+    job_status: JobStatus
+    from: DateTime
+    to: DateTime
+    updated_at: DateTime
+    created_at: DateTime
+}
+
+input CreateEmployeeInput {
+    id_number: String
+    surname: String
+    other_name: String
+    gender: String
+    email: String
+    mobile_number: String!
+    alternative_email: String
+    alternative_mobile_number: String
+    profile_photo: String
+    region_id: Int
+    location: String
+    position: String
+    address: String
+    resumption_date: Date
+    due_date: Date
+    date_of_birth: Date
+}
+
+input UpdateEmployeeInput {
+    id: Int
+    id_number: String
+    surname: String
+    other_name: String
+    gender: String
+    email: String
+    mobile_number: String
+    alternative_email: String
+    alternative_mobile_number: String
+    profile_photo: String
+    region_id: Int
+    location: String
+    position: String
+    address: String
+    resumption_date: Date
+    due_date: Date
+    date_of_birth: Date
+}
+
+input  UpdateEmployeeJobStatusInput{
+    id: Int
+    status: String
+    from: JobStatus
+    to: DateTime
+
+}
+
+enum Gender {
+    FEMALE @enum(value: "FEMALE")
+    MALE @enum(value: "MALE")
+}
+
+enum JobStatus {
+    ON_LEAVE  @enum(value: "ON-LEAVE")
+    TERMINATED  @enum(value: "TERMINATED")
+    IN_ACTIVE @enum(value: "IN-ACTIVE")
+    ACTIVE   @enum(value: "ACTIVE")
+    SUSPENDED @enum(value: "SUSPENDED")
+}
+
+enum EmploymentStatus {
+    PROBATION_PERIOD  @enum(value: "PROBATION-PERIOD")
+    PART_TIME @enum(value: "PART-TIME")
+    FULL_TIME @enum(value: "FULL-TIME")
+}
