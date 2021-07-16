@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Modules\InventoryManagement\Database\Seeds\ProductAttributeSeeder;
 
-class InventoryManagementDatabaseSeeder extends Seeder
+class
+
+InventoryManagementDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
