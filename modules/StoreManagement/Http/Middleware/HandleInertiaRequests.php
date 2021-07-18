@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\EmployeeManagement\Http\Middleware;
+namespace Modules\StoreManagement\Http\Middleware;
 
 use App\Models\User;
 use Closure;

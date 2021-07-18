@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\InventoryManagement\Repositories\Database\Factories;
+namespace Modules\InventoryManagement\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

@@ -1,11 +1,14 @@
 <?php
 
-namespace Modules\InventoryManagement\Repositories\Database\Seeds;
+namespace Modules\InventoryManagement\Database\Seeds;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Modules\InventoryManagement\Database\Seeds\ProductAttributeSeeder;
 
-class InventoryManagementDatabaseSeeder extends Seeder
+class
+
+InventoryManagementDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,7 +19,7 @@ class InventoryManagementDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+         $this->call(ProductAttributeSeeder::class);
 
         Model::reguard();
     }
