@@ -96,10 +96,10 @@ class AuthMobile extends APIBase
 
     public function forgotPasswordCodeChallenge(Request $request){
 
-        $validation = $request->validate(['username'=>"required|string",'csrf_token'=>"required|string",
+        $validation = $request->validate(['email'=>"required|email|string",'csrf_token'=>"required|string",
             'totp_code'=>"required|string",'device_id'=>"required|string"]);
 
-        $user = User::where('username',$request->username)->first();
+        $user = User::where('email',$request->email)->first();
         if($user && isset($validation['totp_code'])){
 
             $user = Auth::loginUsingId($user->id);
@@ -132,9 +132,9 @@ class AuthMobile extends APIBase
     public function forgotPassword(Request $request): \Illuminate\Http\JsonResponse
     {
 
-        $validation = $request->validate(['username','device_os_id','device_name','device_os_name','device_id']);
+        $validation = $request->validate(['email','device_os_id','device_name','device_os_name','device_id']);
 
-        $user = User::where('username',$request->username)->first();
+        $user = User::where('email',$request->email)->first();
         if($user){
 
             $user = Auth::loginUsingId($user->id);

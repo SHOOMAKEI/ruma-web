@@ -107,4 +107,5 @@ class ShopStore extends APIBase
 
       return $this->success(array('productDetail'=>$shopProduct,'productStatus'=>"found"),"Product Found",200);
     }
+
 }

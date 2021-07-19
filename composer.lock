@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60116b7072bcdc9fffacf7917df246dc",
+    "content-hash": "2bf654f5732d320fdafc46e9c9615cea",
     "packages": [
         {
             "name": "akaunting/laravel-menu",
@@ -4856,6 +4856,76 @@
                 }
             ],
             "time": "2020-08-18T17:17:46+00:00"
+        },
+        {
+            "name": "seshac/otp-generator",
+            "version": "0.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/seshac/otp-generator.git",
+                "reference": "ffe65b970f5fb8bf6d5d86b7f8b1a4e44efe0d7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/seshac/otp-generator/zipball/ffe65b970f5fb8bf6d5d86b7f8b1a4e44efe0d7c",
+                "reference": "ffe65b970f5fb8bf6d5d86b7f8b1a4e44efe0d7c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3|7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.3",
+                "vimeo/psalm": "^3.11|^4.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Seshac\\Otp\\OtpServiceProvider"
+                    ],
+                    "aliases": {
+                        "Otp": "Seshac\\Otp\\OtpFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Seshac\\Otp\\": "src",
+                    "Seshac\\Otp\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "sesha",
+                    "email": "seshadriece008@gmail.com",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "OTP Generator and Validator for Laravel Applications",
+            "homepage": "https://github.com/seshac/otp-generator",
+            "keywords": [
+                "laravel",
+                "otp-generator",
+                "seshac"
+            ],
+            "support": {
+                "issues": "https://github.com/seshac/otp-generator/issues",
+                "source": "https://github.com/seshac/otp-generator/tree/0.0.6"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/seshac",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-01-29T04:38:32+00:00"
         },
         {
             "name": "spatie/image",
@@ -10361,16 +10431,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.6",
+            "version": "9.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb"
+                "reference": "d0dc8b6999c937616df4fb046792004b33fd31c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb",
-                "reference": "fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d0dc8b6999c937616df4fb046792004b33fd31c5",
+                "reference": "d0dc8b6999c937616df4fb046792004b33fd31c5",
                 "shasum": ""
             },
             "require": {
@@ -10448,7 +10518,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.6"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.7"
             },
             "funding": [
                 {
@@ -10460,7 +10530,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-23T05:14:38+00:00"
+            "time": "2021-07-19T06:14:47+00:00"
         },
         {
             "name": "react/promise",
@@ -11706,7 +11776,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.0"
+        "php": "^8.0",
+        "ext-fileinfo": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

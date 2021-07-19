@@ -2,10 +2,11 @@
 
 namespace App\API\v1\Controllers\Store;
 
+use App\API\v1\Controllers\APIBase;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class StorePromoterCart extends Controller
+class StorePromoterCart extends APIBase
 {
     /**
      * Display a listing of the resource.
@@ -31,11 +32,18 @@ class StorePromoterCart extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request) :  \Illuminate\Http\JsonResponse
     {
-        //
+        $validation = $request->validate(['device_token'=>"required|string",
+            'shop_code'=>"required|string",
+            'cart_code'=>"required|string",
+            'sales_location.long'=>"required|numeric",
+            'sales_location.lat'=>"required|numeric",
+            'sales_order'=>"required"]);
+
+        return $this->success(['cart_code'=>$validation['cart_code'],'status'=>'success'],'Order submitted Successfully',200);
     }
 
     /**
