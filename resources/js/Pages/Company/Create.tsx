@@ -17,6 +17,7 @@ import {Inertia} from "@inertiajs/inertia";
 function Create() {
     const [data, setData] = useState({
         name: '',
+        code_name: '',
         email: '',
         phone: '',
         currency: 'NGN',
@@ -72,14 +73,14 @@ function Create() {
                         />
                         <TextInput
                             className="mt-10 col-md-6"
-                            label="Email"
-                            placeholder="Email"
-                            name="email"
+                            label="Code Name"
+                            placeholder="Code Name"
+                            name="code_name"
                             type="text"
-                            required
                             label_required={true}
-                            errors={errors.email}
-                            value={data.email}
+                            required
+                            errors={errors.name}
+                            value={data.name}
                             onChange={handleChange}
                         />
                     </div>
@@ -116,6 +117,18 @@ function Create() {
                     <div className="fv-row mb-5 row">
                     <TextInput
                         className="mt-10 col-md-6"
+                        label="Email"
+                        placeholder="Email"
+                        name="email"
+                        type="text"
+                        required
+                        label_required={true}
+                        errors={errors.email}
+                        value={data.email}
+                        onChange={handleChange}
+                    />
+                    <TextInput
+                        className="mt-10 col-md-6"
                         label="Phone"
                         placeholder="Phone"
                         name="phone"
@@ -126,8 +139,11 @@ function Create() {
                         value={data.phone}
                         onChange={handleChange}
                     />
+
+                </div>
+                <div className="fv-row mb-5 row">
                     <TextAreaInput
-                        className="mt-10 col-md-6"
+                        className="mt-10 col-md-12"
                         label="Address"
                         placeholder="Address"
                         name="address"

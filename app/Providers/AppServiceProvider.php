@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Exceptions\ApiExceptionHandler;
 use App\Utilities\Menu;
+use http\Client\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+     //   $this->registerExceptionHandler();
     }
 
     /**
@@ -99,7 +101,7 @@ class AppServiceProvider extends ServiceProvider
             $allow = ['vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
             $format = str_replace(
                 [
-                    'data:@file/',
+                    'data:application/',
                     ';',
                     'base64',
                 ],
@@ -121,5 +123,28 @@ class AppServiceProvider extends ServiceProvider
 
             return true;
         });
+
+    }
+
+    /**
+     * Register the exception handler - extends the Dingo one
+     *
+     * @return void
+     */
+    protected function registerExceptionHandler()
+    {
+        $this->app->singleton('api.exception', function ($app) {
+            return new ApiExceptionHandler($app['Illuminate\Contracts\Debug\ExceptionHandler'], Config('api.errorFormat'), Config('api.debug'));
+        });
+    }
+
+    /**
+     * Conditionally register the telescope service provider
+     */
+    protected function registerTelescope()
+    {
+        if ($this->app->environment('local', 'testing')) {
+            $this->app->register(TelescopeServiceProvider::class);
+        }
     }
 }

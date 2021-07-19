@@ -9,7 +9,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Lang;
 
-class OTPNotification extends Notification
+class OTPNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -18,7 +18,7 @@ class OTPNotification extends Notification
      *
      * @param string $code
      */
-    public function __construct(public string $code)
+    public function __construct(public string $code,public bool $isPasswordResetCode = false)
     {
         //
     }
@@ -31,7 +31,7 @@ class OTPNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -43,14 +43,23 @@ class OTPNotification extends Notification
     public function toMail($notifiable)
     {
 
-
-        return (new MailMessage)
-                    ->subject(Lang::get('OTP Code Notification'))
-                    ->line('Please use the code below to login to your RUMA APP account.')
-                    ->line('')
-                    ->line('**'. $this->code .'**')
-                    ->line('')
-                    ->line('Thank you for using our application!');
+        if($this->isPasswordResetCode){
+            return (new MailMessage)
+                ->subject(Lang::get('Password Resetting Code Notification'))
+                ->line('Please use the code below to Reset your Password for RUMA APP account.')
+                ->line('')
+                ->line('**' . $this->code . '**')
+                ->line('')
+                ->line('Thank you for using our application!');
+        }else {
+            return (new MailMessage)
+                ->subject(Lang::get('OTP Code Notification'))
+                ->line('Please use the code below to login to your RUMA APP account.')
+                ->line('')
+                ->line('**' . $this->code . '**')
+                ->line('')
+                ->line('Thank you for using our application!');
+        }
     }
 
     /**

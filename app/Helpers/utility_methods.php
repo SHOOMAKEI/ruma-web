@@ -192,4 +192,51 @@ if(!function_exists('uploadBase64Image')) {
 
 }
 
+if(!function_exists('uploadBase64FileOtherThanImage')) {
+
+
+    function uploadBase64FileOtherThanImage(Model | HasMedia $model, string $collection_name, string $file, bool $delete_previous_collection = false)
+    {
+        $file_format = 'pdf';
+        $explode = explode(',', $file);
+        $format = str_replace(
+            [
+                'data:application/',
+                ';',
+                'base64',
+            ],
+            [
+                '', '', '',
+            ],
+            $explode[0]
+        );
+
+        if($delete_previous_collection){
+
+            $model->clearMediaCollection($collection_name);
+
+        }
+
+        try {
+
+            if(!str_contains('pdf',$format))
+            {
+                $file_format = 'xlsx';
+            }
+
+            $model->addMediaFromBase64($file, 'application/' . $format)
+                ->usingFileName(str_replace(
+                    ' ',
+                    '-',
+                    sha1(rand(111111, 999999)) . '-' . Carbon::now()->timestamp. '.' . $file_format
+                ))
+                ->toMediaCollection($collection_name);
+        } catch (FileDoesNotExist | FileIsTooBig | InvalidBase64Data | FileCannotBeAdded $e) {
+            return $e;
+        }
+
+        return null;
+    }
+
+}
 

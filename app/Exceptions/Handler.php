@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Models\API\v1\APIResponseMessage;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -37,5 +38,30 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        $class = get_class($exception);
+        switch ($class) {
+            case 'Dingo\Api\Exception\ValidationHttpException':
+                if ($request->expectsJson())
+                    return $this->errorRespond($exception->getErrors()->first(), $exception->getStatusCode());
+                break;
+            default:
+                if ($request->expectsJson())
+                    Return $this->errorRespond ('System Reset', 500);
+
+        break;
+        }
+        return parent::render($request, $exception);
+    }
+
+    private function errorRespond($first, $getStatusCode)
+    {
+        print_r($first);
+        print_r($getStatusCode);
+        die();
+        return new APIResponseMessage();
     }
 }

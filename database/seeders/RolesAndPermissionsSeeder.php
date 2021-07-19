@@ -83,6 +83,8 @@ class RolesAndPermissionsSeeder extends Seeder
             Role::findOrCreate('sales-representative',$guard)->givePermissionTo('user.read');
             Role::findOrCreate('supervisor',$guard)->givePermissionTo('user.read');
             Role::findOrCreate('system-administrator',$guard);
+            if($value == 'api')
+                Role::findOrCreate("mobile-app",$guard)->givePermissionTo("company.read");
 
         }
         $role_web = Role::findByName('system-administrator', 'web');
