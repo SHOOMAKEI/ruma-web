@@ -21,7 +21,6 @@ use Seshac\Otp\Otp;
 
 class AuthMobile extends APIBase
 {
-    use ApiResponse;
     public function index(){
         $response = [
             "success"=>true,

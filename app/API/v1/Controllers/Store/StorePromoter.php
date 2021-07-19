@@ -5,7 +5,7 @@ namespace App\API\v1\Controllers\Store;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ShopPromoter extends Controller
+class StorePromoter extends Controller
 {
     /**
      * Display a listing of the resource.

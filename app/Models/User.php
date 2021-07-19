@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
-use JetBrains\PhpStorm\ArrayShape;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\EmployeeManagement\Models\Employee;
@@ -184,10 +183,6 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     }
 
 
-    #[ArrayShape(["id" => "int", "username" => "string", "employee_id" => "int|null",
-        'email' => "string", "current_company_id" => "int|null",
-        "company_list" => "\Illuminate\Support\Collection",
-        "has_enable_otp" => "int", 'is_active' => "int"])]
     function getBasicDetail(){
         return [
             "id"=>$this->id,
@@ -202,11 +197,6 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         ];
     }
 
-    #[ArrayShape([
-        'has_verify_email' => "bool",
-        'has_enable_otp' => "mixed",
-        'has_enable_two_factory_auth' => "bool"
-    ])]
     public function getSettingsAttribute(): array
     {
         return  [
